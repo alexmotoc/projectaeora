@@ -16,6 +16,7 @@ for x in range (0,10000): #just to make testing easier
     if (x == 0):
         for s in shares:
         #fe = fg.add_entry()
+
             s.printAll()       
             sub_sector = s.get_sub_sector()
             if (sub_sector not in sub_sectors):
@@ -24,6 +25,10 @@ for x in range (0,10000): #just to make testing easier
             if (sector not in sectors):
                 sectors.append(sector) 
     if (x >= 1):
+        # stock_choice = input("choose a stock to get json for: ")
+        # json_string = Scrapper.returnShareInfoJSON(shares,stock_choice)
+        # print(json_string)
+
         i = 0
         for sector in sectors:
             print("Option ",end='')
@@ -34,7 +39,7 @@ for x in range (0,10000): #just to make testing easier
         choice = input("Which category?: ")
         for s in shares:
             if (s.get_sector() == sectors[choice]):
-                s.printAll() 
+                s.printAll()
         try:
             input("Press enter to continue")
         except SyntaxError:

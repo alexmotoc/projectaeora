@@ -42,17 +42,21 @@ class Share:
 
     def printAll(self):
         print(self.code, end='')
-	print(" , ", end='')
+        print(" , ", end='')
         print(self.name, end='')
-	print(" , ", end='')
+        print(" , ", end='')
         print(self.current, end='')
         print(" , ", end='')
         print(self.price, end='')
-	print(" , ", end='')
+        print(" , ", end='')
         print(self.diff, end='')
-	print(" , ", end='')
+        print(" , ", end='')
         print(self.per_diff, end='')
-	print("% , ", end='')
+        print("% , ", end='')
         print(self.sub_sector, end='')
         print(" ,",end='')
         print(self.sector)
+
+    def getDict(self):
+        share_dict = {"code": self.code, "name": self.name, "currency": self.current, "price": self.price, "difference": self.diff, "percentage_difference": self.per_diff, "sector": self.sector, "sub_sector": self.sub_sector}
+        return share_dict

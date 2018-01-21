@@ -1,6 +1,7 @@
 from __future__ import print_function
 import bs4
 import requests
+import json
 from footsie import Share
 
 #'http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX&industrySector=&page=1'
@@ -62,4 +63,35 @@ def ScrapeWebSite2(url, i):
         return sub_sector, sector 
 
 
-    
+'''
+Returns the information for a given stock ticker in JSON in the following format:
+{
+    "code": "III",
+    "name": "3I GRP.",
+    "currency": "GBX",
+    "price": "934.00",
+    "difference": "-7.40",
+    "percentage_difference": "-0.79",
+    "sub_sector": "Specialty Finance",
+    "sector": "Financial Services" 
+}
+TODO: Fill in sub_sector/sector
+'''
+
+
+def returnShareInfoJSON(shares, stock_ticker):
+    # Get a JSON string for the entry in shares than contains the stock_ticker
+
+    json_string = ""
+
+    for s in shares:
+        if s.get_code() == stock_ticker:
+            json_string = json.dumps(s.getDict())
+            break
+
+    if json_string:
+        return json_string
+    else:
+        print("Stock doesn't exist")
+
+    # TODO: Throw an error????

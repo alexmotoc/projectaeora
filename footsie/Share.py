@@ -1,4 +1,5 @@
 from __future__ import print_function
+import json
 
 class Share:
     def __init__(self, code, name, current, price, diff, per_diff, sub_sector, sector):
@@ -60,3 +61,8 @@ class Share:
     def getDict(self):
         share_dict = {"code": self.code, "name": self.name, "currency": self.current, "price": self.price, "difference": self.diff, "percentage_difference": self.per_diff, "sector": self.sector, "sub_sector": self.sub_sector}
         return share_dict
+
+    def returnJSON(self):
+        return json.dumps(self.getDict())
+
+

@@ -1,5 +1,6 @@
 import tornado.web
 import sys
+
 from footsie import Share, Scrapper
 
 shares = list()
@@ -25,9 +26,11 @@ for x in range (0,10000): #just to make testing easier
             if (sector not in sectors):
                 sectors.append(sector) 
     if (x >= 1):
-        # stock_choice = input("choose a stock to get json for: ")
-        # json_string = Scrapper.returnShareInfoJSON(shares,stock_choice)
-        # print(json_string)
+        # Uncomment below to test the json for each stock
+        # stock_choice = input("Pick a stock to get info about: ")
+        # for s in shares:
+        #     if s.get_code() == stock_choice:
+        #         print(s.returnJSON())
 
         i = 0
         for sector in sectors:

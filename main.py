@@ -1,4 +1,3 @@
-import tornado.web
 import sys
 
 from footsie import Share, Scrapper
@@ -10,7 +9,7 @@ sectors = list()
 for x in range (0,10000): #just to make testing easier
     print("****************************************SCRAPING FOR NEW DATA****************************************")
     shares, i = Scrapper.ScrapeWebSite(shares,'http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX&industrySector=&page=1', 0)
-    shares, i = Scrapper.ScrapeWebSite(shares,'http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX&industrySector=&page=2', i)    
+    shares, i = Scrapper.ScrapeWebSite(shares,'http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX&industrySector=&page=2', i)
     shares, i = Scrapper.ScrapeWebSite(shares,'http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX&industrySector=&page=3', i)
     shares, i = Scrapper.ScrapeWebSite(shares,'http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX&industrySector=&page=4', i)
     shares, i = Scrapper.ScrapeWebSite(shares,'http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX&industrySector=&page=5', i)
@@ -19,13 +18,13 @@ for x in range (0,10000): #just to make testing easier
         for s in shares:
         #fe = fg.add_entry()
 
-            s.printAll()       
+            s.printAll()
             sub_sector = s.get_sub_sector()
             if (sub_sector not in sub_sectors):
                 sub_sectors.append(sub_sector)
             sector = s.get_sector()
             if (sector not in sectors):
-                sectors.append(sector) 
+                sectors.append(sector)
     if (x >= 1):
         # Uncomment below to test the json for each stock
         # stock_choice = input("Pick a stock to get info about: ")

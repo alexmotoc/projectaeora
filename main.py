@@ -33,9 +33,13 @@ for x in range (0,10000): #just to make testing easier
         #     if s.get_code() == stock_choice:
         #         print(s.returnJSON())
 
-        # #Uncomment below to test the json for each stock
-        # stock_choice = input("Pick a sector to get info about: ")
-        # print(sectorJSON.returnSectorJSON(shares,stock_choice))
+        # #Uncomment below to test the json for each sector
+        # sector_choice = input("Pick a sector to get info about: ")
+        # print(sectorJSON.returnSectorJSON(shares, sector_choice))
+
+        # #Uncomment below to test the json for each sector
+        # sub_sector_choice = input("Pick a sector to get info about: ")
+        # print(sectorJSON.returnSubSectorJSON(shares, sub_sector_choice))
 
         i = 0
         for sector in sectors:

@@ -2,7 +2,7 @@ import json
 from footsie import Share
 
 
-def returnSectorJSON(shares, sector):
+def get_sector(shares, sector):
     """
 
     :param shares: A list containing all of the different shares in the FTSE100.
@@ -17,7 +17,7 @@ def returnSectorJSON(shares, sector):
     return json.dumps(json_string)
 
 
-def returnSubSectorJSON(shares, sub_sector):
+def get_sub_sector(shares, sub_sector):
     """
 
         :param shares: A list containing all of the different shares in the FTSE100.

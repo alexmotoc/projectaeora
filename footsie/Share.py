@@ -2,67 +2,20 @@ from __future__ import print_function
 import json
 
 class Share:
-    def __init__(self, code, name, current, price, diff, per_diff, sub_sector, sector):
+    def __init__(self, code, name, current, price, diff, per_diff, sector, sub_sector):
         self.code = code
         self.name = name
         self.current = current
         self.price = price
         self.diff = diff
         self.per_diff = per_diff
-        self.sub_sector = sub_sector
         self.sector = sector
+        self.sub_sector = sub_sector
 
-    def update_data(self, current, price, diff, per_diff):
-        self.current = current
-        self.price = price
-        self.diff = diff
-        self.per_diff = per_diff
-    
-    def get_rss_item(self, fe):
-        fe.title(self.name)
-        fe.id(self.code)
-        fe.content(self.code + ',' + self.name + ',' + self.current + ',' + self.price + ',' + self.diff + ',' + self.per_diff)
+    def get_json(self):
+        return json.dumps(self.__dict__)
 
-    def get_code(self):
-        return self.code
-
-    def get_name(self):
-        return self.name
-
-    def get_sub_sector(self):
-        return self.sub_sector
-
-    def get_sector(self):
-        return self.sector
-
-    def get_spot_price(self):
-        return self.price
-
-    def get_per_diff(self):
-        return self.per_diff
-
-    def printAll(self):
-        print(self.code, end='')
-        print(" , ", end='')
-        print(self.name, end='')
-        print(" , ", end='')
-        print(self.current, end='')
-        print(" , ", end='')
-        print(self.price, end='')
-        print(" , ", end='')
-        print(self.diff, end='')
-        print(" , ", end='')
-        print(self.per_diff, end='')
-        print("% , ", end='')
-        print(self.sub_sector, end='')
-        print(" ,",end='')
-        print(self.sector)
-
-    def getDict(self):
-        share_dict = {"code": self.code, "name": self.name, "currency": self.current, "price": self.price, "difference": self.diff, "percentage_difference": self.per_diff, "sector": self.sector, "sub_sector": self.sub_sector}
-        return share_dict
-
-    def returnJSON(self):
-        return json.dumps(self.getDict())
-
-
+    def __str__(self):
+        return '{}, {}, {}, {}, {}, {}, {}, {}'.format(
+                self.code, self.name, self.current, self.price, self.diff,
+                self.per_diff, self.sector, self.sub_sector)

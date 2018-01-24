@@ -79,3 +79,35 @@ def scrape_company_sector(url):
         sub_sector = sub_sector_tag.findNext('td')
 
     return sector.string, sub_sector.string
+
+def scrape_company_price_data(url):
+    #unfinished - see variance data, and method of return
+    url = url.replace("company-summary-chart.html?fourWayKey=", "company-summary/")
+    url = url + ".html"
+    response = requests.get(url)
+    if(response.status_code == 200):
+        #obtains price, variance, high, low, volume, last_close, bid, offer, status and special condition from profile summary page table
+        soup = bs4.BeautifulSoup(response.content, "lxml")
+        variance_tag = soup.find('td', text='Var % (+/-)') 
+        price = variance_tag.findPrevious('td')
+        variance_tag = soup.find('td', text='Var % (+/-)')
+        variance = variance_tag.findNext('td') #the td isn't just plaintext, need to process this cell further
+        high_tag = variance.findNext('td')
+        high = high_tag.findNext('td')
+        low_tag = high.findNext('td')
+        low = low_tag.findNext('td')
+        volume_tag = low.findNext('td')
+        volume = volume_tag.findNext('td')
+        last_close_tag = volume.findNext('td')
+        last_close = last_close_tag.findNext('td')
+        bid_tag = last_close.findNext('td')
+        bid = bid_tag.findNext('td')
+        offer_tag = bid.findNext('td')
+        offer = offer_tag.findNext('td')
+        status_tag = offer.findNext('td')
+        status = status_tag.findNext('td')
+        special_conditions_tag = status.findNext('td')
+        special_conditions = special_conditions_tag.findNext('td')
+    #better to return values in a structure instead      
+    return price.string, variance.string, high.string, low.string, volume.string, last_close.string, bid.string, offer.string, status.string, special_conditions.string
+  

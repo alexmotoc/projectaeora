@@ -1,4 +1,5 @@
 from __future__ import print_function
+from collections import defaultdict
 import bs4
 import requests
 from footsie import Share
@@ -9,6 +10,12 @@ def split_string(s, start, end):
     return (s.split(start))[1].split(end)[0].strip()
 
 def scrape_ftse(url):
+    """
+    Returns a list of shares information.
+
+    Keyword arguments:
+    url -- the url of the website to be scrapped
+    """
     response = requests.get(url)
     shares = list()
 
@@ -26,31 +33,49 @@ def scrape_ftse(url):
             price = data[3].string
             diff = split_string(str(data[4]), '">', "<")
             per_diff = data[5].string.strip()
-
-            # Get specific information about the company (e.g. sector)
-            domain = "http://www.londonstockexchange.com"
-            secondURL = domain + (data[6].find('a')['href'])
-            sector, sub_sector = scrape_stock(secondURL)
-            s = Share.Share(code, name, current, price, diff, per_diff, sector, sub_sector)
+            s = Share.Share(code, name, current, price, diff, per_diff)
             shares.append(s)
 
     return shares
 
-def scrape_stock(url):
-    response = requests.get(url)
+def scrape_company_profiles(url):
+    """
+    Returns a dictionary containing the company codes and the urls associated with their profiles.
 
-    if (response.status_code == 200):
+    Keyword arguments:
+    url -- the url of the website to be scrapped
+    """
+    response = requests.get(url)
+    profiles = dict()
+
+    if(response.status_code == 200):
         soup = bs4.BeautifulSoup(response.content, "lxml")
-        table = soup.findAll(attrs={"summary" : "Trading Information"})[0]
+        table = soup.findAll(attrs={"summary" : "Companies and Prices"})[0]
         body = table.find('tbody')
         rows = body.findAll('tr')
 
         for r in rows:
             data = r.findAll('td')
-            if (data[0].string == 'FTSE sub-sector'):
-                sub_sector = data[1].string
-            elif (data[0].string == 'FTSE sector'):
-                sector = data[1].string
+            code = data[0].string
+            profile = data[6].find('a')['href']
+            profiles[code] = profile
 
-    return sector, sub_sector
+    return profiles
 
+def scrape_company_sector(url):
+    """
+    Returns the sector and the sub-sector to which a particular company belongs to.
+
+    Keyword arguments:
+    url - the url of the company website to be scrapped
+    """
+    response = requests.get(url)
+
+    if (response.status_code == 200):
+        soup = bs4.BeautifulSoup(response.content, "lxml")
+        sector_tag = soup.find('td', text='FTSE sector')
+        sector = sector_tag.findNext('td')
+        sub_sector_tag = sector.findNext('td')
+        sub_sector = sub_sector_tag.findNext('td')
+
+    return sector.string, sub_sector.string

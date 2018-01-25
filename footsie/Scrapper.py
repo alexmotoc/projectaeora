@@ -1,6 +1,7 @@
 from __future__ import print_function
 from collections import defaultdict
 import bs4
+import json
 import requests
 from footsie import Share
 
@@ -134,3 +135,45 @@ def get_top10(url, risers=True):
             top10.append(data.string)
 
     return top10
+
+
+def get_financial_news_data(url):
+    """
+
+    :param url: The url of the company for which financial news is wanted.
+    :return: A list containing dictionaries for each piece of most recent news.
+    """
+    url = url.replace("summary/company-summary-chart", "exchange-insight/news-analysis")
+    # http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/summary/company-summary-chart.html?fourWayKey=GB00B01FLG62GBGBXSET1
+    # http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/exchange-insight/news-analysis.html?fourWayKey=GB00B01FLG62GBGBXSET1
+
+    response = requests.get(url)
+    financial_news = list()
+
+    if response.status_code == 200:
+        soup = bs4.BeautifulSoup(response.content, "lxml")
+        table = soup.findAll(attrs={"summary": "table: News Impact"})[0]
+        body = table.find('tbody')
+        rows = body.findAll('tr')
+
+        for r in rows:
+            data = r.findAll('td')
+
+            row_data = {}
+
+            row_data["time_and_date"] = data[0].text.strip()
+            row_data["code"] = data[1].text.strip()
+            row_data["headline"] = data[2].a.text.strip()
+            row_data["headline_url"] = data[2].a\
+                .get('href')\
+                .replace("javascript: var x=openWin2('", "")\
+                .replace("', 'News', 900, 600, 'resizable=yes,toolbar=no,location=yes,directories=yes,addressbar=yes,scrollbars=yes,status=yes,menubar=no')", "")
+
+            row_data["source"] = data[3].text.strip()
+            row_data["impact"] = data[4].text.strip()
+
+            row_data["impact_img_url"] = data[4].img.get('src')
+
+            financial_news.append(row_data)
+
+    return financial_news

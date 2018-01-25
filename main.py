@@ -20,11 +20,4 @@ def get_sectors(profiles):
 
     return json.dumps(sectors)
 
-print("****************************************SCRAPING FOR NEW DATA****************************************")
 lse = 'http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX&industrySector=&page='
-
-shares = list()
-profiles = dict()
-for page in range(1, 7):
-    # shares += Scrapper.scrape_ftse(lse + str(page))
-    profiles.update(Scrapper.scrape_company_profiles(lse + str(page)))

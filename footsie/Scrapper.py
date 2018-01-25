@@ -9,7 +9,7 @@ from footsie import Share
 def split_string(s, start, end):
     return (s.split(start))[1].split(end)[0].strip()
 
-def scrape_ftse(url):
+def get_ftse(url):
     """
     Returns a list of shares information.
 
@@ -38,7 +38,7 @@ def scrape_ftse(url):
 
     return shares
 
-def scrape_company_profiles(url):
+def get_company_profiles(url):
     """
     Returns a dictionary containing the company codes and the urls associated with their profiles.
 
@@ -62,7 +62,7 @@ def scrape_company_profiles(url):
 
     return profiles
 
-def scrape_company_sector(url):
+def get_company_sector(url):
     """
     Returns the sector and the sub-sector to which a particular company belongs to.
 
@@ -80,7 +80,7 @@ def scrape_company_sector(url):
 
     return sector.string, sub_sector.string
 
-def scrape_company_price_data(url):
+def get_company_price_data(url):
     #unfinished - see variance data, and method of return
     url = url.replace("company-summary-chart.html?fourWayKey=", "company-summary/")
     url = url + ".html"
@@ -88,7 +88,7 @@ def scrape_company_price_data(url):
     if(response.status_code == 200):
         #obtains price, variance, high, low, volume, last_close, bid, offer, status and special condition from profile summary page table
         soup = bs4.BeautifulSoup(response.content, "lxml")
-        variance_tag = soup.find('td', text='Var % (+/-)') 
+        variance_tag = soup.find('td', text='Var % (+/-)')
         price = variance_tag.findPrevious('td')
         variance_tag = soup.find('td', text='Var % (+/-)')
         variance = variance_tag.findNext('td') #the td isn't just plaintext, need to process this cell further
@@ -108,6 +108,29 @@ def scrape_company_price_data(url):
         status = status_tag.findNext('td')
         special_conditions_tag = status.findNext('td')
         special_conditions = special_conditions_tag.findNext('td')
-    #better to return values in a structure instead      
+    #better to return values in a structure instead
     return price.string, variance.string, high.string, low.string, volume.string, last_close.string, bid.string, offer.string, status.string, special_conditions.string
-  
+
+def get_top10(url, risers=True):
+    """
+    Returns a list containing the codes of the top 10 companies.
+
+    Keyword arguments:
+    url - the url of the company website to be scrapped
+    risers - specified whether to get the risers (True) or fallers (False)
+    """
+    response = requests.get(url)
+    top10 = list()
+    index = 0 if risers else 1
+
+    if(response.status_code == 200):
+        soup = bs4.BeautifulSoup(response.content, "lxml")
+        table = soup.findAll(attrs={"summary" : "Companies and Prices"})[index]
+        body = table.find('tbody')
+        rows = body.findAll('tr')
+
+        for r in rows:
+            data = r.find('td')
+            top10.append(data.string)
+
+    return top10

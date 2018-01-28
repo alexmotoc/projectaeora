@@ -4,27 +4,15 @@ import sys
 from collections import defaultdict
 from footsie import Share, Scrapper
 
-shares = list()
-profiles = dict()
-
-#could read in saved data files for saved shares, profiles data, and use those
-
-web_scraper_interface = Scrapper.Scrapper(shares, profiles)
-shares = web_scraper_interface.get_ftse()
-profiles = web_scraper_interface.get_company_profiles()
-
-#save shares,profiles to file
-
-
 """tests...
-print("JSON...") 
+print("JSON...")
 print(web_scraper_interface.get_sectors()) #this bit takes a while since we haven't stored sectors yet
 print("TOP 10")
 top10 = web_scraper_interface.get_top10(True)
 for item in top10:
     print(item)
 print()
-print("JSON again...") 
+print("JSON again...")
 print(web_scraper_interface.get_sectors()) #uses stored data this time
 print()
 print("Share sector, sub-sector, and current price data...")

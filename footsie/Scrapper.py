@@ -2,40 +2,49 @@ from collections import defaultdict
 import bs4
 import json
 import requests
-from footsie import Share
-
-#'http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX&industrySector=&page=1'
-
+import Company, Footsie, News, Share
 
 class Scrapper:
 
-    def __init__(self, shares, profiles):
-        self.shares = shares
-        self.profiles = profiles
+    def __init__(self):
         self.domain = "http://www.londonstockexchange.com"
-        self.ftse100URL = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX&industrySector=&page="
+        self.ftse100URL = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX"
         self.top10URL = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/risers-and-fallers/risers-fallers.html"
-        if len(shares) == 0:
-            self.shares = self.get_ftse()
-        if len(profiles) == 0:
-            self.profiles = self.get_company_profiles()
 
+        # Get company profiles from local file
+        filename = 'data/profiles.json'
+        with open(filename, 'r') as f:
+            profiles = json.loads(f)
+        self.profiles = profiles
 
     def split_string(self, s, start, end):
         return (s.split(start))[1].split(end)[0].strip()
 
     def get_ftse(self):
-        """
-        Returns a list of shares information.
+        """Returns a object containing information about FTSE 100 and the companies in this index."""
+        # Get general data about FTSE100
+        response = requests.get(url)
+        if response.status_code == 200:
+            soup = bs4.BeautifulSoup(response.content, "lxml")
+            table = soup.findAll(attrs={"summary" : "Price data"})[0]
+            body = table.find('tbody')
+            row = body.find('tr')
+            data = r.findAll('td')
 
-        Keyword arguments:
-        url -- the url of the website to be scrapped
-        """
-        shares = list()
+            value = data[0].string
+            diff = self.split_string(data[1].string)
+            per_diff = data[2].string
+            high = data[3].string
+            low = data[4].string
+            prev_close = data[5].string
+
+        # Get data about every company
+        companies = list()
+        table_url = self.ftse100URL + '&industrySector=&page='
         for i in range(1,7):
-            url = self.ftse100URL + str(i)
+            url = table_url + str(i)
             response = requests.get(url)
-            if(response.status_code == 200):
+            if response.status_code == 200:
                 soup = bs4.BeautifulSoup(response.content, "lxml")
                 table = soup.findAll(attrs={"summary" : "Companies and Prices"})[0]
                 body = table.find('tbody')
@@ -44,26 +53,18 @@ class Scrapper:
                 for r in rows:
                     data = r.findAll('td')
                     code = data[0].string
-                    name = data[1].findChildren()[0].string
-                    current = data[2].string
-                    price = data[3].string
-                    diff = self.split_string(str(data[4]), '">', "<")
-                    per_diff = data[5].string.strip()
-                    s = Share.Share(code, name, current, price, diff, per_diff)
-                    shares.append(s)
-        self.shares = shares
-        return self.shares
+                    company = get_company_data(code)
+                    companies.append(company)
+
+        ftse = Footsie()
+        return ftse
 
     def get_company_profiles(self):
-        """
-        Returns a dictionary containing the company codes and the urls associated with their profiles.
-
-        Keyword arguments:
-        url -- the url of the website to be scrapped
-        """
+        """Returns a dictionary containing the company codes and the urls associated with their profiles."""
         profiles = dict()
+        table_url = self.ftse100URL + '&industrySector=&page='
         for i in range(1,7):
-            url = self.ftse100URL + str(i)
+            url = table_url + str(i)
             response = requests.get(url)
 
             if(response.status_code == 200):
@@ -77,43 +78,38 @@ class Scrapper:
                     code = data[0].string
                     profile = data[6].find('a')['href']
                     profiles[code] = profile
-        self.profiles = profiles
-        return self.profiles
 
-    def get_company_sector(self, code):
-        """
-        Returns the sector and the sub-sector to which a particular company belongs to.
+        return profiles
 
-        Keyword arguments:
-        url - the url of the company website to be scrapped
-        """
-        for s in self.shares:
-            if s.code == code and len(s.sector)>0:
-                return s.sector, s.sub_sector
-            elif s.code == code:
-                break
+    def get_company_data(self, code):
         url = self.domain + self.profiles[code]
         response = requests.get(url)
 
-        if (response.status_code == 200):
+        if response.status_code == 200:
             soup = bs4.BeautifulSoup(response.content, "lxml")
+            # Get information about the company
+            name = soup.find('div', {'class': 'company-title'}).text
+            market_cap = soup.find('td', text='Market cap(in millions)*').string
+
+            revenue = dict()
+
+            revenue_table = soup.findAll(attrs={"summary" : "Fundamentals"})[0]
+            head = table.find('thead')
+            body = table.find('tbody')
+            title = head.find('tr')
+            row = body.find('tr')
+            dates = title.findAll('td')
+            values = row.findAll('td')
+
+            for i in range(1, 6):
+                revenue[dates[i]] = values[i]
+
             sector_tag = soup.find('td', text='FTSE sector')
             sector = sector_tag.findNext('td')
             sub_sector_tag = sector.findNext('td')
             sub_sector = sub_sector_tag.findNext('td')
-            s.sector = sector.string
-            s.sub_sector = sub_sector.string
-        return sector.string, sub_sector.string
 
-    def scrape_company_price_data(self, code):
-        #unfinished
-        url = self.domain + self.profiles[code]
-        url = url.replace("company-summary-chart.html?fourWayKey=", "company-summary/")
-        url = url + ".html"
-        response = requests.get(url)
-        if(response.status_code == 200):
-            #obtains price, variance, high, low, volume, last_close, bid, offer, status and special condition from profile summary page table
-            soup = bs4.BeautifulSoup(response.content, "lxml")
+            # Get stock data
             variance_tag = soup.find('td', text='Var % (+/-)')
             price = variance_tag.findPrevious('td')
             variance = variance_tag.findNext('td').findNext('span')
@@ -131,17 +127,15 @@ class Scrapper:
             bid = bid_tag.findNext('td')
             offer_tag = bid.findNext('td')
             offer = offer_tag.findNext('td')
-            status_tag = offer.findNext('td')
-            status = status_tag.findNext('td')
-            special_conditions_tag = status.findNext('td')
-            special_conditions = special_conditions_tag.findNext('td')
-        #need to update Share.py to cater for new variables and get rid of ugly return
-        for s in self.shares:
-            if s.code == code:
-                s.update(price.string, variance.string, high.string, low.string, volume.string, last_close_value, last_close_date, bid.string, offer.string, status.string, special_conditions.string)
-                break
-        return s
-        
+
+            stock = Share(price, variance, high, low, volume,
+                          last_close_value, last_close_date, bid, offer)
+            news = self.get_financial_news_data(code)
+
+            company = Company(code, name, market_cap, revenue,
+                              stock, sector, sub_sector, news)
+
+        return company
 
     def get_top10(self, risers=True):
         """
@@ -171,7 +165,7 @@ class Scrapper:
     def get_financial_news_data(self, code):
         """
 
-        :param url: The url of the company for which financial news is wanted.
+        :param code: The code of the company for which financial news is wanted.
         :return: A list containing dictionaries for each piece of most recent news.
         """
         url = self.domain + self.profiles[code]
@@ -191,38 +185,26 @@ class Scrapper:
             for r in rows:
                 data = r.findAll('td')
 
-                row_data = {}
-
-                row_data["time_and_date"] = data[0].text.strip()
-                row_data["code"] = data[1].text.strip()
-                row_data["headline"] = data[2].a.text.strip()
-                row_data["headline_url"] = data[2].a\
-                    .get('href')\
+                date = data[0].text.strip()
+                headline = data[2].a.text.strip()
+                url = data[2].a.get('href')\
                     .replace("javascript: var x=openWin2('", "")\
                     .replace("', 'News', 900, 600, 'resizable=yes,toolbar=no,location=yes,directories=yes,addressbar=yes,scrollbars=yes,status=yes,menubar=no')", "")
 
-                row_data["source"] = data[3].text.strip()
-                row_data["impact"] = data[4].text.strip()
+                source = data[3].text.strip()
+                impact = data[4].text.strip()
 
-                row_data["impact_img_url"] = data[4].img.get('src')
+                news = News(date, headline, url, source, impact)
 
-                financial_news.append(row_data)
+                financial_news.append(news)
 
         return financial_news
 
-
     def get_sectors(self):
-        """
-        Returns a JSON object containing financial sectors, their corresponding subsectors
-        and the companies belonging to each of them.
-
-        Keyword arguments:
-        profiles - a dictionary containing company codes and their associated profile urls
-        """
-        profiles = self.profiles
-        domain = "http://www.londonstockexchange.com"
+        """Returns a JSON object containing financial sectors, their corresponding subsectors
+        and the companies belonging to each of them."""
         sectors = defaultdict(lambda : defaultdict(list))
-        for code, profile in profiles.items():
+        for code, profile in self.profiles.items():
             sector, sub_sector = self.get_company_sector(code)
             sectors[sector][sub_sector].append(code)
 

@@ -2,7 +2,7 @@ from collections import defaultdict
 import bs4
 import json
 import requests
-import Company, Footsie, News, Share
+from footsie import Company, Footsie, News, Share
 
 class Scrapper:
 
@@ -14,7 +14,7 @@ class Scrapper:
         # Get company profiles from local file
         filename = 'data/profiles.json'
         with open(filename, 'r') as f:
-            profiles = json.loads(f)
+            profiles = json.load(f)
         self.profiles = profiles
 
     def split_string(self, s, start, end):
@@ -56,7 +56,7 @@ class Scrapper:
                     company = get_company_data(code)
                     companies.append(company)
 
-        ftse = Footsie()
+        ftse = Footsie.Footsie()
         return ftse
 
     def get_company_profiles(self):
@@ -76,7 +76,7 @@ class Scrapper:
                 for r in rows:
                     data = r.findAll('td')
                     code = data[0].string
-                    profile = data[6].find('a')['href']
+                    profile = data[1].find('a')['href']
                     profiles[code] = profile
 
         return profiles
@@ -85,6 +85,7 @@ class Scrapper:
         url = self.domain + self.profiles[code]
         response = requests.get(url)
 
+        company = None
         if response.status_code == 200:
             soup = bs4.BeautifulSoup(response.content, "lxml")
             # Get information about the company
@@ -94,15 +95,15 @@ class Scrapper:
             revenue = dict()
 
             revenue_table = soup.findAll(attrs={"summary" : "Fundamentals"})[0]
-            head = table.find('thead')
-            body = table.find('tbody')
+            head = revenue_table.find('thead')
+            body = revenue_table.find('tbody')
             title = head.find('tr')
             row = body.find('tr')
-            dates = title.findAll('td')
+            dates = title.findAll('th')
             values = row.findAll('td')
 
             for i in range(1, 6):
-                revenue[dates[i]] = values[i]
+                revenue[dates[i].string.strip()] = values[i].string.strip()
 
             sector_tag = soup.find('td', text='FTSE sector')
             sector = sector_tag.findNext('td')
@@ -128,12 +129,17 @@ class Scrapper:
             offer_tag = bid.findNext('td')
             offer = offer_tag.findNext('td')
 
-            stock = Share(price, variance, high, low, volume,
-                          last_close_value, last_close_date, bid, offer)
+            # Process variance cell
+            per_diff = variance.text[:variance.text.find('%')]
+            diff = variance.text[variance.text.find('%') + 1:]
+
+            stock = Share.Share(price.string, diff, per_diff, high.string,
+                                low.string, volume.string, last_close_value,
+                                last_close_date, bid.string, offer.string)
             news = self.get_financial_news_data(code)
 
-            company = Company(code, name, market_cap, revenue,
-                              stock, sector, sub_sector, news)
+            company = Company.Company(code, name, market_cap, revenue,
+                              stock, sector.string, sub_sector.string, news)
 
         return company
 
@@ -169,9 +175,11 @@ class Scrapper:
         :return: A list containing dictionaries for each piece of most recent news.
         """
         url = self.domain + self.profiles[code]
-        url = url.replace("summary/company-summary-chart", "exchange-insight/news-analysis")
-        # http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/summary/company-summary-chart.html?fourWayKey=GB00B01FLG62GBGBXSET1
-        # http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/exchange-insight/news-analysis.html?fourWayKey=GB00B01FLG62GBGBXSET1
+        url = url.replace("summary/company-summary/", "exchange-insight/news-analysis.html?fourWayKey=")
+        # Remove .html from the end
+        url = url[:-5]
+        # http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/summary/company-summary/GB0031348658GBGBXSET1.html
+        # http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/exchange-insight/news-analysis.html?fourWayKey=GB0031348658GBGBXSET1
 
         response = requests.get(url)
         financial_news = list()
@@ -194,7 +202,7 @@ class Scrapper:
                 source = data[3].text.strip()
                 impact = data[4].text.strip()
 
-                news = News(date, headline, url, source, impact)
+                news = News.News(date, headline, url, source, impact)
 
                 financial_news.append(news)
 

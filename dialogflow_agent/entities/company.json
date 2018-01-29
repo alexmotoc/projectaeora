@@ -1,0 +1,409 @@
+{
+ "entries": [
+ {
+ "synonyms": ["3I GRP.", "3i", "3i Group"],
+ "value": "III"
+},
+{
+"synonyms": ["A.B.FOOD", "Associated British Foods"],
+ "value": "ABF"
+},
+{
+"synonyms": ["ADMIRAL GRP", "Admiral Group"],
+ "value": "ADM"
+},
+{
+"synonyms": ["ANGLO AMERICAN", "Anglo American plc"],
+ "value": "AAL"
+},
+{
+"synonyms": ["ANTOFAGASTA"],
+ "value": "ANTO"
+},
+{
+"synonyms": ["ASHTEAD GRP.", "Ashtead Group"],
+ "value": "AHT"
+},
+{
+"synonyms": ["ASTRAZENECA"],
+ "value": "AZN"
+},
+{
+"synonyms": ["AVIVA"],
+ "value": "AV."
+},
+{
+"synonyms": ["BAE SYS.", "BAE Systems"],
+ "value": "BA."
+},
+{
+"synonyms": ["BARCLAYS"],
+ "value": "BARC"
+},
+{
+"synonyms": ["BARRATT DEVEL.", "Barratt Developments"],
+ "value": "BDEV"
+},
+{
+"synonyms": ["BERKELEY GP.HLD", "Berkeley Group Holdings", "Berkeley Group Holdings (The)"],
+ "value": "BKG"
+},
+{
+"synonyms": ["BHP BILLITON", "BHP"],
+ "value": "BLT"
+},
+{
+"synonyms": ["BP"],
+ "value": "BP."
+},
+{
+"synonyms": ["BR.AMER.TOB.", "British American Tobacco"],
+ "value": "BATS"
+},
+{
+"synonyms": ["BR.LAND", "British Land", "British Land Company"],
+ "value": "BLND"
+},
+{
+"synonyms": ["BT GROUP"],
+ "value": "BT.A"
+},
+{
+"synonyms": ["BUNZL"],
+ "value": "BNZL"
+},
+{
+"synonyms": ["BURBERRY GRP", "Burberry", "Burberry Group"],
+ "value": "BRBY"
+},
+{
+"synonyms": ["CARNIVAL", "Carnival Corporation & plc"],
+ "value": "CCL"
+},
+{
+"synonyms": ["CENTRICA"],
+ "value": "CNA"
+},
+{
+"synonyms": ["COCACOLA HBC AG", "Coca-Cola HBC AG", "Coca-Cola HBC AG (CDI)"],
+ "value": "CCH"
+},
+{
+"synonyms": ["COMPASS GROUP"],
+ "value": "CPG"
+},
+{
+"synonyms": ["CRH", "CRH plc"],
+ "value": "CRH"
+},
+{
+"synonyms": ["CRODA INTL.", "Croda International"],
+ "value": "CRDA"
+},
+{
+"synonyms": ["DCC", "DCC plc"],
+ "value": "DCC"
+},
+{
+"synonyms": ["DIAGEO"],
+ "value": "DGE"
+},
+{
+"synonyms": ["DIRECT LINE", "Direct Line Group", "Direct Line Insurance Group"],
+ "value": "DLG"
+},
+{
+"synonyms": ["EASYJET"],
+ "value": "EZJ"
+},
+{
+"synonyms": ["EVRAZ"],
+ "value": "EVR"
+},
+{
+"synonyms": ["EXPERIAN"],
+ "value": "EXPN"
+},
+{
+"synonyms": ["FERGUSON", "Ferguson plc"],
+ "value": "FERG"
+},
+{
+"synonyms": ["FRESNILLO", "Fresnillo plc"],
+ "value": "FRES"
+},
+{
+"synonyms": ["G4S"],
+ "value": "GFS"
+},
+{
+"synonyms": ["GKN"],
+ "value": "GKN"
+},
+{
+"synonyms": ["GLAXOSMITHKLINE"],
+ "value": "GSK"
+},
+{
+"synonyms": ["GLENCORE"],
+ "value": "GLEN"
+},
+{
+"synonyms": ["HALMA"],
+ "value": "HLMA"
+},
+{
+"synonyms": ["HAMMERSON"],
+ "value": "HMSO"
+},
+{
+"synonyms": ["HARGREAVES LANS", "Hargreaves Lansdown"],
+ "value": "HL."
+},
+{
+"synonyms": ["HSBC HLDGS.UK", "HSBC", "HSBC Holdings"],
+ "value": "HSBA"
+},
+{
+"synonyms": ["IMP.BRANDS", "Imperial Brands"],
+ "value": "IMB"
+},
+{
+"synonyms": ["INFORMA"],
+ "value": "INF"
+},
+{
+"synonyms": ["INTERCON. HOTEL", "InterContinental Hotels Group"],
+ "value": "IHG"
+},
+{
+"synonyms": ["INTERTEK GROUP", "Intertek"],
+ "value": "ITRK"
+},
+{
+"synonyms": ["INTL CONSOL AIR", "International Airlines Group", "International Consolidated Airlines Group SA (CDI)"],
+ "value": "IAG"
+},
+{
+"synonyms": ["ITV", "ITV plc"],
+ "value": "ITV"
+},
+{
+"synonyms": ["JOHNSON MATTHEY"],
+ "value": "JMAT"
+},
+{
+"synonyms": ["JUST EAT"],
+ "value": "JE."
+},
+{
+"synonyms": ["KINGFISHER", "Kingfisher plc"],
+ "value": "KGF"
+},
+{
+"synonyms": ["LAND SECS.", "Land Securities", "Land Securities Group"],
+ "value": "LAND"
+},
+{
+"synonyms": ["LEGAL&GEN.", "Legal & General", "Legal & General Group"],
+ "value": "LGEN"
+},
+{
+"synonyms": ["LLOYDS GRP.", "Lloyds Banking Group"],
+ "value": "LLOY"
+},
+{
+"synonyms": ["LON.STK.EXCH", "London Stock Exchange Group"],
+ "value": "LSE"
+},
+{
+"synonyms": ["MARKS & SP.", "Marks & Spencer", "Marks & Spencer Group"],
+ "value": "MKS"
+},
+{
+"synonyms": ["MEDICLINIC", "Mediclinic International"],
+ "value": "MDC"
+},
+{
+"synonyms": ["MICRO FOCUS", "Micro Focus International"],
+ "value": "MCRO"
+},
+{
+"synonyms": ["MONDI"],
+ "value": "MNDI"
+},
+{
+"synonyms": ["MORRISON (WM)", "Morrisons", "Morrison (Wm) Supermarkets"],
+ "value": "MRW"
+},
+{
+"synonyms": ["NATIONAL GRID", "National Grid plc"],
+ "value": "NG."
+},
+{
+"synonyms": ["NEXT", "Next plc"],
+ "value": "NXT"
+},
+{
+"synonyms": ["NMC HEALTH"],
+ "value": "NMC"
+},
+{
+"synonyms": ["OLD MUTUAL"],
+ "value": "OML"
+},
+{
+"synonyms": ["PADDY PWR BET", "Paddy Power Betfair"],
+ "value": "PPB"
+},
+{
+"synonyms": ["PEARSON", "Pearson PLC"],
+ "value": "PSON"
+},
+{
+"synonyms": ["PERSIMMON", "Persimmon plc"],
+ "value": "PSN"
+},
+{
+"synonyms": ["PRUDENTIAL", "Prudential plc"],
+ "value": "PRU"
+},
+{
+"synonyms": ["RANDGOLD RES.", "Randgold Resources", "Randgold Resources Ltd."],
+ "value": "RRS"
+},
+{
+"synonyms": ["RDS 'A'", "Royal Dutch Shell", "Royal Dutch Shell 'A'"],
+ "value": "RDSA"
+},
+{
+"synonyms": ["RDS 'B'", "Royal Dutch Shell 'B'"],
+ "value": "RDSB"
+},
+{
+"synonyms": ["RECKITT BEN. GP", "Reckitt Benckiser", "Reckitt Benckiser Group"],
+ "value": "RB."
+},
+{
+"synonyms": ["RELX", "RELX Group", "Relx plc"],
+ "value": "REL"
+},
+{
+"synonyms": ["RENTOKIL INITL.", "Rentokil Initial"],
+ "value": "RTO"
+},
+{
+"synonyms": ["RIO TINTO", "Rio Tinto Group"],
+ "value": "RIO"
+},
+{
+"synonyms": ["ROLLS-ROYCE HLG", "Rolls-Royce Holdings"],
+ "value": "RR."
+},
+{
+"synonyms": ["ROYAL BANK SCOT", "The Royal Bank of Scotland Group", "Royal Bank of Scotland Group"],
+ "value": "RBS"
+},
+{
+"synonyms": ["RSA INS.", "RSA Insurance Group"],
+ "value": "RSA"
+},
+{
+"synonyms": ["SAGE GRP.", "Sage Group"],
+ "value": "SGE"
+},
+{
+"synonyms": ["SAINSBURY(J)", "Sainsbury's", "Sainsbury (J)"],
+ "value": "SBRY"
+},
+{
+"synonyms": ["SCHRODERS"],
+ "value": "SDR"
+},
+{
+"synonyms": ["SCOTTISH MORT", "Scottish Mortgage Investment Trust", "Scottish Mortgage Inv Trust"],
+ "value": "SMT"
+},
+{
+"synonyms": ["SEGRO"],
+ "value": "SGRO"
+},
+{
+"synonyms": ["SEVERN TRENT"],
+ "value": "SVT"
+},
+{
+"synonyms": ["SHIRE", "Shire plc"],
+ "value": "SHP"
+},
+{
+"synonyms": ["SKY PLC", "Sky"],
+ "value": "SKY"
+},
+{
+"synonyms": ["SMITH&NEPHEW", "Smith & Nephew"],
+ "value": "SN."
+},
+{
+"synonyms": ["SMITH(DS)", "Smith, D.S.", "Smith (DS)"],
+ "value": "SMDS"
+},
+{
+"synonyms": ["SMITHS GROUP"],
+ "value": "SMIN"
+},
+{
+"synonyms": ["SMURFIT KAP.", "Smurfit Kappa", "Smurfit Kappa Group"],
+ "value": "SKG"
+},
+{
+"synonyms": ["SSE", "SSE plc"],
+ "value": "SSE"
+},
+{
+"synonyms": ["ST.JAMES'S PLAC", "St. James's Place plc", "St James's Place"],
+ "value": "STJ"
+},
+{
+"synonyms": ["STAND.CHART.", "Standard Chartered"],
+ "value": "STAN"
+},
+{
+"synonyms": ["STD LIFE ABER", "Standard Life Aberdeen"],
+ "value": "SLA"
+},
+{
+"synonyms": ["TAYLOR WIMPEY"],
+ "value": "TW."
+},
+{
+"synonyms": ["TESCO"],
+ "value": "TSCO"
+},
+{
+"synonyms": ["TUI AG", "TUI Group", "TUI AG Reg Shs (DI)"],
+ "value": "TUI"
+},
+{
+"synonyms": ["UNILEVER"],
+ "value": "ULVR"
+},
+{
+"synonyms": ["UTD. UTILITIES", "United Utilities", "United Utilities Group"],
+ "value": "UU."
+},
+{
+"synonyms": ["VODAFONE GRP.", "Vodafone Group"],
+ "value": "VOD"
+},
+{
+"synonyms": ["WHITBREAD"],
+ "value": "WTB"
+},
+{
+"synonyms": ["WPP", "WPP plc"],
+ "value": "WPP"
+}
+],
+ "name": "companies"
+}

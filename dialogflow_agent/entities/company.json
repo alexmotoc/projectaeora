@@ -1,6 +1,6 @@
 {
  "entries": [
- {
+{
  "synonyms": ["3I GRP.", "3i", "3i Group"],
  "value": "III"
 },
@@ -45,7 +45,7 @@
  "value": "BDEV"
 },
 {
-"synonyms": ["BERKELEY GP.HLD", "Berkeley Group Holdings", "Berkeley Group Holdings (The)"],
+"synonyms": ["BERKELEY GP.HLD", "Berkeley Group Holdings", "Berkeley Group"],
  "value": "BKG"
 },
 {
@@ -85,7 +85,7 @@
  "value": "CNA"
 },
 {
-"synonyms": ["COCACOLA HBC AG", "Coca-Cola HBC AG", "Coca-Cola HBC AG (CDI)"],
+"synonyms": ["COCACOLA HBC AG", "Coca-Cola HBC AG", "Coca-Cola"],
  "value": "CCH"
 },
 {
@@ -181,7 +181,7 @@
  "value": "ITRK"
 },
 {
-"synonyms": ["INTL CONSOL AIR", "International Airlines Group", "International Consolidated Airlines Group SA (CDI)"],
+"synonyms": ["INTL CONSOL AIR", "International Airlines Group", "International Consolidated Airlines Group SA"],
  "value": "IAG"
 },
 {
@@ -233,7 +233,7 @@
  "value": "MNDI"
 },
 {
-"synonyms": ["MORRISON (WM)", "Morrisons", "Morrison (Wm) Supermarkets"],
+"synonyms": ["MORRISON", "Morrisons", "Morrison Supermarkets"],
  "value": "MRW"
 },
 {
@@ -313,7 +313,7 @@
  "value": "SGE"
 },
 {
-"synonyms": ["SAINSBURY(J)", "Sainsbury's", "Sainsbury (J)"],
+"synonyms": ["Sainsbury's", "Sainsbury"],
  "value": "SBRY"
 },
 {
@@ -345,7 +345,7 @@
  "value": "SN."
 },
 {
-"synonyms": ["SMITH(DS)", "Smith, D.S.", "Smith (DS)"],
+"synonyms": ["Smith, D.S.", "Smith"],
  "value": "SMDS"
 },
 {
@@ -381,7 +381,7 @@
  "value": "TSCO"
 },
 {
-"synonyms": ["TUI AG", "TUI Group", "TUI AG Reg Shs (DI)"],
+"synonyms": ["TUI AG", "TUI Group", "TUI AG Reg Shs"],
  "value": "TUI"
 },
 {
@@ -405,5 +405,5 @@
  "value": "WPP"
 }
 ],
- "name": "companies"
+ "name": "company"
 }

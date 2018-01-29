@@ -1,0 +1,65 @@
+{
+ "entries": [
+{
+ "synonyms": ["current", "stock price", "value", "current price", "stock value", "stock"],
+ "value": "price"
+},
+{
+ "synonyms": [],
+ "value": "high"
+},
+{
+ "synonyms": [],
+ "value": "low"
+},
+{
+ "synonyms": ["trade volume"],
+ "value": "volume"
+},
+{
+ "synonyms": ["variance", "variation", "change"],
+ "value": "difference"
+},
+{
+ "synonyms": ["percentage change", "percentage variance", "percentage variation"],
+ "value": "percentage difference"
+},
+{
+ "synonyms": [],
+ "value": "revenue"
+},
+{
+ "synonyms": ["FTSE sector"],
+ "value": "sector"
+},
+{
+ "synonyms": ["subsector", "FTSE subsector"],
+ "value": "sub-sector"
+},
+{
+ "synonyms": [],
+ "value": "bid"
+},
+{
+ "synonyms": [],
+ "value": "offer"
+},
+{
+ "synonyms": ["market capitalisation"],
+ "value": "market cap"
+},
+{
+ "synonyms": [],
+ "value": "last close value"
+},
+{
+ "synonyms": [],
+ "value": "last close date"
+},
+{
+ "synonyms": ["reports", "stories", "articles", "announcements"],
+ "value": "news"
+}
+],
+ "name": "attribute"
+}

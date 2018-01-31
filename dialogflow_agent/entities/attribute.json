@@ -1,65 +1,65 @@
 {
- "entries": [
-{
- "synonyms": ["current", "stock price", "value", "current price", "stock value", "stock"],
- "value": "price"
-},
-{
- "synonyms": [],
- "value": "high"
-},
-{
- "synonyms": [],
- "value": "low"
-},
-{
- "synonyms": ["trade volume"],
- "value": "volume"
-},
-{
- "synonyms": ["variance", "variation", "change"],
- "value": "difference"
-},
-{
- "synonyms": ["percentage change", "percentage variance", "percentage variation"],
- "value": "percentage difference"
-},
-{
- "synonyms": [],
- "value": "revenue"
-},
-{
- "synonyms": ["FTSE sector"],
- "value": "sector"
-},
-{
- "synonyms": ["subsector", "FTSE subsector"],
- "value": "sub-sector"
-},
-{
- "synonyms": [],
- "value": "bid"
-},
-{
- "synonyms": [],
- "value": "offer"
-},
-{
- "synonyms": ["market capitalisation"],
- "value": "market cap"
-},
-{
- "synonyms": [],
- "value": "last close value"
-},
-{
- "synonyms": [],
- "value": "last close date"
-},
-{
- "synonyms": ["reports", "stories", "articles", "announcements"],
- "value": "news"
-}
-],
- "name": "attribute"
+    "entries": [
+        {
+        "synonyms": ["price", "current", "stock price","value", "current price", "stock value", "stock"],
+        "value": "price"
+        },
+        {
+        "synonyms": ["high"],
+        "value": "high"
+        },
+        {
+        "synonyms": ["low"],
+        "value": "low"
+        },
+        {
+        "synonyms": ["volume", "trade volume"],
+        "value": "volume"
+        },
+        {
+        "synonyms": ["difference", "variance", "variation", "change"],
+        "value": "diff"
+        },
+        {
+        "synonyms": ["percentage change", "percentage variance", "percentage variation"],
+        "value": "per_diff"
+        },
+        {
+        "synonyms": ["revenue"],
+        "value": "revenue"
+        },
+        {
+        "synonyms": ["sector", "FTSE sector"],
+        "value": "sector"
+        },
+        {
+        "synonyms": ["sub-sector", "subsector", "FTSE subsector"],
+        "value": "sub-sector"
+        },
+        {
+        "synonyms": ["bid"],
+        "value": "bid"
+        },
+        {
+        "synonyms": ["offer"],
+        "value": "offer"
+        },
+        {
+        "synonyms": ["market cap", "market capitalisation"],
+        "value": "market_cap"
+        },
+        {
+        "synonyms": ["last close value"],
+        "value": "last_close_value"
+        },
+        {
+        "synonyms": ["last close date"],
+        "value": "last_close_date"
+        },
+        {
+        "synonyms": ["news", "reports", "stories", "articles", "announcements"],
+        "value": "news"
+        }
+    ],
+    "name": "attribute"
 }

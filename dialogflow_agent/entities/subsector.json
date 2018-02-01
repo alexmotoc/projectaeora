@@ -1,0 +1,241 @@
+{
+    "entries": [
+        {
+        "synonyms": ["Distillers & Vintners"],
+        "value": "Distillers & Vintners"
+        },
+        {
+        "synonyms": ["Soft Drinks"],
+        "value": "Soft Drinks"
+        },
+        {
+        "synonyms": ["Specialty Chemicals"],
+        "value": "Specialty Chemicals"
+        },
+        {
+        "synonyms": ["Mobile Telecommunications"],
+        "value": "Mobile Telecommunications"
+        },
+        {
+        "synonyms": ["Broadline Retailers"],
+        "value": "Broadline Retailers"
+        },
+        {
+        "synonyms": ["Apparel Retailers"],
+        "value": "Apparel Retailers"
+        },
+        {
+        "synonyms": ["Specialized Consumer Services"],
+        "value": "Specialized Consumer Services"
+        },
+        {
+        "synonyms": ["Home Improvement Retailers"],
+        "value": "Home Improvement Retailers"
+        },
+        {
+        "synonyms": ["Property & Casualty Insurance"],
+        "value": "Property & Casualty Insurance"
+        },
+        {
+        "synonyms": ["Full Line Insurance"],
+        "value": "Full Line Insurance"
+        },
+        {
+        "synonyms": ["Insurance Brokers"],
+        "value": "Insurance Brokers"
+        },
+        {
+        "synonyms": ["Aerospace"],
+        "value": "Aerospace"
+        },
+        {
+        "synonyms": ["Defense"],
+        "value": "Defense"
+        },
+        {
+        "synonyms": ["Integrated Oil & Gas"],
+        "value": "Integrated Oil & Gas"
+        },
+        {
+        "synonyms": ["Nondurable Household Products"],
+        "value": "Nondurable Household Products"
+        },
+        {
+        "synonyms": ["Home Construction"],
+        "value": "Home Construction"
+        },
+        {
+        "synonyms": ["Diversified Industrials"],
+        "value": "Diversified Industrials"
+        },
+        {
+        "synonyms": ["Containers & Packaging"],
+        "value": "Containers & Packaging"
+        },
+        {
+        "synonyms": ["Life Insurance"],
+        "value": "Life Insurance"
+        },
+        {
+        "synonyms": ["Business Support Services"],
+        "value": "Business Support Services"
+        },
+        {
+        "synonyms": ["Industrial Suppliers"],
+        "value": "Industrial Suppliers"
+        },
+        {
+        "synonyms": ["Food Products"],
+        "value": "Food Products"
+        },
+        {
+        "synonyms": ["Banks"],
+        "value": "Banks"
+        },
+        {
+        "synonyms": ["Recreational Services"],
+        "value": "Recreational Services"
+        },
+        {
+        "synonyms": ["Restaurants & Bars"],
+        "value": "Restaurants & Bars"
+        },
+        {
+        "synonyms": ["Airlines"],
+        "value": "Airlines"
+        },
+        {
+        "synonyms": ["Hotels"],
+        "value": "Hotels"
+        },
+        {
+        "synonyms": ["Travel & Tourism"],
+        "value": "Travel & Tourism"
+        },
+        {
+        "synonyms": ["Gambling"],
+        "value": "Gambling"
+        },
+        {
+        "synonyms": ["Retail REITs"],
+        "value": "Retail REITs"
+        },
+        {
+        "synonyms": ["Industrial & Office REITs"],
+        "value": "Industrial & Office REITs"
+        },
+        {
+        "synonyms": ["Diversified REITs"],
+        "value": "Diversified REITs"
+        },
+        {
+        "synonyms": ["Tobacco"],
+        "value": "Tobacco"
+        },
+        {
+        "synonyms": ["Fixed Line Telecommunications"],
+        "value": "Fixed Line Telecommunications"
+        },
+        {
+        "synonyms": ["Health Care Providers"],
+        "value": "Health Care Providers"
+        },
+        {
+        "synonyms": ["Medical Equipment"],
+        "value": "Medical Equipment"
+        },
+        {
+        "synonyms": ["Specialty Finance"],
+        "value": "Specialty Finance"
+        },
+        {
+        "synonyms": ["Investment Services"],
+        "value": "Investment Services"
+        },
+        {
+        "synonyms": ["Asset Managers"],
+        "value": "Asset Managers"
+        },
+        {
+        "synonyms": ["Personal Products"],
+        "value": "Personal Products"
+        },
+        {
+        "synonyms": ["Clothing & Accessories"],
+        "value": "Clothing & Accessories"
+        },
+        {
+        "synonyms": ["Food Retailers & Wholesalers"],
+        "value": "Food Retailers & Wholesalers"
+        },
+        {
+        "synonyms": ["Conventional Electricity"],
+        "value": "Conventional Electricity"
+        },
+        {
+        "synonyms": ["Auto Parts"],
+        "value": "Auto Parts"
+        },
+        {
+        "synonyms": ["Building Materials & Fixtures"],
+        "value": "Building Materials & Fixtures"
+        },
+        {
+        "synonyms": ["Electronic Equipment"],
+        "value": "Electronic Equipment"
+        },
+        {
+        "synonyms": ["Pharmaceuticals"],
+        "value": "Pharmaceuticals"
+        },
+        {
+        "synonyms": ["Water"],
+        "value": "Water"
+        },
+        {
+        "synonyms": ["Gas Distribution"],
+        "value": "Gas Distribution"
+        },
+        {
+        "synonyms": ["Multiutilities"],
+        "value": "Multiutilities"
+        },
+        {
+        "synonyms": ["Publishing"],
+        "value": "Publishing"
+        },
+        {
+        "synonyms": ["Broadcasting & Entertainment"],
+        "value": "Broadcasting & Entertainment"
+        },
+        {
+        "synonyms": ["Media Agencies"],
+        "value": "Media Agencies"
+        },
+        {
+        "synonyms": ["Paper"],
+        "value": "Paper"
+        },
+        {
+        "synonyms": ["Equity Investment Instruments"],
+        "value": "Equity Investment Instruments"
+        },
+        {
+        "synonyms": ["Iron & Steel"],
+        "value": "Iron & Steel"
+        },
+        {
+        "synonyms": ["Software"],
+        "value": "Software"
+        },
+        {
+        "synonyms": ["General Mining"],
+        "value": "General Mining"
+        },
+        {
+        "synonyms": ["Gold Mining"],
+        "value": "Gold Mining"
+        },
+    ],
+    "name": "sector"
+}

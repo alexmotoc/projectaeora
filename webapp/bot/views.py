@@ -6,6 +6,11 @@ import json
 import os
 import requests
 
+import sys
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '/../../scrapper'))
+
+from footsie import Scrapper
+
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
@@ -15,7 +20,8 @@ def chat(request):
         form = QueryForm(request.POST)
 
         if form.is_valid():
-            question = form.cleaned_data['query']
+            query = form.save(commit=False)
+            question = form.cleaned_data['question']
 
             dialogflow_key = os.environ.get('DIALOGFLOW_CLIENT_ACCESS_TOKEN')
             dialogflow_api = 'https://api.dialogflow.com/v1/query?v=20150910'
@@ -29,8 +35,21 @@ def chat(request):
             })
 
             r = requests.post(dialogflow_api, headers=headers, data=payload)
-            print(r.text)
-            
+            r = r.json()
+
+            company_code = r['result']['parameters']['company']
+            attribute = r['result']['parameters']['attribute']
+
+            scrapper = Scrapper.Scrapper()
+
+            company = scrapper.get_company_data(company_code)
+            value = getattr(company.stock, attribute)
+
+            response = {}
+            response['text'] = 'The {} of {} is {}.'.format(attribute, company.name, value)
+
+            print(response['text'])
+
             form = QueryForm()
     else:
         form = QueryForm()

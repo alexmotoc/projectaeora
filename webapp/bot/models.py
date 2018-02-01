@@ -10,7 +10,7 @@ class Query(models.Model):
 
 
 class Response(models.Model):
-    query = models.ForeignKey(Statement, on_delete=models.CASCADE)
+    query = models.ForeignKey(Query, on_delete=models.CASCADE)
     response = models.TextField()
 
     def __str__(self):

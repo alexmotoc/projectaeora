@@ -1,0 +1,317 @@
+[
+  {
+    "id": "a19f6769-4bde-428b-adbb-4821699a4304",
+    "data": [
+      {
+        "text": "Tesco",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "subsector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "a2b6a656-a77c-4f7d-b310-c108c708c4da",
+    "data": [
+      {
+        "text": "What ",
+        "userDefined": false
+      },
+      {
+        "text": "sector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is Vodafone in?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "da9210e0-bbfc-487b-a3cc-20b10d13efd8",
+    "data": [
+      {
+        "text": "Can you tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "HSBC",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "offer",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "8b2b5b1e-c59c-4cb9-a0d8-635fd12b6f78",
+    "data": [
+      {
+        "text": "What was the ",
+        "userDefined": false
+      },
+      {
+        "text": "last close value",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "Sainsbury",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "ba563d27-b3e9-4009-901a-3fdb44e30a08",
+    "data": [
+      {
+        "text": "Tell me the ",
+        "userDefined": false
+      },
+      {
+        "text": "market cap",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "Rolls Royce",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "e448f8b0-6b6c-48ed-a6e4-7eabc9e0cef5",
+    "data": [
+      {
+        "text": "What is ",
+        "userDefined": false
+      },
+      {
+        "text": "Coca Cola",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": true
+      },
+      {
+        "text": "\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "revenue",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "ec6d813b-54ac-452c-aff6-e8c63eae699a",
+    "data": [
+      {
+        "text": "BT",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "stock price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "f5dc5e2f-6a43-4415-adc7-f8b171081436",
+    "data": [
+      {
+        "text": "Has ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "  risen ",
+        "userDefined": false
+      },
+      {
+        "text": "this week",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "1d0bf174-e417-4876-98f6-032a20315e56",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "percentage change",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "BP",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " since the market opened?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "4fa76ab9-6bbd-419a-b1ce-99a6b88528c4",
+    "data": [
+      {
+        "text": "What is the current ",
+        "userDefined": false
+      },
+      {
+        "text": "trading volume",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "Carnival",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  },
+  {
+    "id": "cc0bea15-ed82-48cf-aed2-9b65bace1cae",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "current spot price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "3i Group",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0
+  }
+]

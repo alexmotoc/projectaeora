@@ -1,0 +1,65 @@
+{
+  "id": "a2bef24f-9993-45f5-bbe0-23f510a36674",
+  "name": "Footsie Intent",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "5ecd24ba-a6af-43d4-b197-ac8f03498c01",
+          "required": true,
+          "dataType": "@attribute",
+          "name": "attribute",
+          "value": "$attribute",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What do you want to find about $company?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "967e7074-56d6-47d9-a2a1-bfe7704466dd",
+          "required": true,
+          "dataType": "@company",
+          "name": "company",
+          "value": "$company",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What company should I tell you about?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "0b40eeec-e1a8-461d-b802-507ea83e74d1",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1517508678,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -6,7 +6,7 @@ class Query(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return '{} at {}'.format(question, str(created_at))
+        return '{} at {}'.format(self.question, str(self.created_at))
 
 
 class Response(models.Model):

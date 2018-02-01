@@ -15,6 +15,10 @@
 
     <body>
       <main>
+        {% for line in history %}
+          <p>{{ line.query }}</p>
+          <p>{{ line.response }}</p>
+        {% endfor %}
         <form action="/chat/" method="post">
           {% csrf_token %}
           {{ form }}

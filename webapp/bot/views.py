@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from .forms import QueryForm
+from .models import Response
 
 import json
 import os
@@ -16,11 +17,13 @@ def index(request):
     return render(request, 'index.html')
 
 def chat(request):
+    history = Response.objects.all()
+
     if request.method == 'POST':
         form = QueryForm(request.POST)
 
         if form.is_valid():
-            query = form.save(commit=False)
+            query = form.save()
             question = form.cleaned_data['question']
 
             dialogflow_key = os.environ.get('DIALOGFLOW_CLIENT_ACCESS_TOKEN')
@@ -48,10 +51,11 @@ def chat(request):
             response = {}
             response['text'] = 'The {} of {} is {}.'.format(attribute, company.name, value)
 
-            print(response['text'])
+            reply = Response(query=query, response=json.dumps(response))
+            reply.save()
 
             form = QueryForm()
     else:
         form = QueryForm()
 
-    return render(request, 'chat.html', {'form': form})
+    return render(request, 'chat.html', {'form': form, 'history': history})

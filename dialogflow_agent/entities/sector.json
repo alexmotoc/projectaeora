@@ -1,0 +1,137 @@
+{
+    "entries": [
+        {
+        "synonyms": ["Beverages"],
+        "value": "Beverages"
+        },
+        {
+        "synonyms": ["Chemicals"],
+        "value": "Chemicals"
+        },
+        {
+        "synonyms": ["Mobile Telecommunications"],
+        "value": "Mobile Telecommunications"
+        },
+        {
+        "synonyms": ["General Retailers"],
+        "value": "General Retailers"
+        },
+        {
+        "synonyms": ["Nonlife Insurance"],
+        "value": "Nonlife Insurance"
+        },
+        {
+        "synonyms": ["Aerospace & Defense"],
+        "value": "Aerospace & Defense"
+        },
+        {
+        "synonyms": ["Oil & Gas Producers"],
+        "value": "Oil & Gas Producers"
+        },
+        {
+        "synonyms": ["Household Goods & Home Construction"],
+        "value": "Household Goods & Home Construction"
+        },
+        {
+        "synonyms": ["General Industrials"],
+        "value": "General Industrials"
+        },
+        {
+        "synonyms": ["Life Insurance"],
+        "value": "Life Insurance"
+        },
+        {
+        "synonyms": ["Support Services"],
+        "value": "Support Services"
+        },
+        {
+        "synonyms": ["Food Producers"],
+        "value": "Food Producers"
+        },
+        {
+        "synonyms": ["Banks"],
+        "value": "Banks"
+        },
+        {
+        "synonyms": ["Travel & Leisure"],
+        "value": "Travel & Leisure"
+        },
+        {
+        "synonyms": ["Real Estate Investment Trusts"],
+        "value": "Real Estate Investment Trusts"
+        },
+        {
+        "synonyms": ["Tobacco"],
+        "value": "Tobacco"
+        },
+        {
+        "synonyms": ["Fixed Line Telecommunications"],
+        "value": "Fixed Line Telecommunications"
+        },
+        {
+        "synonyms": ["Health Care Equipment & Services"],
+        "value": "Health Care Equipment & Services"
+        },
+        {
+        "synonyms": ["Financial Services"],
+        "value": "Financial Services"
+        },
+        {
+        "synonyms": ["Personal Goods"],
+        "value": "Personal Goods"
+        },
+        {
+        "synonyms": ["Food & Drug Retailers"],
+        "value": "Food & Drug Retailers"
+        },
+        {
+        "synonyms": ["Electricity"],
+        "value": "Electricity"
+        },
+        {
+        "synonyms": ["Automobiles & Parts"],
+        "value": "Automobiles & Parts"
+        },
+        {
+        "synonyms": ["Construction & Materials"],
+        "value": "Construction & Materials"
+        },
+        {
+        "synonyms": ["Electronic & Electrical Equipment"],
+        "value": "Electronic & Electrical Equipment"
+        },
+        {
+        "synonyms": ["Pharmaceuticals & Biotechnology"],
+        "value": "Pharmaceuticals & Biotechnology"
+        },
+        {
+        "synonyms": ["Gas, Water & Multiutilities"],
+        "value": "Gas, Water & Multiutilities"
+        },
+        {
+        "synonyms": ["Media"],
+        "value": "Media"
+        },
+        {
+        "synonyms": ["Forestry & Paper"],
+        "value": "Forestry & Paper"
+        },
+        {
+        "synonyms": ["Equity Investment Instruments"],
+        "value": "Equity Investment Instruments"
+        },
+        {
+        "synonyms": ["Industrial Metals & Mining"],
+        "value": "Industrial Metals & Mining"
+        },
+        {
+        "synonyms": ["Software & Computer Services"],
+        "value": "Software & Computer Services"
+        },
+        {
+        "synonyms": ["Mining"],
+        "value": "Mining"
+        },
+    ],
+    "name": "sector"
+}

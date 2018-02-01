@@ -15,7 +15,7 @@ class Share:
 
     def __str__(self):
         return 'Price: {}\nDifference: {}\nPercentage difference: {}\n' \
-               'Variance: {}\nHigh: {}\nLow: {}\nVolume: {}\n' \
-               'Last close value: {}\nLast close date: {}\nBid: {}\nOffer: {}\n'.format(
+               'High: {}\nLow: {}\nVolume: {}\nLast close value: {}\n' \
+               'Last close date: {}\nBid: {}\nOffer: {}'.format(
                self.price, self.diff, self.per_diff, self.high, self.low,
                self.volume, self.last_close_value, self.last_close_date, self.bid, self.offer)

@@ -12,7 +12,7 @@ class Company:
         self.news = news
 
     def __str__(self):
-        return 'Code: {}\nName: {}\nMarket cap: {}\nRevenue: {}' \
+        return 'Code: {}\nName: {}\nMarket cap: {}\nRevenue: {}\n' \
                'Stock: {}\nSector: {}\nSub-sector: {}\nNews: {}\n'.format(
                self.code, self.name, self.market_cap, self.revenue,
                self.stock, self.sector, self.sub_sector, self.news)

@@ -1,6 +1,7 @@
 from collections import defaultdict
 import bs4
 import json
+import os
 import requests
 from footsie import Company, Footsie, News, Share
 
@@ -12,7 +13,7 @@ class Scrapper:
         self.top10URL = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/risers-and-fallers/risers-fallers.html"
 
         # Get company profiles from local file
-        filename = 'data/profiles.json'
+        filename = os.path.dirname(__file__) + '/../data/profiles.json'
         with open(filename, 'r') as f:
             profiles = json.load(f)
         self.profiles = profiles
@@ -89,8 +90,9 @@ class Scrapper:
         if response.status_code == 200:
             soup = bs4.BeautifulSoup(response.content, "lxml")
             # Get information about the company
-            name = soup.find('div', {'class': 'company-title'}).text
-            market_cap = soup.find('td', text='Market cap(in millions)*').string
+            name_cell = soup.find('div', {'class': 'company-title'})
+            name = name_cell.text.strip().split('\r')[1].strip()
+            market_cap = soup.find('td', text='Market cap(in millions)*').findNext('td').string
 
             revenue = dict()
 

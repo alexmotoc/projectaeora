@@ -18,7 +18,9 @@
       <main>
         <!-- Question history -->
         <div class="row">
-          <div class="col s8 offset-s2">
+            <div class="col s2 indigo">
+            </div>
+          <div class="col s8">
             <div class="bubble sent blue lighten-1">
               test
             </div>
@@ -31,16 +33,18 @@
         <!-- Text input -->
         <div class="row fixed-bottom">
           <div class="col s8 offset-s2 text-bar z-depth-2 hoverable">
-            <div class="col s11">
+            <div class="col s12">
             <form action="/chat/" method="post">
               {% csrf_token %}
-              {{ form }}
+              <div class="col s6 md11">
+                {{ form }}
+              </div>
+              <div class="col s6 md1 input-buttons-container">
+                <a class="btn-floating waves-effect waves-light red input-button"><i class="material-icons md-24">send</i></a>
+                <a class="btn-floating waves-effect waves-light red input-button"><i class="material-icons md-24">mic</i></a>
+              </div>
             </form>
             </div>
-            <!-- <div class="col s1 offset-s11">
-              <i class="material-icons md-36">send</i>
-              <i class="material-icons md-36">mic</i>
-            </div> -->
           </div>
         </div>
       </main>

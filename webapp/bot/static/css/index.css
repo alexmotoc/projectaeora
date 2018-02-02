@@ -38,6 +38,17 @@
     padding: 5px 10px;
 }
 
+.input-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+}
+
+.input-button {
+    margin-left: 5px;
+}
+
 /* label underline focus color */
 #id_question {
     border-bottom: none!important;

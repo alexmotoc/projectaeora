@@ -16,20 +16,31 @@
 
     <body>
       <main>
-        {% for line in history %}
-          <p>{{ line.query }}</p>
-          <p>{{ line.response }}</p>
-        {% endfor %}
+        <!-- Question history -->
         <div class="row">
-          <div class="fixed-bottom col s7 offset-s2">
+          <div class="col s8 offset-s2">
+            <div class="bubble sent blue lighten-1">
+              test
+            </div>
+            <div class="bubble received blue lighten-1">
+              test2
+            </div>
+          </div>
+        </div>
+
+        <!-- Text input -->
+        <div class="row fixed-bottom">
+          <div class="col s8 offset-s2 text-bar z-depth-2 hoverable">
+            <div class="col s11">
             <form action="/chat/" method="post">
               {% csrf_token %}
               {{ form }}
             </form>
-          </div>
-          <div class="fixed-bottom col s1 offset-s9">
-            <i class="material-icons md-36">send</i>
-            <i class="material-icons md-36">mic</i>
+            </div>
+            <!-- <div class="col s1 offset-s11">
+              <i class="material-icons md-36">send</i>
+              <i class="material-icons md-36">mic</i>
+            </div> -->
           </div>
         </div>
       </main>

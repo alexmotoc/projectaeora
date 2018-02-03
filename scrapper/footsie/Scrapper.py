@@ -11,7 +11,7 @@ class Scrapper:
         self.domain = "http://www.londonstockexchange.com"
         self.ftse100URL = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX"
         self.top10URL = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/risers-and-fallers/risers-fallers.html"
-
+        self.ftse100_summary = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/summary/summary-indices.html?index=UKX"
         # Get company profiles from local file
         filename = os.path.dirname(__file__) + '/../data/profiles.json'
         with open(filename, 'r') as f:
@@ -24,16 +24,16 @@ class Scrapper:
     def get_ftse(self):
         """Returns a object containing information about FTSE 100 and the companies in this index."""
         # Get general data about FTSE100
-        response = requests.get(url)
+        response = requests.get(self.ftse100_summary)
         if response.status_code == 200:
             soup = bs4.BeautifulSoup(response.content, "lxml")
             table = soup.findAll(attrs={"summary" : "Price data"})[0]
             body = table.find('tbody')
             row = body.find('tr')
-            data = r.findAll('td')
+            data = row.findAll('td')
 
             value = data[0].string
-            diff = self.split_string(data[1].string)
+            diff = self.split_string(str(data[1]), '">', "<")
             per_diff = data[2].string
             high = data[3].string
             low = data[4].string
@@ -54,10 +54,10 @@ class Scrapper:
                 for r in rows:
                     data = r.findAll('td')
                     code = data[0].string
-                    company = get_company_data(code)
+                    company = self.get_company_data(code)
                     companies.append(company)
 
-        ftse = Footsie.Footsie()
+        ftse = Footsie.Footsie(value, diff, per_diff, high, low, prev_close, companies)
         return ftse
 
     def get_company_profiles(self):
@@ -104,7 +104,7 @@ class Scrapper:
             dates = title.findAll('th')
             values = row.findAll('td')
 
-            for i in range(1, 6):
+            for i in range(1, len(dates)):
                 revenue[dates[i].string.strip()] = values[i].string.strip()
 
             sector_tag = soup.find('td', text='FTSE sector')
@@ -188,7 +188,10 @@ class Scrapper:
 
         if response.status_code == 200:
             soup = bs4.BeautifulSoup(response.content, "lxml")
-            table = soup.findAll(attrs={"summary": "table: News Impact"})[0]
+            try:
+                table = soup.findAll(attrs={"summary": "table: News Impact"})[0]
+            except IndexError:
+                return financial_news
             body = table.find('tbody')
             rows = body.findAll('tr')
 
@@ -215,7 +218,10 @@ class Scrapper:
         and the companies belonging to each of them."""
         sectors = defaultdict(lambda : defaultdict(list))
         for code, profile in self.profiles.items():
-            sector, sub_sector = self.get_company_sector(code)
+            company = self.get_company_data(code)
+            sector = company.sector
+            sub_sector = company.sub_sector
             sectors[sector][sub_sector].append(code)
 
         return json.dumps(sectors)
+

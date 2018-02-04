@@ -220,7 +220,7 @@ class Scrapper:
             date = datetime.strptime(n.date, '%H:%M %d-%b-%Y')
             if (date.date() >= datetime.now().date() - timedelta(x)):
                 news_stories_last_x_days.append(n)
-        return news_stories
+        return news_stories_last_x_days
 
     def get_financial_news_data_current_month(self, code):
         news_stories = self.get_financial_news_data(code)

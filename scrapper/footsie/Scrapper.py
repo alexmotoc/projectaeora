@@ -200,7 +200,7 @@ class Scrapper:
 
                 date = data[0].text.strip()
                 headline = data[2].a.text.strip()
-                url = data[2].a.get('href')\
+                url = self.domain + data[2].a.get('href')\
                     .replace("javascript: var x=openWin2('", "")\
                     .replace("', 'News', 900, 600, 'resizable=yes,toolbar=no,location=yes,directories=yes,addressbar=yes,scrollbars=yes,status=yes,menubar=no')", "")
 
@@ -213,6 +213,33 @@ class Scrapper:
 
         return financial_news
 
+    def get_financial_news_data_last_x_days(self, code, x):
+        news_stories = self.get_financial_news_data(code)
+        news_stories_last_x_days = list()
+        for n in news_stories:
+            date = datetime.strptime(n.date, '%H:%M %d-%b-%Y')
+            if (date.date() >= datetime.now().date() - timedelta(x)):
+                news_stories_last_x_days.append(n)
+        return news_stories
+
+    def get_financial_news_data_current_month(self, code):
+        news_stories = self.get_financial_news_data(code)
+        news_stories_current_month = list()
+        for n in news_stories:
+            date = datetime.strptime(n.date, '%H:%M %d-%b-%Y')
+            if (date.date().month == datetime.now().date().month and date.date().year == datetime.now().date().year):
+                news_stories_current_month.append(n)
+        return news_stories_current_month
+
+    def get_financial_news_data_current_year(self, code):
+        news_stories = self.get_financial_news_data(code)
+        news_stories_current_year = list()
+        for n in news_stories:
+            date = datetime.strptime(n.date, '%H:%M %d-%b-%Y')
+            if (date.date().year == datetime.now().date().year):
+                news_stories_current_year.append(n)
+        return news_stories_current_year 
+    
     def get_sectors(self):
         """Returns a JSON object containing financial sectors, their corresponding subsectors
         and the companies belonging to each of them."""

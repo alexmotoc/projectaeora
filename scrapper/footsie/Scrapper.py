@@ -213,6 +213,31 @@ class Scrapper:
 
         return financial_news
 
+    def get_yahoo_news_data(self, code): 
+        """can use this to complement LSE news
+        if we're gonna use this, we could extend News.py to store a description
+        would also be trivial to create a get_yahoo_news_data_current_month() etc -> only one line would be different from LSE versions"""
+        #https://developer.yahoo.com/finance/company.html
+        yahoo_news = list()
+        url = "http://finance.yahoo.com/rss/headline?s=" + code.split('.')[0] + ".L" 
+        response = requests.get(url)
+        if (response.status_code == 200):
+            soup = bs4.BeautifulSoup(response.content, "xml")
+            items = soup.findAll('item')
+            for item in items:
+                headline = item.title.text
+                description = item.description.text 
+                date = item.pubDate.text
+                date = date.split('+')[0] #remove timezone section of string
+                date = datetime.strptime(date, '%a, %d %b %Y %H:%M:%S ')
+                date = date.strftime('%H:%M %d-%b-%Y') #convert to same format as LSE dates
+                url = item.link.text
+                source = "YAHOO"
+                impact = "N/A"
+                news = News.News(str(date), headline, url, source, impact)
+                yahoo_news.append(news)
+        return yahoo_news
+    
     def get_financial_news_data_last_x_days(self, code, x):
         news_stories = self.get_financial_news_data(code)
         news_stories_last_x_days = list()

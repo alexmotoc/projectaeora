@@ -20,8 +20,17 @@
     height: auto;
     max-width: 50%;
     clear: both;
-    /*background-color: #2962FF;
-    color: #fff;*/
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    word-wrap: break-word;
+}
+
+.bubble-interactive {
+    display: inline-block;
+    height: auto;
+    clear: both;
     margin: 5px 0;
     padding: 5px 10px;
     border-radius: 15px 15px 15px 15px;
@@ -52,6 +61,14 @@
 
 .input-button {
     margin-left: 5px;
+}
+
+.valign-icon {
+    vertical-align: middle;
+}
+
+.news-impact {
+    float: right;
 }
 
 /* label underline focus color */

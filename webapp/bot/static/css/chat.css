@@ -38,6 +38,24 @@
     word-wrap: break-word;
 }
 
+.suggestion-chip {
+    display: inline-block;
+    height: auto;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    word-wrap: break-word;
+}
+
+.suggestion-chip:hover {
+    background-color: #5c6bc0;
+}
+
+.suggestion-chip:hover a {
+    color: white!important;
+}
+
 .sent {
     float: right;
 }

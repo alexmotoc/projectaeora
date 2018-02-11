@@ -23,7 +23,7 @@ def chat(request):
         form = QueryForm(request.POST)
 
         if form.is_valid():
-            query = form.save()
+            # query = form.save()
             question = form.cleaned_data['question']
 
             dialogflow_key = os.environ.get('DIALOGFLOW_CLIENT_ACCESS_TOKEN')
@@ -40,22 +40,30 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
-            company_code = r['result']['parameters']['company']
-            attribute = r['result']['parameters']['attribute']
-
-            scrapper = Scrapper.Scrapper()
-
-            company = scrapper.get_company_data(company_code)
-            value = getattr(company.stock, attribute)
-
+            # Check whether all required entities have been specified
             response = {}
-            response['text'] = 'The {} of {} is {}.'.format(attribute, company.name, value)
+            if r['result']['parameters']['company'] == '' or r['result']['parameters']['attribute'] == '':
+                response['text'] = r['result']['fulfillment']['speech']
+            else:
+                company_code = r['result']['parameters']['company']
+                attribute = r['result']['parameters']['attribute']
 
-            reply = Response(query=query, response=json.dumps(response))
-            reply.save()
+                scrapper = Scrapper.Scrapper()
+
+                company = scrapper.get_company_data(company_code)
+
+                try:
+                    value = getattr(company.stock, attribute)
+                except AttributeError:
+                    value = getattr(company, attribute)
+
+                response['text'] = 'The {} of {} is {}.'.format(attribute, company.name, value)
+
+            # reply = Response(query=query, response=json.dumps(response))
+            # reply.save()
 
             form = QueryForm()
     else:
         form = QueryForm()
 
-    return render(request, 'chat.html', {'form': form, 'history': history})
+    return render(request, 'chat.html', {'form': form, 'response': response})

@@ -15,10 +15,11 @@
 
     <body>
       <main>
-        {% for line in history %}
+        <!-- {% for line in history %}
           <p>{{ line.query }}</p>
           <p>{{ line.response }}</p>
-        {% endfor %}
+        {% endfor %} -->
+        <p>{{ response }}</p>
         <form action="/chat/" method="post">
           {% csrf_token %}
           {{ form }}

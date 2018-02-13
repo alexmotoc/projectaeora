@@ -1,134 +1,92 @@
 [
   {
-    "value": "Distillers \u0026 Vintners",
+    "value": "General Retailers",
     "synonyms": [
-      "Distillers \u0026 Vintners"
+      "General Retailers"
     ]
   },
   {
-    "value": "Soft Drinks",
+    "value": "Real Estate Investment Trusts",
     "synonyms": [
-      "Soft Drinks"
+      "Real Estate Investment Trusts"
     ]
   },
   {
-    "value": "Specialty Chemicals",
+    "value": "Chemicals",
     "synonyms": [
-      "Specialty Chemicals"
+      "Chemicals"
     ]
   },
   {
-    "value": "Mobile Telecommunications",
+    "value": "Forestry & Paper",
     "synonyms": [
-      "Mobile Telecommunications"
+      "Forestry & Paper"
     ]
   },
   {
-    "value": "Broadline Retailers",
+    "value": "Construction & Materials",
     "synonyms": [
-      "Broadline Retailers"
+      "Construction & Materials"
     ]
   },
   {
-    "value": "Apparel Retailers",
+    "value": "Gas, Water & Multiutilities",
     "synonyms": [
-      "Apparel Retailers"
+      "Gas, Water & Multiutilities"
     ]
   },
   {
-    "value": "Specialized Consumer Services",
+    "value": "Household Goods & Home Construction",
     "synonyms": [
-      "Specialized Consumer Services"
+      "Household Goods & Home Construction"
     ]
   },
   {
-    "value": "Home Improvement Retailers",
+    "value": "Electronic & Electrical Equipment",
     "synonyms": [
-      "Home Improvement Retailers"
+      "Electronic & Electrical Equipment"
     ]
   },
   {
-    "value": "Property \u0026 Casualty Insurance",
+    "value": "General Industrials",
     "synonyms": [
-      "Property \u0026 Casualty Insurance"
+      "General Industrials"
     ]
   },
   {
-    "value": "Full Line Insurance",
+    "value": "Beverages",
     "synonyms": [
-      "Full Line Insurance"
+      "Beverages"
     ]
   },
   {
-    "value": "Insurance Brokers",
+    "value": "Pharmaceuticals & Biotechnology",
     "synonyms": [
-      "Insurance Brokers"
+      "Pharmaceuticals & Biotechnology"
     ]
   },
   {
-    "value": "Aerospace",
+    "value": "Industrial Metals & Mining",
     "synonyms": [
-      "Aerospace"
+      "Industrial Metals & Mining"
     ]
   },
   {
-    "value": "Defense",
+    "value": "Nonlife Insurance",
     "synonyms": [
-      "Defense"
+      "Nonlife Insurance"
     ]
   },
   {
-    "value": "Integrated Oil \u0026 Gas",
+    "value": "Software & Computer Services",
     "synonyms": [
-      "Integrated Oil \u0026 Gas"
+      "Software & Computer Services"
     ]
   },
   {
-    "value": "Nondurable Household Products",
+    "value": "Support Services",
     "synonyms": [
-      "Nondurable Household Products"
-    ]
-  },
-  {
-    "value": "Home Construction",
-    "synonyms": [
-      "Home Construction"
-    ]
-  },
-  {
-    "value": "Diversified Industrials",
-    "synonyms": [
-      "Diversified Industrials"
-    ]
-  },
-  {
-    "value": "Containers \u0026 Packaging",
-    "synonyms": [
-      "Containers \u0026 Packaging"
-    ]
-  },
-  {
-    "value": "Life Insurance",
-    "synonyms": [
-      "Life Insurance"
-    ]
-  },
-  {
-    "value": "Business Support Services",
-    "synonyms": [
-      "Business Support Services"
-    ]
-  },
-  {
-    "value": "Industrial Suppliers",
-    "synonyms": [
-      "Industrial Suppliers"
-    ]
-  },
-  {
-    "value": "Food Products",
-    "synonyms": [
-      "Food Products"
+      "Support Services"
     ]
   },
   {
@@ -138,189 +96,33 @@
     ]
   },
   {
-    "value": "Recreational Services",
+    "value": "Health Care Equipment & Services",
     "synonyms": [
-      "Recreational Services"
+      "Health Care Equipment & Services"
     ]
   },
   {
-    "value": "Restaurants \u0026 Bars",
+    "value": "Food Producers",
     "synonyms": [
-      "Restaurants \u0026 Bars"
+      "Food Producers"
     ]
   },
   {
-    "value": "Airlines",
+    "value": "Mining",
     "synonyms": [
-      "Airlines"
+      "Mining"
     ]
   },
   {
-    "value": "Hotels",
+    "value": "Aerospace & Defense",
     "synonyms": [
-      "Hotels"
+      "Aerospace & Defense"
     ]
   },
   {
-    "value": "Travel \u0026 Tourism",
+    "value": "Travel & Leisure",
     "synonyms": [
-      "Travel \u0026 Tourism"
-    ]
-  },
-  {
-    "value": "Gambling",
-    "synonyms": [
-      "Gambling"
-    ]
-  },
-  {
-    "value": "Retail REITs",
-    "synonyms": [
-      "Retail REITs"
-    ]
-  },
-  {
-    "value": "Industrial \u0026 Office REITs",
-    "synonyms": [
-      "Industrial \u0026 Office REITs"
-    ]
-  },
-  {
-    "value": "Diversified REITs",
-    "synonyms": [
-      "Diversified REITs"
-    ]
-  },
-  {
-    "value": "Tobacco",
-    "synonyms": [
-      "Tobacco"
-    ]
-  },
-  {
-    "value": "Fixed Line Telecommunications",
-    "synonyms": [
-      "Fixed Line Telecommunications"
-    ]
-  },
-  {
-    "value": "Health Care Providers",
-    "synonyms": [
-      "Health Care Providers"
-    ]
-  },
-  {
-    "value": "Medical Equipment",
-    "synonyms": [
-      "Medical Equipment"
-    ]
-  },
-  {
-    "value": "Specialty Finance",
-    "synonyms": [
-      "Specialty Finance"
-    ]
-  },
-  {
-    "value": "Investment Services",
-    "synonyms": [
-      "Investment Services"
-    ]
-  },
-  {
-    "value": "Asset Managers",
-    "synonyms": [
-      "Asset Managers"
-    ]
-  },
-  {
-    "value": "Personal Products",
-    "synonyms": [
-      "Personal Products"
-    ]
-  },
-  {
-    "value": "Clothing \u0026 Accessories",
-    "synonyms": [
-      "Clothing \u0026 Accessories"
-    ]
-  },
-  {
-    "value": "Food Retailers \u0026 Wholesalers",
-    "synonyms": [
-      "Food Retailers \u0026 Wholesalers"
-    ]
-  },
-  {
-    "value": "Conventional Electricity",
-    "synonyms": [
-      "Conventional Electricity"
-    ]
-  },
-  {
-    "value": "Auto Parts",
-    "synonyms": [
-      "Auto Parts"
-    ]
-  },
-  {
-    "value": "Building Materials \u0026 Fixtures",
-    "synonyms": [
-      "Building Materials \u0026 Fixtures"
-    ]
-  },
-  {
-    "value": "Electronic Equipment",
-    "synonyms": [
-      "Electronic Equipment"
-    ]
-  },
-  {
-    "value": "Pharmaceuticals",
-    "synonyms": [
-      "Pharmaceuticals"
-    ]
-  },
-  {
-    "value": "Water",
-    "synonyms": [
-      "Water"
-    ]
-  },
-  {
-    "value": "Gas Distribution",
-    "synonyms": [
-      "Gas Distribution"
-    ]
-  },
-  {
-    "value": "Multiutilities",
-    "synonyms": [
-      "Multiutilities"
-    ]
-  },
-  {
-    "value": "Publishing",
-    "synonyms": [
-      "Publishing"
-    ]
-  },
-  {
-    "value": "Broadcasting \u0026 Entertainment",
-    "synonyms": [
-      "Broadcasting \u0026 Entertainment"
-    ]
-  },
-  {
-    "value": "Media Agencies",
-    "synonyms": [
-      "Media Agencies"
-    ]
-  },
-  {
-    "value": "Paper",
-    "synonyms": [
-      "Paper"
+      "Travel & Leisure"
     ]
   },
   {
@@ -330,27 +132,69 @@
     ]
   },
   {
-    "value": "Iron \u0026 Steel",
+    "value": "Fixed Line Telecommunications",
     "synonyms": [
-      "Iron \u0026 Steel"
+      "Fixed Line Telecommunications"
     ]
   },
   {
-    "value": "Software",
+    "value": "Food & Drug Retailers",
     "synonyms": [
-      "Software"
+      "Food & Drug Retailers"
     ]
   },
   {
-    "value": "General Mining",
+    "value": "Financial Services",
     "synonyms": [
-      "General Mining"
+      "Financial Services"
     ]
   },
   {
-    "value": "Gold Mining",
+    "value": "Personal Goods",
     "synonyms": [
-      "Gold Mining"
+      "Personal Goods"
+    ]
+  },
+  {
+    "value": "Electricity",
+    "synonyms": [
+      "Electricity"
+    ]
+  },
+  {
+    "value": "Life Insurance",
+    "synonyms": [
+      "Life Insurance"
+    ]
+  },
+  {
+    "value": "Automobiles & Parts",
+    "synonyms": [
+      "Automobiles & Parts"
+    ]
+  },
+  {
+    "value": "Oil & Gas Producers",
+    "synonyms": [
+      "Oil & Gas Producers"
+    ]
+  },
+  {
+    "value": "Mobile Telecommunications",
+    "synonyms": [
+      "Mobile Telecommunications"
+    ]
+  },
+  {
+    "value": "Media",
+    "synonyms": [
+      "Media"
+    ]
+  },
+  {
+    "value": "Tobacco",
+    "synonyms": [
+      "Tobacco"
     ]
   }
 ]

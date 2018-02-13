@@ -3,7 +3,8 @@ import bs4
 import json
 import os
 import requests
-from footsie import Company, Footsie, News, Share
+from footsie import Company, Footsie, News, Share, Sector
+from datetime import datetime, timedelta
 
 class Scrapper:
 
@@ -17,6 +18,32 @@ class Scrapper:
         with open(filename, 'r') as f:
             profiles = json.load(f)
         self.profiles = profiles
+        #Get sectors from local file
+        filename = os.path.dirname(__file__) + '/../data/sectors.json'
+        sectors = defaultdict(lambda : defaultdict(set))
+        with open(filename, 'r') as f:
+            sectors = json.load(f)
+        self.sectors = sectors
+
+    def get_companies_in_sector(self, requested_sector): 
+        #returns list of codes of companies in the requested_sector
+        companies_in_sector = list()
+        for sector, sub_sectors in self.sectors.items():
+            if sector == requested_sector:
+                for sub_sector, companies in sub_sectors.items():
+                    for company in companies:
+                        companies_in_sector.append(company)
+                break
+        return companies_in_sector
+
+    def get_sector_data(self, sector_name):
+        #Returns a Sector object
+        sector = Sector.Sector(sector_name)
+        companies = self.get_companies_in_sector(sector_name)   
+        sector_data = list()  
+        for company in companies:
+            sector.add_company(self.get_company_data(company))
+        return sector
 
     def split_string(self, s, start, end):
         return (s.split(start))[1].split(end)[0].strip()
@@ -276,4 +303,3 @@ class Scrapper:
             sectors[sector][sub_sector].append(code)
 
         return json.dumps(sectors)
-

@@ -7,6 +7,8 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="{% static "css/chat.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/sidebar.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/main-offset.css" %}"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,17 +17,7 @@
     </head>
 
     <body>
-      <!-- Sidebar for mobile -->
-      <ul id="slide-out" class="side-nav fixed indigo lighten-1">
-        <li class="indigo sidebar-section sidebar-status-section"><a class="waves-effect green-text sidebar-status" href="#!"><i class="material-icons green-text">check_circle</i>Operational</a></li>
-        <li><div class="divider sidebar-divider indigo"></div></li>
-        <li><a class="waves-effect" href="#!"><i class="material-icons">chat</i>Chat</a></li>
-        <li class="sidebar-section"><a class="waves-effect" href="#!"><i class="material-icons">star_rate</i>My Interests</a></li>
-        <li><div class="divider sidebar-divider indigo"></div></li>
-        <li><a class="waves-effect" href="#!"><i class="material-icons">help</i>Help</a></li>
-        <li><a class="waves-effect" href="#!"><i class="material-icons">settings</i>Settings</a></li>
-      </ul>
-      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+      {% include "sidebar.html" %}
 
       <main>
         <!-- Question history -->
@@ -104,5 +96,6 @@
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
       <script type="text/javascript" src="{% static "js/chat.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>
     </body>
   </html>

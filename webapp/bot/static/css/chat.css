@@ -89,23 +89,6 @@
     float: right;
 }
 
-.sidebar-divider {
-    margin: 0px!important;
-}
-
-.sidebar-section {
-    height: 30%;
-}
-
-.sidebar-status-section {
-    display: flex;
-}
-
-.sidebar-status {
-    align-self: flex-end;
-    width: 100%;
-}
-
 /* label underline focus color */
 #id_question {
     border-bottom: none!important;
@@ -115,17 +98,6 @@
 #id_question:focus {
     border-bottom: none!important;
     box-shadow: none!important;
-}
-
-/* Offset your content by the width of the side menu */
-header, main, footer {
-    padding-left: 300px;
-}
-
-@media only screen and (max-width : 992px) {
-    header, main, footer {
-        padding-left: 0;
-    }
 }
 
 /* Make sticky footer */

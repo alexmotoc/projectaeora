@@ -19,8 +19,8 @@
           <p>{{ line.query }}</p>
           <p>{{ line.response }}</p>
         {% endfor %} -->
-        <p>{{ response }}</p>
-        <form action="/chat/" method="post">
+        <p>{{ response.text }}</p>
+        <form id="ask-question" action="/chat/" method="post">
           {% csrf_token %}
           {{ form }}
           <input type="submit" value="Submit" />
@@ -29,6 +29,8 @@
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>
       <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/chat.js" %}"></script>
     </body>
   </html>

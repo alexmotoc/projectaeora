@@ -18,6 +18,7 @@ def index(request):
 
 def chat(request):
     history = Response.objects.all()
+    response = {}
 
     if request.method == 'POST':
         form = QueryForm(request.POST)
@@ -40,24 +41,26 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
-            # Check whether all required entities have been specified
-            response = {}
-            if r['result']['parameters']['company'] == '' or r['result']['parameters']['attribute'] == '':
+            if r['result']['action'] == "input.unknown":
                 response['text'] = r['result']['fulfillment']['speech']
             else:
-                company_code = r['result']['parameters']['company']
-                attribute = r['result']['parameters']['attribute']
+                # Check whether all required entities have been specified
+                if r['result']['parameters']['company'] == '' or r['result']['parameters']['attribute'] == '':
+                    response['text'] = r['result']['fulfillment']['speech']
+                else:
+                    company_code = r['result']['parameters']['company']
+                    attribute = r['result']['parameters']['attribute']
 
-                scrapper = Scrapper.Scrapper()
+                    scrapper = Scrapper.Scrapper()
 
-                company = scrapper.get_company_data(company_code)
+                    company = scrapper.get_company_data(company_code)
 
-                try:
-                    value = getattr(company.stock, attribute)
-                except AttributeError:
-                    value = getattr(company, attribute)
+                    try:
+                        value = getattr(company.stock, attribute)
+                    except AttributeError:
+                        value = getattr(company, attribute)
 
-                response['text'] = 'The {} of {} is {}.'.format(attribute, company.name, value)
+                    response['text'] = 'The {} of {} is {}.'.format(attribute, company.name, value)
 
             # reply = Response(query=query, response=json.dumps(response))
             # reply.save()

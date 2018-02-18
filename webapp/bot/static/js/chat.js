@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    $('.tooltipped').tooltip({delay: 50});
+
     var csrftoken = $.cookie('csrftoken');
 
     function csrfSafeMethod(method) {

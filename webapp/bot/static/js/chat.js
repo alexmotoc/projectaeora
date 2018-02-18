@@ -18,6 +18,28 @@ $(document).ready(function() {
         $("#ask-question").submit();
     });
 
+    $("#send-voice").click(function(e) {
+        if (window.hasOwnProperty('webkitSpeechRecognition')) {
+            var recognition = new webkitSpeechRecognition();
+
+            recognition.continuous = true;
+            recognition.interimResults = true;
+
+            recognition.lang = "en-US";
+            recognition.start();
+
+            recognition.onresult = function(e) {
+                $("#id_question").val(e.results[0][0].transcript);
+                recognition.stop();
+                $("#ask-question").submit();
+            };
+
+            recognition.onerror = function(e) {
+                recognition.stop();
+            }
+      }
+    });
+
     $("#ask-question").submit(function(e) {
         e.preventDefault();
 

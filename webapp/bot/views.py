@@ -17,9 +17,9 @@ from footsie import Scrapper
 def index(request):
     return render(request, 'index.html')
 
-def footsie_intent(r):           
+def footsie_intent(r):
     # Check whether all required entities have been specified
-    if r['result']['parameters']['company'] == '' or r['result']['parameters']['attribute'] == '':
+    if r['result']['actionIncomplete']:
         return r['result']['fulfillment']['speech']
     else:
         company_code = r['result']['parameters']['company']
@@ -93,15 +93,15 @@ def chat(request):
 
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
-            response = {}
+
             if r['result']['action'] == "input.unknown":
                 response['text'] = r['result']['fulfillment']['speech']
             else:
-                if r['metadata']['intentName'] == 'Footsie Intent':
+                if r['result']['metadata']['intentName'] == 'Footsie Intent':
                     response['text'] = footsie_intent(r)
-                elif r['metadata']['intentName'] == 'SectorQuery':
+                elif r['result']['metadata']['intentName'] == 'SectorQuery':
                     response['text'] = sector_query_intent(r, True)
-                elif r['metadata']['intentName'] == 'SubSectorQuery':
+                elif r['result']['metadata']['intentName'] == 'SubSectorQuery':
                     response['text'] = sector_query_intent(r, False)
 
             # reply = Response(query=query, response=json.dumps(response))
@@ -114,8 +114,7 @@ def chat(request):
     if request.is_ajax():
         return JsonResponse({'response': response})
     else:
-        return render(request, 'chat.html', {'form': form, 'response': response})
-    return render(request, 'chat.html', {'form': form, 'history': history})
+        return render(request, 'chat.html', {'form': form, 'history': history})
 
 def settings(request):
     return render(request, 'settings.html')

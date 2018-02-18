@@ -21,8 +21,8 @@
 
       <main>
         <!-- Question history -->
-        <div class="row history">
-          <div class="col s10 offset-s1">
+        <div id="history-container" class="row history">
+          <div id="chat-history" class="col s10 offset-s1">
             <div class="bubble sent blue lighten-1">
               <span class="white-text">What are the latest news about Oil?</span>
             </div>
@@ -128,8 +128,8 @@
                 {{ form }}
               </div>
               <div class="col s6 md1 input-buttons-container">
-                <a class="btn-floating waves-effect waves-light red input-button"><i class="material-icons md-24">send</i></a>
-                <a class="btn-floating waves-effect waves-light red input-button"><i class="material-icons md-24">mic</i></a>
+                <a id="send-text" class="btn-floating waves-effect waves-light red input-button"><i class="material-icons md-24">send</i></a>
+                <a id="send-voice" class="btn-floating waves-effect waves-light red input-button"><i class="material-icons md-24">mic</i></a>
               </div>
             </form>
             </div>

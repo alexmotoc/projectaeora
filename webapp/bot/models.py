@@ -36,3 +36,10 @@ class FollowCompany(models.Model):
     # Record when the user last got news so that in the future, if they want news, they will only get news that they
     # haven't already seen,   
     last_time_got_news = models.DateField(datetime.date.today())
+
+
+class UserPreferences(models.Model):
+    colour_scheme = models.CharField(default='default', max_length=40)
+
+    # Defaults to False = text, True = respond with voice.
+    voice_or_text = models.BooleanField(default=False)

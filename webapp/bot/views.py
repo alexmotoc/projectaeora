@@ -68,6 +68,20 @@ def sector_query_intent(r, is_sector):
                     response += ","
                 response += "{} is {}: {}%".format(company.name, sector_attribute, company.stock.per_diff)
             return response
+            
+def top_risers_intent(r):
+    if r['result']['parameters']['rise_fall'] == '':
+        return r['result']['fulfillment']['speech']
+    else:
+        scraper = Scrapper.Scrapper()
+        if r['result']['parameters']['rise_fall'] == "risers":
+            response = "Top Risers:\n" + scraper.get_top5(True)
+        elif r['result']['parameters']['rise_fall'] == "fallers":
+            response = "Top Fallers:\n" + scraper.get_top5(False)
+        else: #get both
+            response = "Top Risers:\n"+ scraper.get_top5(True)
+            response += "\nTop Fallers:\n" +scraper.get_top5(False)
+    return response
 
 def chat(request):
     history = Response.objects.all()
@@ -103,7 +117,8 @@ def chat(request):
                     response['text'] = sector_query_intent(r, True)
                 elif r['result']['metadata']['intentName'] == 'SubSectorQuery':
                     response['text'] = sector_query_intent(r, False)
-
+                elif r['result']['metadata']['intentName'] == 'TopRisers':
+                    response['text'] = top_risers_intent(r)
             # reply = Response(query=query, response=json.dumps(response))
             # reply.save()
 

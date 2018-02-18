@@ -11,7 +11,7 @@ class Scrapper:
     def __init__(self):
         self.domain = "http://www.londonstockexchange.com"
         self.ftse100URL = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX"
-        self.top10URL = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/risers-and-fallers/risers-fallers.html"
+        self.top5URL = "http://www.londonstockexchange.com/media/iframe/fallers.htm"
         self.ftse100_summary = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/summary/summary-indices.html?index=UKX"
         # Get company profiles from local file
         filename = os.path.dirname(__file__) + '/../data/profiles.json'
@@ -189,7 +189,7 @@ class Scrapper:
 
         return company
 
-    def get_top10(self, risers=True):
+    def get_top5(self, risers=True):
         """
         Returns a list containing the codes of the top 10 companies.
 
@@ -197,21 +197,27 @@ class Scrapper:
         url - the url of the company website to be scrapped
         risers - specified whether to get the risers (True) or fallers (False)
         """
-        response = requests.get(self.top10URL)
-        top10 = list()
-        index = 0 if risers else 1
-
+        if risers:
+            url = self.top5URL.replace("fallers", "risers")
+        else:
+            url = self.top5URL
+        response = requests.get(url)
+        top5 = ""
         if(response.status_code == 200):
             soup = bs4.BeautifulSoup(response.content, "lxml")
-            table = soup.findAll(attrs={"summary" : "Companies and Prices"})[index]
+            table = soup.findAll(attrs={"summary" : "Companies and Prices"})[0]
             body = table.find('tbody')
             rows = body.findAll('tr')
-
+            i = 1
             for r in rows:
-                data = r.find('td')
-                top10.append(data.string)
-
-        return top10
+                name = r.find('td').find('a').string
+                price = r.findAll('td')[2].string  
+                per_diff = self.split_string(str(r.findAll('td')[4]), '">', "<")
+                top5 += (name+"\t"+price+"\t"+per_diff)
+                if i < 5: 
+                    top5 += "\n"
+                i = i + 1
+        return top5
 
 
     def get_financial_news_data(self, code):

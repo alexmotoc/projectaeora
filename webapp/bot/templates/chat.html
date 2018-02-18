@@ -6,6 +6,9 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/chat.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/sidebar.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/main-offset.css" %}"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,22 +17,131 @@
     </head>
 
     <body>
+      {% include "sidebar.html" %}
+
       <main>
-        <!-- {% for line in history %}
-          <p>{{ line.query }}</p>
-          <p>{{ line.response }}</p>
-        {% endfor %} -->
-        <form id="ask-question" action="/chat/" method="post">
-          {% csrf_token %}
-          {{ form }}
-          <input type="submit" value="Submit" />
-        </form>
+        <!-- Question history -->
+        <div class="row history">
+          <div class="col s10 offset-s1">
+            <div class="bubble sent blue lighten-1">
+              <span class="white-text">What are the latest news about Oil?</span>
+            </div>
+            <div class="bubble received blue lighten-1">
+              <span class="white-text">Here's what I found</span>
+            </div>
+            <div class="bubble-interactive received">
+              <div class="card">
+                <div class="card-image">
+                  <img class="activator" src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iSLg_CUxcjBM/v1/1000x-1.jpg">
+                </div>
+                <div class="card-content">
+                  <span class="card-title grey-text text-darken-4">Iran Can Boost Output Fast If OPEC Ends Cuts, Oil Minister Says
+                    <span class="news-impact green-text"><i class="material-icons valign-icon">trending_up</i>+0.29%</span></span>
+                  <p>Iran can swiftly increase production of crude if OPEC decides to scrap limits on global output when the group meets next in June,
+                      Oil Minister Bijan Namdar Zanganeh said.</p>
+                </div>
+                <div class="card-action">
+                  <p><a href="#">Go to article</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="bubble sent blue lighten-1">
+              <span class="white-text">What's the stock price of Barclays?</span>
+            </div>
+            <div class="bubble-interactive received">
+              <div class="card white">
+                <div class="card-content black-text">
+                  <span class="card-title">Barclays PLC</span>
+                  <p class="grey-text">BARC&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="black-text">192.87 GBX</span></p>
+                  <p class="grey-text">11-Feb-2018 16:05&emsp;<span class="red-text"><i class="material-icons valign-icon">trending_down</i>1.23 (0.63%)</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="bubble-interactive received">
+              <div class="waves-effect suggestion-chip z-depth-2">
+                <span><a class="grey-text text-darken-2">What about Lloyds?</a></span>
+              </div>
+              <div class="waves-effect suggestion-chip z-depth-2">
+                <span><a class="grey-text text-darken-2">What about HSBC?</a></span>
+              </div>
+              <div class="waves-effect suggestion-chip z-depth-2">
+                <span><a class="suggestion-chip-text grey-text text-darken-2">Revenue</a></span>
+              </div>
+            </div>
+            <div class="bubble sent blue lighten-1">
+              <span class="white-text">Who are the top risers?</span>
+            </div>
+            <div class="bubble-interactive received">
+              <div class="card white">
+                <div class="card-content black-text">
+                  <span class="card-title">Top Risers</span>
+                  <table>
+                    <thead>
+                      <tr>
+                          <th>Code</th>
+                          <th>Name</th>
+                          <th>Price</th>
+                          <th>+/-</th>
+                          <th>%+/-</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>CAR</td>
+                        <td>CARCLO</td>
+                        <td>83.40</td>
+                        <td class="green-text">+5.40</td>
+                        <td class="green-text">+6.92</td>
+                      </tr>
+                      <tr>
+                        <td>ASIT</td>
+                        <td>ABERFORTH SPLI.</td>
+                        <td>98.00</td>
+                        <td class="green-text">+6.00</td>
+                        <td class="green-text">+6.52</td>
+                      </tr>
+                      <tr>
+                        <td>SGRO</td>
+                        <td>SEGRO</td>
+                        <td>591.20</td>
+                        <td class="green-text">+36.00</td>
+                        <td class="green-text">+6.48</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
+
+      <footer class="fixed-bottom">
+        <!-- Text input -->
+        <div class="row">
+          <div class="col s10 offset-s1 text-bar z-depth-2 hoverable white">
+            <div class="col s12">
+            <form id="ask-question" action="/chat/" method="post">
+              {% csrf_token %}
+              <div class="col s6 md11">
+                {{ form }}
+              </div>
+              <div class="col s6 md1 input-buttons-container">
+                <a class="btn-floating waves-effect waves-light red input-button"><i class="material-icons md-24">send</i></a>
+                <a class="btn-floating waves-effect waves-light red input-button"><i class="material-icons md-24">mic</i></a>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+    </footer>
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>
       <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
       <script type="text/javascript" src="{% static "js/chat.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>
     </body>
   </html>

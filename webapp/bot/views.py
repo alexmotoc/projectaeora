@@ -115,3 +115,7 @@ def chat(request):
         return JsonResponse({'response': response})
     else:
         return render(request, 'chat.html', {'form': form, 'response': response})
+    return render(request, 'chat.html', {'form': form, 'history': history})
+
+def settings(request):
+    return render(request, 'settings.html')

@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/sidebar.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/main-offset.css" %}"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta charset="utf-8">
+      <title>Settings</title>
+    </head>
+
+    <body>
+      {% include "sidebar.html" %}
+
+      <main>
+        <div class="row">
+          <div class="col s10 offset-s1">
+            <h1>Settings</h1>
+            <div class="row">
+              <div class="switch">
+                <label>
+                  Voice replies
+                  <input type="checkbox">
+                  <span class="lever"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>
+    </body>
+  </html>

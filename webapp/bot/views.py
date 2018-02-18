@@ -17,7 +17,7 @@ from footsie import Scrapper
 def index(request):
     return render(request, 'index.html')
 
-def footsie_intent(r)                
+def footsie_intent(r):
     # Check whether all required entities have been specified
     if r['result']['parameters']['company'] == '' or r['result']['parameters']['attribute'] == '':
         return r['result']['fulfillment']['speech']
@@ -51,7 +51,7 @@ def sector_query_intent(r, is_sector):
             sector = scraper.get_sub_sector_data(sector_name)
     data = getattr(sector, sector_attribute)
     #form response
-    if sector_attribute == "highest_price" or sector_attribute == "lowest_price": 
+    if sector_attribute == "highest_price" or sector_attribute == "lowest_price":
         return "{} has the {} {} in {}: {}".format(data.name, sector_attribute.split('_',1)[0], sector_attribute.split('_', 1)[1], sector_name, getattr(data.stock, sector_attribute.split('_', 1)[1]))
     elif sector_attribute == "news":
         response = ""
@@ -64,7 +64,7 @@ def sector_query_intent(r, is_sector):
         else:
             response = ""
             for company in data:
-                if len(response) > 0: 
+                if len(response) > 0:
                     response += ","
                 response += "{} is {}: {}%".format(company.name, sector_attribute, company.stock.per_diff)
             return response
@@ -102,7 +102,7 @@ def chat(request):
                 elif r['metadata']['intentName'] == 'SectorQuery':
                     response['text'] = sector_query_intent(r, True)
                 elif r['metadata']['intentName'] == 'SubSectorQuery':
-                    response['text'] = sector_query_intent(r, False)  
+                    response['text'] = sector_query_intent(r, False)
 
             # reply = Response(query=query, response=json.dumps(response))
             # reply.save()

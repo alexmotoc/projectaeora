@@ -59,3 +59,6 @@ def chat(request):
         form = QueryForm()
 
     return render(request, 'chat.html', {'form': form, 'history': history})
+
+def settings(request):
+    return render(request, 'settings.html')

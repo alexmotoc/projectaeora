@@ -122,7 +122,7 @@
         <div class="row">
           <div class="col s10 offset-s1 text-bar z-depth-2 hoverable white">
             <div class="col s12">
-            <form action="/chat/" method="post">
+            <form id="ask-question" action="/chat/" method="post">
               {% csrf_token %}
               <div class="col s6 md11">
                 {{ form }}
@@ -139,6 +139,7 @@
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>
       <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
       <script type="text/javascript" src="{% static "js/chat.js" %}"></script>
       <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>

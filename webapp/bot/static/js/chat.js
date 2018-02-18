@@ -15,7 +15,9 @@ $(document).ready(function() {
     });
 
     $("#send-text").click(function(e) {
-        $("#ask-question").submit();
+        if ($("#id_question").val() != "") {
+            $("#ask-question").submit();
+        }
     });
 
     $("#ask-question").submit(function(e) {

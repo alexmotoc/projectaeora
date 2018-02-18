@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 
 from .forms import QueryForm
@@ -35,7 +36,7 @@ def chat(request):
                 "lang": "en",
                 "query": question,
                 "sessionId": "12345",
-                "timezone": "Africa/Casablanca"
+                "timezone": "Africa/Casablacontent_type='application/xhtml+xml'nca"
             })
 
             r = requests.post(dialogflow_api, headers=headers, data=payload)
@@ -69,4 +70,7 @@ def chat(request):
     else:
         form = QueryForm()
 
-    return render(request, 'chat.html', {'form': form, 'response': response})
+    if request.is_ajax():
+        return JsonResponse({'response': response})
+    else:
+        return render(request, 'chat.html', {'form': form, 'response': response})

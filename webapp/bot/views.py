@@ -42,10 +42,10 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
-            # Check whether all required entities have been specified
             if r['result']['action'] == "input.unknown":
                 response['text'] = r['result']['fulfillment']['speech']
             else:
+                # Check whether all required entities have been specified
                 if r['result']['parameters']['company'] == '' or r['result']['parameters']['attribute'] == '':
                     response['text'] = r['result']['fulfillment']['speech']
                 else:

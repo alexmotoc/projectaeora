@@ -19,7 +19,6 @@
           <p>{{ line.query }}</p>
           <p>{{ line.response }}</p>
         {% endfor %} -->
-        <p>{{ response.text }}</p>
         <form id="ask-question" action="/chat/" method="post">
           {% csrf_token %}
           {{ form }}

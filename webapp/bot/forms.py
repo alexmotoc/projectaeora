@@ -16,6 +16,7 @@ class UserPreferencesForm(ModelForm):
 
     class Meta:
         model = UserPreferences
+        fields = '__all__'
 
 
 class FollowCompanyForm(ModelForm):

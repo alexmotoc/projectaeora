@@ -1,11 +1,11 @@
 import unittest
-from footsie import Scrapper
+from footsie import Scraper
 
-class TestScrapper(unittest.TestCase):
+class TestScraper(unittest.TestCase):
 
     def setUp(self):
-        self.scrapper = Scrapper.Scrapper()
-        self.company = self.scrapper.get_company_data('BARC')
+        self.scraper = Scraper.Scraper()
+        self.company = self.scraper.get_company_data('BARC')
 
     def test_company_name(self):
         self.assertTrue(self.company.name, 'BARCLAYS PLC ORD 25P')

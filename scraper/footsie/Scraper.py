@@ -6,7 +6,7 @@ import requests
 from footsie import Company, Footsie, News, Share, Sector
 from datetime import datetime, timedelta
 
-class Scrapper:
+class Scraper:
 
     def __init__(self):
         self.domain = "http://www.londonstockexchange.com"

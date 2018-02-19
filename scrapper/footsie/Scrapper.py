@@ -11,7 +11,7 @@ class Scrapper:
     def __init__(self):
         self.domain = "http://www.londonstockexchange.com"
         self.ftse100URL = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/constituents-indices.html?index=UKX"
-        self.top10URL = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/risers-and-fallers/risers-fallers.html"
+        self.top5URL = "http://www.londonstockexchange.com/media/iframe/fallers.htm"
         self.ftse100_summary = "http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/indices/summary/summary-indices.html?index=UKX"
         # Get company profiles from local file
         filename = os.path.dirname(__file__) + '/../data/profiles.json'
@@ -25,7 +25,7 @@ class Scrapper:
             sectors = json.load(f)
         self.sectors = sectors
 
-    def get_companies_in_sector(self, requested_sector): 
+    def get_companies_in_sector(self, requested_sector):
         #returns list of codes of companies in the requested_sector
         companies_in_sector = list()
         for sector, sub_sectors in self.sectors.items():
@@ -36,7 +36,7 @@ class Scrapper:
                 break
         return companies_in_sector
 
-    def get_companies_in_sub_sector(self, requested_sub_sector): 
+    def get_companies_in_sub_sector(self, requested_sub_sector):
         #returns list of codes of companies in the requested_sub_sector
         companies_in_sub_sector = list()
         for sector, sub_sectors in self.sectors.items():
@@ -49,7 +49,7 @@ class Scrapper:
     def get_sector_data(self, sector_name):
         #Returns a Sector object
         sector = Sector.Sector(sector_name)
-        companies = self.get_companies_in_sector(sector_name)    
+        companies = self.get_companies_in_sector(sector_name)
         for company in companies:
             sector.add_company(self.get_company_data(company))
         return sector
@@ -57,7 +57,7 @@ class Scrapper:
     def get_sub_sector_data(self, sub_sector_name):
         #Returns a Sector object
         sub_sector = Sector.Sector(sub_sector_name)
-        companies = self.get_companies_in_sub_sector(sub_sector_name)     
+        companies = self.get_companies_in_sub_sector(sub_sector_name)
         for company in companies:
             sub_sector.add_company(self.get_company_data(company))
         return sub_sector
@@ -179,17 +179,22 @@ class Scrapper:
             per_diff = variance.text[:variance.text.find('%')]
             diff = variance.text[variance.text.find('%') + 1:]
 
+            # Get date information
+            disclaimer = soup.find('div', {'class': 'disclaimer_gray'})
+            # Strip the phrases surrounding the date
+            date = disclaimer.string.split('\xa0-\xa0\n')[0].strip()[6:-3]
+
             stock = Share.Share(price.string, diff, per_diff, high.string,
                                 low.string, volume.string, last_close_value,
                                 last_close_date, bid.string, offer.string)
             news = self.get_financial_news_data(code)
 
             company = Company.Company(code, name, market_cap, revenue,
-                              stock, sector.string, sub_sector.string, news)
+                              stock, sector.string, sub_sector.string, news, date)
 
         return company
 
-    def get_top10(self, risers=True):
+    def get_top5(self, risers=True):
         """
         Returns a list containing the codes of the top 10 companies.
 
@@ -197,21 +202,27 @@ class Scrapper:
         url - the url of the company website to be scrapped
         risers - specified whether to get the risers (True) or fallers (False)
         """
-        response = requests.get(self.top10URL)
-        top10 = list()
-        index = 0 if risers else 1
-
+        if risers:
+            url = self.top5URL.replace("fallers", "risers")
+        else:
+            url = self.top5URL
+        response = requests.get(url)
+        top5 = ""
         if(response.status_code == 200):
             soup = bs4.BeautifulSoup(response.content, "lxml")
-            table = soup.findAll(attrs={"summary" : "Companies and Prices"})[index]
+            table = soup.findAll(attrs={"summary" : "Companies and Prices"})[0]
             body = table.find('tbody')
             rows = body.findAll('tr')
-
+            i = 1
             for r in rows:
-                data = r.find('td')
-                top10.append(data.string)
-
-        return top10
+                name = r.find('td').find('a').string
+                price = r.findAll('td')[2].string  
+                per_diff = self.split_string(str(r.findAll('td')[4]), '">', "<")
+                top5 += (name+"\t"+price+"\t"+per_diff)
+                if i < 5: 
+                    top5 += "\n"
+                i = i + 1
+        return top5
 
 
     def get_financial_news_data(self, code):
@@ -257,20 +268,20 @@ class Scrapper:
 
         return financial_news
 
-    def get_yahoo_news_data(self, code): 
+    def get_yahoo_news_data(self, code):
         """can use this to complement LSE news
         if we're gonna use this, we could extend News.py to store a description
         would also be trivial to create a get_yahoo_news_data_current_month() etc -> only one line would be different from LSE versions"""
         #https://developer.yahoo.com/finance/company.html
         yahoo_news = list()
-        url = "http://finance.yahoo.com/rss/headline?s=" + code.split('.')[0] + ".L" 
+        url = "http://finance.yahoo.com/rss/headline?s=" + code.split('.')[0] + ".L"
         response = requests.get(url)
         if (response.status_code == 200):
             soup = bs4.BeautifulSoup(response.content, "xml")
             items = soup.findAll('item')
             for item in items:
                 headline = item.title.text
-                description = item.description.text 
+                description = item.description.text
                 date = item.pubDate.text
                 date = date.split('+')[0] #remove timezone section of string
                 date = datetime.strptime(date, '%a, %d %b %Y %H:%M:%S ')
@@ -281,7 +292,7 @@ class Scrapper:
                 news = News.News(str(date), headline, url, source, impact)
                 yahoo_news.append(news)
         return yahoo_news
-    
+
     def get_financial_news_data_last_x_days(self, code, x):
         news_stories = self.get_financial_news_data(code)
         news_stories_last_x_days = list()
@@ -307,8 +318,8 @@ class Scrapper:
             date = datetime.strptime(n.date, '%H:%M %d-%b-%Y')
             if (date.date().year == datetime.now().date().year):
                 news_stories_current_year.append(n)
-        return news_stories_current_year 
-    
+        return news_stories_current_year
+
     def get_sectors(self):
         """Returns a JSON object containing financial sectors, their corresponding subsectors
         and the companies belonging to each of them."""

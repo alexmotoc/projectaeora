@@ -9,9 +9,9 @@ import os
 import requests
 
 import sys
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '/../../scrapper'))
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '/../../scraper'))
 
-from footsie import Scrapper
+from footsie import Scraper
 
 # Create your views here.
 def index(request):
@@ -24,8 +24,8 @@ def footsie_intent(r):
     else:
         company_code = r['result']['parameters']['company']
         attribute = r['result']['parameters']['attribute']
-        scrapper = Scrapper.Scrapper()
-        company = scrapper.get_company_data(company_code)
+        scraper = Scraper.Scraper()
+        company = scraper.get_company_data(company_code)
         try:
             value = getattr(company.stock, attribute)
         except AttributeError:
@@ -33,7 +33,7 @@ def footsie_intent(r):
         return 'The {} of {} is {}.'.format(attribute, company.name, value)
 
 def sector_query_intent(r, is_sector):
-    scraper = Scrapper.Scrapper()
+    scraper = Scraper.Scraper()
     #if required entities have been specified get sector/sub-sector data
     if is_sector: #is a SectorQuery
         if r['result']['parameters']['sector'] == '' or r['result']['parameters']['sector_attribute'] == '':
@@ -73,7 +73,7 @@ def top_risers_intent(r):
     if r['result']['parameters']['rise_fall'] == '':
         return r['result']['fulfillment']['speech']
     else:
-        scraper = Scrapper.Scrapper()
+        scraper = Scraper.Scraper()
         if r['result']['parameters']['rise_fall'] == "risers":
             response = "Top Risers:\n" + scraper.get_top5(True)
         elif r['result']['parameters']['rise_fall'] == "fallers":

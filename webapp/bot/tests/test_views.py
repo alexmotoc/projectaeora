@@ -11,9 +11,10 @@ class IndexViewTests(TestCase):
         self.assertEqual(found.func, index)
 
     def test_index_view_returns_correct_html(self):
-        request = HttpRequest()
-        response = index(request)
+        response = self.client.get('/')
         html = response.content.decode('utf8')
+
+        # TODO: Start the template for the landing page
         self.assertTrue(html.startswith('<html>'))
 
         # TODO: Fill this in once the landing page has been created.

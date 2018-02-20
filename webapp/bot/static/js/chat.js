@@ -22,8 +22,8 @@ $(document).ready(function() {
         if (window.hasOwnProperty('webkitSpeechRecognition')) {
             var recognition = new webkitSpeechRecognition();
 
-            recognition.continuous = true;
-            recognition.interimResults = true;
+            recognition.continuous = false;
+            recognition.interimResults = false;
 
             recognition.lang = "en-US";
             recognition.start();

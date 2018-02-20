@@ -18,24 +18,42 @@ $(document).ready(function() {
         $("#ask-question").submit();
     });
 
+    /* Return a string with the first letter capitalised */
+    String.prototype.capitalize = function() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    }
+
     $("#send-voice").click(function(e) {
         if (window.hasOwnProperty('webkitSpeechRecognition')) {
             var recognition = new webkitSpeechRecognition();
 
             recognition.continuous = false;
-            recognition.interimResults = false;
+            recognition.interimResults = true;
 
-            recognition.lang = "en-US";
+            recognition.lang = "en-GB";
             recognition.start();
 
-            recognition.onresult = function(e) {
-                $("#id_question").val(e.results[0][0].transcript);
-                recognition.stop();
-                $("#ask-question").submit();
+            var final_transcript = '';
+
+            recognition.onresult = function(event) {
+                var interim_transcript = '';
+
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        final_transcript += event.results[i][0].transcript;
+                    } else {
+                        interim_transcript += event.results[i][0].transcript;
+                    }
+                }
+
+                final_transcript = interim_transcript.capitalize();
+                $("#id_question").val(final_transcript);
             };
 
-            recognition.onerror = function(e) {
+            recognition.onaudioend = function(event) {
                 recognition.stop();
+                $("#id_question").val(final_transcript);
+                $("#ask-question").submit();
             }
       }
     });

@@ -20,7 +20,11 @@ class IndexViewTests(TestCase):
         # Until then fail this test.
         self.fail("Implement the landing page")
 
+
 class ChatViewTests(TestCase):
+
+    # TODO: add bot as a namespace so that two tests below won't fail!
+
     def test_chat_view_loads(self):
         response = self.client.get(reverse('bot:chat'))
         self.assertEqual(response.status_code, 200)

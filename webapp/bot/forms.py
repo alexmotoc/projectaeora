@@ -23,4 +23,5 @@ class FollowCompanyForm(ModelForm):
 
     class Meta:
         model = FollowCompany
+        # TODO: Depending on the implementation these fields might be required!
         exclude = ['sector', 'sub_sector', 'last_time_got_news']

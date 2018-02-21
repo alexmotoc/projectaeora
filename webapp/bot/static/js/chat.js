@@ -25,6 +25,9 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $("#buffering").remove();
+                var synth = window.speechSynthesis;
+                var utterThis = new SpeechSynthesisUtterance(data['response']['text']);
+                synth.speak(utterThis);
                 var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["response"]["text"] + "</span></div>";
                 $("#chat-history").append(reply);
                 $(".received").last().removeClass("scale-out").addClass("scale-in");

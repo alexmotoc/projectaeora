@@ -29,6 +29,14 @@ class TestScraper(unittest.TestCase):
         self.assertEqual(self.company.revenue['31-Dec-15'], '31803.00')
         self.assertEqual(self.company.revenue['31-Dec-16'], '27747.00')
 
+    # TODO: Make it so that if a given sector is empty, return None - the current implementation for get_companies_in_sub_sector(..) does this.
+    def test_non_existent_sector(self):
+        empty_string_list = self.scraper.get_companies_in_sector("")
+        self.assertEqual(empty_string_list, None)
+
+        abc_string_list = self.scraper.get_companies_in_sector("abc")
+        self.assertEqual(abc_string_list, None)
+
     def test_companies_in_sector(self):
         beverages_sector_list = self.scraper.get_companies_in_sector("Beverages")
         companies_in_beverages = ["CCH", "DGE"]
@@ -37,6 +45,23 @@ class TestScraper(unittest.TestCase):
         insurance_sector_list = self.scraper.get_companies_in_sector("Nonlife Insurance")
         companies_in_insurance = ["ADM", "DLG", "RSA"]
         self.assertCountEqual(insurance_sector_list, companies_in_insurance)
+
+    def test_non_existent_sub_sector(self):
+        empty_string_list = self.scraper.get_companies_in_sub_sector("")
+        self.assertEqual(empty_string_list, None)
+
+        abc_string_list = self.scraper.get_companies_in_sub_sector("abc")
+        self.assertEqual(abc_string_list, None)
+
+    def test_companies_in_sub_sector(self):
+        soft_drinks_sub_sector = self.scraper.get_companies_in_sub_sector("Soft Drinks")
+        companies_in_soft_drinks = ["CCH"]
+        self.assertCountEqual(soft_drinks_sub_sector, companies_in_soft_drinks)
+
+        specialty_chemicals_sub_sector = self.scraper.get_companies_in_sub_sector("Specialty Chemicals")
+        companies_in_specialty_chemicals = ["JMAT", "CRDA"]
+        self.assertCountEqual(specialty_chemicals_sub_sector, companies_in_specialty_chemicals)
+
 
 if __name__ == '__main__':
     unittest.main()

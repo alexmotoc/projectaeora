@@ -56,7 +56,9 @@ $(document).ready(function() {
     }
 
     $("#send-text").click(function(e) {
-        $("#ask-question").submit();
+        if ($("#id_question").val() != "") {
+            $("#ask-question").submit();
+        }
     });
 
     /* Return a string with the first letter capitalised */

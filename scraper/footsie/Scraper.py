@@ -127,7 +127,12 @@ class Scraper:
         return profiles
 
     def get_company_data(self, code):
-        url = self.domain + self.profiles[code]
+        try:
+            company_code = self.profiles[code]
+        except:
+            return None
+
+        url = self.domain + company_code
         response = requests.get(url)
 
         company = None
@@ -216,10 +221,10 @@ class Scraper:
             i = 1
             for r in rows:
                 name = r.find('td').find('a').string
-                price = r.findAll('td')[2].string  
+                price = r.findAll('td')[2].string
                 per_diff = self.split_string(str(r.findAll('td')[4]), '">', "<")
                 top5 += (name+"\t"+price+"\t"+per_diff)
-                if i < 5: 
+                if i < 5:
                     top5 += "\n"
                 i = i + 1
         return top5

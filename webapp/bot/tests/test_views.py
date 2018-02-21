@@ -4,6 +4,7 @@ from django.urls import reverse, resolve
 
 from bot.views import index
 
+
 class IndexViewTests(TestCase):
 
     def test_root_url_resolves_to_index_view(self):

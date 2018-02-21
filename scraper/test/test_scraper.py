@@ -41,12 +41,10 @@ class TestScraper(unittest.TestCase):
         beverages_sector_list = self.scraper.get_companies_in_sector("Beverages")
         companies_in_beverages = ["DGE", "CCH"]
         self.assertCountEqual(beverages_sector_list, companies_in_beverages)
-        self.assertEqual(sorted(beverages_sector_list), sorted(companies_in_beverages))
 
         insurance_sector_list = self.scraper.get_companies_in_sector("Nonlife Insurance")
         companies_in_insurance = ["DLG", "ADM", "RSA"]
         self.assertCountEqual(insurance_sector_list, companies_in_insurance)
-        self.assertEqual(sorted(insurance_sector_list), sorted(companies_in_insurance))
 
     def test_comapanies_in_empty_sub_sector(self):
         empty_string_list = self.scraper.get_companies_in_sub_sector("")
@@ -60,12 +58,10 @@ class TestScraper(unittest.TestCase):
         soft_drinks_sub_sector = self.scraper.get_companies_in_sub_sector("Soft Drinks")
         companies_in_soft_drinks = ["CCH"]
         self.assertCountEqual(soft_drinks_sub_sector, companies_in_soft_drinks)
-        self.assertEqual(soft_drinks_sub_sector, companies_in_soft_drinks)
 
         specialty_chemicals_sub_sector = self.scraper.get_companies_in_sub_sector("Specialty Chemicals")
         companies_in_specialty_chemicals = ["JMAT", "CRDA"]
         self.assertCountEqual(specialty_chemicals_sub_sector, companies_in_specialty_chemicals)
-        self.assertEqual(sorted(specialty_chemicals_sub_sector), sorted(companies_in_specialty_chemicals))
 
     # TODO: Make it so that if you're trying to get data on a sector that doesn't exist, return None??
     def test_empty_sector_data(self):

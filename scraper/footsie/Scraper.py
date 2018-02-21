@@ -209,7 +209,7 @@ class Scraper:
 
     def get_top5(self, risers=True):
         """
-        Returns a list containing the codes of the top 10 companies.
+        Returns a list containing tuples with the codes of the top 5 companies and info about their prices.
 
         Keyword arguments:
         url - the url of the company website to be scrapped
@@ -220,21 +220,21 @@ class Scraper:
         else:
             url = self.top5URL
         response = requests.get(url)
-        top5 = ""
-        if(response.status_code == 200):
+
+        top5 = list()
+
+        if response.status_code == 200:
             soup = bs4.BeautifulSoup(response.content, "lxml")
             table = soup.findAll(attrs={"summary" : "Companies and Prices"})[0]
             body = table.find('tbody')
             rows = body.findAll('tr')
-            i = 1
+
             for r in rows:
                 name = r.find('td').find('a').string
                 price = r.findAll('td')[2].string
                 per_diff = self.split_string(str(r.findAll('td')[4]), '">', "<")
-                top5 += (name+"\t"+price+"\t"+per_diff)
-                if i < 5:
-                    top5 += "\n"
-                i = i + 1
+                top5.append((name, price, per_diff))
+
         return top5
 
 

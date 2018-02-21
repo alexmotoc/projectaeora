@@ -135,6 +135,19 @@ class TestScraper(unittest.TestCase):
             self.assertIsInstance(company, Company.Company)
             self.assertIn(company.code, companies_in_specialty_chemicals)
 
+    def test_top5_risers(self):
+        top5_risers = self.scraper.get_top5()
+        self.assertEqual(len(top5_risers), 5)
+
+        for company in top5_risers:
+            self.assertEqual(company[2][0], '+')
+
+    def test_top5_fallers(self):
+        top5_fallers = self.scraper.get_top5(risers=False)
+        self.assertEqual(len(top5_fallers), 5)
+
+        for company in top5_fallers:
+            self.assertEqual(company[2][0], '-')
 
 if __name__ == '__main__':
     unittest.main()

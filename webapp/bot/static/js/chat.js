@@ -100,7 +100,7 @@ $(document).ready(function() {
                     }
 
                     finalTranscript = interimTranscript.capitalize();
-                    $("span").last().text(finalTranscript);
+                    $(".sent").last().find('span').text(finalTranscript);
                 };
 
                 recognition.onspeechend = function(event) {

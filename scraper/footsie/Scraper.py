@@ -31,9 +31,9 @@ class Scraper:
         for sector, sub_sectors in self.sectors.items():
             if sector == requested_sector:
                 for sub_sector, companies in sub_sectors.items():
-                    for company in companies:
-                        companies_in_sector.append(company)
+                    companies_in_sector += companies
                 break
+
         return companies_in_sector
 
     def get_companies_in_sub_sector(self, requested_sub_sector):
@@ -42,24 +42,32 @@ class Scraper:
         for sector, sub_sectors in self.sectors.items():
             for sub_sector, companies in sub_sectors.items():
                 if sub_sector == requested_sub_sector:
-                    for company in companies:
-                        companies_in_sub_sector.append(company)
-                    return companies_in_sub_sector
+                    companies_in_sub_sector += companies
+
+        return companies_in_sub_sector
 
     def get_sector_data(self, sector_name):
         #Returns a Sector object
-        sector = Sector.Sector(sector_name)
+        sector = None
         companies = self.get_companies_in_sector(sector_name)
-        for company in companies:
-            sector.add_company(self.get_company_data(company))
+
+        if companies:
+            sector = Sector.Sector(sector_name)
+            for company in companies:
+                sector.add_company(self.get_company_data(company))
+
         return sector
 
     def get_sub_sector_data(self, sub_sector_name):
         #Returns a Sector object
-        sub_sector = Sector.Sector(sub_sector_name)
+        sub_sector = None
         companies = self.get_companies_in_sub_sector(sub_sector_name)
-        for company in companies:
-            sub_sector.add_company(self.get_company_data(company))
+
+        if companies:
+            sub_sector = Sector.Sector(sub_sector_name)
+            for company in companies:
+                sub_sector.add_company(self.get_company_data(company))
+
         return sub_sector
 
     def split_string(self, s, start, end):

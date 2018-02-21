@@ -96,5 +96,39 @@ class TestScraper(unittest.TestCase):
 
     # TODO: Add tests for when the sector is all lower case etc...
 
+    # TODO: Make it so that if you're trying to get data on a sub_sector that doesn't exist, return None??
+    def test_non_existent_sub_sector_sub_sector_data(self):
+        # TODO: BUG - Error thrown from Scraper when running the line below!
+        empty_string_sub_sector = self.scraper.get_sub_sector_data("")
+        self.assertEqual(empty_string_sub_sector, None)
+
+        abc_string_sub_sector = self.scraper.get_sub_sector_data("abc")
+        self.assertEqual(abc_string_sub_sector, None)
+
+    def test_sub_sector_data(self):
+        soft_drinks_sub_sector = self.scraper.get_sub_sector_data("Soft Drinks")
+        self.assertIsInstance(soft_drinks_sub_sector, Sector.Sector)
+        self.assertEqual(soft_drinks_sub_sector.name, "Soft Drinks")
+
+        soft_drinks_company_list = soft_drinks_sub_sector.companies
+        companies_in_soft_drinks = ["CCH"]
+
+        self.assertEqual(len(soft_drinks_company_list), 1)
+
+        for company in soft_drinks_company_list:
+            self.assertIsInstance(company, Company.Company)
+            self.assertIn(company.code, companies_in_soft_drinks)
+
+        specialty_chemicals_sub_sector = self.scraper.get_sub_sector_data("Specialty Chemicals")
+        self.assertIsInstance(specialty_chemicals_sub_sector, Sector.Sector)
+
+        specialty_chemicals_company_list = specialty_chemicals_sub_sector.companies
+        companies_in_specialty_chemicals = ["JMAT", "CRDA"]
+
+        for company in specialty_chemicals_company_list:
+            self.assertIsInstance(company, Company.Company)
+            self.assertIn(company.code, companies_in_specialty_chemicals)
+
+
 if __name__ == '__main__':
     unittest.main()

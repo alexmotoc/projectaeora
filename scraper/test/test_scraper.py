@@ -1,7 +1,7 @@
 import unittest
 
 from footsie import Scraper
-
+from footsie import Sector, Company
 
 class TestScraper(unittest.TestCase):
 
@@ -62,6 +62,39 @@ class TestScraper(unittest.TestCase):
         companies_in_specialty_chemicals = ["JMAT", "CRDA"]
         self.assertCountEqual(specialty_chemicals_sub_sector, companies_in_specialty_chemicals)
 
+    # TODO: Make it so that if you're trying to get data on a sector that doesn't exist, return None??
+    def test_non_existent_sector_sector_data(self):
+        empty_string_sector = self.scraper.get_sector_data("")
+        self.assertEqual(empty_string_sector, None)
+
+        abc_string_sector = self.scraper.get_sector_data("abc")
+        self.assertEqual(abc_string_sector, None)
+
+    def test_sector_data(self):
+        beverages_sector = self.scraper.get_sector_data("Beverages")
+        self.assertIsInstance(beverages_sector, Sector.Sector)
+        self.assertEqual(beverages_sector.name, "Beverages")
+
+        beverages_company_list = beverages_sector.companies
+        companies_in_beverages = ["CCH", "DGE"]
+
+        self.assertEqual(len(beverages_company_list), 2)
+
+        for company in beverages_company_list:
+            self.assertIsInstance(company, Company.Company)
+            self.assertIn(company.code, companies_in_beverages)
+
+        insurance_sector = self.scraper.get_sector_data("Nonlife Insurance")
+        self.assertIsInstance(insurance_sector, Sector.Sector)
+        self.assertEqual(insurance_sector.name, "Nonlife Insurance")
+
+        insurance_company_list = insurance_sector.companies
+        companies_in_insurance = ["ADM", "DLG", "RSA"]
+        for company in insurance_company_list:
+            self.assertIsInstance(company, Company.Company)
+            self.assertIn(company.code, companies_in_insurance)
+
+    # TODO: Add tests for when the sector is all lower case etc...
 
 if __name__ == '__main__':
     unittest.main()

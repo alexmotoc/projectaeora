@@ -7,6 +7,7 @@ def obj_dict(obj):
 
 def news_reply(lse_list, yahoo_list):
     overall_dict = {
+        "speech": "Here are some news articles that I've found!",
         "London Stock Exchange": lse_list,
         "Yahoo News": yahoo_list
                     }

@@ -64,6 +64,10 @@
     float: left;
 }
 
+.timestamps {
+    font-weight: bold;
+}
+
 .text-bar {
     border-radius: 20px 20px 20px 20px;
     -webkit-border-radius: 20px 20px 20px 20px;

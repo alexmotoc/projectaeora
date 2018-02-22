@@ -1,7 +1,8 @@
 import unittest
 
 from footsie import Scraper
-from footsie import Sector, Company
+from footsie import Sector, Company, News
+from datetime import datetime, timedelta
 
 class TestScraper(unittest.TestCase):
 
@@ -144,6 +145,87 @@ class TestScraper(unittest.TestCase):
 
         for company in top5_fallers:
             self.assertEqual(company[2][0], '-')
+
+    #Tests for financial news_stories
+    def test_get_financial_news_data(self):
+        news = self.scraper.get_financial_news_data('BARC')
+        self.assertFalse(len(news) == 0)
+
+        for n in news:
+            self.assertIsInstance(n, News.News)
+            self.assertIsNotNone(n.date)
+            self.assertIsInstance(n.date, str)
+            self.assertIsNotNone(n.headline)
+            self.assertIsInstance(n.headline, str)
+            self.assertIsNotNone(n.url)
+            self.assertIsInstance(n.url, str)
+            self.assertIsNotNone(n.source)
+            self.assertIsInstance(n.source, str)
+
+    def test_get_yahoo_news_data(self):
+        yahoo_news = self.scraper.get_yahoo_news_data('BARC')
+        self.assertFalse(len(yahoo_news) == 0)
+
+        for n in yahoo_news:
+            self.assertIsInstance(n, News.News)
+            self.assertIsNotNone(n.date)
+            self.assertIsInstance(n.date, str)
+            self.assertIsNotNone(n.headline)
+            self.assertIsInstance(n.headline, str)
+            self.assertIsNotNone(n.url)
+            self.assertIsInstance(n.url, str)
+            self.assertIsNotNone(n.source)
+            self.assertIsInstance(n.source, str)
+            self.assertEqual(n.source, 'YAHOO')
+
+    def test_get_financial_news_data_last_x_days(self):
+        news_last_3_days = self.scraper.get_financial_news_data_last_x_days('BARC', 3)
+
+        for news_article in news_last_3_days:
+            self.assertIsNotNone(news_article.date)
+            self.assertIsInstance(news_article.date, str)
+            date = datetime.strptime(news_article.date, '%H:%M %d-%b-%Y')
+            self.assertIsInstance(news_article, News.News)
+            self.assertIsNotNone(news_article.headline)
+            self.assertIsInstance(news_article.headline, str)
+            self.assertIsNotNone(news_article.url)
+            self.assertIsInstance(news_article.url, str)
+            self.assertIsNotNone(news_article.source)
+            self.assertIsInstance(news_article.source, str)
+            self.assertTrue(date.date() >= datetime.now().date() - timedelta(3))
+
+    def test_get_financial_news_data_current_month(self):
+        news_current_month = self.scraper.get_financial_news_data_current_month('BARC')
+
+        for news_article in news_current_month:
+            self.assertIsNotNone(news_article.date)
+            self.assertIsInstance(news_article.date, str)
+            date = datetime.strptime(news_article.date, '%H:%M %d-%b-%Y')
+            self.assertIsInstance(news_article, News.News)
+            self.assertIsNotNone(news_article.headline)
+            self.assertIsInstance(news_article.headline, str)
+            self.assertIsNotNone(news_article.url)
+            self.assertIsInstance(news_article.url, str)
+            self.assertIsNotNone(news_article.source)
+            self.assertIsInstance(news_article.source, str)
+            self.assertTrue(date.date().month == datetime.now().date().month and date.date().year == datetime.now().date().year)
+
+    def test_get_financial_news_data_current_year(self):
+        news_current_year = self.scraper.get_financial_news_data_current_year('BARC')
+        self.assertFalse(len(news_current_year) == 0)
+
+        for news_article in news_current_year:
+            self.assertIsNotNone(news_article.date)
+            self.assertIsInstance(news_article.date, str)
+            date = datetime.strptime(news_article.date, '%H:%M %d-%b-%Y')
+            self.assertIsInstance(news_article, News.News)
+            self.assertIsNotNone(news_article.headline)
+            self.assertIsInstance(news_article.headline, str)
+            self.assertIsNotNone(news_article.url)
+            self.assertIsInstance(news_article.url, str)
+            self.assertIsNotNone(news_article.source)
+            self.assertIsInstance(news_article.source, str)
+            self.assertTrue(date.date().year == datetime.now().date().year)
 
 if __name__ == '__main__':
     unittest.main()

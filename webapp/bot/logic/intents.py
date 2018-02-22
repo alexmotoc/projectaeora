@@ -1,3 +1,10 @@
+import os
+
+import sys
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../../../scraper'))
+
+from footsie import Scraper
+
 def footsie_intent(r):
     # Check whether all required entities have been specified
     if r['result']['actionIncomplete']:

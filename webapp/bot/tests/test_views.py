@@ -27,6 +27,11 @@ class ChatViewTests(TestCase):
 
     def test_chat_view_loads(self):
         response = self.client.get(reverse('chat'))
+
+        
+class ChatViewTests(TestCase):
+    def test_chat_view_loads(self):
+        response = self.client.get(reverse('bot:chat'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'chat.html')
 

@@ -50,11 +50,12 @@ $(document).ready(function() {
     }
 
     function createReply(data) {
+        var response = JSON.parse(data["response"]);
+
         var synth = window.speechSynthesis;
-        var utterThis = new SpeechSynthesisUtterance(data['response']['speech']);
+        var utterThis = new SpeechSynthesisUtterance(response['speech']);
         synth.speak(utterThis);
 
-        var response = JSON.parse(data["response"]);
         switch(response["type"]) {
             case "company":
                 break;

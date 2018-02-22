@@ -31,9 +31,9 @@ class Scraper:
         for sector, sub_sectors in self.sectors.items():
             if sector == requested_sector:
                 for sub_sector, companies in sub_sectors.items():
-                    for company in companies:
-                        companies_in_sector.append(company)
+                    companies_in_sector += companies
                 break
+
         return companies_in_sector
 
     def get_companies_in_sub_sector(self, requested_sub_sector):
@@ -42,24 +42,32 @@ class Scraper:
         for sector, sub_sectors in self.sectors.items():
             for sub_sector, companies in sub_sectors.items():
                 if sub_sector == requested_sub_sector:
-                    for company in companies:
-                        companies_in_sub_sector.append(company)
-                    return companies_in_sub_sector
+                    companies_in_sub_sector += companies
+
+        return companies_in_sub_sector
 
     def get_sector_data(self, sector_name):
         #Returns a Sector object
-        sector = Sector.Sector(sector_name)
+        sector = None
         companies = self.get_companies_in_sector(sector_name)
-        for company in companies:
-            sector.add_company(self.get_company_data(company))
+
+        if companies:
+            sector = Sector.Sector(sector_name)
+            for company in companies:
+                sector.add_company(self.get_company_data(company))
+
         return sector
 
     def get_sub_sector_data(self, sub_sector_name):
         #Returns a Sector object
-        sub_sector = Sector.Sector(sub_sector_name)
+        sub_sector = None
         companies = self.get_companies_in_sub_sector(sub_sector_name)
-        for company in companies:
-            sub_sector.add_company(self.get_company_data(company))
+
+        if companies:
+            sub_sector = Sector.Sector(sub_sector_name)
+            for company in companies:
+                sub_sector.add_company(self.get_company_data(company))
+
         return sub_sector
 
     def split_string(self, s, start, end):
@@ -127,7 +135,12 @@ class Scraper:
         return profiles
 
     def get_company_data(self, code):
-        url = self.domain + self.profiles[code]
+        try:
+            company_code = self.profiles[code]
+        except:
+            return None
+
+        url = self.domain + company_code
         response = requests.get(url)
 
         company = None
@@ -196,7 +209,7 @@ class Scraper:
 
     def get_top5(self, risers=True):
         """
-        Returns a list containing the codes of the top 10 companies.
+        Returns a list containing tuples with the codes of the top 5 companies and info about their prices.
 
         Keyword arguments:
         url - the url of the company website to be scrapped
@@ -207,21 +220,21 @@ class Scraper:
         else:
             url = self.top5URL
         response = requests.get(url)
-        top5 = ""
-        if(response.status_code == 200):
+
+        top5 = list()
+
+        if response.status_code == 200:
             soup = bs4.BeautifulSoup(response.content, "lxml")
             table = soup.findAll(attrs={"summary" : "Companies and Prices"})[0]
             body = table.find('tbody')
             rows = body.findAll('tr')
-            i = 1
+
             for r in rows:
                 name = r.find('td').find('a').string
-                price = r.findAll('td')[2].string  
+                price = r.findAll('td')[2].string
                 per_diff = self.split_string(str(r.findAll('td')[4]), '">', "<")
-                top5 += (name+"\t"+price+"\t"+per_diff)
-                if i < 5: 
-                    top5 += "\n"
-                i = i + 1
+                top5.append((name, price, per_diff))
+
         return top5
 
 

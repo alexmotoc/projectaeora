@@ -39,6 +39,7 @@ class FollowCompany(models.Model):
 
 
 class UserPreferences(models.Model):
+    # TODO: Add choices for the model!
     colour_scheme = models.CharField(default='default', max_length=40)
 
     # Defaults to False = text, True = respond with voice.

@@ -1,9 +1,12 @@
 import os
 
 import sys
+
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../../../scraper'))
 
 from footsie import Scraper
+from bot.logic import replies
+
 from bot.logic import replies
 
 def footsie_intent(r):
@@ -14,6 +17,10 @@ def footsie_intent(r):
         company_code = r['result']['parameters']['company']
         attribute = r['result']['parameters']['attribute']
         scraper = Scraper.Scraper()
+
+        if attribute == "news":
+            return replies.news_reply(scraper.get_financial_news_data(company_code), scraper.get_yahoo_news_data(company_code))
+
         company = scraper.get_company_data(company_code)
         try:
             value = getattr(company.stock, attribute)

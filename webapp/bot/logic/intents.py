@@ -20,13 +20,9 @@ def footsie_intent(r):
 
         if attribute == "news":
             return replies.news_reply(scraper.get_financial_news_data(company_code), scraper.get_yahoo_news_data(company_code))
-
-        company = scraper.get_company_data(company_code)
-        try:
-            value = getattr(company.stock, attribute)
-        except AttributeError:
-            value = getattr(company, attribute)
-        return 'The {} of {} is {}.'.format(attribute, company.name, value)
+        else:
+            company = scraper.get_company_data(company_code)
+            return replies.get_company_reply(company, attribute)
 
 def sector_query_intent(r, is_sector):
     scraper = Scraper.Scraper()

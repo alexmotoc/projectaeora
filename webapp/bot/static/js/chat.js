@@ -25,13 +25,7 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $("#buffering").remove();
-                var synth = window.speechSynthesis;
-                var utterThis = new SpeechSynthesisUtterance(data['response']['text']);
-                synth.speak(utterThis);
-                var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["response"]["text"] + "</span></div>";
-                $("#chat-history").append(reply);
-                $(".received").last().removeClass("scale-out").addClass("scale-in");
-                $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+                createReply(data);
             },
         });
     }
@@ -53,6 +47,50 @@ $(document).ready(function() {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
         return $("#id_question").val();
+    }
+
+    function createReply(data) {
+        var response = JSON.parse(data["response"]);
+
+        var synth = window.speechSynthesis;
+        var utterThis = new SpeechSynthesisUtterance(response['speech']);
+        synth.speak(utterThis);
+
+        switch(response["type"]) {
+            case "company":
+                break;
+            case "news":
+                break;
+            case "top":
+                var card = response["text"];
+                var reply = "<div class='bubble-interactive received'>" +
+                              "<div class='card white'>" +
+                                "<div class='card-content black-text'>" +
+                                  "<span class='card-title'>" + card["title"] + "</span>" +
+                                  "<table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th></tr></thead>" +
+                                  "<tbody>";
+
+                card["companies"].forEach(function(obj) {
+                    reply += "<tr><td>" + obj.name + "</td><td>" + obj.price +"</td>";
+
+                    if (obj.percentage_change[0] == '+') {
+                        reply += "<td class='green-text'>" + obj.percentage_change + "</td>";
+                    } else {
+                        reply += "<td class='red-text'>" + obj.percentage_change + "</td>";
+                    }
+
+                    reply += "</tr>";
+                });
+
+                reply += "</tbody></table></div></div></div>";
+                break;
+            default:
+                var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["response"]["text"] + "</span></div>";
+        }
+
+        $("#chat-history").append(reply);
+        $(".received").last().removeClass("scale-out").addClass("scale-in");
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
     }
 
     $("#send-text").click(function(e) {

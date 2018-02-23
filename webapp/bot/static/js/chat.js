@@ -50,14 +50,29 @@ $(document).ready(function() {
     }
 
     function createReply(data) {
-        var response = JSON.parse(data["response"]);
-
+        if (typeof data["response"] != 'object'){
+            var response = JSON.parse(data["response"]);
+        }else{
+            var response = JSON.parse(data["response"]["text"])
+        }
         var synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(response['speech']);
         synth.speak(utterThis);
-
+        var card = response["text"];
         switch(response["type"]) {
             case "company":
+                var reply =  "<div class='bubble-interactive received'>" +
+                "<div class='bubble-interactive received'>" +
+                  "<div class='card white'>" +
+                    "<div class='card-content black-text'>" +
+                      "<span class='card-title'>"+card["name"]+"</span>" +
+                      "<p class='grey-text'>"+card["code"]+"&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" +
+                      "<span class='black-text'>" + card['primary'] +"</span></p>" + //will replace first block of this line with a call to get_style(card[primary], card[primary_type]) to customise style based on what data type and value
+                      "<p class='grey-text'>"+card["date"]+"&emsp;"+
+                      "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>"+card['secondary']+"</span></p>"+ //ditto ^^ except secondary
+                    "</div>" +
+                  "</div>" +
+                "</div>";
                 break;
             case "news":
                 break;
@@ -171,3 +186,4 @@ $(document).ready(function() {
         fetchReply(query);
     });
 });
+

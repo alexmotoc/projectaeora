@@ -22,15 +22,84 @@
         <div class="row">
           <div class="col s10 offset-s1">
             <h1>Settings</h1>
-            <div class="row">
-              <div class="switch">
-                <label>
-                  Voice replies
-                  <input type="checkbox">
-                  <span class="lever"></span>
-                </label>
+            <form action="/settings/" method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="input-field">
+                  {{ form.colour_scheme }}
+                  {{ form.colour_scheme.label_tag }}
+                </div>
               </div>
-            </div>
+              <div class="row">
+                  <div class="input-field">
+                      {{ form.company }}
+                      {{ form.company.label_tag }}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="input-field">
+                      {{ form.sector }}
+                      {{ form.sector.label_tag }}
+                  </div>
+              </div>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.current_price.label }}
+                    {{ form.current_price }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.daily_high.label }}
+                    {{ form.daily_high }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.daily_low.label }}
+                    {{ form.daily_low }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.percentage_change.label }}
+                    {{ form.percentage_change }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.news.label }}
+                    {{ form.news }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.voice.label }}
+                    {{ form.voice }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <input class="waves-effect waves-light btn indigo" type="submit" name="update-preferences" value="Save">
+              </div>
+            </form>
           </div>
         </div>
       </main>
@@ -39,5 +108,6 @@
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
       <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/settings.js" %}"></script>
     </body>
   </html>

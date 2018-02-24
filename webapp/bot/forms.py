@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Query, UserPreferences, FollowCompany
+from .models import Query, UserPreferences
 
 
 class QueryForm(ModelForm):
@@ -13,15 +13,10 @@ class QueryForm(ModelForm):
 
 
 class UserPreferencesForm(ModelForm):
+    company = forms.CharField(widget=forms.TextInput(attrs={'class': 'autocomplete'}), required=False)
+    sector = forms.CharField(widget=forms.TextInput(attrs={'class': 'autocomplete'}), required=False)
 
     class Meta:
         model = UserPreferences
-        fields = '__all__'
+        exclude = ['last_time_got_news']
 
-
-class FollowCompanyForm(ModelForm):
-
-    class Meta:
-        model = FollowCompany
-        # TODO: Depending on the implementation these fields might be required!
-        exclude = ['sector', 'sub_sector', 'last_time_got_news']

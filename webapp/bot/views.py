@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 
-from .forms import QueryForm
+from .forms import QueryForm, UserPreferencesForm
 from bot.logic import intents
 from .models import Response
 
@@ -67,4 +67,19 @@ def chat(request):
         return render(request, 'chat.html', {'form': form, 'history': history})
 
 def settings(request):
-    return render(request, 'settings.html')
+    if request.method == 'POST':
+        form = UserPreferencesForm(request.POST)
+    else:
+        form = UserPreferencesForm()
+
+    return render(request, 'settings.html', {'form': form})
+
+def get_companies(request):
+    with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/profiles.json') as f:
+        companies = json.load(f)
+        return JsonResponse(companies)
+
+def get_sectors(request):
+    with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/sectors.json') as f:
+        sectors = json.load(f)
+        return JsonResponse(sectors)

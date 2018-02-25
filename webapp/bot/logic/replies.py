@@ -1,3 +1,5 @@
+import json
+
 from collections import defaultdict
 
 def big_movers_card(top5, risers=True):
@@ -95,13 +97,14 @@ def get_company_reply(company, attribute):
 
 def sector_reply(sector, sector_attribute):
     data = getattr(sector, sector_attribute)
-    """if (sector_attribute == "highest_price"):
-
-    }
-    else if (sector_attribute == "lowest_price"){
-
-    }"""
-    if sector_attribute == "rising" or sector_attribute == "falling":
+    if (sector_attribute == "highest_price" or sector_attribute == "lowest_price"):
+        data = getattr(sector, sector_attribute)
+        sector_name = sector.name
+        speech = "{} has the {} {} in {}: {}".format(data.name, sector_attribute.split('_',1)[0], sector_attribute.split('_', 1)[1], sector_name, getattr(data.stock, sector_attribute.split('_', 1)[1]))
+        response = get_company_reply(data, "price")
+        response['speech'] = speech
+        return response
+    elif sector_attribute == "rising" or sector_attribute == "falling":
         number_of_companies_in_sector = len(sector.companies)
         number_of_companies_moving_in_requested_direction = len(data)
         speech = ""
@@ -132,12 +135,16 @@ def sector_reply(sector, sector_attribute):
         movers['speech'] = speech
         # Build elements for the card visualisation
         card = defaultdict()
-        if sector_attribute == "rising" or True:
-            card['title'] = str(len(data))+"/"+str(number_of_companies_in_sector)+" "+sector.name+" are "+sector_attribute
-        else:
-            card['title'] = 'Fallers in '+sector.name
-        #card['title'] = speech
+        card['title'] = str(len(data))+'/'+str(number_of_companies_in_sector)+' '+sector.name+' are '+sector_attribute
         card['companies'] = companies
         movers['text'] = card
         movers['type'] = 'top'
-        return json.dumps(movers)
+        return movers
+    """elif sector_attribute == "news":
+        news = {"LSE": sector.news}
+        overall_dict = {
+        "speech": "Here are some news articles that I've found!",
+        "type": "news",
+        "text": news
+        }
+        return overall_dict"""

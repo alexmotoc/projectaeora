@@ -151,7 +151,7 @@ class Scraper:
             name = name_cell.text.strip().split('\r')[1].strip()
             market_cap = soup.find('td', text='Market cap(in millions)*').findNext('td').string
 
-            revenue = dict()
+            revenue = list()
 
             revenue_table = soup.findAll(attrs={"summary" : "Fundamentals"})[0]
             head = revenue_table.find('thead')
@@ -162,7 +162,7 @@ class Scraper:
             values = row.findAll('td')
 
             for i in range(1, len(dates)):
-                revenue[dates[i].string.strip()] = values[i].string.strip()
+                revenue.append((dates[i].string.strip(), values[i].string.strip()))
 
             sector_tag = soup.find('td', text='FTSE sector')
             sector = sector_tag.findNext('td')

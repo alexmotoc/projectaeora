@@ -115,7 +115,6 @@ $(document).ready(function() {
         var synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(data['speech']);
         synth.speak(utterThis);
-
         var card = data["text"];
         switch(data["type"]) {
             case "company":
@@ -155,6 +154,18 @@ $(document).ready(function() {
 
                 reply += "</tbody></table></div></div></div>";
                 break;
+            case "revenue":
+                var reply = "<div class = 'bubble-interactive received'>" +
+                              "<div class = 'card white'>" +
+                                "<div class = 'card-content black-text'>" +
+                                  "<span class = 'card-title'>" + card["title"] + "</span>" +
+                                  "<table class = 'striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
+                                  "<tbody>";
+                card["revenue_data"].forEach(function(obj) {
+                    reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td><tr>";
+                });
+                reply += "</tbody></table></div></div></div>"; 
+                break;       
             default:
                 var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["text"] + "</span></div>";
         }

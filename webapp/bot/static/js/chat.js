@@ -49,15 +49,92 @@ $(document).ready(function() {
         return $("#id_question").val();
     }
 
-    function createReply(data) {
-        var response = JSON.parse(data["response"]);
+    function getStyle(attribute, value){
+        if (attribute == "per_diff"){
+            if (value.charAt(0) == "+"){
+                return "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>"
+            }
+            else if (value.charAt(0) == "-"){
+                return "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>"
+            }
+        }
+        else if (attribute == "high"){
+            return "<span class='black-text'>High: "
+        }
+        else if (attribute == "low"){
+            return "<span class='black-text'>Low: "
+        }
+        else if (attribute == "market_cap"){
+            return "<span class='black-text'>Market Cap: "
+        }
+        else if (attribute == "revenue"){
+            return "<span class='black-text'>Revenue: "
+        }
+        else if (attribute == "bid"){
+            return "<span class='black-text'>Bid: "
+        }
+        else if (attribute == "offer"){
+            return "<span class='black-text'>Offer: "
+        }
+        else if (attribute == "sector"){
+            return "<span class='black-text'>Sector: "
+        }
+        else if (attribute == "sub_sector"){
+            return "<span class='black-text'>Sub-Sector: "
+        }
+        else if (attribute == "volume"){
+            return "<span class='black-text'>Volume: "
+        }
+        else if (attribute == "last_close_value"){
+            return "<span class='black-text'>Last Close Value: "
+        }
+        else if (attribute == "last_close_date"){
+            return "<span class='black-text'>Last Close Date: "
+        }
+        else if (attribute == "price"){
+            return "<span class='black-text'>Price: "
+        }
+        else{
+            return "<span class='black-text'>"
+        }     
+    }
 
+    function getUnits(attribute){
+        if (attribute == "per_diff"){
+            return "%"
+        }
+        else if (attribute == "price"){
+            return " GBX"
+        }
+        else{
+            return ""
+        }
+    }
+
+    function createReply(data) {
+        if (typeof data["response"] != 'object'){
+            var response = JSON.parse(data["response"]);
+        }else{
+            var response = JSON.parse(data["response"]["text"])
+        }
         var synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(response['speech']);
         synth.speak(utterThis);
-
+        var card = response["text"];
         switch(response["type"]) {
             case "company":
+                var reply =  "<div class='bubble-interactive received'>" +
+                "<div class='bubble-interactive received'>" +
+                  "<div class='card white'>" +
+                    "<div class='card-content black-text'>" +
+                      "<span class='card-title'>"+card["name"]+"</span>" +
+                      "<p class='grey-text'>"+card["code"]+"&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" +
+                      getStyle(card['primary_type'], card['primary']) + card['primary']+getUnits(card['primary_type'])+"</span></p>" +
+                      "<p class='grey-text'>"+card["date"]+"&emsp;"+
+                      getStyle(card['secondary_type'], card['secondary'])+card['secondary']+getUnits(card['secondary_type'])+"</span></p>"+
+                    "</div>" +
+                  "</div>" +
+                "</div>";
                 break;
             case "news":
                 break;
@@ -171,3 +248,4 @@ $(document).ready(function() {
         fetchReply(query);
     });
 });
+

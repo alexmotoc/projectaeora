@@ -238,7 +238,7 @@ $(document).ready(function() {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
         processingQuery();
+        fetchReply($('#id_question').val());
         $("#id_question").val("");
-        fetchReply(query);
     });
 });

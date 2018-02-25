@@ -112,3 +112,49 @@ def get_company_reply(company, attribute):
     reply['speech'] = "The " + to_english[attribute] + " of " + company.name + " is " + value #The text to be spoken by the agent
 
     return reply
+
+def sector_reply(sector, sector_attribute):
+    data = getattr(sector, sector_attribute)
+    if (sector_attribute == "highest_price" or sector_attribute == "lowest_price"):
+        data = getattr(sector, sector_attribute)
+        sector_name = sector.name
+        speech = "{} has the {} {} in {}: {}".format(data.name, sector_attribute.split('_',1)[0], sector_attribute.split('_', 1)[1], sector_name, getattr(data.stock, sector_attribute.split('_', 1)[1]))
+        response = get_company_reply(data, "price")
+        response['speech'] = speech
+        return response
+    elif sector_attribute == "rising" or sector_attribute == "falling":
+        number_of_companies_in_sector = len(sector.companies)
+        number_of_companies_moving_in_requested_direction = len(data)
+        speech = ""
+        if number_of_companies_moving_in_requested_direction == 0:
+            speech = "No "+sector.name+" companies are "+sector_attribute+". "
+            if sector_attribute == "rising":
+                sector_attribute = "falling"
+            else:
+                sector_attribute = "rising"
+            data = getattr(sector, sector_attribute)
+        speech += "The following "+sector.name+" companies are "+sector_attribute+". "
+        companies = []
+        for i in range(len(data)):
+            row = defaultdict()
+            row['name'] = data[i].name
+            row['price'] = data[i].stock.price
+            row['percentage_change'] = data[i].stock.per_diff
+            speech += row['name']
+            if i < len(data) - 2:
+                speech += ', '
+            else:
+                if i == len(data) - 1:
+                    speech += '.'
+                else:
+                    speech += ' and '
+            companies.append(row)
+        movers = defaultdict()
+        movers['speech'] = speech
+        # Build elements for the card visualisation
+        card = defaultdict()
+        card['title'] = str(len(data))+'/'+str(number_of_companies_in_sector)+' '+sector.name+' are '+sector_attribute
+        card['companies'] = companies
+        movers['text'] = card
+        movers['type'] = 'top'
+        return movers

@@ -138,11 +138,3 @@ def sector_reply(sector, sector_attribute):
         movers['text'] = card
         movers['type'] = 'top'
         return movers
-    """elif sector_attribute == "news":
-        news = {"LSE": sector.news}
-        overall_dict = {
-        "speech": "Here are some news articles that I've found!",
-        "type": "news",
-        "text": news
-        }
-        return overall_dict"""

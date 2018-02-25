@@ -29,6 +29,7 @@
 
 .bubble-interactive {
     display: inline-block;
+    max-width: 100%;
     height: auto;
     clear: both;
     margin: 5px 0;

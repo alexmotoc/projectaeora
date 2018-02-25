@@ -47,7 +47,27 @@ def big_movers_card(top5, risers=True):
 
 def news_reply(lse_list, yahoo_list):
 
-    news = {"LSE": lse_list, "YAHOO": yahoo_list}
+    lse_news = []
+    for i in range(len(lse_list)):
+        row = {}
+        row["date"] = lse_list[i].date
+        row["headline"] = lse_list[i].headline
+        row["url"] = lse_list[i].url
+        row["source"] = lse_list[i].source
+        row["impact"] = lse_list[i].impact
+        lse_news.append(row)
+        
+    yahoo_news = []
+    for i in range(len(yahoo_list)):
+        row = {}
+        row["date"] = yahoo_list[i].date
+        row["headline"] = yahoo_list[i].headline
+        row["url"] = yahoo_list[i].url
+        row["source"] = yahoo_list[i].source
+        row["impact"] = yahoo_list[i].impact
+        lse_news.append(row)
+
+    news = {"LSE": lse_news, "YAHOO": yahoo_news}
     overall_dict = {
         "speech": "Here are some news articles that I've found!",
         "type": "news",

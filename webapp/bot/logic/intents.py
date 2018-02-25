@@ -25,6 +25,9 @@ def footsie_intent(r):
 
         if attribute == "news":
             return replies.news_reply(scraper.get_financial_news_data(company_code), scraper.get_yahoo_news_data(company_code))
+        elif attribute == "revenue":
+            company = scraper.get_company_data(company_code)
+            return replies.revenue_reply(company)
         else:
             company = scraper.get_company_data(company_code)
             return replies.get_company_reply(company, attribute)

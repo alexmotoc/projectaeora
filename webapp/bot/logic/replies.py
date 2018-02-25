@@ -90,7 +90,7 @@ def get_company_reply(company, attribute):
     , "sub_sector": "sector", "high": "low", "low" : "high", "diff": "per_diff"
     , "per_diff": "diff",  "last_close_value": "last_close_date"
     ,"last_close_date": "last_close_value", "revenue": "market_cap"
-    ,"market_cap": "revenue", "volume" : "price", "price": "per_diff"}
+    ,"market_cap": "volume", "volume" : "price", "price": "per_diff"}
 
     #to_english determines the english word that will be substituted for the attribute name
     to_english = {"bid": "bid", "offer": "offer", "sector": "sector", "sub_sector": "sub-sector",
@@ -158,3 +158,19 @@ def sector_reply(sector, sector_attribute):
         movers['text'] = card
         movers['type'] = 'top'
         return movers
+
+def revenue_reply(company):
+    response = {}
+    response['speech'] = "Here is the revenue data for "+company.name
+    response['type'] = "revenue"
+    card = {}
+    card['title'] = "Revenue Data for "+company.name
+    card['revenue_data'] = list()
+    response['text'] = card
+    for i in range(len(company.revenue)):
+        row = {}
+        row['date'] = company.revenue[i][0]
+        row['revenue'] = company.revenue[i][1]
+        card['revenue_data'].append(row)
+    return response
+

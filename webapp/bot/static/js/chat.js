@@ -49,7 +49,57 @@ $(document).ready(function() {
         return $("#id_question").val();
     }
 
-    function getStyle(attribute, value){
+    function getStylePrimary(attribute, value){
+      if (attribute == "per_diff"){
+        if (value.charAt(0) == "+"){
+          return "<p class = 'green-text price-impact'><i class='material-icons valign-icon'>trending_up</i>"
+        }
+        else if (value.charAt(0) == "-"){
+          return "<p class = 'red-text price-impact'><i class='material-icons valign-icon'>trending_down</i>"
+        }
+      }
+      else if (attribute == "high"){
+          return "<p class='black-text price-impact'>High: "
+      }
+      else if (attribute == "low"){
+          return "<p class='black-text price-impact'>Low: "
+      }
+      else if (attribute == "market_cap"){
+          return "<p class='black-text price-impact'>Market Cap: "
+      }
+      else if (attribute == "revenue"){
+          return "<p class='black-text price-impact'>Revenue: "
+      }
+      else if (attribute == "bid"){
+          return "<p class='black-text price-impact'>Bid: "
+      }
+      else if (attribute == "offer"){
+          return "<p class='black-text price-impact'>Offer: "
+      }
+      else if (attribute == "sector"){
+          return "<p class='black-text price-impact'>Sector: "
+      }
+      else if (attribute == "sub_sector"){
+          return "<p class='black-text price-impact'>Sub-Sector: "
+      }
+      else if (attribute == "volume"){
+          return "<p class='black-text price-impact'>Volume: "
+      }
+      else if (attribute == "last_close_value"){
+          return "<p class='black-text price-impact'>Last Close Value: "
+      }
+      else if (attribute == "last_close_date"){
+          return "<p class='black-text price-impact'>Last Close Date: "
+      }
+      else if (attribute == "price"){
+          return "<p class='black-text price-impact'>Price: "
+      }
+      else{
+          return "<p class='black-text price-impact'>"
+      }
+    }
+
+    function getStyleSecondary(attribute, value){ #TODO: Put functionality of getStylePrimary and getStyleSecondary into one function
         if (attribute == "per_diff"){
             if (value.charAt(0) == "+"){
                 return "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>"
@@ -96,7 +146,7 @@ $(document).ready(function() {
         }
         else{
             return "<span class='black-text'>"
-        }     
+        }
     }
 
     function getUnits(attribute){
@@ -124,14 +174,13 @@ $(document).ready(function() {
         switch(response["type"]) {
             case "company":
                 var reply =  "<div class='bubble-interactive received'>" +
-                "<div class='bubble-interactive received'>" +
                   "<div class='card white'>" +
                     "<div class='card-content black-text'>" +
                       "<span class='card-title'>"+card["name"]+"</span>" +
-                      "<p class='grey-text'>"+card["code"]+"&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" +
-                      getStyle(card['primary_type'], card['primary']) + card['primary']+getUnits(card['primary_type'])+"</span></p>" +
-                      "<p class='grey-text'>"+card["date"]+"&emsp;"+
-                      getStyle(card['secondary_type'], card['secondary'])+card['secondary']+getUnits(card['secondary_type'])+"</span></p>"+
+                      "<p class='grey-text code-time'>"+card["code"]+"<br>" +
+                      card["date"]+"</p>"+
+                      getStylePrimary(card['primary_type'], card['primary']) + card['primary']+getUnits(card['primary_type'])+"<br>" +
+                      getStyleSecondary(card['secondary_type'], card['secondary'])+card['secondary']+getUnits(card['secondary_type'])+"</span></p>" +
                     "</div>" +
                   "</div>" +
                 "</div>";
@@ -248,4 +297,3 @@ $(document).ready(function() {
         fetchReply(query);
     });
 });
-

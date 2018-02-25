@@ -5,6 +5,8 @@ from .forms import QueryForm
 from bot.logic import intents
 from .models import Response
 
+from collections import defaultdict
+
 import json
 import os
 import requests
@@ -43,11 +45,15 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
+            response = defaultdict()
+
             if r['result']['action'] == "input.unknown":
                 response['text'] = r['result']['fulfillment']['speech']
+                response['type'] = 'input.unknown'
+                response['speech'] = r['result']['fulfillment']['speech']
             else:
                 if r['result']['metadata']['intentName'] == 'Footsie Intent':
-                    response['text'] = intents.footsie_intent(r)
+                    response = intents.footsie_intent(r)
                 elif r['result']['metadata']['intentName'] == 'SectorQuery':
                     response['text'] = intents.sector_query_intent(r, True)
                 elif r['result']['metadata']['intentName'] == 'SubSectorQuery':
@@ -62,7 +68,7 @@ def chat(request):
         form = QueryForm()
 
     if request.is_ajax():
-        return JsonResponse({'response': response})
+        return JsonResponse(response)
     else:
         return render(request, 'chat.html', {'form': form, 'history': history})
 

@@ -96,7 +96,7 @@ $(document).ready(function() {
         }
         else{
             return "<span class='black-text'>"
-        }     
+        }
     }
 
     function getUnits(attribute){
@@ -112,34 +112,28 @@ $(document).ready(function() {
     }
 
     function createReply(data) {
-        if (typeof data["response"] != 'object'){
-            var response = JSON.parse(data["response"]);
-        }else{
-            var response = JSON.parse(data["response"]["text"])
-        }
         var synth = window.speechSynthesis;
-        var utterThis = new SpeechSynthesisUtterance(response['speech']);
+        var utterThis = new SpeechSynthesisUtterance(data['speech']);
         synth.speak(utterThis);
-        var card = response["text"];
-        switch(response["type"]) {
+
+        var card = data["text"];
+        switch(data["type"]) {
             case "company":
                 var reply =  "<div class='bubble-interactive received'>" +
-                "<div class='bubble-interactive received'>" +
-                  "<div class='card white'>" +
-                    "<div class='card-content black-text'>" +
-                      "<span class='card-title'>"+card["name"]+"</span>" +
-                      "<p class='grey-text'>"+card["code"]+"&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" +
-                      getStyle(card['primary_type'], card['primary']) + card['primary']+getUnits(card['primary_type'])+"</span></p>" +
-                      "<p class='grey-text'>"+card["date"]+"&emsp;"+
-                      getStyle(card['secondary_type'], card['secondary'])+card['secondary']+getUnits(card['secondary_type'])+"</span></p>"+
-                    "</div>" +
-                  "</div>" +
-                "</div>";
+                              "<div class='card white'>" +
+                                "<div class='card-content black-text'>" +
+                                  "<span class='card-title'>"+card["name"]+"</span>" +
+                                  "<p class='grey-text'>"+card["code"]+"&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" +
+                                  getStyle(card['primary_type'], card['primary']) + card['primary'] + getUnits(card['primary_type']) + "</span></p>" +
+                                  "<p class='grey-text'>"+card["date"]+"&emsp;" +
+                                  getStyle(card['secondary_type'], card['secondary'])+card['secondary'] + getUnits(card['secondary_type']) + "</span></p>"+
+                                "</div>" +
+                              "</div>" +
+                            "</div>";
                 break;
             case "news":
                 break;
             case "top":
-                var card = response["text"];
                 var reply = "<div class='bubble-interactive received'>" +
                               "<div class='card white'>" +
                                 "<div class='card-content black-text'>" +
@@ -162,7 +156,7 @@ $(document).ready(function() {
                 reply += "</tbody></table></div></div></div>";
                 break;
             default:
-                var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["response"]["text"] + "</span></div>";
+                var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["text"] + "</span></div>";
         }
 
         $("#chat-history").append(reply);
@@ -248,4 +242,3 @@ $(document).ready(function() {
         fetchReply(query);
     });
 });
-

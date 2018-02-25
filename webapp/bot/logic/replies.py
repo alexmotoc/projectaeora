@@ -1,5 +1,3 @@
-import json
-
 from collections import defaultdict
 
 def big_movers_card(top5, risers=True):

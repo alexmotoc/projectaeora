@@ -53,7 +53,7 @@ def chat(request):
                 elif r['result']['metadata']['intentName'] == 'SubSectorQuery':
                     response['text'] = intents.sector_query_intent(r, False)
                 elif r['result']['metadata']['intentName'] == 'TopRisers':
-                    response['text'] = intents.top_risers_intent(r)
+                    response = intents.top_risers_intent(r)
             # reply = Response(query=query, response=json.dumps(response))
             # reply.save()
 

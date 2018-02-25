@@ -93,6 +93,18 @@
     float: right;
 }
 
+.code-time {
+    float: left;
+}
+
+.price-impact {
+    text-align: right;
+}
+
+.card {
+    min-width: 300px;
+}
+
 /* label underline focus color */
 #id_question {
     border-bottom: none!important;

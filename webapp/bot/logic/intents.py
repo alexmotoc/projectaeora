@@ -12,7 +12,11 @@ from bot.logic import replies
 def footsie_intent(r):
     # Check whether all required entities have been specified
     if r['result']['actionIncomplete']:
-        return r['result']['fulfillment']['speech']
+        reply = {}
+        reply['text'] = r['result']['fulfillment']['speech']
+        reply['speech'] = r['result']['fulfillment']['speech']
+        reply['type'] = 'incomplete'
+        return reply
     else:
         company_code = r['result']['parameters']['company']
         attribute = r['result']['parameters']['attribute']

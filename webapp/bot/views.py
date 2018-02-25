@@ -55,9 +55,9 @@ def chat(request):
                 if r['result']['metadata']['intentName'] == 'Footsie Intent':
                     response = intents.footsie_intent(r)
                 elif r['result']['metadata']['intentName'] == 'SectorQuery':
-                    response['text'] = intents.sector_query_intent(r, True)
+                    response = intents.sector_query_intent(r, True)
                 elif r['result']['metadata']['intentName'] == 'SubSectorQuery':
-                    response['text'] = intents.sector_query_intent(r, False)
+                    response = intents.sector_query_intent(r, False)
                 elif r['result']['metadata']['intentName'] == 'TopRisers':
                     response = intents.top_risers_intent(r)
             # reply = Response(query=query, response=json.dumps(response))

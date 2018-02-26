@@ -28,7 +28,7 @@ def chat(request):
         form = QueryForm(request.POST)
 
         if form.is_valid():
-            # query = form.save()
+            query = form.save()
             question = form.cleaned_data['question']
 
             dialogflow_key = os.environ.get('DIALOGFLOW_CLIENT_ACCESS_TOKEN')
@@ -60,8 +60,8 @@ def chat(request):
                     response = intents.sector_query_intent(r, False)
                 elif r['result']['metadata']['intentName'] == 'TopRisers':
                     response = intents.top_risers_intent(r)
-            # reply = Response(query=query, response=json.dumps(response))
-            # reply.save()
+            reply = Response(query=query, response=json.dumps(response))
+            reply.save()
 
             form = QueryForm()
     else:

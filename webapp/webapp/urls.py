@@ -23,4 +23,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('chat/', views.chat, name='chat'),
     path('settings/', views.settings, name='settings'),
+    path('ajax/getcompanies', views.get_companies, name='get-companies'),
+    path('ajax/getsectors', views.get_sectors, name='get-sectors'),
 ]

@@ -74,12 +74,12 @@ def chat(request):
 
 def settings(request):
     status = None
+
     try:
         preferences = UserPreferences.objects.all().first()
     except:
         preferences = None
 
-    print(request.POST)
     if request.method == 'POST':
         form = UserPreferencesForm(request.POST, instance=preferences)
 
@@ -97,11 +97,31 @@ def settings(request):
         return render(request, 'settings.html', {'form': form})
 
 def get_companies(request):
+    saved_companies = []
+
+    try:
+        preferences = UserPreferences.objects.all().first()
+        for company in preferences.companies.split(', '):
+            if company:
+                saved_companies.append({"name": company})
+    except:
+        preferences = None
+
     with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/profiles.json') as f:
         companies = json.load(f)
-        return JsonResponse(companies)
+        return JsonResponse({"companies": companies, "saved_companies": saved_companies})
 
 def get_sectors(request):
+    saved_sectors = []
+
+    try:
+        preferences = UserPreferences.objects.all().first()
+        for sector in preferences.sectors.split(', '):
+            if sector:
+                saved_sectors.append({"name": sector})
+    except:
+        preferences = None
+
     with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/sectors.json') as f:
         sectors = json.load(f)
-        return JsonResponse(sectors)
+        return JsonResponse({"sectors": sectors, "saved_sectors": saved_sectors})

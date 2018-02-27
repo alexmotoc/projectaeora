@@ -23,8 +23,8 @@ class Response(models.Model):
 class UserPreferences(models.Model):
     colour_scheme = models.CharField(default='indigo', max_length=40)
 
-    company = models.CharField(max_length=6)
-    sector = models.CharField(max_length=40)
+    companies = models.TextField(default='')
+    sectors = models.TextField(default='')
 
     # The properties beneath are for if the user wants to receive them in their daily briefing.
     current_price = models.BooleanField(default=True)

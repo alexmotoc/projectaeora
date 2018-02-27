@@ -20,8 +20,8 @@ class UserPreferencesForm(ModelForm):
     )
 
     colour_scheme = forms.ChoiceField(choices=COLOUR_SCHEME_CHOICES, required=False)
-    company = forms.CharField(widget=forms.TextInput(attrs={'class': 'autocomplete'}), required=False)
-    sector = forms.CharField(widget=forms.TextInput(attrs={'class': 'autocomplete'}), required=False)
+    companies = forms.CharField(widget=forms.HiddenInput(), required=False)
+    sectors = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = UserPreferences

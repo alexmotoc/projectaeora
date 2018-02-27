@@ -264,8 +264,16 @@ $(document).ready(function() {
 
     $("#ask-question").submit(function(e) {
         e.preventDefault();
-        var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out'><span class='white-text'>" + $('#id_question').val() + "</span></div>";
+
+        var now = new Date();
+        var time = now.getHours() + ":" + now.getMinutes();
+
+        var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out tooltipped'" +
+                    "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
+                    "<span class='white-text'>" + $('#id_question').val() + "</span></div>";
+
         $("#chat-history").append(query);
+        $('.tooltipped').tooltip({delay: 50});
         $(".sent").last().removeClass("scale-out").addClass("scale-in");
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 

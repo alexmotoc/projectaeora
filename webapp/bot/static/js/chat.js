@@ -26,8 +26,8 @@ function createReply(voice, data) {
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["name"] + "</span>" +
                               "<p class='grey-text code-time'>" + card["code"] + "<br>" + card["date"] + "</p>" +
-                              "<p class='black-text price-impact'" + getStyle(card['primary_type'], card['primary']) + card['primary'] + getUnits(card['primary_type']) +
-                              "<br>" + getStyle(card['secondary_type'], card['secondary']) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" + 
+                              getStyle(card['primary_type'], card["primary"], true) + card['primary'] + getUnits(card['primary_type']) +
+                              "<br>" + getStyle(card['secondary_type'], card["secondary"], false) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" +
                             "</div>" +
                           "</div>" +
                         "</div>";
@@ -77,54 +77,58 @@ function createReply(voice, data) {
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 }
 
-function getStyle(attribute, value){
+function getStyle(attribute, value, primary){
     if (attribute == "per_diff"){
         if (value.charAt(0) == "+"){
-            return "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>"
+            style = "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>"
         }
         else if (value.charAt(0) == "-"){
-            return "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>"
+            style = "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>"
         }
     }
     else if (attribute == "high"){
-        return "<span class='black-text'>High: "
+        style = "<span class='black-text'>High: "
     }
     else if (attribute == "low"){
-        return "<span class='black-text'>Low: "
+        style = "<span class='black-text'>Low: "
     }
     else if (attribute == "market_cap"){
-        return "<span class='black-text'>Market Cap: "
+        style = "<span class='black-text'>Market Cap: "
     }
     else if (attribute == "revenue"){
-        return "<span class='black-text'>Revenue: "
+        style = "<span class='black-text'>Revenue: "
     }
     else if (attribute == "bid"){
-        return "<span class='black-text'>Bid: "
+        style = "<span class='black-text'>Bid: "
     }
     else if (attribute == "offer"){
-        return "<span class='black-text'>Offer: "
+        style = "<span class='black-text'>Offer: "
     }
     else if (attribute == "sector"){
-        return "<span class='black-text'>Sector: "
+        style =  "<span class='black-text'>Sector: "
     }
     else if (attribute == "sub_sector"){
-        return "<span class='black-text'>Sub-Sector: "
+        style = "<span class='black-text'>Sub-Sector: "
     }
     else if (attribute == "volume"){
-        return "<span class='black-text'>Volume: "
+        style = "<span class='black-text'>Volume: "
     }
     else if (attribute == "last_close_value"){
-        return "<span class='black-text'>Last Close Value: "
+        style = "<span class='black-text'>Last Close Value: "
     }
     else if (attribute == "last_close_date"){
-        return "<span class='black-text'>Last Close Date: "
+        style = "<span class='black-text'>Last Close Date: "
     }
     else if (attribute == "price"){
-        return "<span class='black-text'>Price: "
+        style = "<span class='black-text'>Price: "
     }
     else{
-        return "<span class='black-text'>"
+        style = "<span class='black-text'>"
     }
+    if (primary){
+        style.replace("span class", "p class")
+    }
+    return style
 }
 
 function getUnits(attribute){

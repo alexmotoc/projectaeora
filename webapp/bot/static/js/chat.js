@@ -74,7 +74,10 @@ function createReply(voice, data) {
 
     $("#chat-history").append(reply);
     $(".received").last().removeClass("scale-out").addClass("scale-in");
-    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+    if (voice) {
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+    }
 }
 
 function getStyle(attribute, value, primary){

@@ -48,24 +48,24 @@ def big_movers_card(top5, risers=True):
 def news_reply(lse_list, yahoo_list):
 
     lse_news = []
-    for i in range(len(lse_list)):
+    for el in lse_list:
         row = {}
-        row["date"] = lse_list[i].date
-        row["headline"] = lse_list[i].headline
-        row["url"] = lse_list[i].url
-        row["source"] = lse_list[i].source
-        row["impact"] = lse_list[i].impact
+        row["date"] = el.date
+        row["headline"] = el.headline
+        row["url"] = el.url
+        row["source"] = el.source
+        row["impact"] = el.impact
         lse_news.append(row)
 
     yahoo_news = []
-    for i in range(len(yahoo_list)):
+    for el in yahoo_list:
         row = {}
-        row["date"] = yahoo_list[i].date
-        row["headline"] = yahoo_list[i].headline
-        row["url"] = yahoo_list[i].url
-        row["source"] = yahoo_list[i].source
-        row["impact"] = yahoo_list[i].impact
-        lse_news.append(row)
+        row["date"] = el.date
+        row["headline"] = el.headline
+        row["url"] = el.url
+        row["source"] = el.source
+        row["impact"] = el.impact
+        yahoo_news.append(row)
 
     news = {"LSE": lse_news, "YAHOO": yahoo_news}
     overall_dict = {
@@ -175,5 +175,5 @@ def revenue_reply(company):
         row['date'] = company.revenue[i][0]
         row['revenue'] = company.revenue[i][1]
         card['revenue_data'].append(row)
-        
+
     return response

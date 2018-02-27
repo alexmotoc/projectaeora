@@ -59,6 +59,7 @@
 
 .price-impact {
     text-align: right;
+    white-space: nowrap;
 }
 
 .card {

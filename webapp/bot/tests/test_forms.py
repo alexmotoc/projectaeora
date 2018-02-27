@@ -22,6 +22,7 @@ class UserPreferencesFormTest(TestCase):
         self.assertFalse(form.is_bound())
         self.assertFalse(form.is_valid())
 
+#Both company and sector fields are marked as 'not required' so form should be valid without either one of them?
     def test_form_validation_for_blank_company(self):
         form = UserPreferencesForm(data={'company': '', 'sector': 'Banks'})
         self.assertTrue(form.is_valid())

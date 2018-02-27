@@ -20,10 +20,17 @@ class Response(models.Model):
         return 'Q: {}\nA: {}'.format(self.query, self.response)
 
 
-class FollowCompany(models.Model):
-    company_code = models.CharField(max_length=6)
+class UserPreferences(models.Model):
+    COLOUR_SCHEME_CHOICES = (
+        ('indigo', 'Indigo'),
+        ('dark', 'Dark'),
+        ('light', 'Light'),
+    )
+
+    colour_scheme = models.CharField(choices=COLOUR_SCHEME_CHOICES, default='indigo', max_length=40)
+
+    company = models.CharField(max_length=6)
     sector = models.CharField(max_length=40)
-    sub_sector = models.CharField(max_length=40)
 
     # The properties beneath are for if the user wants to receive them in their daily briefing.
     current_price = models.BooleanField(default=True)
@@ -31,16 +38,10 @@ class FollowCompany(models.Model):
     daily_low = models.BooleanField(default=True)
     percentage_change = models.BooleanField(default=True)
     news = models.BooleanField(default=False)
-    news_image = models.BooleanField(default=False)
 
     # Record when the user last got news so that in the future, if they want news, they will only get news that they
-    # haven't already seen,   
+    # haven't already seen,
     last_time_got_news = models.DateField(datetime.date.today())
 
-
-class UserPreferences(models.Model):
-    # TODO: Add choices for the model!
-    colour_scheme = models.CharField(default='default', max_length=40)
-
     # Defaults to False = text, True = respond with voice.
-    voice_or_text = models.BooleanField(default=False)
+    voice = models.BooleanField(default=False)

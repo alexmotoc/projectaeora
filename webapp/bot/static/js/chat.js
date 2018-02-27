@@ -25,13 +25,7 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $("#buffering").remove();
-                var synth = window.speechSynthesis;
-                var utterThis = new SpeechSynthesisUtterance(data['response']['text']);
-                synth.speak(utterThis);
-                var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["response"]["text"] + "</span></div>";
-                $("#chat-history").append(reply);
-                $(".received").last().removeClass("scale-out").addClass("scale-in");
-                $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+                createReply(true, data);
             },
         });
     }
@@ -129,7 +123,135 @@ $(document).ready(function() {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
         processingQuery();
+        fetchReply($('#id_question').val());
         $("#id_question").val("");
-        fetchReply(query);
     });
 });
+
+function createReply(voice, data) {
+    if (voice) {
+        var synth = window.speechSynthesis;
+        var utterThis = new SpeechSynthesisUtterance(data['speech']);
+        synth.speak(utterThis);
+    }
+    var card = data["text"];
+    switch(data["type"]) {
+        case "company":
+            var reply =  "<div class='bubble-interactive received'>" +
+                          "<div class='card white'>" +
+                            "<div class='card-content black-text'>" +
+                              "<span class='card-title'>"+card["name"]+"</span>" +
+                              "<p class='grey-text'>"+card["code"]+"&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" +
+                              getStyle(card['primary_type'], card['primary']) + card['primary'] + getUnits(card['primary_type']) + "</span></p>" +
+                              "<p class='grey-text'>"+card["date"]+"&emsp;" +
+                              getStyle(card['secondary_type'], card['secondary'])+card['secondary'] + getUnits(card['secondary_type']) + "</span></p>"+
+                            "</div>" +
+                          "</div>" +
+                        "</div>";
+            break;
+        case "news":
+            break;
+        case "top":
+            var reply = "<div class='bubble-interactive received'>" +
+                          "<div class='card white'>" +
+                            "<div class='card-content black-text'>" +
+                              "<span class='card-title'>" + card["title"] + "</span>" +
+                              "<table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th></tr></thead>" +
+                              "<tbody>";
+
+            card["companies"].forEach(function(obj) {
+                reply += "<tr><td>" + obj.name + "</td><td>" + obj.price +"</td>";
+
+                if (obj.percentage_change[0] == '+') {
+                    reply += "<td class='green-text'>" + obj.percentage_change + "</td>";
+                } else {
+                    reply += "<td class='red-text'>" + obj.percentage_change + "</td>";
+                }
+
+                reply += "</tr>";
+            });
+
+            reply += "</tbody></table></div></div></div>";
+            break;
+        case "revenue":
+            var reply = "<div class = 'bubble-interactive received'>" +
+                          "<div class = 'card white'>" +
+                            "<div class = 'card-content black-text'>" +
+                              "<span class = 'card-title'>" + card["title"] + "</span>" +
+                              "<table class = 'striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
+                              "<tbody>";
+            card["revenue_data"].forEach(function(obj) {
+                reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td><tr>";
+            });
+            reply += "</tbody></table></div></div></div>";
+            break;
+        default:
+            var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["text"] + "</span></div>";
+    }
+
+    $("#chat-history").append(reply);
+    $(".received").last().removeClass("scale-out").addClass("scale-in");
+    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+}
+
+function getStyle(attribute, value){
+    if (attribute == "per_diff"){
+        if (value.charAt(0) == "+"){
+            return "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>"
+        }
+        else if (value.charAt(0) == "-"){
+            return "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>"
+        }
+    }
+    else if (attribute == "high"){
+        return "<span class='black-text'>High: "
+    }
+    else if (attribute == "low"){
+        return "<span class='black-text'>Low: "
+    }
+    else if (attribute == "market_cap"){
+        return "<span class='black-text'>Market Cap: "
+    }
+    else if (attribute == "revenue"){
+        return "<span class='black-text'>Revenue: "
+    }
+    else if (attribute == "bid"){
+        return "<span class='black-text'>Bid: "
+    }
+    else if (attribute == "offer"){
+        return "<span class='black-text'>Offer: "
+    }
+    else if (attribute == "sector"){
+        return "<span class='black-text'>Sector: "
+    }
+    else if (attribute == "sub_sector"){
+        return "<span class='black-text'>Sub-Sector: "
+    }
+    else if (attribute == "volume"){
+        return "<span class='black-text'>Volume: "
+    }
+    else if (attribute == "last_close_value"){
+        return "<span class='black-text'>Last Close Value: "
+    }
+    else if (attribute == "last_close_date"){
+        return "<span class='black-text'>Last Close Date: "
+    }
+    else if (attribute == "price"){
+        return "<span class='black-text'>Price: "
+    }
+    else{
+        return "<span class='black-text'>"
+    }
+}
+
+function getUnits(attribute){
+    if (attribute == "per_diff"){
+        return "%"
+    }
+    else if (attribute == "price"){
+        return " GBX"
+    }
+    else{
+        return ""
+    }
+}

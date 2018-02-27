@@ -67,12 +67,23 @@ def chat(request):
         return render(request, 'chat.html', {'form': form, 'history': history})
 
 def settings(request):
+    status = None
+
     if request.method == 'POST':
         form = UserPreferencesForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            status = "Preferences saved!"
+        else:
+            status = "Preferences couldn't be saved!"
     else:
         form = UserPreferencesForm()
 
-    return render(request, 'settings.html', {'form': form})
+    if request.is_ajax():
+        return JsonResponse({"status": status})
+    else:
+        return render(request, 'settings.html', {'form': form})
 
 def get_companies(request):
     with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/profiles.json') as f:

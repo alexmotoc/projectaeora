@@ -22,7 +22,7 @@
         <div class="row">
           <div class="col s10 offset-s1">
             <h1>Settings</h1>
-            <form action="/settings/" method="post">
+            <form id="preferences-form" action="/settings/" method="post">
               {% csrf_token %}
               <div class="row">
                 <div class="input-field">
@@ -30,6 +30,7 @@
                   {{ form.colour_scheme.label_tag }}
                 </div>
               </div>
+              <h5>Daily briefings</h5>
               <div class="row">
                   <div class="input-field">
                       {{ form.company }}
@@ -42,6 +43,7 @@
                       {{ form.sector.label_tag }}
                   </div>
               </div>
+              <h5>Attributes</h5>
               <div class="row">
                 <div class="switch">
                   <label>
@@ -97,7 +99,7 @@
                 </div>
               </div>
               <div class="row">
-                <input class="waves-effect waves-light btn indigo" type="submit" name="update-preferences" value="Save">
+                <input id="save-preferences" class="waves-effect waves-light btn indigo" type="submit" name="update-preferences" value="Save">
               </div>
             </form>
           </div>
@@ -106,6 +108,7 @@
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>
       <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
       <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>
       <script type="text/javascript" src="{% static "js/settings.js" %}"></script>

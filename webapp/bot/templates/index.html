@@ -6,6 +6,7 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/index.css" %}"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,6 +16,24 @@
 
     <body>
       <main>
+
+      <div class="navbar-fixed">
+	      <nav>
+	      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo"><img src="{% static "images/logo.png" %}" height="56"></a>
+	        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons"></i>menu</a>
+	        <ul class="right hide-on-med-and-down">
+	          <li><a href="#!">Overview</a></li>
+	          <li><a href="chat">Chat</a></li>
+	        </ul>
+	      <ul class="side-nav" id="mobile-demo">
+	          <li><a href="#!">Overview</a></li>
+	          <li><a href="chat">Chat</a></li>
+	      </ul>
+	      </div>
+	      </nav>
+      </div>
+
       </main>
 
       <!--Import jQuery before materialize.js-->

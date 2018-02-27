@@ -52,7 +52,7 @@ $(document).ready(function() {
         $.ajax({
             url: "/settings/",
             type: "POST",
-            data: {},
+            data: $("#preferences-form").serialize(),
             success: function(result) {
                 Materialize.toast(result.status, 3000, 'rounded');
             }

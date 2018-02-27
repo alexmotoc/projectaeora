@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from .forms import QueryForm, UserPreferencesForm
 from bot.logic import intents
-from .models import Response
+from .models import Response, UserPreferences
 
 from collections import defaultdict
 
@@ -74,9 +74,14 @@ def chat(request):
 
 def settings(request):
     status = None
+    try:
+        preferences = UserPreferences.objects.all().first()
+    except:
+        preferences = None
 
+    print(request.POST)
     if request.method == 'POST':
-        form = UserPreferencesForm(request.POST)
+        form = UserPreferencesForm(request.POST, instance=preferences)
 
         if form.is_valid():
             form.save()
@@ -84,7 +89,7 @@ def settings(request):
         else:
             status = "Preferences couldn't be saved!"
     else:
-        form = UserPreferencesForm()
+        form = UserPreferencesForm(instance=preferences)
 
     if request.is_ajax():
         return JsonResponse({"status": status})

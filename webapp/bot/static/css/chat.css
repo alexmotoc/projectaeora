@@ -29,6 +29,7 @@
 
 .bubble-interactive {
     display: inline-block;
+    max-width: 100%;
     height: auto;
     clear: both;
     margin: 5px 0;
@@ -36,6 +37,32 @@
     border-radius: 15px 15px 15px 15px;
     -webkit-border-radius: 15px 15px 15px 15px;
     word-wrap: break-word;
+}
+
+.scrollable-container {
+    display: flex;
+    overflow-x: scroll;
+}
+
+.scrollable-container::-webkit-scrollbar {
+    display: none;
+}
+
+.news-article {
+    min-width: 305px;
+    margin: 10px;
+}
+
+.code-time {
+    float: left;
+}
+
+.price-impact {
+    text-align: right;
+}
+
+.card {
+    min-width: 300px;
 }
 
 .suggestion-chip {
@@ -62,6 +89,10 @@
 
 .received {
     float: left;
+}
+
+.timestamps {
+    font-weight: bold;
 }
 
 .text-bar {

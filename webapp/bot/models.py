@@ -1,5 +1,8 @@
+import datetime
+
 from django.db import models
 from django.utils import timezone
+
 
 class Query(models.Model):
     question = models.CharField(max_length=256)
@@ -15,3 +18,30 @@ class Response(models.Model):
 
     def __str__(self):
         return 'Q: {}\nA: {}'.format(self.query, self.response)
+
+
+class UserPreferences(models.Model):
+    COLOUR_SCHEME_CHOICES = (
+        ('indigo', 'Indigo'),
+        ('dark', 'Dark'),
+        ('light', 'Light'),
+    )
+
+    colour_scheme = models.CharField(choices=COLOUR_SCHEME_CHOICES, default='indigo', max_length=40)
+
+    company = models.CharField(max_length=6)
+    sector = models.CharField(max_length=40)
+
+    # The properties beneath are for if the user wants to receive them in their daily briefing.
+    current_price = models.BooleanField(default=True)
+    daily_high = models.BooleanField(default=True)
+    daily_low = models.BooleanField(default=True)
+    percentage_change = models.BooleanField(default=True)
+    news = models.BooleanField(default=False)
+
+    # Record when the user last got news so that in the future, if they want news, they will only get news that they
+    # haven't already seen,
+    last_time_got_news = models.DateField(datetime.date.today())
+
+    # Defaults to False = text, True = respond with voice.
+    voice = models.BooleanField(default=False)

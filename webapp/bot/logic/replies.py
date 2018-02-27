@@ -56,7 +56,7 @@ def news_reply(lse_list, yahoo_list):
         row["source"] = lse_list[i].source
         row["impact"] = lse_list[i].impact
         lse_news.append(row)
-        
+
     yahoo_news = []
     for i in range(len(yahoo_list)):
         row = {}
@@ -161,16 +161,19 @@ def sector_reply(sector, sector_attribute):
 
 def revenue_reply(company):
     response = {}
-    response['speech'] = "Here is the revenue data for "+company.name
-    response['type'] = "revenue"
+
     card = {}
-    card['title'] = "Revenue Data for "+company.name
+    card['title'] = "Revenue Data for " + company.name
     card['revenue_data'] = list()
+
+    response['speech'] = "Here is the revenue data for " + company.name
+    response['type'] = "revenue"
     response['text'] = card
+
     for i in range(len(company.revenue)):
         row = {}
         row['date'] = company.revenue[i][0]
         row['revenue'] = company.revenue[i][1]
         card['revenue_data'].append(row)
+        
     return response
-

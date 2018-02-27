@@ -26,8 +26,8 @@ function createReply(voice, data) {
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["name"] + "</span>" +
                               "<p class='grey-text code-time'>" + card["code"] + "<br>" + card["date"] + "</p>" +
-                              getStyle(card['primary_type'], card["primary"], true) + card['primary'] + getUnits(card['primary_type']) +
-                              "<br>" + getStyle(card['secondary_type'], card["secondary"], false) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" +
+                              "<p class='price-impact'>" + getStyle(card['primary_type'], card["primary"]) + card['primary'] + getUnits(card['primary_type']) +
+                              "<br>" + getStyle(card['secondary_type'], card["secondary"]) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" +
                             "</div>" +
                           "</div>" +
                         "</div>";
@@ -77,58 +77,57 @@ function createReply(voice, data) {
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 }
 
-function getStyle(attribute, value, primary){
-    if (attribute == "per_diff"){
+function getStyle(attribute, value){
+    if (attribute == "per_diff" || attribute == "diff"){
         if (value.charAt(0) == "+"){
-            style = "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>"
+            return "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>"
         }
         else if (value.charAt(0) == "-"){
-            style = "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>"
+            return "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>"
+        }
+        else{
+          return "<span class='black-text->'"
         }
     }
     else if (attribute == "high"){
-        style = "<span class='black-text'>High: "
+        return "<span class='black-text'>High: "
     }
     else if (attribute == "low"){
-        style = "<span class='black-text'>Low: "
+        return "<span class='black-text'>Low: "
     }
     else if (attribute == "market_cap"){
-        style = "<span class='black-text'>Market Cap: "
+        return "<span class='black-text'>Market Cap: "
     }
     else if (attribute == "revenue"){
-        style = "<span class='black-text'>Revenue: "
+        return "<span class='black-text'>Revenue: "
     }
     else if (attribute == "bid"){
-        style = "<span class='black-text'>Bid: "
+        return "<span class='black-text'>Bid: "
     }
     else if (attribute == "offer"){
-        style = "<span class='black-text'>Offer: "
+        return "<span class='black-text'>Offer: "
     }
     else if (attribute == "sector"){
-        style =  "<span class='black-text'>Sector: "
+        return "<span class='black-text'>Sector: "
     }
     else if (attribute == "sub_sector"){
-        style = "<span class='black-text'>Sub-Sector: "
+        return "<span class='black-text'>Sub-Sector: "
     }
     else if (attribute == "volume"){
-        style = "<span class='black-text'>Volume: "
+        return "<span class='black-text'>Volume: "
     }
     else if (attribute == "last_close_value"){
-        style = "<span class='black-text'>Last Close Value: "
+        return "<span class='black-text'>Last Close Value: "
     }
     else if (attribute == "last_close_date"){
-        style = "<span class='black-text'>Last Close Date: "
+        return "<span class='black-text'>Last Close Date: "
     }
     else if (attribute == "price"){
-        style = "<span class='black-text'>Price: "
+        return "<span class='black-text'>Price: "
     }
     else{
-        style = "<span class='black-text'>"
+        return "<span class='black-text'>"
     }
-    if (primary){
-        style.replace("span class", "p class")
-    }
-    return style
 }
 
 function getUnits(attribute){

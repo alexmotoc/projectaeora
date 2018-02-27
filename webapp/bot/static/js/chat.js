@@ -33,7 +33,6 @@ function createReply(voice, data) {
                         "</div>";
             break;
         case "news":
-        console.log(data);
             var reply = "<div class='bubble-interactive received'><section class='scrollable-container'>";
 
             card["LSE"].forEach(function(obj) {

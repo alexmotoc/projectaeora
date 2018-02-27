@@ -23,138 +23,156 @@
         <!-- Question history -->
         <div class="row history">
           <div id="chat-history" class="col s10 offset-s1">
-            <div class="bubble sent blue lighten-1 tooltipped" data-position="right" data-delay="50" data-tooltip="12.05pm" >
-              <span class="white-text">What are the latest news about Oil?</span>
-            </div>
-            <div class="bubble received blue lighten-1">
-              <span class="white-text">Here's what I found</span>
-            </div>
-            <div class="bubble-interactive received">
-              <div class="card">
-                <div class="card-image">
-                  <img class="activator" src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iSLg_CUxcjBM/v1/1000x-1.jpg">
-                </div>
-                <div class="card-content">
-                  <span class="card-title grey-text text-darken-4">Iran Can Boost Output Fast If OPEC Ends Cuts, Oil Minister Says
-                    <span class="news-impact green-text"><i class="material-icons valign-icon">trending_up</i>+0.29%</span></span>
-                  <p>Iran can swiftly increase production of crude if OPEC decides to scrap limits on global output when the group meets next in June,
-                      Oil Minister Bijan Namdar Zanganeh said.</p>
-                  <blockquote>
-                    <div class="chip">finance</div>
-                    <div class="chip">oil</div>
-                    <div class="chip">petrol</div>
-                  </blockquote>
 
-                </div>
-                <div class="card-action">
-                  <p><a href="#">Go to article</a></p>
-                </div>
-              </div>
-            </div>
-            <div class="bubble sent blue lighten-1">
-              <span class="white-text">What's the stock price of Barclays?</span>
-            </div>
-            <div class="bubble-interactive received">
-              <div class="card white">
-                <div class="card-content black-text">
-                  <span class="card-title">Barclays PLC</span>
-                  <p class="grey-text">BARC&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="black-text">192.87 GBX</span></p>
-                  <p class="grey-text">11-Feb-2018 16:05&emsp;<span class="red-text"><i class="material-icons valign-icon">trending_down</i>1.23 (0.63%)</span></p>
-                </div>
-              </div>
-            </div>
-            <div class="bubble-interactive received">
-              <div class="waves-effect suggestion-chip z-depth-2">
-                <span><a class="grey-text text-darken-2">What about Lloyds?</a></span>
-              </div>
-              <div class="waves-effect suggestion-chip z-depth-2">
-                <span><a class="grey-text text-darken-2">What about HSBC?</a></span>
-              </div>
-              <div class="waves-effect suggestion-chip z-depth-2">
-                <span><a class="suggestion-chip-text grey-text text-darken-2">Revenue</a></span>
-              </div>
-            </div>
-            <div class="bubble sent blue lighten-1">
-              <span class="white-text">Who are the top risers?</span>
-            </div>
-            <div class="bubble-interactive received">
-              <div class="card white">
-                <div class="card-content black-text">
-                  <span class="card-title">Top Risers</span>
-                  <table>
-                    <thead>
-                      <tr>
-                          <th>Code</th>
-                          <th>Name</th>
-                          <th>Price</th>
-                          <th>+/-</th>
-                          <th>%+/-</th>
-                      </tr>
-                    </thead>
+            <!--Import jQuery before materialize.js-->
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+            <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>
+            <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
+            <script type="text/javascript" src="{% static "js/chat.js" %}"></script>
+            <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>
 
-                    <tbody>
-                      <tr>
-                        <td>CAR</td>
-                        <td>CARCLO</td>
-                        <td>83.40</td>
-                        <td class="green-text">+5.40</td>
-                        <td class="green-text">+6.92</td>
-                      </tr>
-                      <tr>
-                        <td>ASIT</td>
-                        <td>ABERFORTH SPLI.</td>
-                        <td>98.00</td>
-                        <td class="green-text">+6.00</td>
-                        <td class="green-text">+6.52</td>
-                      </tr>
-                      <tr>
-                        <td>SGRO</td>
-                        <td>SEGRO</td>
-                        <td>591.20</td>
-                        <td class="green-text">+36.00</td>
-                        <td class="green-text">+6.48</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            {% for query_response in history %}
+            <div class="bubble sent blue lighten-1 tooltipped" data-position="right" data-delay="50" data-tooltip="{{ query_response.query.created_at }}" >
+              <span class="white-text">{{ query_response.query.question }}</span>
             </div>
+
+            <script>
+              var data = JSON.parse('{{ query_response.response | escapejs }}')
+              createReply(false, data)
+            </script>
+            {% endfor %}
+
+            <!--<div class="bubble sent blue lighten-1 tooltipped" data-position="right" data-delay="50" data-tooltip="12.05pm" >-->
+              <!--<span class="white-text">What are the latest news about Oil?</span>-->
+            <!--</div>-->
+            <!--<div class="bubble received blue lighten-1">-->
+              <!--<span class="white-text">Here's what I found</span>-->
+            <!--</div>-->
+            <!--<div class="bubble-interactive received">-->
+              <!--<div class="card">-->
+                <!--<div class="card-image">-->
+                  <!--<img class="activator" src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iSLg_CUxcjBM/v1/1000x-1.jpg">-->
+                <!--</div>-->
+                <!--<div class="card-content">-->
+                  <!--<span class="card-title grey-text text-darken-4">Iran Can Boost Output Fast If OPEC Ends Cuts, Oil Minister Says-->
+                    <!--<span class="news-impact green-text"><i class="material-icons valign-icon">trending_up</i>+0.29%</span></span>-->
+                  <!--<p>Iran can swiftly increase production of crude if OPEC decides to scrap limits on global output when the group meets next in June,-->
+                      <!--Oil Minister Bijan Namdar Zanganeh said.</p>-->
+                  <!--<blockquote>-->
+                    <!--<div class="chip">finance</div>-->
+                    <!--<div class="chip">oil</div>-->
+                    <!--<div class="chip">petrol</div>-->
+                  <!--</blockquote>-->
+
+                <!--</div>-->
+                <!--<div class="card-action">-->
+                  <!--<p><a href="#">Go to article</a></p>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="bubble sent blue lighten-1">-->
+              <!--<span class="white-text">What's the stock price of Barclays?</span>-->
+            <!--</div>-->
+            <!--<div class="bubble-interactive received">-->
+              <!--<div class="card white">-->
+                <!--<div class="card-content black-text">-->
+                  <!--<span class="card-title">Barclays PLC</span>-->
+                  <!--<p class="grey-text">BARC&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="black-text">192.87 GBX</span></p>-->
+                  <!--<p class="grey-text">11-Feb-2018 16:05&emsp;<span class="red-text"><i class="material-icons valign-icon">trending_down</i>1.23 (0.63%)</span></p>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="bubble-interactive received">-->
+              <!--<div class="waves-effect suggestion-chip z-depth-2">-->
+                <!--<span><a class="grey-text text-darken-2">What about Lloyds?</a></span>-->
+              <!--</div>-->
+              <!--<div class="waves-effect suggestion-chip z-depth-2">-->
+                <!--<span><a class="grey-text text-darken-2">What about HSBC?</a></span>-->
+              <!--</div>-->
+              <!--<div class="waves-effect suggestion-chip z-depth-2">-->
+                <!--<span><a class="suggestion-chip-text grey-text text-darken-2">Revenue</a></span>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="bubble sent blue lighten-1">-->
+              <!--<span class="white-text">Who are the top risers?</span>-->
+            <!--</div>-->
+            <!--<div class="bubble-interactive received">-->
+              <!--<div class="card white">-->
+                <!--<div class="card-content black-text">-->
+                  <!--<span class="card-title">Top Risers</span>-->
+                  <!--<table>-->
+                    <!--<thead>-->
+                      <!--<tr>-->
+                          <!--<th>Code</th>-->
+                          <!--<th>Name</th>-->
+                          <!--<th>Price</th>-->
+                          <!--<th>+/-</th>-->
+                          <!--<th>%+/-</th>-->
+                      <!--</tr>-->
+                    <!--</thead>-->
+
+                    <!--<tbody>-->
+                      <!--<tr>-->
+                        <!--<td>CAR</td>-->
+                        <!--<td>CARCLO</td>-->
+                        <!--<td>83.40</td>-->
+                        <!--<td class="green-text">+5.40</td>-->
+                        <!--<td class="green-text">+6.92</td>-->
+                      <!--</tr>-->
+                      <!--<tr>-->
+                        <!--<td>ASIT</td>-->
+                        <!--<td>ABERFORTH SPLI.</td>-->
+                        <!--<td>98.00</td>-->
+                        <!--<td class="green-text">+6.00</td>-->
+                        <!--<td class="green-text">+6.52</td>-->
+                      <!--</tr>-->
+                      <!--<tr>-->
+                        <!--<td>SGRO</td>-->
+                        <!--<td>SEGRO</td>-->
+                        <!--<td>591.20</td>-->
+                        <!--<td class="green-text">+36.00</td>-->
+                        <!--<td class="green-text">+6.48</td>-->
+                      <!--</tr>-->
+                    <!--</tbody>-->
+                  <!--</table>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
           </div>
         </div>
 
-          <!-- Modal Structure -->
-  <div id="modal1" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h4>Help:</h4>
-      <h5>Using Aeora:</h5>
-      <p>To start using Aeora, simply input a question in the box at the bottom of your screen, the bot will then respond accordingly.</p>
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <h4>Help:</h4>
+            <h5>Using Aeora:</h5>
+            <p>To start using Aeora, simply input a question in the box at the bottom of your screen, the bot will then respond accordingly.</p>
 
-      <h6>Voice Input</h6>
-        Click the microphone button and start speaking.
-        The microphone will flash, showing that it is listening for input. 
-        Once finished, the voice message will automatically send and the bot will respond. 
+            <h6>Voice Input</h6>
+              Click the microphone button and start speaking.
+              The microphone will flash, showing that it is listening for input.
+              Once finished, the voice message will automatically send and the bot will respond.
 
-      <h5>Questions you may ask:</h5>
+            <h5>Questions you may ask:</h5>
 
-      <p>Aeora can provide answers to queries on the FTSE 100 such as:
-          <ul>
-          <li>“What is the current spot price for 3i Group?”</li>
-          <li>“What is the current trading volume for Carnival?”</li>
-          <li>“What is the percentage change in BP since the market opened?”</li>
-          </ul>
-      <p>Aeora also provides access to financial news digests and allows users to ask questions on this, such as: </p>
-        <ul>
-          <li>“Is there news on General Retailers this morning?”</li>
-          <li>“Are Oil and Gas Producers in the news?”</li>
-          <li> “Is the news on Royal Dutch Shell positive or negative?”</li>
-        </ul>
-      </p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
-    </div>
-  </div>
-
+            <p>Aeora can provide answers to queries on the FTSE 100 such as:
+                <ul>
+                <li>“What is the current spot price for 3i Group?”</li>
+                <li>“What is the current trading volume for Carnival?”</li>
+                <li>“What is the percentage change in BP since the market opened?”</li>
+                </ul>
+            <p>Aeora also provides access to financial news digests and allows users to ask questions on this, such as: </p>
+              <ul>
+                <li>“Is there news on General Retailers this morning?”</li>
+                <li>“Are Oil and Gas Producers in the news?”</li>
+                <li> “Is the news on Royal Dutch Shell positive or negative?”</li>
+              </ul>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+          </div>
+        </div>
       </main>
 
       <footer class="fixed-bottom">
@@ -177,11 +195,6 @@
         </div>
     </footer>
 
-      <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>
-      <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
-      <script type="text/javascript" src="{% static "js/chat.js" %}"></script>
-      <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>
+
     </body>
   </html>

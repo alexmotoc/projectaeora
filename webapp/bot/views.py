@@ -1,9 +1,11 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 
-from .forms import QueryForm
+from .forms import QueryForm, UserPreferencesForm
 from bot.logic import intents
 from .models import Response
+
+from collections import defaultdict
 
 import json
 import os
@@ -26,7 +28,7 @@ def chat(request):
         form = QueryForm(request.POST)
 
         if form.is_valid():
-            # query = form.save()
+            query = form.save()
             question = form.cleaned_data['question']
 
             dialogflow_key = os.environ.get('DIALOGFLOW_CLIENT_ACCESS_TOKEN')
@@ -43,28 +45,58 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
+            response = defaultdict()
+
             if r['result']['action'] == "input.unknown":
                 response['text'] = r['result']['fulfillment']['speech']
+                response['type'] = 'input.unknown'
+                response['speech'] = r['result']['fulfillment']['speech']
             else:
                 if r['result']['metadata']['intentName'] == 'Footsie Intent':
-                    response['text'] = intents.footsie_intent(r)
+                    response = intents.footsie_intent(r)
                 elif r['result']['metadata']['intentName'] == 'SectorQuery':
-                    response['text'] = intents.sector_query_intent(r, True)
+                    response = intents.sector_query_intent(r, True)
                 elif r['result']['metadata']['intentName'] == 'SubSectorQuery':
-                    response['text'] = intents.sector_query_intent(r, False)
+                    response = intents.sector_query_intent(r, False)
                 elif r['result']['metadata']['intentName'] == 'TopRisers':
                     response = intents.top_risers_intent(r)
-            # reply = Response(query=query, response=json.dumps(response))
-            # reply.save()
+            reply = Response(query=query, response=json.dumps(response))
+            reply.save()
 
             form = QueryForm()
     else:
         form = QueryForm()
 
     if request.is_ajax():
-        return JsonResponse({'response': response})
+        return JsonResponse(response)
     else:
         return render(request, 'chat.html', {'form': form, 'history': history})
 
 def settings(request):
-    return render(request, 'settings.html')
+    status = None
+
+    if request.method == 'POST':
+        form = UserPreferencesForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            status = "Preferences saved!"
+        else:
+            status = "Preferences couldn't be saved!"
+    else:
+        form = UserPreferencesForm()
+
+    if request.is_ajax():
+        return JsonResponse({"status": status})
+    else:
+        return render(request, 'settings.html', {'form': form})
+
+def get_companies(request):
+    with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/profiles.json') as f:
+        companies = json.load(f)
+        return JsonResponse(companies)
+
+def get_sectors(request):
+    with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/sectors.json') as f:
+        sectors = json.load(f)
+        return JsonResponse(sectors)

@@ -275,16 +275,13 @@ class Scraper:
                 source = data[3].text.strip()
                 impact = data[4].text.strip()
 
-                news = News.News(date, headline, url, source, impact)
+                news = News.News(date, headline, url, source, impact, "")
 
                 financial_news.append(news)
 
         return financial_news
 
     def get_yahoo_news_data(self, code):
-        """can use this to complement LSE news
-        if we're gonna use this, we could extend News.py to store a description
-        would also be trivial to create a get_yahoo_news_data_current_month() etc -> only one line would be different from LSE versions"""
         #https://developer.yahoo.com/finance/company.html
         yahoo_news = list()
         url = "http://finance.yahoo.com/rss/headline?s=" + code.split('.')[0] + ".L"
@@ -302,7 +299,7 @@ class Scraper:
                 url = item.link.text
                 source = "YAHOO"
                 impact = "N/A"
-                news = News.News(str(date), headline, url, source, impact)
+                news = News.News(str(date), headline, url, source, impact, description)
                 yahoo_news.append(news)
         return yahoo_news
 

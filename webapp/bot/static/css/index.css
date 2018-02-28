@@ -3,10 +3,21 @@ nav {
   background-color: white;
   height: 64px;
 }
-
-#top-nav {
-  height: 64px;
+/*
+.navbar-fixed .nav-wrapper #top-nav .brand-logo img {
+    height: 64px;
 }
+
+/*
+@media (max-width: 600px) {
+  .navbar-fixed .nav-wrapper #top-nav .brand-logo img {
+      height: 56px;
+  }
+}
+
+/* #top-nav {
+  height: 64px;
+} */
 
 .nav-button {
   color: black;

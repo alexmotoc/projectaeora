@@ -60,7 +60,12 @@
 .price-impact {
     text-align: right;
     white-space: nowrap;
-    padding-left: 150px;
+}
+
+@media only screen and (min-width: 470px) {
+    .price-impact {
+        padding-left: 150px;
+    }
 }
 
 .card {

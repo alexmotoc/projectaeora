@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from .forms import QueryForm, UserPreferencesForm
-from bot.logic import intents
+from .logic import intents, suggestions
 from .models import Response, UserPreferences
 
 from collections import defaultdict
@@ -45,6 +45,8 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
+            print(r)
+
             response = defaultdict()
 
             if r['result']['action'] == "input.unknown":
@@ -60,8 +62,11 @@ def chat(request):
                     response = intents.sector_query_intent(r, False)
                 elif r['result']['metadata']['intentName'] == 'TopRisers':
                     response = intents.top_risers_intent(r)
+
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
+
+            response = suggestions.add_suggestions(response, r)
 
             form = QueryForm()
     else:

@@ -75,6 +75,31 @@ function createReply(voice, data) {
     $("#chat-history").append(reply);
     $(".received").last().removeClass("scale-out").addClass("scale-in");
 
+    // Display suggestions
+    if (data['suggestions'] != null) {
+        var suggested_companies = data['suggestions']['suggested_companies']
+
+        for (i = 0; i < suggested_companies.length; i++) {
+            if (i == 0) {
+                $("#chat-history").append(
+                '<div class="bubble-interactive received">'
+                );
+            }
+
+            $("#chat-history div.received:last").append(
+                  '<div class="waves-effect suggestion-chip z-depth-2">' +
+                  '<span><a class="grey-text text-darken-2" >' + suggested_companies[i] + '</a></span>' +
+                  '</div>'
+            );
+
+            if (i == suggested_companies.length - 1) {
+                $("#chat-history").append(
+                '</div">'
+                );
+            }
+        }
+    }
+
     if (voice) {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
     }

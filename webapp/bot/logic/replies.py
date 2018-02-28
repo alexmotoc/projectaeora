@@ -49,12 +49,20 @@ def big_movers_card(top5, risers=True):
 
     return big_movers
 
-def get_summary(url, characters):
+def get_summary_and_sentiment(url, characters):
     response = requests.get(url)
     if (response.status_code == 200):
         soup = bs4.BeautifulSoup(response.text, 'lxml') #, 'lxml')
         article = html2text.html2text(soup.find('html').get_text()).split("/**/")[1]
-        return article.replace("\n", " ")[:characters]+"..." 
+        summary = article.replace("\n", " ")[:characters]+"..." 
+        blob = TextBlob(article)
+        if blob.sentiment.polarity > 0:
+            return summary, "positive"
+        elif blob.sentiment.polarity == 0:
+            return summary, "neutral"
+        else:
+            return summary, "negative"
+    return "No summary available", "none"
 
 def news_reply(lse_list, yahoo_list):
 
@@ -66,7 +74,7 @@ def news_reply(lse_list, yahoo_list):
         row["url"] = el.url
         row["source"] = el.source
         row["impact"] = el.impact
-        row["summary"] = get_summary(el.url, 250)
+        row["summary"], row["sentiment"] = get_summary_and_sentiment(el.url, 250)
         lse_news.append(row)
 
     yahoo_news = []

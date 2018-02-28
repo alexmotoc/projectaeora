@@ -44,8 +44,16 @@ function createReply(voice, data) {
                 if (obj.impact != "-") {
                     reply += "<span>" + getImpact(obj.impact) + obj.impact + "</span>";
                 }
-
-                reply += "<p>" + obj.summary+ "</p>" +
+                if (obj.sentiment == "positive"){
+                    reply += "<p class='green-text'>POSITIVE</p>"
+                }
+                else if (obj.sentiment == "neutral" || obj.sentiment == "none"){
+                    reply += "<p class='grey-text'>NEUTRAL</p>"   
+                }
+                else{
+                    reply += "<p class='red-text'>NEGATIVE</p>"
+                }
+                reply += "<p>" + obj.summary+ "</p>" + 
                        "<blockquote><div class='chip'>finance</div><div class='chip'>oil</div><div class='chip'>petrol</div></blockquote>" +
                        "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
                        "</div></div></div>";

@@ -59,6 +59,8 @@
 
 .price-impact {
     text-align: right;
+    white-space: nowrap;
+    padding-left: 150px;
 }
 
 .card {

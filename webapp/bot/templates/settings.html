@@ -32,16 +32,12 @@
               </div>
               <h5>Daily briefings</h5>
               <div class="row">
-                  <div class="input-field">
-                      {{ form.company }}
-                      {{ form.company.label_tag }}
-                  </div>
+                  <div id="track-companies" class="chips chips-initial chips-autocomplete"></div>
+                  {{ form.companies }}
               </div>
               <div class="row">
-                  <div class="input-field">
-                      {{ form.sector }}
-                      {{ form.sector.label_tag }}
-                  </div>
+                <div id="track-sectors" class="chips chips-initial chips-autocomplete"></div>
+                {{ form.sectors }}
               </div>
               <h5>Attributes</h5>
               <div class="row">

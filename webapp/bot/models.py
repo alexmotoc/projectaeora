@@ -21,16 +21,10 @@ class Response(models.Model):
 
 
 class UserPreferences(models.Model):
-    COLOUR_SCHEME_CHOICES = (
-        ('indigo', 'Indigo'),
-        ('dark', 'Dark'),
-        ('light', 'Light'),
-    )
+    colour_scheme = models.CharField(default='indigo', max_length=40)
 
-    colour_scheme = models.CharField(choices=COLOUR_SCHEME_CHOICES, default='indigo', max_length=40)
-
-    company = models.CharField(max_length=6)
-    sector = models.CharField(max_length=40)
+    companies = models.TextField(default='')
+    sectors = models.TextField(default='')
 
     # The properties beneath are for if the user wants to receive them in their daily briefing.
     current_price = models.BooleanField(default=True)
@@ -38,10 +32,6 @@ class UserPreferences(models.Model):
     daily_low = models.BooleanField(default=True)
     percentage_change = models.BooleanField(default=True)
     news = models.BooleanField(default=False)
-
-    # Record when the user last got news so that in the future, if they want news, they will only get news that they
-    # haven't already seen,
-    last_time_got_news = models.DateField(datetime.date.today())
 
     # Defaults to False = text, True = respond with voice.
     voice = models.BooleanField(default=False)

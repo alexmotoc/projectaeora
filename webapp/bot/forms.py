@@ -13,10 +13,17 @@ class QueryForm(ModelForm):
 
 
 class UserPreferencesForm(ModelForm):
-    company = forms.CharField(widget=forms.TextInput(attrs={'class': 'autocomplete'}), required=False)
-    sector = forms.CharField(widget=forms.TextInput(attrs={'class': 'autocomplete'}), required=False)
+    COLOUR_SCHEME_CHOICES = (
+        ('indigo', 'Indigo'),
+        ('dark', 'Dark'),
+        ('light', 'Light'),
+    )
+
+    colour_scheme = forms.ChoiceField(choices=COLOUR_SCHEME_CHOICES, required=False)
+    companies = forms.CharField(widget=forms.HiddenInput(), required=False)
+    sectors = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = UserPreferences
-        exclude = ['last_time_got_news']
+        fields = '__all__'
 

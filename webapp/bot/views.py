@@ -52,7 +52,7 @@ def chat(request):
                 response['type'] = 'input.unknown'
                 response['speech'] = r['result']['fulfillment']['speech']
             else:
-                if r['result']['metadata']['intentName'] == 'Footsie Intent':
+                if 'Footsie Intent' in r['result']['metadata']['intentName']:
                     response = intents.footsie_intent(r)
                 elif r['result']['metadata']['intentName'] == 'SectorQuery':
                     response = intents.sector_query_intent(r, True)

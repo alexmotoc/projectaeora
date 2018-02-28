@@ -2,3 +2,104 @@ nav {
   color: black;
   background-color: white;
 }
+
+#top-nav {
+  height: 100px;
+}
+
+.nav-button {
+  color: black;
+  line-height: 100px;
+  width: 100px;
+  text-align: center;
+}
+
+li.active {
+  border-bottom: 3px solid #42a5f5;
+  font-weight: bold;
+}
+
+.nav-buttons {
+  margin-left: 15%;
+}
+
+.parallax-container {
+  height: 800px;
+}
+
+#overview-text {
+  font-size: 1.6em;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+#introducing-aeora {
+  margin-top: 75px;
+}
+
+.bubble {
+    display: inline-block;
+    height: auto;
+    max-width: 50%;
+    clear: both;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    word-wrap: break-word;
+}
+
+.bubble-interactive {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    clear: both;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    word-wrap: break-word;
+}
+
+.code-time {
+    float: left;
+}
+
+.price-impact {
+    text-align: right;
+}
+
+.card {
+    min-width: 300px;
+}
+
+.suggestion-chip {
+    display: inline-block;
+    height: auto;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    word-wrap: break-word;
+}
+
+.suggestion-chip:hover {
+    background-color: #5c6bc0;
+}
+
+.suggestion-chip:hover a {
+    color: white!important;
+}
+
+.sent {
+    float: right;
+}
+
+.received {
+    float: left;
+}
+
+#demo {
+  margin-right: auto;
+  margin-left: auto;
+}

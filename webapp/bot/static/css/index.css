@@ -1,16 +1,17 @@
 nav {
   color: black;
   background-color: white;
+  height: 64px;
 }
 
 #top-nav {
-  height: 100px;
+  height: 64px;
 }
 
 .nav-button {
   color: black;
-  line-height: 100px;
-  width: 100px;
+  line-height: 64px;
+  width: 100;
   text-align: center;
 }
 
@@ -19,9 +20,9 @@ li.active {
   font-weight: bold;
 }
 
-.nav-buttons {
+/*.nav-buttons {
   margin-left: 15%;
-}
+}*/
 
 .parallax-container {
   height: 800px;

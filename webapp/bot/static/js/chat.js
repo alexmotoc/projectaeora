@@ -45,7 +45,7 @@ function createReply(voice, data) {
                     reply += "<span>" + getImpact(obj.impact) + obj.impact + "</span>";
                 }
 
-                reply += "<p>Summary</p>" +
+                reply += "<p>" + obj.summary+ "</p>" +
                        "<blockquote><div class='chip'>finance</div><div class='chip'>oil</div><div class='chip'>petrol</div></blockquote>" +
                        "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
                        "</div></div></div>";
@@ -304,3 +304,4 @@ $(document).ready(function() {
         $("#id_question").val("");
     });
 });
+

@@ -1,4 +1,9 @@
 from collections import defaultdict
+import html2text
+from textblob import TextBlob
+import requests
+import bs4
+
 
 def big_movers_card(top5, risers=True):
     """
@@ -44,6 +49,12 @@ def big_movers_card(top5, risers=True):
 
     return big_movers
 
+def get_summary(url, characters):
+    response = requests.get(url)
+    if (response.status_code == 200):
+        soup = bs4.BeautifulSoup(response.text, 'lxml') #, 'lxml')
+        article = html2text.html2text(soup.find('html').get_text()).split("/**/")[1]
+        return article.replace("\n", " ")[:characters]+"..." 
 
 def news_reply(lse_list, yahoo_list):
 
@@ -55,6 +66,7 @@ def news_reply(lse_list, yahoo_list):
         row["url"] = el.url
         row["source"] = el.source
         row["impact"] = el.impact
+        row["summary"] = get_summary(el.url, 250)
         lse_news.append(row)
 
     yahoo_news = []
@@ -65,6 +77,7 @@ def news_reply(lse_list, yahoo_list):
         row["url"] = el.url
         row["source"] = el.source
         row["impact"] = el.impact
+        row["summary"] = el.description
         yahoo_news.append(row)
 
     news = {"LSE": lse_news, "YAHOO": yahoo_news}

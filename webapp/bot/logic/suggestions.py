@@ -44,7 +44,8 @@ def get_companies_in_sector(requested_sector):
 
 def add_suggestions(response, dialogflow_response):
 
-    if not response['type'] == 'top':
+    # if not about a sector
+    if 'attribute' in dialogflow_response['result']['parameters']:
         company_code = dialogflow_response['result']['parameters']['company']
         attribute = dialogflow_response['result']['parameters']['attribute']
 
@@ -70,5 +71,6 @@ def add_suggestions(response, dialogflow_response):
             suggestions.append("What about {}?".format(company_attributes[suggestion]))
 
         response['suggestions'] = suggestions
+
 
     return response

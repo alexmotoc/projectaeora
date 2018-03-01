@@ -77,9 +77,9 @@ function createReply(voice, data) {
 
     // Display suggestions
     if (data['suggestions'] != null) {
-        var suggested_companies = data['suggestions']['suggested_companies']
+        var suggestions = data['suggestions']
 
-        for (i = 0; i < suggested_companies.length; i++) {
+        for (i = 0; i < suggestions.length; i++) {
             if (i == 0) {
                 $("#chat-history").append(
                 '<div class="bubble-interactive received">'
@@ -88,16 +88,22 @@ function createReply(voice, data) {
 
             $("#chat-history div.received:last").append(
                   '<div class="waves-effect suggestion-chip z-depth-2">' +
-                  '<span><a class="grey-text text-darken-2" >' + suggested_companies[i] + '</a></span>' +
+                  '<span><a class="grey-text text-darken-2" >' + suggestions[i] + '</a></span>' +
                   '</div>'
             );
 
-            if (i == suggested_companies.length - 1) {
+            if (i == suggestions.length - 1) {
                 $("#chat-history").append(
                 '</div">'
                 );
             }
         }
+
+
+    $(".suggestion-chip").on('click', function(e) {
+        var suggestion = $($($(e.target)).contents()[0]).text()
+        alert(suggestion)
+    })
     }
 
     if (voice) {

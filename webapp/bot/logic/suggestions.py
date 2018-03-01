@@ -3,6 +3,24 @@ import random
 
 sector_json = json.load(open('../scraper/data/sectors.json'))
 
+company_attributes = {
+    'last_close_date': 'the last close date',
+    'diff': 'change',
+    'per_diff': 'the percentage change',
+    'revenue': 'revenue',
+    'news': 'news',
+    'offer': 'the current offer',
+    'bid': 'bid',
+    'low': 'the current low',
+    'volume': 'the current volume',
+    'market_cap': 'the market cap',
+    'price': 'price',
+    'last_close_value': 'the last close value',
+    'high': 'the current high'
+}
+
+# What does sector or sub_sector attribute do!??
+
 
 def get_sector(company_code):
     for sector in sector_json:
@@ -22,6 +40,7 @@ def get_companies_in_sector(requested_sector):
 
     return companies_in_sector
 
+
 def add_suggestions(response, dialogflow_response):
 
     print(response)
@@ -39,16 +58,21 @@ def add_suggestions(response, dialogflow_response):
 
         companies_in_sector.remove(company_code)
 
-        suggested_companies = []
+        suggestions = []
         for i in range(3):
             if len(companies_in_sector) > 0:
                 suggestion = random.choice(companies_in_sector)
                 companies_in_sector.remove(suggestion)
-                suggested_companies.append("What about {}?".format(suggestion))
+                suggestions.append("What about {}?".format(suggestion))
 
-        other_actions = ["News"]
+        attributes = company_attributes.copy()
+        del attributes[attribute]
 
-        suggestions = {'suggested_companies': suggested_companies, 'other_actions': other_actions}
+        for i in range(4 - len(suggestions)):
+            suggestion = random.choice(list(attributes.keys()))
+            del attributes[suggestion]
+            suggestions.append("What about {}?".format(company_attributes[suggestion]))
+
         response['suggestions'] = suggestions
 
     return response

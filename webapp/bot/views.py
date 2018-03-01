@@ -47,6 +47,8 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
+            print(r)
+
             response = defaultdict()
 
             # SubSector must come before Sector!
@@ -68,6 +70,8 @@ def chat(request):
 
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
+
+            print(response)
 
             if response['type'] != 'input.unknown':
                 response = suggestions.add_suggestions(response, r)

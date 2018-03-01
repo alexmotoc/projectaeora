@@ -19,6 +19,14 @@ company_attributes = {
     'high': 'the current high'
 }
 
+sector_attributes = {
+    'news': 'news',
+    'highest_price': 'the highest price',
+    'lowest_price': 'the lowest price',
+    'rising': 'rising',
+    'falling': 'falling'
+}
+
 # What does sector or sub_sector attribute do!??
 
 
@@ -42,9 +50,28 @@ def get_companies_in_sector(requested_sector):
     return companies_in_sector
 
 
+def get_sub_sectors(sector):
+    sub_sectors = []
+    for sector_element in sector_json:
+        if sector_element == sector:
+            for sub_sector in sector_json[sector]:
+                sub_sectors.append(sub_sector)
+            return sub_sectors
+
+
+def get_sector_sub_sectors(sub_sector):
+    sub_sectors = []
+    for sector in sector_json:
+        for sub_sector_element in sector_json[sector]:
+            if sub_sector_element == sub_sector:
+                for sub_sector_element in sector_json[sector]:
+                    sub_sectors.append(sub_sector_element)
+                return sector, sub_sectors
+
+
 def add_suggestions(response, dialogflow_response):
 
-    # if not about a sector
+    # if about a company
     if 'attribute' in dialogflow_response['result']['parameters']:
         company_code = dialogflow_response['result']['parameters']['company']
         attribute = dialogflow_response['result']['parameters']['attribute']
@@ -72,5 +99,53 @@ def add_suggestions(response, dialogflow_response):
 
         response['suggestions'] = suggestions
 
+    # if a sector question
+    elif 'sector_attribute' in dialogflow_response['result']['parameters']:
+
+        if 'sector' in dialogflow_response['result']['parameters']:
+            sector = dialogflow_response['result']['parameters']['sector']
+            sub_sectors = get_sub_sectors(sector)
+        else:
+            sub_sector = dialogflow_response['result']['parameters']['subsector']
+            sector, sub_sectors = get_sector_sub_sectors(sub_sector)
+
+        sector_attribute = dialogflow_response['result']['parameters']['sector_attribute']
+
+        print(sub_sectors)
+        print(sector)
+
+        suggestions = []
+
+        attributes = sector_attributes.copy()
+        del attributes[sector_attribute]
+
+        if 'sector' in dialogflow_response['result']['parameters']:
+            for i in range(min(2, len(sub_sectors))):
+                suggestion = random.choice(sub_sectors)
+                sub_sectors.remove(suggestion)
+                suggestions.append("What about {}?".format(suggestion))
+
+            for i in range(4 - len(suggestions)):
+                suggestion = random.choice(list(attributes.keys()))
+                del attributes[suggestion]
+                suggestions.append("What about {}?".format(sector_attributes[suggestion]))
+        else:
+            suggestions.append("What about {}?".format(sector))
+
+            sub_sectors.remove(sub_sector)
+
+            for i in range(min(2, len(sub_sectors))):
+                print('test')
+                suggestion = random.choice(sub_sectors)
+                sub_sectors.remove(suggestion)
+                suggestions.append("What about {}?".format(suggestion))
+
+            for i in range(4 - len(suggestions)):
+                suggestion = random.choice(list(attributes.keys()))
+                del attributes[suggestion]
+                suggestions.append("What about {}?".format(sector_attributes[suggestion]))
+
+        response["suggestions"] = suggestions
+    # else about risers
 
     return response

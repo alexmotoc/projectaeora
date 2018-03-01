@@ -60,9 +60,10 @@ def chat(request):
                     response = intents.sector_query_intent(r, False)
                 elif 'SectorQuery' in r['result']['metadata']['intentName']:
                     response = intents.sector_query_intent(r, True)
-
                 elif r['result']['metadata']['intentName'] == 'TopRisers':
                     response = intents.top_risers_intent(r)
+                    print(response)
+
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
 

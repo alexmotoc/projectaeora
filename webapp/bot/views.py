@@ -49,6 +49,8 @@ def chat(request):
 
             response = defaultdict()
 
+            # SubSector must come before Sector!
+
             if r['result']['action'] == "input.unknown":
                 response['text'] = r['result']['fulfillment']['speech']
                 response['type'] = 'input.unknown'
@@ -56,10 +58,11 @@ def chat(request):
             else:
                 if 'Footsie Intent' in r['result']['metadata']['intentName']:
                     response = intents.footsie_intent(r)
-                elif r['result']['metadata']['intentName'] == 'SectorQuery':
-                    response = intents.sector_query_intent(r, True)
-                elif r['result']['metadata']['intentName'] == 'SubSectorQuery':
+                elif 'SubSectorQuery' in r['result']['metadata']['intentName']:
                     response = intents.sector_query_intent(r, False)
+                elif 'SectorQuery' in r['result']['metadata']['intentName']:
+                    response = intents.sector_query_intent(r, True)
+
                 elif r['result']['metadata']['intentName'] == 'TopRisers':
                     response = intents.top_risers_intent(r)
 

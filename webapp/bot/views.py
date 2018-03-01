@@ -16,9 +16,11 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '/../../scrape
 
 from footsie import Scraper
 
+
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
+
 
 def chat(request):
     history = Response.objects.all()
@@ -45,8 +47,6 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
-            print(r)
-
             response = defaultdict()
 
             if r['result']['action'] == "input.unknown":
@@ -66,7 +66,8 @@ def chat(request):
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
 
-            response = suggestions.add_suggestions(response, r)
+            if response['type'] != 'input.unknown':
+                response = suggestions.add_suggestions(response, r)
 
             form = QueryForm()
     else:
@@ -76,6 +77,7 @@ def chat(request):
         return JsonResponse(response)
     else:
         return render(request, 'chat.html', {'form': form, 'history': history})
+
 
 def settings(request):
     status = None
@@ -101,6 +103,7 @@ def settings(request):
     else:
         return render(request, 'settings.html', {'form': form})
 
+
 def get_companies(request):
     saved_companies = []
 
@@ -115,6 +118,7 @@ def get_companies(request):
     with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/profiles.json') as f:
         companies = json.load(f)
         return JsonResponse({"companies": companies, "saved_companies": saved_companies})
+
 
 def get_sectors(request):
     saved_sectors = []

@@ -100,15 +100,32 @@ function createReply(voice, data) {
         }
 
 
-    $(".suggestion-chip").on('click', function(e) {
-        var suggestion = $($($(e.target)).contents()[0]).text()
-        alert(suggestion)
-    })
+        $(".suggestion-chip").on('click', function(e) {
+            var suggestion = $($($(e.target)).contents()[0]).text();
+            addQuery(suggestion);
+        })
     }
 
     if (voice) {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
     }
+}
+
+function addQuery(question) {
+    var now = new Date();
+    var time = now.getHours() + ":" + now.getMinutes();
+
+    var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out tooltipped'" +
+                "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
+                "<span class='white-text'>" + question + "</span></div>";
+
+    $("#chat-history").append(query);
+    $('.tooltipped').tooltip({delay: 50});
+    $(".sent").last().removeClass("scale-out").addClass("scale-in");
+    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+    processingQuery();
+    fetchReply(question);
 }
 
 function getStyle(attribute, value){
@@ -176,6 +193,39 @@ function getUnits(attribute){
     }
 }
 
+function processingQuery() {
+    var bufferingCircle = "<div class='preloader-wrapper small active'>" +
+                              "<div class='spinner-layer spinner-blue-only'>" +
+                                "<div class='circle-clipper left'>" +
+                                  "<div class='circle'></div>" +
+                                "</div><div class='gap-patch'>" +
+                                  "<div class='circle'></div>" +
+                                "</div><div class='circle-clipper right'>" +
+                                  "<div class='circle'></div>" +
+                                "</div>" +
+                              "</div>" +
+                            "</div>";
+    var bufferingBubble = "<div id='buffering' class='bubble-interactive received'>" + bufferingCircle + "</div>";
+    $("#chat-history").append(bufferingBubble);
+    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+    return $("#id_question").val();
+}
+
+var fetchReply = function(query) {
+    return $.ajax({
+        url: "/chat/",
+        type: "POST",
+        data: {
+            question: query
+        },
+        success: function(data) {
+            $("#buffering").remove();
+            createReply(true, data);
+        },
+    });
+}
+
 $(document).ready(function() {
     $('.scrollable-container').hScroll();
 
@@ -195,39 +245,6 @@ $(document).ready(function() {
             }
         }
     });
-
-    var fetchReply = function(query) {
-        return $.ajax({
-            url: "/chat/",
-            type: "POST",
-            data: {
-                question: query
-            },
-            success: function(data) {
-                $("#buffering").remove();
-                createReply(true, data);
-            },
-        });
-    }
-
-    function processingQuery() {
-        var bufferingCircle = "<div class='preloader-wrapper small active'>" +
-                                  "<div class='spinner-layer spinner-blue-only'>" +
-                                    "<div class='circle-clipper left'>" +
-                                      "<div class='circle'></div>" +
-                                    "</div><div class='gap-patch'>" +
-                                      "<div class='circle'></div>" +
-                                    "</div><div class='circle-clipper right'>" +
-                                      "<div class='circle'></div>" +
-                                    "</div>" +
-                                  "</div>" +
-                                "</div>";
-        var bufferingBubble = "<div id='buffering' class='bubble-interactive received'>" + bufferingCircle + "</div>";
-        $("#chat-history").append(bufferingBubble);
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-
-        return $("#id_question").val();
-    }
 
     $("#send-text").click(function(e) {
         if ($("#id_question").val() != "") {
@@ -297,21 +314,7 @@ $(document).ready(function() {
 
     $("#ask-question").submit(function(e) {
         e.preventDefault();
-
-        var now = new Date();
-        var time = now.getHours() + ":" + now.getMinutes();
-
-        var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out tooltipped'" +
-                    "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
-                    "<span class='white-text'>" + $('#id_question').val() + "</span></div>";
-
-        $("#chat-history").append(query);
-        $('.tooltipped').tooltip({delay: 50});
-        $(".sent").last().removeClass("scale-out").addClass("scale-in");
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-
-        processingQuery();
-        fetchReply($('#id_question').val());
+        addQuery($('#id_question').val())
         $("#id_question").val("");
     });
 });

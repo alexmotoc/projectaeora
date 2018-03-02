@@ -67,15 +67,17 @@ function createReply(voice, data) {
             reply += topPerformers(card['fallers']);
             break;
         case "revenue":
-            var reply = "<div class = 'bubble-interactive received'>" +
-                          "<div class = 'card white'>" +
-                            "<div class = 'card-content black-text'>" +
-                              "<span class = 'card-title'>" + card["title"] + "</span>" +
-                              "<table class = 'striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
-                              "<tbody>";
+            var reply = "<div class='bubble-interactive received'>" +
+                          "<div class='card white'>" +
+                            "<div class='card-content black-text'>" +
+                              "<span class='card-title'>" + card["title"] + "</span>" +
+                              "<table class='striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
+                              "</tr></thead><tbody>";
+
             card["revenue_data"].forEach(function(obj) {
-                reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td><tr>";
+                reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td></tr>";
             });
+
             reply += "</tbody></table></div></div></div>";
             break;
         default:

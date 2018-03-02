@@ -71,9 +71,7 @@ def chat(request):
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
 
-            print(response)
-
-            if response['type'] != 'input.unknown':
+            if response['type'] not in ('input.unknown', 'incomplete'):
                 response = suggestions.add_suggestions(response, r)
 
             form = QueryForm()

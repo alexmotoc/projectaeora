@@ -72,12 +72,29 @@ $(document).ready(function() {
 
     $("#track-companies").on("chip.add", function(e, chip) {
         var company_tags = $("#id_companies").val();
-        $("#id_companies").val(company_tags + ", " + chip.tag);
+
+        var separator;
+
+        if (company_tags == "") {
+            separator = ""
+        } else {
+            separator = ", "
+        }
+
+        $("#id_companies").val(company_tags + separator + chip.tag);
     });
 
     $("#track-sectors").on("chip.add", function(e, chip) {
         var sector_tags = $("#id_sectors").val();
-        $("#id_sectors").val(sector_tags + ", " + chip.tag);
+        var separator;
+
+        if (sector_tags == "") {
+            separator = ""
+        } else {
+            separator = ", "
+        }
+
+        $("#id_sectors").val(sector_tags + separator + chip.tag);
     });
 
     $("#track-companies").on("chip.delete", function(e, chip) {

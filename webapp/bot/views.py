@@ -27,10 +27,10 @@ def chat(request):
     preferences = UserPreferences.objects.all().first()
     attributes = []
 
-    for field in preferences.__meta.get_fields():
-        if field.get_internal_type == 'BooleanField'
-           and field.name != 'voice' and field.value:
-            attributes.append(field.name)
+    for field in preferences._meta.get_fields():
+        if field.get_internal_type() == 'BooleanField' \
+           and field.name != 'voice' and getattr(preferences, field.name):
+                attributes.append(field.name)
 
     if request.method == 'POST':
         form = QueryForm(request.POST)
@@ -72,7 +72,7 @@ def chat(request):
                 elif 'TopRisers' in intent:
                     response = intents.top_risers_intent(r)
                 elif 'Daily Briefing' in intent:
-                    response = replies.daily_briefings_intent(preferences.companies,
+                    response = intents.daily_briefings_intent(preferences.companies,
                                preferences.sectors, attributes)
 
             reply = Response(query=query, response=json.dumps(response))

@@ -5,7 +5,6 @@ to_english = {"bid": "bid", "offer": "offer", "sector": "sector", "sub_sector": 
 "high": "high", "low": "low", "diff": "change", "per_diff": "percentage change",
 "last_close_value": "last close", "last_close_date": "last close date", "revenue": "revenue",
 "market_cap": "market cap", "volume": "volume", "price": "price"}
-secondary_attribute = related_attribute[attribute]
 
 def big_movers_card(top5, risers=True):
     """
@@ -52,26 +51,26 @@ def big_movers_card(top5, risers=True):
     return big_movers
 
 
-def news_reply(lse_list, yahoo_list):
+def news_reply(financial_news):
 
     lse_news = []
-    for i in range(len(lse_list)):
+    for news in financial_news['LSE']:
         row = {}
-        row["date"] = lse_list[i].date
-        row["headline"] = lse_list[i].headline
-        row["url"] = lse_list[i].url
-        row["source"] = lse_list[i].source
-        row["impact"] = lse_list[i].impact
+        row["date"] = news.date
+        row["headline"] = news.headline
+        row["url"] = news.url
+        row["source"] = news.source
+        row["impact"] = news.impact
         lse_news.append(row)
 
     yahoo_news = []
-    for i in range(len(yahoo_list)):
+    for i in financial_news['YAHOO']:
         row = {}
-        row["date"] = yahoo_list[i].date
-        row["headline"] = yahoo_list[i].headline
-        row["url"] = yahoo_list[i].url
-        row["source"] = yahoo_list[i].source
-        row["impact"] = yahoo_list[i].impact
+        row["date"] = news.date
+        row["headline"] = news.headline
+        row["url"] = news.url
+        row["source"] = news.source
+        row["impact"] = news.impact
         lse_news.append(row)
 
     news = {"LSE": lse_news, "YAHOO": yahoo_news}
@@ -99,6 +98,8 @@ def get_company_reply(company, attribute):
     ,"last_close_date": "last_close_value", "revenue": "market_cap"
     ,"market_cap": "volume", "volume" : "price", "price": "per_diff"}
 
+    secondary_attribute = related_attribute[attribute]
+
     try:
         secondary_value = getattr(company.stock, secondary_attribute)
     except AttributeError:
@@ -115,6 +116,7 @@ def get_company_reply(company, attribute):
 
 def sector_reply(sector, sector_attribute):
     data = getattr(sector, sector_attribute)
+
     if (sector_attribute == "highest_price" or sector_attribute == "lowest_price"):
         data = getattr(sector, sector_attribute)
         sector_name = sector.name
@@ -184,29 +186,45 @@ def daily_briefings(companies, sectors, attributes):
     if not companies and not sectors:
         message = 'You are not currently tracking any companies or sectors. ' \
                   'Please add some in the settings page!'
-        reponse['text'] = message
-        respons['speech'] = message
+        response['text'] = message
+        response['speech'] = message
+        response['type'] = 'error'
     else:
+        company_attribute = {"current_price": "price", "daily_high": "high", "daily_low": "low",
+                             "percentage_change": "per_diff", "news": "news"}
+
         # Build company cards
         for company in companies:
             card = {'name': company.name, 'code': company.code, 'date': company.date}
             for attribute in attributes:
+                attr = company_attribute[attribute]
+                try:
+                    value = getattr(company.stock, attr)
+                except AttributeError:
+                    value = getattr(company, attr)
 
-                
+                if attr == 'news':
+                    card[attr] = self.news_reply(value)
+                else:
+                    card[attr] = value
+
         # Get sector news
+        sector_news = defaultdict()
         for sector in sectors:
-            companies = sector.companies
-            for company in companies:
-                lse_news = list()
-                for n in company.news:
-                    lse_news.append(n)
-                    lse_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
-                yahoo_news = list()
-                for n in scraper.get_yahoo_news_data(company.code):
-                    yahoo_news.append(n)
-                    yahoo_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
-        replies.news_reply(lse_news, yahoo_news)
+            financial_news = defaultdict(list)
+            lse_news = list()
+            yahoo_news = list()
+            for company in sector.companies:
+                lse_news += company.news['LSE']
+                yahoo_news += company.news['YAHOO']
 
-    response['type'] = 'briefing'
+            lse_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+            yahoo_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+
+            financial_news['LSE'] = lse_news
+            financial_news['YAHOO'] = yahoo_news
+
+        replies.news_reply(lse_news, yahoo_news)
+        response['type'] = 'briefing'
 
     return response

@@ -64,9 +64,11 @@ function createReply(voice, data) {
                               "<span class = 'card-title'>" + card["title"] + "</span>" +
                               "<table class = 'striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
                               "<tbody>";
+
             card["revenue_data"].forEach(function(obj) {
                 reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td><tr>";
             });
+            
             reply += "</tbody></table></div></div></div>";
             break;
         case "briefing":

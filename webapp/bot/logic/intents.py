@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import datetime
 import os
 
@@ -24,7 +25,7 @@ def footsie_intent(r):
         scraper = Scraper.Scraper()
 
         if attribute == "news":
-            return replies.news_reply(scraper.get_financial_news_data(company_code), scraper.get_yahoo_news_data(company_code))
+            return replies.news_reply(scraper.get_financial_news_data(company_code))
         elif attribute == "revenue":
             company = scraper.get_company_data(company_code)
             return replies.revenue_reply(company)
@@ -51,16 +52,21 @@ def sector_query_intent(r, is_sector):
             sector = scraper.get_sub_sector_data(sector_name)
     if sector_attribute == "news":
         companies = sector.companies
+        financial_news = defaultdict(list)
+        lse_news = list()
+        yahoo_news = list()
+
         for company in companies:
-            lse_news = list()
-            for n in company.news:
-                lse_news.append(n)
-                lse_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
-            yahoo_news = list()
-            for n in scraper.get_yahoo_news_data(company.code):
-                yahoo_news.append(n)
-                yahoo_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
-            return replies.news_reply(lse_news, yahoo_news)
+            lse_news += company.news['LSE']
+            yahoo_news += company.news['YAHOO']
+
+        lse_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+        yahoo_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+
+        financial_news['LSE'] = lse_news
+        financial_news['YAHOO'] = yahoo_news
+
+        return replies.news_reply(financial_news)
     else:
         return replies.sector_reply(sector, sector_attribute)
 
@@ -84,13 +90,17 @@ def top_risers_intent(r):
     return response
 
 def daily_briefings_intent(companies, sectors, attributes):
+    print(companies)
+    print(sectors)
+    print(attributes)
     scraper = Scraper.Scraper()
 
-    for company in companies:
+    for company in companies.split(", "):
         companies_data = scraper.get_company_data(company)
 
-    for sector in sectors:
+    for sector in sectors.split(", "):
         sectors_data = scraper.get_sector_data(sector)
 
     response = replies.daily_briefings(companies_data, sectors_data, attributes)
+
     return response

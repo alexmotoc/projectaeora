@@ -24,7 +24,12 @@ def chat(request):
     history = Response.objects.all()
     response = {}
 
-    preferences = UserPreferences.objects.all().first()
+    try:
+        preferences = UserPreferences.objects.all().first()
+    except:
+        preferences = UserPreferences.objects.create()
+        preferences.save()
+
     attributes = []
 
     for field in preferences._meta.get_fields():
@@ -93,7 +98,8 @@ def settings(request):
     try:
         preferences = UserPreferences.objects.all().first()
     except:
-        preferences = None
+        preferences = User.Preferences.objects.create()
+        preferences.save()
 
     if request.method == 'POST':
         form = UserPreferencesForm(request.POST, instance=preferences)

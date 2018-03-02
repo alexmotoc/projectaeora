@@ -8,9 +8,9 @@ import os
 
 def get_stopwords():
     #source=http://xpo6.com/list-of-english-stop-words/
-    filepath = os.path.dirname(__file__) + '/stopwords.txt' 
-    stopwords = list() 
-    with open(filepath) as fp:  
+    filepath = os.path.dirname(__file__) + '/stopwords.txt'
+    stopwords = list()
+    with open(filepath) as fp:
         line = fp.readline()
         while line:
             stopwords.append(line.strip())
@@ -36,17 +36,17 @@ def get_keywords(article):
 def get_analysis(url, characters):
     response = requests.get(url)
     if (response.status_code == 200):
-        soup = bs4.BeautifulSoup(response.text, 'lxml') #, 'lxml')
+        soup = bs4.BeautifulSoup(response.text, 'lxml')
         article = html2text.html2text(soup.find('html').get_text()).split("/**/")[1]
-        summary = article.replace("\n", " ")[:characters]+"..." 
+        summary = article.replace("\n", " ")[:characters]+"..."
         blob = TextBlob(article)
         keywords = get_keywords(blob)
         if blob.sentiment.polarity > 0:
-            return summary, "positive", keywords 
+            return summary, "positive", keywords
         elif blob.sentiment.polarity == 0:
             return summary, "neutral", keywords
         else:
-            return summary, "negative", keywords        
+            return summary, "negative", keywords
     return "No summary available", "none", set()
 
 #to_english determines the english word that will be substituted for the attribute name
@@ -99,10 +99,10 @@ def big_movers_card(top5, risers=True):
 
     return big_movers
 
-def news_reply(lse_list, yahoo_list):
+def news_reply(financial_news):
 
     lse_news = []
-    for el in lse_list:
+    for el in financial_news['LSE']:
         row = {}
         row["date"] = el.date
         row["headline"] = el.headline
@@ -121,7 +121,7 @@ def news_reply(lse_list, yahoo_list):
         row["source"] = el.source
         row["impact"] = el.impact
         row["summary"] = el.description
-        row["sentiment"] = "none" 
+        row["sentiment"] = "none"
         row["keywords"] = list()
         yahoo_news.append(row)
 

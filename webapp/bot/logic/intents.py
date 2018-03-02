@@ -79,12 +79,15 @@ def daily_briefings_intent(companies, sectors, attributes):
     scraper = Scraper.Scraper()
 
     companies_data = []
-    for company in companies.split(", "):
-        companies_data.append(scraper.get_company_data(company))
+
+    if companies:
+        for company in companies.split(", "):
+            companies_data.append(scraper.get_company_data(company))
 
     sectors_data = []
-    for sector in sectors.split(", "):
-        sectors_data.append(scraper.get_sector_data(sector))
+    if sectors:
+        for sector in sectors.split(", "):
+            sectors_data.append(scraper.get_sector_data(sector))
 
     response = replies.daily_briefings(companies_data, sectors_data, attributes)
 

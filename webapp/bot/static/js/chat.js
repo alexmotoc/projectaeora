@@ -95,10 +95,6 @@ function createReply(voice, data) {
         $(".suggestion-chip").on('click', function(e) {
             var suggestion = $($($(e.target)).contents()[0]).text();
             addQuery(suggestion);
-
-            if ($('#suggestions').length) {
-                $('#suggestions').remove();
-            }
         })
     }
 
@@ -108,6 +104,10 @@ function createReply(voice, data) {
 }
 
 function addQuery(question) {
+    if ($('#suggestions').length) {
+        $('#suggestions').remove();
+    }
+
     var now = new Date();
     var time = now.getHours() + ":" + now.getMinutes();
 

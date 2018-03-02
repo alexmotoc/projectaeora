@@ -52,8 +52,6 @@ def big_movers_card(top5, risers=True):
 
 
 def news_reply(financial_news):
-
-    lse_news = []
     for news in financial_news['LSE']:
         row = {}
         row["date"] = news.date

@@ -27,13 +27,43 @@ function createReply(history, voice, data) {
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["name"] + "</span>" +
                               "<p class='grey-text code-time'>" + card["code"] + "<br>" + card["date"] + "</p>" +
-                              "<p class='price-impact'>" + getStyle(card['primary_type'], card["primary"]) + card['primary'] + getUnits(card['primary_type']) +
-                              "<br>" + getStyle(card['secondary_type'], card["secondary"]) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" +
+                              "<p class='black-text price-impact'" + getStyle(card['primary_type'], card['primary']) + card['primary'] + getUnits(card['primary_type']) +
+                              "<br>" + getStyle(card['secondary_type'], card['secondary']) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" +
                             "</div>" +
                           "</div>" +
                         "</div>";
             break;
         case "news":
+            var reply = "<div class='bubble-interactive received'><section class='scrollable-container'>";
+
+            card["LSE"].forEach(function(obj) {
+                reply +=  "<div class='news-article'>" +
+                   "<div class='card'>" +
+                     "<div class='card-content'>" +
+                       "<span class='card-title grey-text text-darken-4'>" + obj.headline + "</span>";
+
+                if (obj.impact != "-") {
+                    reply += "<span>" + getImpact(obj.impact) + obj.impact + "</span>";
+                }
+
+                reply += "<p>Summary</p>" +
+                       "<blockquote><div class='chip'>finance</div><div class='chip'>oil</div><div class='chip'>petrol</div></blockquote>" +
+                       "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
+                       "</div></div></div>";
+            });
+
+            card["YAHOO"].forEach(function(obj) {
+                // reply +=  "<div class='news-article'>" +
+                //    "<div class='card'>" +
+                //      "<div class='card-content'>" +
+                //        "<span class='card-title grey-text text-darken-4'>" + obj.headline +
+                //        "<p>Summary</p>" +
+                //        "<blockquote><div class='chip'>finance</div><div class='chip'>oil</div><div class='chip'>petrol</div><blockquote>" +
+                //        "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
+                //        "</div></div>";
+            });
+
+            reply += "</section></div>";
             break;
         case "top":
             var reply = "<div class='bubble-interactive received'>" +
@@ -87,68 +117,69 @@ function createReply(history, voice, data) {
     }
 }
 
+function getImpact(value) {
+    if (value.charAt(0) == "+"){
+        return "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>";
+    }
+    else if (value.charAt(0) == "-"){
+        return "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>";
+    }
+}
+
 function getStyle(attribute, value){
-    if (attribute == "per_diff" || attribute == "diff"){
-        if (value.charAt(0) == "+"){
-            return "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>"
-        }
-        else if (value.charAt(0) == "-"){
-            return "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>"
-        }
-        else{
-          return "<span class='black-text->'"
-        }
+    if (attribute == "per_diff"){
+        return getImpact(value);
     }
     else if (attribute == "high"){
-        return "<span class='black-text'>High: "
+        return "<span class='black-text'>High: ";
     }
     else if (attribute == "low"){
-        return "<span class='black-text'>Low: "
+        return "<span class='black-text'>Low: ";
     }
     else if (attribute == "market_cap"){
-        return "<span class='black-text'>Market Cap: "
+        return "<span class='black-text'>Market Cap: ";
     }
     else if (attribute == "revenue"){
-        return "<span class='black-text'>Revenue: "
+        return "<span class='black-text'>Revenue: ";
     }
     else if (attribute == "bid"){
-        return "<span class='black-text'>Bid: "
+        return "<span class='black-text'>Bid: ";
     }
     else if (attribute == "offer"){
-        return "<span class='black-text'>Offer: "
+        return "<span class='black-text'>Offer: ";
     }
     else if (attribute == "sector"){
-        return "<span class='black-text'>Sector: "
+        return "<span class='black-text'>Sector: ";
     }
     else if (attribute == "sub_sector"){
-        return "<span class='black-text'>Sub-Sector: "
+        return "<span class='black-text'>Sub-Sector: ";
     }
     else if (attribute == "volume"){
-        return "<span class='black-text'>Volume: "
+        return "<span class='black-text'>Volume: ";
     }
     else if (attribute == "last_close_value"){
-        return "<span class='black-text'>Last Close Value: "
+        return "<span class='black-text'>Last Close Value: ";
     }
     else if (attribute == "last_close_date"){
-        return "<span class='black-text'>Last Close Date: "
+        return "<span class='black-text'>Last Close Date: ";
     }
     else if (attribute == "price"){
-        return "<span class='black-text'>Price: "
+        return "<span class='black-text'>Price: ";
     }
     else{
-        return "<span class='black-text'>"
+        return "<span class='black-text'>";
     }
 }
 
 function getUnits(attribute){
     if (attribute == "per_diff"){
-        return "%"
+        return "%";
     }
     else if (attribute == "price"){
-        return " GBX"
+        return " GBX";
     }
     else{
-        return ""
+        return "";
     }
 }
 

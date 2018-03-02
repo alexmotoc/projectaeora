@@ -1,5 +1,12 @@
 from collections import defaultdict
 
+#to_english determines the english word that will be substituted for the attribute name
+to_english = {"bid": "bid", "offer": "offer", "sector": "sector", "sub_sector": "sub-sector",
+"high": "high", "low": "low", "diff": "change", "per_diff": "percentage change",
+"last_close_value": "last close", "last_close_date": "last close date", "revenue": "revenue",
+"market_cap": "market cap", "volume": "volume", "price": "price"}
+secondary_attribute = related_attribute[attribute]
+
 def big_movers_card(top5, risers=True):
     """
     Returns a dictionary containing the layout of the big movers card tables.
@@ -92,13 +99,6 @@ def get_company_reply(company, attribute):
     ,"last_close_date": "last_close_value", "revenue": "market_cap"
     ,"market_cap": "volume", "volume" : "price", "price": "per_diff"}
 
-    #to_english determines the english word that will be substituted for the attribute name
-    to_english = {"bid": "bid", "offer": "offer", "sector": "sector", "sub_sector": "sub-sector",
-    "high": "high", "low": "low", "diff": "change", "per_diff": "percentage change",
-    "last_close_value": "last close", "last_close_date": "last close date", "revenue": "revenue",
-    "market_cap": "market cap", "volume": "volume", "price": "price"}
-    secondary_attribute = related_attribute[attribute]
-
     try:
         secondary_value = getattr(company.stock, secondary_attribute)
     except AttributeError:
@@ -175,5 +175,38 @@ def revenue_reply(company):
         row['date'] = company.revenue[i][0]
         row['revenue'] = company.revenue[i][1]
         card['revenue_data'].append(row)
-        
+
+    return response
+
+def daily_briefings(companies, sectors, attributes):
+    response = {}
+
+    if not companies and not sectors:
+        message = 'You are not currently tracking any companies or sectors. ' \
+                  'Please add some in the settings page!'
+        reponse['text'] = message
+        respons['speech'] = message
+    else:
+        # Build company cards
+        for company in companies:
+            card = {'name': company.name, 'code': company.code, 'date': company.date}
+            for attribute in attributes:
+
+                
+        # Get sector news
+        for sector in sectors:
+            companies = sector.companies
+            for company in companies:
+                lse_news = list()
+                for n in company.news:
+                    lse_news.append(n)
+                    lse_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+                yahoo_news = list()
+                for n in scraper.get_yahoo_news_data(company.code):
+                    yahoo_news.append(n)
+                    yahoo_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+        replies.news_reply(lse_news, yahoo_news)
+
+    response['type'] = 'briefing'
+
     return response

@@ -82,3 +82,15 @@ def top_risers_intent(r):
             response += "\nTop Fallers:\n" +scraper.get_top5(False)
 
     return response
+
+def daily_briefings_intent(companies, sectors, attributes):
+    scraper = Scraper.Scraper()
+
+    for company in companies:
+        companies_data = scraper.get_company_data(company)
+
+    for sector in sectors:
+        sectors_data = scraper.get_sector_data(sector)
+
+    response = replies.daily_briefings(companies_data, sectors_data, attributes)
+    return response

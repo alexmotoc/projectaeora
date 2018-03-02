@@ -18,6 +18,7 @@ function createReply(voice, data) {
         var utterThis = new SpeechSynthesisUtterance(data['speech']);
         synth.speak(utterThis);
     }
+
     var card = data["text"];
     switch(data["type"]) {
         case "company":
@@ -67,6 +68,9 @@ function createReply(voice, data) {
                 reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td><tr>";
             });
             reply += "</tbody></table></div></div></div>";
+            break;
+        case "briefing":
+            var reply = "";
             break;
         default:
             var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["text"] + "</span></div>";
@@ -150,6 +154,15 @@ $(document).ready(function() {
 
     $('.tooltipped').tooltip({delay: 50});
 
+    var voice;
+
+    $.ajax({
+        url: '/ajax/getvoice',
+        success: function(result) {
+            voice = result.voice;
+        }
+    });
+
     var csrftoken = $.cookie('csrftoken');
 
     function csrfSafeMethod(method) {
@@ -165,7 +178,7 @@ $(document).ready(function() {
         }
     });
 
-    var fetchReply = function(query) {
+    var fetchReply = function(query, voice) {
         return $.ajax({
             url: "/chat/",
             type: "POST",
@@ -174,7 +187,8 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $("#buffering").remove();
-                createReply(true, data);
+
+                createReply(voice, data);
             },
         });
     }
@@ -248,9 +262,8 @@ $(document).ready(function() {
 
                 recognition.onspeechend = function(event) {
                     recognition.abort();
-                    // $("#send-voice").removeClass("pulse");
                     processingQuery();
-                    fetchReply(finalTranscript);
+                    fetchReply(finalTranscript, voice);
                 }
 
                 recognition.onend = function(event) {
@@ -280,7 +293,7 @@ $(document).ready(function() {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
         processingQuery();
-        fetchReply($('#id_question').val());
+        fetchReply($('#id_question').val(), false);
         $("#id_question").val("");
     });
 });

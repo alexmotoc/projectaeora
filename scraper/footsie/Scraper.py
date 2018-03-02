@@ -298,7 +298,7 @@ class Scraper:
                 date = date.strftime('%H:%M %d-%b-%Y') #convert to same format as LSE dates
                 url = item.link.text
                 source = "YAHOO"
-                impact = "N/A"
+                impact = "-"
                 news = News.News(str(date), headline, url, source, impact, description)
                 yahoo_news.append(news)
         return yahoo_news

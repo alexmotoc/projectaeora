@@ -71,7 +71,7 @@ def news_reply(financial_news):
         row["url"] = news.url
         row["source"] = news.source
         row["impact"] = news.impact
-        lse_news.append(row)
+        yahoo_news.append(row)
 
     news = {"LSE": lse_news, "YAHOO": yahoo_news}
     overall_dict = {
@@ -189,42 +189,57 @@ def daily_briefings(companies, sectors, attributes):
         response['text'] = message
         response['speech'] = message
         response['type'] = 'error'
+    elif not attributes:
+        message = 'You have not selected any attributes to be displayed. ' \
+                  'Please add some in the settings page!'
+        response['text'] = message
+        response['speech'] = message
+        response['type'] = 'error'
     else:
-        company_attribute = {"current_price": "price", "daily_high": "high", "daily_low": "low",
+        briefing = defaultdict()
+
+        company_attributes = {"current_price": "price", "daily_high": "high", "daily_low": "low",
                              "percentage_change": "per_diff", "news": "news"}
 
+        company_cards = []
         # Build company cards
         for company in companies:
             card = {'name': company.name, 'code': company.code, 'date': company.date}
             for attribute in attributes:
-                attr = company_attribute[attribute]
+                attr = company_attributes[attribute]
                 try:
                     value = getattr(company.stock, attr)
                 except AttributeError:
                     value = getattr(company, attr)
 
                 if attr == 'news':
-                    card[attr] = self.news_reply(value)
+                    card[attr] = news_reply(value)
                 else:
                     card[attr] = value
+            company_cards.append(card)
+
+        briefing['companies'] = company_cards
 
         # Get sector news
-        sector_news = defaultdict()
+        sector_attributes = ['highest_price', 'lowest_price', 'rising', 'falling']
+        sector_cards = []
+
         for sector in sectors:
-            financial_news = defaultdict(list)
-            lse_news = list()
-            yahoo_news = list()
-            for company in sector.companies:
-                lse_news += company.news['LSE']
-                yahoo_news += company.news['YAHOO']
+            card = {}
 
-            lse_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
-            yahoo_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+            for attribute in sector_attributes:
+                card[attribute] = sector_reply(sector, attribute)
 
-            financial_news['LSE'] = lse_news
-            financial_news['YAHOO'] = yahoo_news
+            # Check if user wants sector news
+            if 'news' in attributes:
+                card['news'] = news_reply(sector.news)
 
-        replies.news_reply(lse_news, yahoo_news)
+            sector_cards.append(card)
+
+        briefing['sectors'] = sector_cards
+
+        response['speech'] = 'Here is the latest information I could find!'
+        response['text'] = briefing
         response['type'] = 'briefing'
 
     return response

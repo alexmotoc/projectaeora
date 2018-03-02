@@ -12,7 +12,7 @@ jQuery(function ($) {
     };
 });
 
-function createReply(voice, data) {
+function createReply(history, voice, data) {
     if (voice) {
         var synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(data['speech']);
@@ -68,10 +68,11 @@ function createReply(voice, data) {
             card["revenue_data"].forEach(function(obj) {
                 reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td><tr>";
             });
-            
+
             reply += "</tbody></table></div></div></div>";
             break;
         case "briefing":
+            console.log(data);
             var reply = "";
             break;
         default:
@@ -81,7 +82,7 @@ function createReply(voice, data) {
     $("#chat-history").append(reply);
     $(".received").last().removeClass("scale-out").addClass("scale-in");
 
-    if (voice) {
+    if (!history) {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
     }
 }
@@ -180,7 +181,7 @@ $(document).ready(function() {
         }
     });
 
-    var fetchReply = function(query, voice) {
+    var fetchReply = function(query, history, voice) {
         return $.ajax({
             url: "/chat/",
             type: "POST",
@@ -190,7 +191,7 @@ $(document).ready(function() {
             success: function(data) {
                 $("#buffering").remove();
 
-                createReply(voice, data);
+                createReply(false, voice, data);
             },
         });
     }
@@ -295,7 +296,7 @@ $(document).ready(function() {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
         processingQuery();
-        fetchReply($('#id_question').val(), false);
+        fetchReply($('#id_question').val(), false, false);
         $("#id_question").val("");
     });
 });

@@ -35,6 +35,7 @@ def footsie_intent(r):
 
 def sector_query_intent(r, is_sector):
     scraper = Scraper.Scraper()
+    sector = None
     #if required entities have been specified get sector/sub-sector data
     if is_sector: #is a SectorQuery
         if r['result']['parameters']['sector'] == '' or r['result']['parameters']['sector_attribute'] == '':
@@ -51,22 +52,7 @@ def sector_query_intent(r, is_sector):
             sector_attribute = r['result']['parameters']['sector_attribute']
             sector = scraper.get_sub_sector_data(sector_name)
     if sector_attribute == "news":
-        companies = sector.companies
-        financial_news = defaultdict(list)
-        lse_news = list()
-        yahoo_news = list()
-
-        for company in companies:
-            lse_news += company.news['LSE']
-            yahoo_news += company.news['YAHOO']
-
-        lse_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
-        yahoo_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
-
-        financial_news['LSE'] = lse_news
-        financial_news['YAHOO'] = yahoo_news
-
-        return replies.news_reply(financial_news)
+        return replies.news_reply(sector.news)
     else:
         return replies.sector_reply(sector, sector_attribute)
 
@@ -90,16 +76,15 @@ def top_risers_intent(r):
     return response
 
 def daily_briefings_intent(companies, sectors, attributes):
-    print(companies)
-    print(sectors)
-    print(attributes)
     scraper = Scraper.Scraper()
 
+    companies_data = []
     for company in companies.split(", "):
-        companies_data = scraper.get_company_data(company)
+        companies_data.append(scraper.get_company_data(company))
 
+    sectors_data = []
     for sector in sectors.split(", "):
-        sectors_data = scraper.get_sector_data(sector)
+        sectors_data.append(scraper.get_sector_data(sector))
 
     response = replies.daily_briefings(companies_data, sectors_data, attributes)
 

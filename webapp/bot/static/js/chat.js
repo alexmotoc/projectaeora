@@ -12,6 +12,31 @@ jQuery(function ($) {
     };
 });
 
+function topPerformers(card) {
+    var reply = "<div class='bubble-interactive received'>" +
+                  "<div class='card white'>" +
+                    "<div class='card-content black-text'>" +
+                      "<span class='card-title'>" + card["title"] + "</span>" +
+                      "<table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th></tr></thead>" +
+                      "<tbody>";
+
+    card["companies"].forEach(function(obj) {
+        reply += "<tr><td>" + obj.name + "</td><td>" + obj.price +"</td>";
+
+        if (obj.percentage_change[0] == '+') {
+            reply += "<td class='green-text'>" + obj.percentage_change + "</td>";
+        } else {
+            reply += "<td class='red-text'>" + obj.percentage_change + "</td>";
+        }
+
+        reply += "</tr>";
+    });
+
+    reply += "</tbody></table></div></div></div>";
+
+    return reply;
+}
+
 function createReply(voice, data) {
     if (voice) {
         var synth = window.speechSynthesis;
@@ -35,26 +60,11 @@ function createReply(voice, data) {
         case "news":
             break;
         case "top":
-            var reply = "<div class='bubble-interactive received'>" +
-                          "<div class='card white'>" +
-                            "<div class='card-content black-text'>" +
-                              "<span class='card-title'>" + card["title"] + "</span>" +
-                              "<table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th></tr></thead>" +
-                              "<tbody>";
-
-            card["companies"].forEach(function(obj) {
-                reply += "<tr><td>" + obj.name + "</td><td>" + obj.price +"</td>";
-
-                if (obj.percentage_change[0] == '+') {
-                    reply += "<td class='green-text'>" + obj.percentage_change + "</td>";
-                } else {
-                    reply += "<td class='red-text'>" + obj.percentage_change + "</td>";
-                }
-
-                reply += "</tr>";
-            });
-
-            reply += "</tbody></table></div></div></div>";
+            var reply = topPerformers(card);
+            break;
+        case "risers&fallers":
+            var reply = topPerformers(card['risers']);
+            reply += topPerformers(card['fallers']);
             break;
         case "revenue":
             var reply = "<div class = 'bubble-interactive received'>" +

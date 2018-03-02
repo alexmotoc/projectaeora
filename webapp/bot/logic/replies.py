@@ -3,7 +3,35 @@ import html2text
 from textblob import TextBlob
 import requests
 import bs4
+import os
 
+
+def get_stopwords():
+    #source=http://xpo6.com/list-of-english-stop-words/
+    filepath = os.path.dirname(__file__) + '/stopwords.txt' 
+    stopwords = list() 
+    with open(filepath) as fp:  
+        line = fp.readline()
+        while line:
+            stopwords.append(line.strip())
+            line = fp.readline()
+    return stopwords
+
+def get_keywords(article):
+    stopwords = get_stopwords()
+    words = article.words
+    non_stopwords = list()
+    for word in words:
+        if word.lower() not in stopwords:
+            non_stopwords.append(word.lower())
+    words_sorted_by_frequency = sorted(non_stopwords,key=non_stopwords.count,reverse=True)
+    keywords = set()
+    for word in words_sorted_by_frequency:
+        if len(keywords)<3:
+            keywords.add(word.title())
+        else:
+            break
+    return list(keywords)
 
 def big_movers_card(top5, risers=True):
     """
@@ -49,20 +77,21 @@ def big_movers_card(top5, risers=True):
 
     return big_movers
 
-def get_summary_and_sentiment(url, characters):
+def get_analysis(url, characters):
     response = requests.get(url)
     if (response.status_code == 200):
         soup = bs4.BeautifulSoup(response.text, 'lxml') #, 'lxml')
         article = html2text.html2text(soup.find('html').get_text()).split("/**/")[1]
         summary = article.replace("\n", " ")[:characters]+"..." 
         blob = TextBlob(article)
+        keywords = get_keywords(blob)
         if blob.sentiment.polarity > 0:
-            return summary, "positive"
+            return summary, "positive", keywords 
         elif blob.sentiment.polarity == 0:
-            return summary, "neutral"
+            return summary, "neutral", keywords
         else:
-            return summary, "negative"
-    return "No summary available", "none"
+            return summary, "negative", keywords        
+    return "No summary available", "none", set()
 
 def news_reply(lse_list, yahoo_list):
 
@@ -74,7 +103,7 @@ def news_reply(lse_list, yahoo_list):
         row["url"] = el.url
         row["source"] = el.source
         row["impact"] = el.impact
-        row["summary"], row["sentiment"] = get_summary_and_sentiment(el.url, 250)
+        row["summary"], row["sentiment"],row["keywords"] = get_analysis(el.url, 250)
         lse_news.append(row)
 
     yahoo_news = []

@@ -54,7 +54,7 @@ function createReply(voice, data) {
                     reply += "<p class='red-text'>NEGATIVE</p>"
                 }
                 reply += "<p>" + obj.summary+ "</p>" + 
-                       "<blockquote><div class='chip'>finance</div><div class='chip'>oil</div><div class='chip'>petrol</div></blockquote>" +
+                       "<blockquote><div class='chip'>"+obj.keywords[0]+"</div><div class='chip'>"+obj.keywords[1]+"</div><div class='chip'>"+obj.keywords[2]+"</div></blockquote>" +
                        "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
                        "</div></div></div>";
             });

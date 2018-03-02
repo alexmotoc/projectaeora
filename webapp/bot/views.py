@@ -47,8 +47,6 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
-            print(r)
-
             response = defaultdict()
 
             # SubSector must come before Sector!

@@ -79,30 +79,26 @@ function createReply(voice, data) {
     if (data['suggestions'] != null) {
         var suggestions = data['suggestions']
 
+        var suggestion_div = '<div class="bubble-interactive received" id="suggestions">';
+
         for (i = 0; i < suggestions.length; i++) {
-            if (i == 0) {
-                $("#chat-history").append(
-                '<div class="bubble-interactive received">'
-                );
-            }
-
-            $("#chat-history div.received:last").append(
-                  '<div class="waves-effect suggestion-chip z-depth-2">' +
-                  '<span><a class="grey-text text-darken-2" >' + suggestions[i] + '</a></span>' +
-                  '</div>'
-            );
-
-            if (i == suggestions.length - 1) {
-                $("#chat-history").append(
-                '</div">'
-                );
-            }
+            suggestion_div +=
+            '<div class="waves-effect suggestion-chip z-depth-2">' +
+              '<span><a class="grey-text text-darken-2" >' + suggestions[i] + '</a></span>' +
+            '</div>';
         }
 
+        suggestion_div += '</div">';
+
+        $("#chat-history").append(suggestion_div);
 
         $(".suggestion-chip").on('click', function(e) {
             var suggestion = $($($(e.target)).contents()[0]).text();
             addQuery(suggestion);
+
+            if ($('#suggestions').length) {
+                $('#suggestions').remove();
+            }
         })
     }
 

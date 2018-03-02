@@ -49,6 +49,12 @@ def get_analysis(url, characters):
             return summary, "negative", keywords        
     return "No summary available", "none", set()
 
+#to_english determines the english word that will be substituted for the attribute name
+to_english = {"bid": "bid", "offer": "offer", "sector": "sector", "sub_sector": "sub-sector",
+"high": "high", "low": "low", "diff": "change", "per_diff": "percentage change",
+"last_close_value": "last close", "last_close_date": "last close date", "revenue": "revenue",
+"market_cap": "market cap", "volume": "volume", "price": "price"}
+
 def big_movers_card(top5, risers=True):
     """
     Returns a dictionary containing the layout of the big movers card tables.
@@ -103,11 +109,11 @@ def news_reply(lse_list, yahoo_list):
         row["url"] = el.url
         row["source"] = el.source
         row["impact"] = el.impact
-        row["summary"], row["sentiment"],row["keywords"] = get_analysis(el.url, 250)
+        row["summary"], row["sentiment"], row["keywords"] = get_analysis(el.url, 250)
         lse_news.append(row)
 
     yahoo_news = []
-    for el in yahoo_list:
+    for i in financial_news['YAHOO']:
         row = {}
         row["date"] = el.date
         row["headline"] = el.headline
@@ -144,11 +150,6 @@ def get_company_reply(company, attribute):
     ,"last_close_date": "last_close_value", "revenue": "market_cap"
     ,"market_cap": "volume", "volume" : "price", "price": "per_diff"}
 
-    #to_english determines the english word that will be substituted for the attribute name
-    to_english = {"bid": "bid", "offer": "offer", "sector": "sector", "sub_sector": "sub-sector",
-    "high": "high", "low": "low", "diff": "change", "per_diff": "percentage change",
-    "last_close_value": "last close", "last_close_date": "last close date", "revenue": "revenue",
-    "market_cap": "market cap", "volume": "volume", "price": "price"}
     secondary_attribute = related_attribute[attribute]
 
     try:
@@ -167,6 +168,7 @@ def get_company_reply(company, attribute):
 
 def sector_reply(sector, sector_attribute):
     data = getattr(sector, sector_attribute)
+
     if (sector_attribute == "highest_price" or sector_attribute == "lowest_price"):
         data = getattr(sector, sector_attribute)
         sector_name = sector.name
@@ -227,5 +229,69 @@ def revenue_reply(company):
         row['date'] = company.revenue[i][0]
         row['revenue'] = company.revenue[i][1]
         card['revenue_data'].append(row)
+
+    return response
+
+def daily_briefings(companies, sectors, attributes):
+    response = {}
+
+    if not companies and not sectors:
+        message = 'You are not currently tracking any companies or sectors. ' \
+                  'Please add some in the settings page!'
+        response['text'] = message
+        response['speech'] = message
+        response['type'] = 'error'
+    elif not attributes:
+        message = 'You have not selected any attributes to be displayed. ' \
+                  'Please add some in the settings page!'
+        response['text'] = message
+        response['speech'] = message
+        response['type'] = 'error'
+    else:
+        briefing = defaultdict()
+
+        company_attributes = {"current_price": "price", "daily_high": "high", "daily_low": "low",
+                             "percentage_change": "per_diff", "news": "news"}
+
+        company_cards = []
+        # Build company cards
+        for company in companies:
+            card = {'name': company.name, 'code': company.code, 'date': company.date}
+            for attribute in attributes:
+                attr = company_attributes[attribute]
+                try:
+                    value = getattr(company.stock, attr)
+                except AttributeError:
+                    value = getattr(company, attr)
+
+                if attr == 'news':
+                    card[attr] = news_reply(value)
+                else:
+                    card[attr] = value
+            company_cards.append(card)
+
+        briefing['companies'] = company_cards
+
+        # Get sector news
+        sector_attributes = ['highest_price', 'lowest_price', 'rising', 'falling']
+        sector_cards = []
+
+        for sector in sectors:
+            card = {}
+
+            for attribute in sector_attributes:
+                card[attribute] = sector_reply(sector, attribute)
+
+            # Check if user wants sector news
+            if 'news' in attributes:
+                card['news'] = news_reply(sector.news)
+
+            sector_cards.append(card)
+
+        briefing['sectors'] = sector_cards
+
+        response['speech'] = 'Here is the latest information I could find!'
+        response['text'] = briefing
+        response['type'] = 'briefing'
 
     return response

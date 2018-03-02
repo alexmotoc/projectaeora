@@ -12,12 +12,13 @@ jQuery(function ($) {
     };
 });
 
-function createReply(voice, data) {
+function createReply(history, voice, data) {
     if (voice) {
         var synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(data['speech']);
         synth.speak(utterThis);
     }
+
     var card = data["text"];
     switch(data["type"]) {
         case "company":
@@ -106,10 +107,16 @@ function createReply(voice, data) {
                               "<span class = 'card-title'>" + card["title"] + "</span>" +
                               "<table class = 'striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
                               "<tbody>";
+
             card["revenue_data"].forEach(function(obj) {
                 reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td><tr>";
             });
+
             reply += "</tbody></table></div></div></div>";
+            break;
+        case "briefing":
+            console.log(data);
+            var reply = "";
             break;
         default:
             var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["text"] + "</span></div>";
@@ -117,7 +124,10 @@ function createReply(voice, data) {
 
     $("#chat-history").append(reply);
     $(".received").last().removeClass("scale-out").addClass("scale-in");
-    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+    if (!history) {
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+    }
 }
 
 function getImpact(value) {
@@ -191,6 +201,15 @@ $(document).ready(function() {
 
     $('.tooltipped').tooltip({delay: 50});
 
+    var voice;
+
+    $.ajax({
+        url: '/ajax/getvoice',
+        success: function(result) {
+            voice = result.voice;
+        }
+    });
+
     var csrftoken = $.cookie('csrftoken');
 
     function csrfSafeMethod(method) {
@@ -206,7 +225,7 @@ $(document).ready(function() {
         }
     });
 
-    var fetchReply = function(query) {
+    var fetchReply = function(query, history, voice) {
         return $.ajax({
             url: "/chat/",
             type: "POST",
@@ -215,7 +234,8 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $("#buffering").remove();
-                createReply(true, data);
+
+                createReply(false, voice, data);
             },
         });
     }
@@ -289,9 +309,8 @@ $(document).ready(function() {
 
                 recognition.onspeechend = function(event) {
                     recognition.abort();
-                    // $("#send-voice").removeClass("pulse");
                     processingQuery();
-                    fetchReply(finalTranscript);
+                    fetchReply(finalTranscript, voice);
                 }
 
                 recognition.onend = function(event) {
@@ -307,13 +326,21 @@ $(document).ready(function() {
 
     $("#ask-question").submit(function(e) {
         e.preventDefault();
-        var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out'><span class='white-text'>" + $('#id_question').val() + "</span></div>";
+
+        var now = new Date();
+        var time = now.getHours() + ":" + now.getMinutes();
+
+        var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out tooltipped'" +
+                    "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
+                    "<span class='white-text'>" + $('#id_question').val() + "</span></div>";
+
         $("#chat-history").append(query);
+        $('.tooltipped').tooltip({delay: 50});
         $(".sent").last().removeClass("scale-out").addClass("scale-in");
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
         processingQuery();
-        fetchReply($('#id_question').val());
+        fetchReply($('#id_question').val(), false, false);
         $("#id_question").val("");
     });
 });

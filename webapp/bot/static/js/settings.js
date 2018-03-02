@@ -19,14 +19,26 @@ $(document).ready(function() {
     $.ajax({
         url: '/ajax/getcompanies',
         success: function(result) {
-            var data = {};
-            for (var key in eval(result)) {
-                data[key] = null;
+            var companies = {};
+            for (var key in eval(result['companies'])) {
+                companies[key] = null;
             }
 
-            $('#id_company').autocomplete({
-                data: data,
-                limit: 10
+            var saved_companies = [];
+
+            result["saved_companies"].forEach(function(obj) {
+                saved_companies.push({tag: obj.name});
+            });
+
+            $("#track-companies").material_chip({
+                data: saved_companies,
+                placeholder: "Track companies",
+                secondaryPlaceholder: "+ Add company",
+                autocompleteOptions: {
+                    data: companies,
+                    limit: Infinity,
+                    minLength: 1
+                }
             });
         }
     });
@@ -34,16 +46,48 @@ $(document).ready(function() {
     $.ajax({
         url: '/ajax/getsectors',
         success: function(result) {
-          var data = {};
-          for (var key in eval(result)) {
-              data[key] = null;
+          var sectors = {};
+          for (var key in eval(result['sectors'])) {
+              sectors[key] = null;
           }
 
-          $('#id_sector').autocomplete({
-              data: data,
-              limit: 10
+          var saved_sectors = [];
+
+          result["saved_sectors"].forEach(function(obj) {
+              saved_sectors.push({tag: obj.name});
+          });
+
+          $("#track-sectors").material_chip({
+              data: saved_sectors,
+              placeholder: "Track sectors",
+              secondaryPlaceholder: "+ Add sector",
+              autocompleteOptions: {
+                  data: sectors,
+                  limit: Infinity,
+                  minLength: 1
+              }
           });
         }
+    });
+
+    $("#track-companies").on("chip.add", function(e, chip) {
+        var company_tags = $("#id_companies").val();
+        $("#id_companies").val(company_tags + ", " + chip.tag);
+    });
+
+    $("#track-sectors").on("chip.add", function(e, chip) {
+        var sector_tags = $("#id_sectors").val();
+        $("#id_sectors").val(sector_tags + ", " + chip.tag);
+    });
+
+    $("#track-companies").on("chip.delete", function(e, chip) {
+        var company_tags = $("#id_companies").val();
+        $("#id_companies").val(company_tags.replace(chip.tag, "").replace(", ", ""));
+    });
+
+    $("#track-sectors").on("chip.delete", function(e, chip) {
+        var sector_tags = $("#id_sectors").val();
+        $("#id_sectors").val(sector_tags.replace(chip.tag, "").replace(", ", ""));
     });
 
     $("#preferences-form").submit(function(e) {
@@ -52,7 +96,7 @@ $(document).ready(function() {
         $.ajax({
             url: "/settings/",
             type: "POST",
-            data: {},
+            data: $("#preferences-form").serialize(),
             success: function(result) {
                 Materialize.toast(result.status, 3000, 'rounded');
             }

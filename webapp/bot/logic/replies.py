@@ -159,21 +159,40 @@ def sector_reply(sector, sector_attribute):
         movers['type'] = 'top'
         return movers
 
-def revenue_reply(company):
+def revenue_reply(company, date_period):
     response = {}
 
     card = {}
-    card['title'] = "Revenue Data for " + company.name
+    card['title'] = company.name
     card['revenue_data'] = list()
 
     response['speech'] = "Here is the revenue data for " + company.name
     response['type'] = "revenue"
     response['text'] = card
 
-    for i in range(len(company.revenue)):
-        row = {}
-        row['date'] = company.revenue[i][0]
-        row['revenue'] = company.revenue[i][1]
-        card['revenue_data'].append(row)
-        
+    valid_date = False
+
+    if not date_period:
+        valid_date = True
+
+        for revenue in company.revenue:
+            row = {}
+            row['date'] = revenue[0]
+            row['revenue'] = revenue[1]
+            card['revenue_data'].append(row)
+    else:
+        for revenue in company.revenue:
+            if revenue[0][-2:] == date_period[2:4]:
+                valid_date = True
+                row = {}
+                row['date'] = revenue[0]
+                row['revenue'] = revenue[1]
+                card['revenue_data'].append(row)
+                break
+
+    if not valid_date:
+        response['speech'] = "I'm sorry, I couldn't find the data you were looking for."
+        response['text'] = "I'm sorry, I couldn't find the data you were looking for."
+        response['type'] = 'error'
+
     return response

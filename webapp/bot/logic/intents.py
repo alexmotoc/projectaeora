@@ -27,7 +27,7 @@ def footsie_intent(r):
             return replies.news_reply(scraper.get_financial_news_data(company_code), scraper.get_yahoo_news_data(company_code))
         elif attribute == "revenue":
             company = scraper.get_company_data(company_code)
-            return replies.revenue_reply(company)
+            return replies.revenue_reply(company, r['result']['parameters']['date-period'])
         else:
             company = scraper.get_company_data(company_code)
             return replies.get_company_reply(company, attribute)
@@ -55,16 +55,18 @@ def sector_query_intent(r, is_sector):
             lse_news = list()
             for n in company.news:
                 lse_news.append(n)
-                lse_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+            lse_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
             yahoo_news = list()
             for n in scraper.get_yahoo_news_data(company.code):
                 yahoo_news.append(n)
-                yahoo_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+            yahoo_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
             return replies.news_reply(lse_news, yahoo_news)
     else:
         return replies.sector_reply(sector, sector_attribute)
 
 def top_risers_intent(r):
+    response = {}
+    
     if r['result']['parameters']['rise_fall'] == '':
         return r['result']['fulfillment']['speech']
     else:
@@ -78,7 +80,10 @@ def top_risers_intent(r):
         else: #get both
             risers = scraper.get_top5()
             fallers = scraper.get_top5(False)
-            response = "Top Risers:\n"+ scraper.get_top5(True)
-            response += "\nTop Fallers:\n" +scraper.get_top5(False)
+            risers_response = replies.big_movers_card(risers)
+            fallers_response = replies.big_movers_card(fallers, False)
+            response['speech'] = risers_response['speech'] + ' ' + fallers_response['speech']
+            response['type'] = 'risers&fallers'
+            response['text'] = {'risers': risers_response['text'], 'fallers': fallers_response['text']}
 
     return response

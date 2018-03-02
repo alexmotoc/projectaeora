@@ -12,6 +12,31 @@ jQuery(function ($) {
     };
 });
 
+function topPerformers(card) {
+    var reply = "<div class='bubble-interactive received'>" +
+                  "<div class='card white'>" +
+                    "<div class='card-content black-text'>" +
+                      "<span class='card-title'>" + card["title"] + "</span>" +
+                      "<table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th></tr></thead>" +
+                      "<tbody>";
+
+    card["companies"].forEach(function(obj) {
+        reply += "<tr><td>" + obj.name + "</td><td>" + obj.price +"</td>";
+
+        if (obj.percentage_change[0] == '+') {
+            reply += "<td class='green-text'>" + obj.percentage_change + "</td>";
+        } else {
+            reply += "<td class='red-text'>" + obj.percentage_change + "</td>";
+        }
+
+        reply += "</tr>";
+    });
+
+    reply += "</tbody></table></div></div></div>";
+
+    return reply;
+}
+
 function createReply(voice, data) {
     if (voice) {
         var synth = window.speechSynthesis;
@@ -26,8 +51,8 @@ function createReply(voice, data) {
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["name"] + "</span>" +
                               "<p class='grey-text code-time'>" + card["code"] + "<br>" + card["date"] + "</p>" +
-                              "<p class='black-text price-impact'" + getStyle(card['primary_type'], card['primary']) + card['primary'] + getUnits(card['primary_type']) +
-                              "<br>" + getStyle(card['secondary_type'], card['secondary']) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" + 
+                              "<p class='price-impact'>" + getStyle(card['primary_type'], card["primary"]) + card['primary'] + getUnits(card['primary_type']) +
+                              "<br>" + getStyle(card['secondary_type'], card["secondary"]) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" +
                             "</div>" +
                           "</div>" +
                         "</div>";
@@ -35,37 +60,24 @@ function createReply(voice, data) {
         case "news":
             break;
         case "top":
+            var reply = topPerformers(card);
+            break;
+        case "risers&fallers":
+            var reply = topPerformers(card['risers']);
+            reply += topPerformers(card['fallers']);
+            break;
+        case "revenue":
             var reply = "<div class='bubble-interactive received'>" +
                           "<div class='card white'>" +
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["title"] + "</span>" +
-                              "<table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th></tr></thead>" +
-                              "<tbody>";
+                              "<table class='striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
+                              "</tr></thead><tbody>";
 
-            card["companies"].forEach(function(obj) {
-                reply += "<tr><td>" + obj.name + "</td><td>" + obj.price +"</td>";
-
-                if (obj.percentage_change[0] == '+') {
-                    reply += "<td class='green-text'>" + obj.percentage_change + "</td>";
-                } else {
-                    reply += "<td class='red-text'>" + obj.percentage_change + "</td>";
-                }
-
-                reply += "</tr>";
-            });
-
-            reply += "</tbody></table></div></div></div>";
-            break;
-        case "revenue":
-            var reply = "<div class = 'bubble-interactive received'>" +
-                          "<div class = 'card white'>" +
-                            "<div class = 'card-content black-text'>" +
-                              "<span class = 'card-title'>" + card["title"] + "</span>" +
-                              "<table class = 'striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
-                              "<tbody>";
             card["revenue_data"].forEach(function(obj) {
-                reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td><tr>";
+                reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td></tr>";
             });
+
             reply += "</tbody></table></div></div></div>";
             break;
         default:
@@ -74,16 +86,66 @@ function createReply(voice, data) {
 
     $("#chat-history").append(reply);
     $(".received").last().removeClass("scale-out").addClass("scale-in");
+
+    // Display suggestions
+    if (data['suggestions'] != null) {
+        var suggestions = data['suggestions']
+
+        var suggestion_div = '<div class="bubble-interactive received" id="suggestions">';
+
+        for (i = 0; i < suggestions.length; i++) {
+            suggestion_div +=
+            '<div class="waves-effect suggestion-chip z-depth-2">' +
+              '<span><a class="grey-text text-darken-2" >' + suggestions[i] + '</a></span>' +
+            '</div>';
+        }
+
+        suggestion_div += '</div">';
+
+        $("#chat-history").append(suggestion_div);
+
+        $(".suggestion-chip").on('click', function(e) {
+            var suggestion = $($($(e.target)).contents()[0]).text();
+            addQuery(suggestion);
+        })
+    }
+
+    if (voice) {
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+    }
+}
+
+function addQuery(question) {
+    if ($('#suggestions').length) {
+        $('#suggestions').remove();
+    }
+
+    var now = new Date();
+    var time = now.getHours() + ":" + now.getMinutes();
+
+    var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out tooltipped'" +
+                "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
+                "<span class='white-text'>" + question + "</span></div>";
+
+    $("#chat-history").append(query);
+    $('.tooltipped').tooltip({delay: 50});
+    $(".sent").last().removeClass("scale-out").addClass("scale-in");
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+    processingQuery();
+    fetchReply(question);
 }
 
 function getStyle(attribute, value){
-    if (attribute == "per_diff"){
+    if (attribute == "per_diff" || attribute == "diff"){
         if (value.charAt(0) == "+"){
             return "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>"
         }
         else if (value.charAt(0) == "-"){
             return "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>"
+        }
+        else{
+          return "<span class='black-text->'"
         }
     }
     else if (attribute == "high"){
@@ -139,6 +201,39 @@ function getUnits(attribute){
     }
 }
 
+function processingQuery() {
+    var bufferingCircle = "<div class='preloader-wrapper small active'>" +
+                              "<div class='spinner-layer spinner-blue-only'>" +
+                                "<div class='circle-clipper left'>" +
+                                  "<div class='circle'></div>" +
+                                "</div><div class='gap-patch'>" +
+                                  "<div class='circle'></div>" +
+                                "</div><div class='circle-clipper right'>" +
+                                  "<div class='circle'></div>" +
+                                "</div>" +
+                              "</div>" +
+                            "</div>";
+    var bufferingBubble = "<div id='buffering' class='bubble-interactive received'>" + bufferingCircle + "</div>";
+    $("#chat-history").append(bufferingBubble);
+    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+    return $("#id_question").val();
+}
+
+var fetchReply = function(query) {
+    return $.ajax({
+        url: "/chat/",
+        type: "POST",
+        data: {
+            question: query
+        },
+        success: function(data) {
+            $("#buffering").remove();
+            createReply(true, data);
+        },
+    });
+}
+
 $(document).ready(function() {
     $('.scrollable-container').hScroll();
 
@@ -158,39 +253,6 @@ $(document).ready(function() {
             }
         }
     });
-
-    var fetchReply = function(query) {
-        return $.ajax({
-            url: "/chat/",
-            type: "POST",
-            data: {
-                question: query
-            },
-            success: function(data) {
-                $("#buffering").remove();
-                createReply(true, data);
-            },
-        });
-    }
-
-    function processingQuery() {
-        var bufferingCircle = "<div class='preloader-wrapper small active'>" +
-                                  "<div class='spinner-layer spinner-blue-only'>" +
-                                    "<div class='circle-clipper left'>" +
-                                      "<div class='circle'></div>" +
-                                    "</div><div class='gap-patch'>" +
-                                      "<div class='circle'></div>" +
-                                    "</div><div class='circle-clipper right'>" +
-                                      "<div class='circle'></div>" +
-                                    "</div>" +
-                                  "</div>" +
-                                "</div>";
-        var bufferingBubble = "<div id='buffering' class='bubble-interactive received'>" + bufferingCircle + "</div>";
-        $("#chat-history").append(bufferingBubble);
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-
-        return $("#id_question").val();
-    }
 
     $("#send-text").click(function(e) {
         if ($("#id_question").val() != "") {
@@ -260,13 +322,7 @@ $(document).ready(function() {
 
     $("#ask-question").submit(function(e) {
         e.preventDefault();
-        var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out'><span class='white-text'>" + $('#id_question').val() + "</span></div>";
-        $("#chat-history").append(query);
-        $(".sent").last().removeClass("scale-out").addClass("scale-in");
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-
-        processingQuery();
-        fetchReply($('#id_question').val());
+        addQuery($('#id_question').val())
         $("#id_question").val("");
     });
 });

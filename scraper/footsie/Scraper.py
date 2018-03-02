@@ -151,7 +151,7 @@ class Scraper:
             name = name_cell.text.strip().split('\r')[1].strip()
             market_cap = soup.find('td', text='Market cap(in millions)*').findNext('td').string
 
-            revenue = dict()
+            revenue = list()
 
             revenue_table = soup.findAll(attrs={"summary" : "Fundamentals"})[0]
             head = revenue_table.find('thead')
@@ -162,7 +162,7 @@ class Scraper:
             values = row.findAll('td')
 
             for i in range(1, len(dates)):
-                revenue[dates[i].string.strip()] = values[i].string.strip()
+                revenue.append((dates[i].string.strip(), values[i].string.strip()))
 
             sector_tag = soup.find('td', text='FTSE sector')
             sector = sector_tag.findNext('td')
@@ -190,7 +190,7 @@ class Scraper:
 
             # Process variance cell
             per_diff = variance.text[:variance.text.find('%')]
-            diff = variance.text[variance.text.find('%') + 1:]
+            diff = variance.findNext('span').text.replace("(","").replace(")","").replace("\n","").strip()
 
             # Get date information
             disclaimer = soup.find('div', {'class': 'disclaimer_gray'})
@@ -252,7 +252,8 @@ class Scraper:
         # http://www.londonstockexchange.com/exchange/prices-and-markets/stocks/exchange-insight/news-analysis.html?fourWayKey=GB0031348658GBGBXSET1
 
         response = requests.get(url)
-        financial_news = list()
+        financial_news = defaultdict(list)
+        lse_news = list()
 
         if response.status_code == 200:
             soup = bs4.BeautifulSoup(response.content, "lxml")
@@ -277,7 +278,15 @@ class Scraper:
 
                 news = News.News(date, headline, url, source, impact)
 
-                financial_news.append(news)
+                lse_news.append(news)
+
+        lse_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+
+        yahoo_news = self.get_yahoo_news_data(code)
+        yahoo_news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+
+        financial_news['LSE'] = lse_news
+        financial_news['YAHOO'] = yahoo_news
 
         return financial_news
 

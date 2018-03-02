@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from .forms import QueryForm, UserPreferencesForm
 from bot.logic import intents
-from .models import Response
+from .models import Response, UserPreferences
 
 from collections import defaultdict
 
@@ -23,6 +23,14 @@ def index(request):
 def chat(request):
     history = Response.objects.all()
     response = {}
+
+    preferences = UserPreferences.objects.all().first()
+    attributes = []
+
+    for field in preferences._meta.get_fields():
+        if field.get_internal_type() == 'BooleanField' \
+           and field.name != 'voice' and getattr(preferences, field.name):
+                attributes.append(field.name)
 
     if request.method == 'POST':
         form = QueryForm(request.POST)
@@ -47,19 +55,26 @@ def chat(request):
 
             response = defaultdict()
 
+            # SubSector must come before Sector!
+            intent = r['result']['metadata']['intentName']
+
             if r['result']['action'] == "input.unknown":
                 response['text'] = r['result']['fulfillment']['speech']
                 response['type'] = 'input.unknown'
                 response['speech'] = r['result']['fulfillment']['speech']
             else:
-                if r['result']['metadata']['intentName'] == 'Footsie Intent':
+                if 'Footsie' in intent:
                     response = intents.footsie_intent(r)
-                elif r['result']['metadata']['intentName'] == 'SectorQuery':
-                    response = intents.sector_query_intent(r, True)
-                elif r['result']['metadata']['intentName'] == 'SubSectorQuery':
+                elif 'SubSectorQuery' in intent:
                     response = intents.sector_query_intent(r, False)
-                elif r['result']['metadata']['intentName'] == 'TopRisers':
+                elif 'SectorQuery' in intent:
+                    response = intents.sector_query_intent(r, True)
+                elif 'TopRisers' in intent:
                     response = intents.top_risers_intent(r)
+                elif 'Daily Briefing' in intent:
+                    response = intents.daily_briefings_intent(preferences.companies,
+                               preferences.sectors, attributes)
+
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
 
@@ -75,8 +90,13 @@ def chat(request):
 def settings(request):
     status = None
 
+    try:
+        preferences = UserPreferences.objects.all().first()
+    except:
+        preferences = None
+
     if request.method == 'POST':
-        form = UserPreferencesForm(request.POST)
+        form = UserPreferencesForm(request.POST, instance=preferences)
 
         if form.is_valid():
             form.save()
@@ -84,7 +104,7 @@ def settings(request):
         else:
             status = "Preferences couldn't be saved!"
     else:
-        form = UserPreferencesForm()
+        form = UserPreferencesForm(instance=preferences)
 
     if request.is_ajax():
         return JsonResponse({"status": status})
@@ -92,11 +112,36 @@ def settings(request):
         return render(request, 'settings.html', {'form': form})
 
 def get_companies(request):
+    saved_companies = []
+
+    try:
+        preferences = UserPreferences.objects.all().first()
+        for company in preferences.companies.split(', '):
+            if company:
+                saved_companies.append({"name": company})
+    except:
+        preferences = None
+
     with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/profiles.json') as f:
         companies = json.load(f)
-        return JsonResponse(companies)
+        return JsonResponse({"companies": companies, "saved_companies": saved_companies})
 
 def get_sectors(request):
+    saved_sectors = []
+
+    try:
+        preferences = UserPreferences.objects.all().first()
+        for sector in preferences.sectors.split(', '):
+            if sector:
+                saved_sectors.append({"name": sector})
+    except:
+        preferences = None
+
     with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/sectors.json') as f:
         sectors = json.load(f)
-        return JsonResponse(sectors)
+        return JsonResponse({"sectors": sectors, "saved_sectors": saved_sectors})
+
+def get_voice_preference(request):
+    preferences = UserPreferences.objects.all().first()
+
+    return JsonResponse({"voice": preferences.voice})

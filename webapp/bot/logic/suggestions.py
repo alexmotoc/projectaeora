@@ -147,5 +147,10 @@ def add_suggestions(response, dialogflow_response):
 
         response["suggestions"] = suggestions
     # else about risers
+    else:
+        if dialogflow_response['result']['parameters']['rise_fall'] == "risers":
+            response["suggestions"] = ['What about the top fallers?']
+        elif dialogflow_response['result']['parameters']['rise_fall'] == "fallers":
+            response["suggestions"] = ['What about the top risers?']
 
     return response

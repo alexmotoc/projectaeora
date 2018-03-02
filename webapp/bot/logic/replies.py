@@ -37,8 +37,12 @@ def get_analysis(url, characters):
     response = requests.get(url)
     if (response.status_code == 200):
         soup = bs4.BeautifulSoup(response.text, 'lxml')
-        article = html2text.html2text(soup.find('html').get_text()).split("/**/")[1]
-        summary = article.replace("\n", " ")[:characters]+"..."
+        html_text = html2text.html2text(soup.find('html').get_text())
+        if "/**/" in html_text:
+            article = html_text.split("/**/")[1]
+            summary = article.replace("\n", " ")[:characters]+"..."
+        else:
+            return "No summary avaialble", "none", list()
         blob = TextBlob(article)
         keywords = get_keywords(blob)
         if blob.sentiment.polarity > 0:
@@ -47,7 +51,7 @@ def get_analysis(url, characters):
             return summary, "neutral", keywords
         else:
             return summary, "negative", keywords
-    return "No summary available", "none", set()
+    return "No summary available", "none", list()
 
 #to_english determines the english word that will be substituted for the attribute name
 to_english = {"bid": "bid", "offer": "offer", "sector": "sector", "sub_sector": "sub-sector",

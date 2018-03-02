@@ -63,6 +63,10 @@ def chat(request):
 
                 elif r['result']['metadata']['intentName'] == 'TopRisers':
                     response = intents.top_risers_intent(r)
+                else:
+                    response['text'] = r['result']['fulfillment']['speech']
+                    response['speech'] = r['result']['fulfillment']['speech']
+                    response['type'] = 'simple.response'
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
 

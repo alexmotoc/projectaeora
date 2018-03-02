@@ -60,6 +60,7 @@
 .price-impact {
     text-align: right;
     white-space: nowrap;
+}
 
 @media only screen and (min-width: 470px) {
     .price-impact {

@@ -33,6 +33,22 @@ def get_keywords(article):
             break
     return list(keywords)
 
+def get_analysis(url, characters):
+    response = requests.get(url)
+    if (response.status_code == 200):
+        soup = bs4.BeautifulSoup(response.text, 'lxml') #, 'lxml')
+        article = html2text.html2text(soup.find('html').get_text()).split("/**/")[1]
+        summary = article.replace("\n", " ")[:characters]+"..." 
+        blob = TextBlob(article)
+        keywords = get_keywords(blob)
+        if blob.sentiment.polarity > 0:
+            return summary, "positive", keywords 
+        elif blob.sentiment.polarity == 0:
+            return summary, "neutral", keywords
+        else:
+            return summary, "negative", keywords        
+    return "No summary available", "none", set()
+
 def big_movers_card(top5, risers=True):
     """
     Returns a dictionary containing the layout of the big movers card tables.
@@ -77,22 +93,6 @@ def big_movers_card(top5, risers=True):
 
     return big_movers
 
-def get_analysis(url, characters):
-    response = requests.get(url)
-    if (response.status_code == 200):
-        soup = bs4.BeautifulSoup(response.text, 'lxml') #, 'lxml')
-        article = html2text.html2text(soup.find('html').get_text()).split("/**/")[1]
-        summary = article.replace("\n", " ")[:characters]+"..." 
-        blob = TextBlob(article)
-        keywords = get_keywords(blob)
-        if blob.sentiment.polarity > 0:
-            return summary, "positive", keywords 
-        elif blob.sentiment.polarity == 0:
-            return summary, "neutral", keywords
-        else:
-            return summary, "negative", keywords        
-    return "No summary available", "none", set()
-
 def news_reply(lse_list, yahoo_list):
 
     lse_news = []
@@ -115,6 +115,8 @@ def news_reply(lse_list, yahoo_list):
         row["source"] = el.source
         row["impact"] = el.impact
         row["summary"] = el.description
+        row["sentiment"] = "none" 
+        row["keywords"] = list()
         yahoo_news.append(row)
 
     news = {"LSE": lse_news, "YAHOO": yahoo_news}

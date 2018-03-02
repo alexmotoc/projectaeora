@@ -47,18 +47,23 @@ function createReply(voice, data) {
                 if (obj.sentiment == "positive"){
                     reply += "<p class='green-text'>POSITIVE</p>"
                 }
-                else if (obj.sentiment == "neutral" || obj.sentiment == "none"){
+                else if (obj.sentiment == "neutral"){
                     reply += "<p class='grey-text'>NEUTRAL</p>"   
-                }
-                else{
+                }     
+                else if (obj.sentiment == "negative"){
                     reply += "<p class='red-text'>NEGATIVE</p>"
                 }
-                reply += "<p>" + obj.summary+ "</p>" + 
-                       "<blockquote><div class='chip'>"+obj.keywords[0]+"</div><div class='chip'>"+obj.keywords[1]+"</div><div class='chip'>"+obj.keywords[2]+"</div></blockquote>" +
-                       "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
-                       "</div></div></div>";
+                reply += "<p>" + obj.summary+ "</p>" 
+                if (obj.keywords.length == 3){
+                    reply += "<blockquote><div class='chip'>"+obj.keywords[0]+"</div><div class='chip'>"+obj.keywords[1]+"</div><div class='chip'>"+obj.keywords[2]+"</div></blockquote>"
+                }
+                reply += "<p class = 'grey-text'>Date published: " + obj.date + "</p>"
+                reply += "<p class = 'grey-text'>Source: " + obj.source + "</p>"
+                reply += "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
+                "</div></div></div>";
             });
 
+            //in theory we can soon delete this block of code
             card["YAHOO"].forEach(function(obj) {
                 // reply +=  "<div class='news-article'>" +
                 //    "<div class='card'>" +

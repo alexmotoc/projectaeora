@@ -1,3 +1,5 @@
 requests==2.18.4
 lxml=4.0.0
 BeautifulSoup4=4.6.0
+html2text=2018.1.9
+textblob=0.15.1

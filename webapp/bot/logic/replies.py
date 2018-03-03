@@ -27,7 +27,7 @@ def get_keywords(article):
     words_sorted_by_frequency = sorted(non_stopwords,key=non_stopwords.count,reverse=True)
     keywords = set()
     for word in words_sorted_by_frequency:
-        if len(keywords)<3:
+        if len(keywords)<5:
             keywords.add(word.title())
         else:
             break
@@ -42,7 +42,7 @@ def get_analysis(url, characters):
             article = html_text.split("/**/")[1]
             summary = article.replace("\n", " ")[:characters]+"..."
         else:
-            return "No summary avaialble", "none", list()
+            return "No summary available.", "none", list()
         blob = TextBlob(article)
         keywords = get_keywords(blob)
         if blob.sentiment.polarity > 0:
@@ -51,7 +51,7 @@ def get_analysis(url, characters):
             return summary, "neutral", keywords
         else:
             return summary, "negative", keywords
-    return "No summary available", "none", list()
+    return "No summary available.", "none", list()
 
 #to_english determines the english word that will be substituted for the attribute name
 to_english = {"bid": "bid", "offer": "offer", "sector": "sector", "sub_sector": "sub-sector",

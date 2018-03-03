@@ -1,5 +1,6 @@
 import datetime
 
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
 
@@ -32,6 +33,7 @@ class UserPreferences(models.Model):
     daily_low = models.BooleanField(default=True)
     percentage_change = models.BooleanField(default=True)
     news = models.BooleanField(default=False)
+    days_old = models.IntegerField(default=3, validators=[MaxValueValidator(14), MinValueValidator(1)]) # how old the news should be
 
     # Defaults to False = text, True = respond with voice.
     voice = models.BooleanField(default=False)

@@ -45,19 +45,29 @@ function createReply(history, voice, data) {
                 if (obj.impact != "-") {
                     reply += "<span>" + getImpact(obj.impact) + obj.impact + "</span>";
                 }
-                if (obj.sentiment == "positive"){
-                    reply += "<p class='green-text'>POSITIVE</p>"
+                // if (obj.sentiment == "positive"){
+                //     reply += "<p class='green-text'>Sentiment: Positive</p>"
+                // }
+                // else if (obj.sentiment == "neutral"){
+                //     reply += "<p class='grey-text'>Sentiment: Neutral</p>"
+                // }
+                // else if (obj.sentiment == "negative"){
+                //     reply += "<p class='red-text'>Sentiment: Negative</p>"
+                // }
+                reply += "<p>" + obj.summary+ "</p>"
+                reply += "<blockquote>"
+
+                if (obj.keywords.length == 5) {
+                    for (var i = 0; i < 5; i++) {
+                        try {
+                            reply += "<div class='chip'>" + obj.keywords[i] + "</div>"
+                        } catch(err) {
+                            break;
+                        }
+                    }
                 }
-                else if (obj.sentiment == "neutral"){
-                    reply += "<p class='grey-text'>NEUTRAL</p>"   
-                }     
-                else if (obj.sentiment == "negative"){
-                    reply += "<p class='red-text'>NEGATIVE</p>"
-                }
-                reply += "<p>" + obj.summary+ "</p>" 
-                if (obj.keywords.length == 3){
-                    reply += "<blockquote><div class='chip'>"+obj.keywords[0]+"</div><div class='chip'>"+obj.keywords[1]+"</div><div class='chip'>"+obj.keywords[2]+"</div></blockquote>"
-                }
+
+                reply += "</blockquote>"
                 reply += "<p class = 'grey-text'>Date published: " + obj.date + "</p>"
                 reply += "<p class = 'grey-text'>Source: " + obj.source + "</p>"
                 reply += "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
@@ -77,6 +87,7 @@ function createReply(history, voice, data) {
             });
 
             reply += "</section></div>";
+
             break;
         case "top":
             var reply = "<div class='bubble-interactive received'>" +
@@ -236,6 +247,7 @@ $(document).ready(function() {
                 $("#buffering").remove();
 
                 createReply(false, voice, data);
+                $('.scrollable-container').hScroll();
             },
         });
     }
@@ -344,4 +356,3 @@ $(document).ready(function() {
         $("#id_question").val("");
     });
 });
-

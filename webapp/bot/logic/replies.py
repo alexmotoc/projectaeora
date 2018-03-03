@@ -191,17 +191,11 @@ def sector_reply(sector, sector_attribute):
     elif sector_attribute == "rising" or sector_attribute == "falling":
         number_of_companies_in_sector = len(sector.companies)
         number_of_companies_moving_in_requested_direction = len(data)
-        speech = ""
 
         if number_of_companies_moving_in_requested_direction == 0:
             speech = "No "+sector.name+" companies are "+sector_attribute+". "
-            if sector_attribute == "rising":
-                sector_attribute = "falling"
-            else:
-                sector_attribute = "rising"
-            data = getattr(sector, sector_attribute)
-
-        speech += "The following "+sector.name+" companies are "+sector_attribute+". "
+        else:
+            speech = "The following "+sector.name+" companies are "+sector_attribute+". "
         companies = []
 
         for i in range(len(data)):
@@ -227,8 +221,12 @@ def sector_reply(sector, sector_attribute):
         card = defaultdict()
         card['title'] = str(len(data))+'/'+str(number_of_companies_in_sector)+' '+sector.name+' are '+sector_attribute
         card['companies'] = companies
-        movers['text'] = card
-        movers['type'] = 'top'
+        if number_of_companies_moving_in_requested_direction == 0:
+            movers['text'] = speech
+            movers['type'] = 'no-data'
+        else:
+            movers['text'] = card
+            movers['type'] = 'top'
 
         return movers
 

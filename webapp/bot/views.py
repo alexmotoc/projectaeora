@@ -175,12 +175,14 @@ def interests(request):
     except:
         preferences = UserPreferences.objects.create()
         preferences.save()
+    news_timeframe = preferences.days_old
     companies = preferences.companies
     sectors = preferences.sectors
     scraper = Scraper.Scraper()
     company_news_data = defaultdict()
     company_news_data['LSE'] = list()
     company_news_data['YAHOO'] = list()
+    #get news for tracked companies
     for company in companies.split(", "):
         financial_news_data = scraper.get_financial_news_data(company)
         company_news_data['LSE'] = company_news_data['LSE'] + financial_news_data['LSE']
@@ -189,11 +191,13 @@ def interests(request):
     sector_news_data = defaultdict()
     sector_news_data['LSE'] = list()
     sector_news_data['YAHOO'] = list()
+    #get news for tracked sectors
     for sector in sectors.split(", "):
         if len(sector) > 0:
             sector_news_data['LSE'] += scraper.get_sector_data(sector).news['LSE']
             sector_news_data['YAHOO'] += scraper.get_sector_data(sector).news['YAHOO']
     #sector_news = replies.news_reply(sector_news_data, 3)
+    #merge company and sector news, sort by date and remove duplicates
     all_news_data = defaultdict()
     all_news_data['LSE'] = list()
     all_news_data['YAHOO'] = list()
@@ -202,6 +206,6 @@ def interests(request):
     all_news_data['LSE'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)   
     all_news_data['YAHOO'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)
     all_news_data = remove_duplicates(all_news_data)
-    all_news = replies.news_reply(all_news_data, 3)
+    all_news = replies.news_reply(all_news_data, news_timeframe)
     data = {'companies': companies, 'sectors': sectors, 'all_news': all_news}
     return render(request, 'interests.html', data)

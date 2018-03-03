@@ -28,14 +28,47 @@
        <div class='card'>
          <div class='card-content'>
            <span class='card-title grey-text text-darken-4'>{{news.headline}}</span>
+
            <p>{{news.summary}}</p> 
-<p>Add keywords here</p>
+
+            <blockquote>
+            {% for keyword in news.keywords%}
+            <div class='chip'>{{keyword}}</div>
+            {% endfor %}
+            </blockquote>
+
+{% if news.impact != "-"%}
+  {% if news.impact.0 == "+"%}
+           <span class='green-text'>Impact: <i class='material-icons valign-icon'>trending_up</i>
+  {% elif news.impact.0 == "-" %}
+           <span class='red-text'><i class='material-icons valign-icon'>trending_down</i>
+  {% endif %}
+  {{news.impact}}</span>
+{% endif %}
+
+           {% if news.sentiment != "none" %}
+            <p class='grey-text'>Sentiment: 
+            {% if news.sentiment == "positive" %}
+            <span class='green-text'>Positive</span>
+            {% elif news.sentiment == "neutral" %}
+            <span class='grey-text'>Neutral</span>
+            {% elif news.sentiment == "negative" %}
+            <span class='red-text'>Negative</span>
+            {% endif %}
+            </p>
+           {% endif %}
+
+
+
             <p class = 'grey-text'>Date published: {{news.date}}</p>
             <p class = 'grey-text'>Source: {{news.source}}</p>
             <div class='card-action'><p><a href="{{news.url}}">Go to article</a></p></div>
-            </div></div></div>
+          </div>
+        </div>
+       </div>
   {% endfor %}
-            </section></div>
+       </section>
+     </div>
 
           </div>
         </div>

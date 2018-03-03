@@ -15,6 +15,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '/../../scraper'))
 
 from footsie import Scraper
+from datetime import datetime, timedelta
 
 # Create your views here.
 def index(request):
@@ -152,6 +153,22 @@ def get_voice_preference(request):
 
     return JsonResponse({"voice": preferences.voice})
 
+
+def remove_duplicates(news_data):
+    lastn = ""
+    for n in news_data['LSE']:
+        if lastn != "":
+            if n.url == lastn.url:
+                news_data['LSE'].remove(n)
+        lastn = n
+    lastn = ""
+    for n in news_data['YAHOO']:
+        if lastn != "":
+            if n.url == lastn.url:
+                news_data['YAHOO'].remove(n)
+        lastn = n
+    return news_data
+
 def interests(request):
     try:
         preferences = UserPreferences.objects.all().first()
@@ -168,11 +185,23 @@ def interests(request):
         financial_news_data = scraper.get_financial_news_data(company)
         company_news_data['LSE'] = company_news_data['LSE'] + financial_news_data['LSE']
         company_news_data['YAHOO'] = company_news_data['YAHOO'] + financial_news_data['YAHOO']   
-    company_news = replies.news_reply(company_news_data, 3)
-    #for sector in sectors:
-    #    sector_news_data['LSE'] += scraper.get_sector_data(sector).news['LSE']
-    #    sector_news_data['YAHOO'] += scraper.get_sector_data(sector.news['YAHOO']
-    #sector_news = replies.news_reply(sector.news, 3)
-    sectors = {"Banks", "Soft Drinks"}
-    data = {'companies': companies, 'sectors': sectors, 'company_news': company_news}
+    #company_news = replies.news_reply(company_news_data, 3)
+    sector_news_data = defaultdict()
+    sector_news_data['LSE'] = list()
+    sector_news_data['YAHOO'] = list()
+    for sector in sectors.split(", "):
+        if len(sector) > 0:
+            sector_news_data['LSE'] += scraper.get_sector_data(sector).news['LSE']
+            sector_news_data['YAHOO'] += scraper.get_sector_data(sector).news['YAHOO']
+    #sector_news = replies.news_reply(sector_news_data, 3)
+    all_news_data = defaultdict()
+    all_news_data['LSE'] = list()
+    all_news_data['YAHOO'] = list()
+    all_news_data['LSE'] = company_news_data['LSE'] + sector_news_data['LSE']
+    all_news_data['YAHOO'] = company_news_data['YAHOO'] + sector_news_data['YAHOO'] 
+    all_news_data['LSE'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)   
+    all_news_data['YAHOO'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)
+    all_news_data = remove_duplicates(all_news_data)
+    all_news = replies.news_reply(all_news_data, 3)
+    data = {'companies': companies, 'sectors': sectors, 'all_news': all_news}
     return render(request, 'interests.html', data)

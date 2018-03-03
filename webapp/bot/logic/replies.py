@@ -113,6 +113,7 @@ def news_reply(financial_news, days):
             row["summary"] = "No summary is available."
             row["sentiment"] = "none"
             row["keywords"] = list()
+            row["company"] = el.company
             lse_news.append(row)
 
     yahoo_news = []
@@ -129,6 +130,7 @@ def news_reply(financial_news, days):
             if row["summary"][-3:] != "...":
                 row["summary"] += "..."
             row["sentiment"], row["keywords"] = get_analysis(i.description)
+            row["company"] = i.company
             yahoo_news.append(row)
 
     news = lse_news + yahoo_news

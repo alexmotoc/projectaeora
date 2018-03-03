@@ -275,7 +275,7 @@ def daily_briefings(companies, sectors, attributes, days):
         company_cards = []
         # Build company cards
         for company in companies:
-            card = {'name': company.name, 'code': company.code, 'date': company.date}
+            card = {'name': company.name, 'code': company.code, 'price': company.stock.price, 'date': company.date}
             for attribute in attributes:
                 attr = company_attributes[attribute]
                 try:
@@ -286,7 +286,7 @@ def daily_briefings(companies, sectors, attributes, days):
                 if attr == 'news':
                     card[attr] = news_reply(value, days)
                 else:
-                    card[to_english[attr].title()] = value
+                    card[attr] = value
             company_cards.append(card)
 
         briefing['companies'] = company_cards
@@ -298,6 +298,8 @@ def daily_briefings(companies, sectors, attributes, days):
         for sector in sectors:
             card = {}
 
+            card['name'] = sector.name
+            
             for attribute in sector_attributes:
                 card[attribute] = sector_reply(sector, attribute)
 

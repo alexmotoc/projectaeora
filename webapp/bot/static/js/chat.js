@@ -12,17 +12,29 @@ jQuery(function ($) {
     };
 });
 
-function createReply(history, voice, data) {
+function appendReply(history, voice, data) {
     if (voice) {
         var synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(data['speech']);
         synth.speak(utterThis);
     }
 
+    var reply = createReply(data);
+
+    $("#chat-history").append(reply);
+
+    if (!history) {
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+    }
+}
+
+function createReply(data) {
     var card = data["text"];
+    var reply = '';
+
     switch(data["type"]) {
         case "company":
-            var reply =  "<div class='bubble-interactive received'>" +
+            reply +=  "<div class='bubble-interactive received'>" +
                           "<div class='card white'>" +
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["name"] + "</span>" +
@@ -34,7 +46,7 @@ function createReply(history, voice, data) {
                         "</div>";
             break;
         case "news":
-            var reply = "<div class='bubble-interactive received'><section class='scrollable-container'>";
+            reply += "<div class='bubble-interactive received'><section class='scrollable-container'>";
 
             card.forEach(function(obj) {
                 reply +=  "<div class='news-article'>" +
@@ -83,7 +95,7 @@ function createReply(history, voice, data) {
 
             break;
         case "top":
-            var reply = "<div class='bubble-interactive received'>" +
+            reply += "<div class='bubble-interactive received'>" +
                           "<div class='card white'>" +
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["title"] + "</span>" +
@@ -105,7 +117,7 @@ function createReply(history, voice, data) {
             reply += "</tbody></table></div></div></div>";
             break;
         case "revenue":
-            var reply = "<div class = 'bubble-interactive received'>" +
+            reply += "<div class = 'bubble-interactive received'>" +
                           "<div class = 'card white'>" +
                             "<div class = 'card-content black-text'>" +
                               "<span class = 'card-title'>" + card["title"] + "</span>" +
@@ -119,47 +131,70 @@ function createReply(history, voice, data) {
             reply += "</tbody></table></div></div></div>";
             break;
         case "briefing":
-            var reply;
-
             card['companies'].forEach(function(obj) {
-                reply += simpleReply("Here is the latest data on " + obj.name);
+                reply += simpleReply("Here is the latest data on " + obj.name + ".");
 
-                reply += "<div class='bubble-interactive received'>" +
-                              "<div class='card white'>" +
-                                "<div class='card-content black-text'>" +
-                                  "<span class='card-title'>" + obj.name + "</span>" +
-                                  "<table class='striped'><thead><tr>";
+                    reply += "<div class='bubble-interactive received'>" +
+                                  "<div class='card white'>" +
+                                    "<div class='card-content black-text'>" +
+                                      "<span class='card-title'>" + obj.name + "</span>" +
+                                      "<table class='striped'><thead><tr>";
 
-                for (var key in obj) {
-                    if (key != "code" && key != "name" && key != "date" && key != "news") {
-                        reply += "<th>" + key + "</th>";
-                    }
+                reply += "<tr>Price</tr>";
+
+                if ("high" in obj) {
+                    reply += "<tr>High</tr>";
+                }
+
+                if ("low" in obj) {
+                    reply += "<tr>Low</tr>";
+                }
+
+                if ("per_diff" in obj) {
+                    reply += "<tr>Percentage change</tr>";
                 }
 
                 reply += "</tr></thead><tbody><tr>";
 
-                for (var key in obj) {
-                    if (key != "code" && key != "name" && key != "date" && key != "news") {
-                        if (key == "Percentage Change") {
-                            reply += "<td>" + getImpact(obj[key]) + obj[key] + "</span></td>";
-                        } else {
-                            reply += "<td>" + obj[key] + "</td>";
-                        }
-                    }
+                reply += "<td>" + obj.price + "</td>";
+
+                if ("high" in obj) {
+                    reply += "<td>" + obj.high + "</td>";
+                }
+
+                if ("low" in obj) {
+                    reply += "<td>" + obj.low + "</td>";
+                }
+
+                if ("per_diff" in obj) {
+                    reply += "<td>" + getImpact(obj.per_diff) + obj.per_diff + "</span></td>";
                 }
 
                 reply += "</tr></tbody></table>";
                 reply += "<p class='grey-text'>" + obj.date + "</p>";
                 reply += "</div></div></div>";
 
-                reply += simpleReply("Here are the latest news on " + obj.name);
+                reply += simpleReply("Here are the latest news on " + obj.name + ".");
 
-                reply += createReply(false, false, obj.news);
+                reply += createReply(obj.news);
             });
 
             card['sectors'].forEach(function(obj) {
-                for (var key in obj) {
-                    reply += createReply(false, false, obj[key]);
+                reply += simpleReply("The highest price in " + obj.name + " is:");
+                reply += createReply(obj.highest_price);
+
+                reply += simpleReply("The lowest price in " + obj.name + " is:");
+                reply += createReply(obj.lowest_price);
+
+                reply += simpleReply("The rising companies in " + obj.name + " are:");
+                reply += createReply(obj.rising);
+
+                reply += simpleReply("The falling companies in " + obj.name + " are:");
+                reply += createReply(obj.falling);
+
+                if ("news" in obj) {
+                    reply += simpleReply("Here are some news about " + obj.name + ".");
+                    reply += createReply(obj.news);
                 }
             });
 
@@ -168,16 +203,11 @@ function createReply(history, voice, data) {
             var reply = simpleReply(data['text']);
     }
 
-    $("#chat-history").append(reply);
-    $(".received").last().removeClass("scale-out").addClass("scale-in");
-
-    if (!history) {
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-    }
+    return reply;
 }
 
 function simpleReply(text) {
-    return "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + text + "</span></div>";
+    return "<div class='bubble received blue lighten-1'><span class='white-text'>" + text + "</span></div>";
 }
 
 function getImpact(value) {
@@ -285,7 +315,7 @@ $(document).ready(function() {
             success: function(data) {
                 $("#buffering").remove();
 
-                createReply(false, voice, data);
+                appendReply(false, voice, data);
                 $('.scrollable-container').hScroll();
             },
         });
@@ -337,9 +367,8 @@ $(document).ready(function() {
                 var finalTranscript = "";
 
                 recognition.onspeechstart = function(event) {
-                    var queryBubble = "<div class='bubble sent blue lighten-1 scale-transition scale-out'><span class='white-text'></span></div>";
+                    var queryBubble = "<div class='bubble sent blue lighten-1'><span class='white-text'></span></div>";
                     $("#chat-history").append(queryBubble);
-                    $(".sent").last().removeClass("scale-out").addClass("scale-in");
                     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
                 };
 
@@ -381,13 +410,12 @@ $(document).ready(function() {
         var now = new Date();
         var time = now.getHours() + ":" + now.getMinutes();
 
-        var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out tooltipped'" +
+        var query = "<div class='bubble sent blue lighten-1 tooltipped'" +
                     "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
                     "<span class='white-text'>" + $('#id_question').val() + "</span></div>";
 
         $("#chat-history").append(query);
         $('.tooltipped').tooltip({delay: 50});
-        $(".sent").last().removeClass("scale-out").addClass("scale-in");
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
         processingQuery();

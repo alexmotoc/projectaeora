@@ -160,12 +160,11 @@ def interests(request):
         preferences.save()
     companies = preferences.companies
     sectors = preferences.sectors
-    companies = {"BARC", "VOD"} #will replace with actual preferences
     scraper = Scraper.Scraper()
     company_news_data = defaultdict()
     company_news_data['LSE'] = list()
     company_news_data['YAHOO'] = list()
-    for company in companies:
+    for company in companies.split(", "):
         financial_news_data = scraper.get_financial_news_data(company)
         company_news_data['LSE'] = company_news_data['LSE'] + financial_news_data['LSE']
         company_news_data['YAHOO'] = company_news_data['YAHOO'] + financial_news_data['YAHOO']   
@@ -174,7 +173,6 @@ def interests(request):
     #    sector_news_data['LSE'] += scraper.get_sector_data(sector).news['LSE']
     #    sector_news_data['YAHOO'] += scraper.get_sector_data(sector.news['YAHOO']
     #sector_news = replies.news_reply(sector.news, 3)
-    companies = {"BARC", "VOD"}
     sectors = {"Banks", "Soft Drinks"}
     data = {'companies': companies, 'sectors': sectors, 'company_news': company_news}
     return render(request, 'interests.html', data)

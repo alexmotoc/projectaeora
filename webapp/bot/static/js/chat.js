@@ -134,24 +134,24 @@ function createReply(data) {
             card['companies'].forEach(function(obj) {
                 reply += simpleReply("Here is the latest data on " + obj.name + ".");
 
-                    reply += "<div class='bubble-interactive received'>" +
-                                  "<div class='card white'>" +
-                                    "<div class='card-content black-text'>" +
-                                      "<span class='card-title'>" + obj.name + "</span>" +
-                                      "<table class='striped'><thead><tr>";
+                reply += "<div class='bubble-interactive received'>" +
+                              "<div class='card white'>" +
+                                "<div class='card-content black-text'>" +
+                                  "<span class='card-title'>" + obj.name + "</span>" +
+                                  "<table class='centered'><thead><tr>";
 
-                reply += "<tr>Price</tr>";
+                reply += "<th>Price</th>";
 
                 if ("high" in obj) {
-                    reply += "<tr>High</tr>";
+                    reply += "<th>High</th>";
                 }
 
                 if ("low" in obj) {
-                    reply += "<tr>Low</tr>";
+                    reply += "<th>Low</th>";
                 }
 
                 if ("per_diff" in obj) {
-                    reply += "<tr>Percentage change</tr>";
+                    reply += "<th>Percentage change</th>";
                 }
 
                 reply += "</tr></thead><tbody><tr>";

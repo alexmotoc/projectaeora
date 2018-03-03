@@ -73,7 +73,7 @@ function createReply(history, voice, data) {
                     }
                     reply += "</p>"
                 }
-                
+
                 reply += "<p class = 'grey-text'>Date published: " + obj.date + "</p>"
                 reply += "<p class = 'grey-text'>Source: " + obj.source + "</p>"
                 reply += "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
@@ -119,11 +119,53 @@ function createReply(history, voice, data) {
             reply += "</tbody></table></div></div></div>";
             break;
         case "briefing":
-            console.log(data);
-            var reply = "";
+            var reply;
+
+            card['companies'].forEach(function(obj) {
+                reply += simpleReply("Here is the latest data on " + obj.name);
+
+                reply += "<div class='bubble-interactive received'>" +
+                              "<div class='card white'>" +
+                                "<div class='card-content black-text'>" +
+                                  "<span class='card-title'>" + obj.name + "</span>" +
+                                  "<table class='striped'><thead><tr>";
+
+                for (var key in obj) {
+                    if (key != "code" && key != "name" && key != "date" && key != "news") {
+                        reply += "<th>" + key + "</th>";
+                    }
+                }
+
+                reply += "</tr></thead><tbody><tr>";
+
+                for (var key in obj) {
+                    if (key != "code" && key != "name" && key != "date" && key != "news") {
+                        if (key == "Percentage Change") {
+                            reply += "<td>" + getImpact(obj[key]) + obj[key] + "</span></td>";
+                        } else {
+                            reply += "<td>" + obj[key] + "</td>";
+                        }
+                    }
+                }
+
+                reply += "</tr></tbody></table>";
+                reply += "<p class='grey-text'>" + obj.date + "</p>";
+                reply += "</div></div></div>";
+
+                reply += simpleReply("Here are the latest news on " + obj.name);
+
+                reply += createReply(false, false, obj.news);
+            });
+
+            card['sectors'].forEach(function(obj) {
+                for (var key in obj) {
+                    reply += createReply(false, false, obj[key]);
+                }
+            });
+
             break;
         default:
-            var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["text"] + "</span></div>";
+            var reply = simpleReply(data['text']);
     }
 
     $("#chat-history").append(reply);
@@ -132,6 +174,10 @@ function createReply(history, voice, data) {
     if (!history) {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
     }
+}
+
+function simpleReply(text) {
+    return "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + text + "</span></div>";
 }
 
 function getImpact(value) {

@@ -24,7 +24,7 @@ def index(request):
 
 def chat(request):
     history = Response.objects.all()
-    response = {}
+    response = defaultdict()
 
     if request.method == 'POST':
         form = QueryForm(request.POST)
@@ -46,8 +46,6 @@ def chat(request):
 
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
-
-            response = defaultdict()
 
             # SubSector must come before Sector!
 

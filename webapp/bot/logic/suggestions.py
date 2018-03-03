@@ -109,10 +109,7 @@ def add_suggestions(response, dialogflow_response):
             sub_sector = dialogflow_response['result']['parameters']['subsector']
             sector, sub_sectors = get_sector_sub_sectors(sub_sector)
 
-        sector_attribute = dialogflow_response['result']['parameters']['sector_attribute']
-
-        print(sub_sectors)
-        print(sector)
+        sector_attribute = dialogflow_response['result']['parameters']['sector_attribute']  
 
         suggestions = []
 

@@ -12,7 +12,7 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <meta charset="utf-8">
-      <title>Settings</title>
+      <title>My Interests</title>
     </head>
 
     <body>
@@ -22,12 +22,6 @@
         <div class="row">
           <div class="col s10 offset-s1">
             <h1>My Interests</h1>
-  {% for company in companies %}
-    <li>{{ company }}</li>
-  {% endfor %}
-  {% for sector in sectors %}
-    <li>{{ sector }}</li>
-  {% endfor %}
   <div class='bubble-interactive received'><section class='scrollable-container'>
   {% for news in company_news.text%}
      <div class='news-article'>
@@ -38,20 +32,11 @@
 <p>Add keywords here</p>
             <p class = 'grey-text'>Date published: {{news.date}}</p>
             <p class = 'grey-text'>Source: {{news.source}}</p>
-            <div class='card-action'><p><a href={{news.url}}>Go to article</a></p></div>
+            <div class='card-action'><p><a href="{{news.url}}">Go to article</a></p></div>
             </div></div></div>
+  {% endfor %}
             </section></div>
 
-
-
-
-
-
-
-
-
-
-  {% endfor %}
           </div>
         </div>
       </main>

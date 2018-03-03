@@ -276,7 +276,7 @@ class Scraper:
                 source = data[3].text.strip()
                 impact = data[4].text.strip()
 
-                news = News.News(date, headline, url, source, impact, "")
+                news = News.News(date, headline, url, source, impact, "", code)
 
                 lse_news.append(news)
 
@@ -308,7 +308,7 @@ class Scraper:
                 url = item.link.text
                 source = "YAHOO"
                 impact = "-"
-                news = News.News(str(date), headline, url, source, impact, description)
+                news = News.News(str(date), headline, url, source, impact, description, code)
                 yahoo_news.append(news)
         return yahoo_news
 

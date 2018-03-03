@@ -11,7 +11,7 @@ from bot.logic import replies
 
 from bot.logic import replies
 
-def footsie_intent(r):
+def footsie_intent(r, days):
     # Check whether all required entities have been specified
     if r['result']['actionIncomplete']:
         reply = {}
@@ -25,7 +25,7 @@ def footsie_intent(r):
         scraper = Scraper.Scraper()
 
         if attribute == "news":
-            return replies.news_reply(scraper.get_financial_news_data(company_code))
+            return replies.news_reply(scraper.get_financial_news_data(company_code), days)
         elif attribute == "revenue":
             company = scraper.get_company_data(company_code)
             return replies.revenue_reply(company)
@@ -33,7 +33,7 @@ def footsie_intent(r):
             company = scraper.get_company_data(company_code)
             return replies.get_company_reply(company, attribute)
 
-def sector_query_intent(r, is_sector):
+def sector_query_intent(r, is_sector, days):
     scraper = Scraper.Scraper()
     sector = None
     #if required entities have been specified get sector/sub-sector data
@@ -52,7 +52,7 @@ def sector_query_intent(r, is_sector):
             sector_attribute = r['result']['parameters']['sector_attribute']
             sector = scraper.get_sub_sector_data(sector_name)
     if sector_attribute == "news":
-        return replies.news_reply(sector.news)
+        return replies.news_reply(sector.news, days)
     else:
         return replies.sector_reply(sector, sector_attribute)
 
@@ -75,7 +75,7 @@ def top_risers_intent(r):
 
     return response
 
-def daily_briefings_intent(companies, sectors, attributes):
+def daily_briefings_intent(companies, sectors, attributes, days):
     scraper = Scraper.Scraper()
 
     companies_data = []
@@ -89,6 +89,6 @@ def daily_briefings_intent(companies, sectors, attributes):
         for sector in sectors.split(", "):
             sectors_data.append(scraper.get_sector_data(sector))
 
-    response = replies.daily_briefings(companies_data, sectors_data, attributes)
+    response = replies.daily_briefings(companies_data, sectors_data, attributes, days)
 
     return response

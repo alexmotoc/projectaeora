@@ -317,3 +317,6 @@ your
 yours
 yourself
 yourselves
+'s
+s
+plc

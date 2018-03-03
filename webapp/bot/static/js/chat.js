@@ -35,6 +35,7 @@ function createReply(history, voice, data) {
             break;
         case "news":
             var reply = "<div class='bubble-interactive received'><section class='scrollable-container'>";
+
             card.forEach(function(obj) {
                 reply +=  "<div class='news-article'>" +
                    "<div class='card'>" +
@@ -44,19 +45,11 @@ function createReply(history, voice, data) {
                 if (obj.impact != "-") {
                     reply += "<span>" + getImpact(obj.impact) + obj.impact + "</span>";
                 }
-                // if (obj.sentiment == "positive"){
-                //     reply += "<p class='green-text'>Sentiment: Positive</p>"
-                // }
-                // else if (obj.sentiment == "neutral"){
-                //     reply += "<p class='grey-text'>Sentiment: Neutral</p>"
-                // }
-                // else if (obj.sentiment == "negative"){
-                //     reply += "<p class='red-text'>Sentiment: Negative</p>"
-                // }
+
                 reply += "<p>" + obj.summary+ "</p>"
-                reply += "<blockquote>"
 
                 if (obj.keywords.length == 5) {
+                    reply += "<blockquote>"
                     for (var i = 0; i < 5; i++) {
                         try {
                             reply += "<div class='chip'>" + obj.keywords[i] + "</div>"
@@ -64,9 +57,23 @@ function createReply(history, voice, data) {
                             break;
                         }
                     }
+                    reply += "</blockquote>"
                 }
 
-                reply += "</blockquote>"
+                if (obj.sentiment != "none") {
+                    reply += "<p class='grey-text'>Sentiment: ";
+                    if (obj.sentiment == "positive"){
+                        reply += "<span class='green-text'>Positive</span>"
+                    }
+                    else if (obj.sentiment == "neutral"){
+                        reply += "<span class='grey-text'>Neutral</span>"
+                    }
+                    else if (obj.sentiment == "negative"){
+                        reply += "<span class='red-text'>Negative</span>"
+                    }
+                    reply += "</p>"
+                }
+                
                 reply += "<p class = 'grey-text'>Date published: " + obj.date + "</p>"
                 reply += "<p class = 'grey-text'>Source: " + obj.source + "</p>"
                 reply += "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +

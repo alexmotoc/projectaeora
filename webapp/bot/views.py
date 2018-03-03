@@ -69,16 +69,16 @@ def chat(request):
                 response['speech'] = r['result']['fulfillment']['speech']
             else:
                 if 'Footsie' in intent:
-                    response = intents.footsie_intent(r)
+                    response = intents.footsie_intent(r, preferences.days_old)
                 elif 'SubSectorQuery' in intent:
-                    response = intents.sector_query_intent(r, False)
+                    response = intents.sector_query_intent(r, False, preferences.days_old)
                 elif 'SectorQuery' in intent:
-                    response = intents.sector_query_intent(r, True)
+                    response = intents.sector_query_intent(r, True, preferences.days_old)
                 elif 'TopRisers' in intent:
                     response = intents.top_risers_intent(r)
                 elif 'Daily Briefing' in intent:
                     response = intents.daily_briefings_intent(preferences.companies,
-                               preferences.sectors, attributes)
+                               preferences.sectors, attributes, preferences.days_old)
 
             reply = Response(query=query, response=json.dumps(response))
             reply.save()

@@ -33,25 +33,19 @@ def get_keywords(article):
             break
     return list(keywords)
 
-def get_analysis(url, characters):
-    response = requests.get(url)
-    if (response.status_code == 200):
-        soup = bs4.BeautifulSoup(response.text, 'lxml')
-        html_text = html2text.html2text(soup.find('html').get_text())
-        if "/**/" in html_text:
-            article = html_text.split("/**/")[1]
-            summary = article.replace("\n", " ")[:characters]+"..."
-        else:
-            return "No summary available.", "none", list()
-        blob = TextBlob(article)
-        keywords = get_keywords(blob)
-        if blob.sentiment.polarity > 0:
-            return summary, "positive", keywords
-        elif blob.sentiment.polarity == 0:
-            return summary, "neutral", keywords
-        else:
-            return summary, "negative", keywords
-    return "No summary available.", "none", list()
+def get_analysis(content):
+    blob = TextBlob(content)
+    keywords = get_keywords(blob)
+
+    sentiment = None
+    if blob.sentiment.polarity > 0:
+        sentiment = 'positive'
+    elif blob.sentiment.polarity == 0:
+        sentiment = 'neutral'
+    else:
+        sentiment = 'negative'
+
+    return sentiment, keywords
 
 #to_english determines the english word that will be substituted for the attribute name
 to_english = {"bid": "bid", "offer": "offer", "sector": "sector", "sub_sector": "sub-sector",
@@ -103,47 +97,50 @@ def big_movers_card(top5, risers=True):
 
     return big_movers
 
-def news_reply(financial_news):
+def news_reply(financial_news, days):
+    reply = defaultdict()
 
     lse_news = []
     for el in financial_news['LSE']:
         date = datetime.strptime(el.date, '%H:%M %d-%b-%Y')
-        if not(date.date() >= datetime.now().date() - timedelta(3)):
-            break  
-        row = {}
-        row["date"] = el.date
-        row["headline"] = el.headline
-        row["url"] = el.url
-        row["source"] = el.source
-        row["impact"] = el.impact
-        row["summary"], row["sentiment"], row["keywords"] = get_analysis(el.url, 250)
-        lse_news.append(row)
+        if date.date() >= datetime.now().date() - timedelta(days):
+            row = {}
+            row["date"] = el.date
+            row["headline"] = el.headline
+            row["url"] = el.url
+            row["source"] = el.source
+            row["impact"] = el.impact
+            row["summary"] = "No summary is available."
+            row["sentiment"] = "none"
+            row["keywords"] = list()
+            lse_news.append(row)
 
     yahoo_news = []
     for i in financial_news['YAHOO']:
         date = datetime.strptime(i.date, '%H:%M %d-%b-%Y')
-        if not(date.date() >= datetime.now().date() - timedelta(3)):
-            break
-        row = {}
-        row["date"] = i.date
-        row["headline"] = i.headline
-        row["url"] = i.url
-        row["source"] = i.source
-        row["impact"] = i.impact
-        row["summary"] = i.description
-        row["sentiment"] = "none"
-        row["keywords"] = list()
-        yahoo_news.append(row)
+        if date.date() >= datetime.now().date() - timedelta(days):
+            row = {}
+            row["date"] = i.date
+            row["headline"] = i.headline
+            row["url"] = i.url
+            row["source"] = i.source
+            row["impact"] = i.impact
+            row["summary"] = i.description[:256] + '...'
+            row["sentiment"], row["keywords"] = get_analysis(i.description)
+            yahoo_news.append(row)
 
     news = lse_news + yahoo_news
-    news.sort(key=lambda x: datetime.strptime(x["date"], '%H:%M %d-%b-%Y'), reverse=True) 
-    overall_dict = {
-        "speech": "Here are some news articles that I've found!",
-        "type": "news",
-        "text": news
-    }
+    news.sort(key=lambda x: datetime.strptime(x["date"], '%H:%M %d-%b-%Y'), reverse=True)
 
-    return overall_dict
+    if news:
+        reply['speech'] = "Here are some news articles that I've found!"
+    else:
+        reply['speech'] = "I'm sorry, I couldn't find any recent articles."
+
+    reply['type'] = 'news'
+    reply['text'] = news
+
+    return reply
 
 
 def get_company_reply(company, attribute):
@@ -243,7 +240,7 @@ def revenue_reply(company):
 
     return response
 
-def daily_briefings(companies, sectors, attributes):
+def daily_briefings(companies, sectors, attributes, days):
     response = {}
 
     if not companies and not sectors:
@@ -276,7 +273,7 @@ def daily_briefings(companies, sectors, attributes):
                     value = getattr(company, attr)
 
                 if attr == 'news':
-                    card[attr] = news_reply(value)
+                    card[attr] = news_reply(value, days)
                 else:
                     card[attr] = value
             company_cards.append(card)
@@ -295,7 +292,7 @@ def daily_briefings(companies, sectors, attributes):
 
             # Check if user wants sector news
             if 'news' in attributes:
-                card['news'] = news_reply(sector.news)
+                card['news'] = news_reply(sector.news, days)
 
             sector_cards.append(card)
 

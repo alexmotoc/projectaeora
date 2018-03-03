@@ -25,9 +25,6 @@ class Sector:
         self.news['LSE'] += company.news['LSE']
         self.news['YAHOO'] += company.news['YAHOO']
 
-        self.news['LSE'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
-        self.news['YAHOO'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
-
         if self.highest_price == None:
             self.highest_price = company
         else:

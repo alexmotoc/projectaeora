@@ -4,7 +4,7 @@ from textblob import TextBlob
 import requests
 import bs4
 import os
-
+from datetime import datetime, timedelta
 
 def get_stopwords():
     #source=http://xpo6.com/list-of-english-stop-words/
@@ -107,6 +107,9 @@ def news_reply(financial_news):
 
     lse_news = []
     for el in financial_news['LSE']:
+        date = datetime.strptime(el.date, '%H:%M %d-%b-%Y')
+        if not(date.date() >= datetime.now().date() - timedelta(3)):
+            break  
         row = {}
         row["date"] = el.date
         row["headline"] = el.headline
@@ -118,18 +121,22 @@ def news_reply(financial_news):
 
     yahoo_news = []
     for i in financial_news['YAHOO']:
+        date = datetime.strptime(i.date, '%H:%M %d-%b-%Y')
+        if not(date.date() >= datetime.now().date() - timedelta(3)):
+            break
         row = {}
-        row["date"] = el.date
-        row["headline"] = el.headline
-        row["url"] = el.url
-        row["source"] = el.source
-        row["impact"] = el.impact
-        row["summary"] = el.description
+        row["date"] = i.date
+        row["headline"] = i.headline
+        row["url"] = i.url
+        row["source"] = i.source
+        row["impact"] = i.impact
+        row["summary"] = i.description
         row["sentiment"] = "none"
         row["keywords"] = list()
         yahoo_news.append(row)
 
-    news = {"LSE": lse_news, "YAHOO": yahoo_news}
+    news = lse_news + yahoo_news
+    news.sort(key=lambda x: datetime.strptime(x["date"], '%H:%M %d-%b-%Y'), reverse=True) 
     overall_dict = {
         "speech": "Here are some news articles that I've found!",
         "type": "news",

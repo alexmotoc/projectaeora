@@ -125,7 +125,9 @@ def news_reply(financial_news, days):
             row["url"] = i.url
             row["source"] = i.source
             row["impact"] = i.impact
-            row["summary"] = i.description[:256] + '...'
+            row["summary"] = i.description[:256]
+            if row["summary"][-3:] != "...":
+                row["summary"] += "..."
             row["sentiment"], row["keywords"] = get_analysis(i.description)
             yahoo_news.append(row)
 

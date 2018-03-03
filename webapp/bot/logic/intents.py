@@ -1,5 +1,5 @@
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 
 import sys
@@ -25,7 +25,16 @@ def footsie_intent(r, days):
         scraper = Scraper.Scraper()
 
         if attribute == "news":
-            return replies.news_reply(scraper.get_financial_news_data(company_code), days)
+            date_period = r['result']['parameters']['date-period']
+
+            if date_period:
+                start, end = date_period.split('/')
+                start_date = datetime.strptime(start, '%Y-%m-%d')
+                end_date = datetime.strptime(end, '%Y-%m-%d')
+                difference = end_date.date() - start_date.date()
+                return replies.news_reply(scraper.get_financial_news_data(company_code), difference.days)
+            else:
+                return replies.news_reply(scraper.get_financial_news_data(company_code), days)
         elif attribute == "revenue":
             company = scraper.get_company_data(company_code)
             return replies.revenue_reply(company)
@@ -52,7 +61,16 @@ def sector_query_intent(r, is_sector, days):
             sector_attribute = r['result']['parameters']['sector_attribute']
             sector = scraper.get_sub_sector_data(sector_name)
     if sector_attribute == "news":
-        return replies.news_reply(sector.news, days)
+        date_period = r['result']['parameters']['date-period']
+
+        if date_period:
+            start, end = date_period.split('/')
+            start_date = datetime.strptime(start, '%Y-%m-%d')
+            end_date = datetime.strptime(end, '%Y-%m-%d')
+            difference = end_date.date() - start_date.date()
+            return replies.news_reply(sector.news, difference.days)
+        else:
+            return replies.news_reply(sector.news, days)
     else:
         return replies.sector_reply(sector, sector_attribute)
 

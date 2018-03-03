@@ -260,12 +260,6 @@ def daily_briefings(companies, sectors, attributes, days):
         response['text'] = message
         response['speech'] = message
         response['type'] = 'error'
-    elif not attributes:
-        message = 'You have not selected any attributes to be displayed. ' \
-                  'Please add some in the settings page!'
-        response['text'] = message
-        response['speech'] = message
-        response['type'] = 'error'
     else:
         briefing = defaultdict()
 
@@ -299,7 +293,7 @@ def daily_briefings(companies, sectors, attributes, days):
             card = {}
 
             card['name'] = sector.name
-            
+
             for attribute in sector_attributes:
                 card[attribute] = sector_reply(sector, attribute)
 

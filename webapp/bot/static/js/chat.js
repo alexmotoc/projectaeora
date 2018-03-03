@@ -35,8 +35,7 @@ function createReply(history, voice, data) {
             break;
         case "news":
             var reply = "<div class='bubble-interactive received'><section class='scrollable-container'>";
-
-            card["LSE"].forEach(function(obj) {
+            card.forEach(function(obj) {
                 reply +=  "<div class='news-article'>" +
                    "<div class='card'>" +
                      "<div class='card-content'>" +
@@ -63,19 +62,6 @@ function createReply(history, voice, data) {
                 reply += "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
                 "</div></div></div>";
             });
-
-            //in theory we can soon delete this block of code
-            card["YAHOO"].forEach(function(obj) {
-                // reply +=  "<div class='news-article'>" +
-                //    "<div class='card'>" +
-                //      "<div class='card-content'>" +
-                //        "<span class='card-title grey-text text-darken-4'>" + obj.headline +
-                //        "<p>Summary</p>" +
-                //        "<blockquote><div class='chip'>finance</div><div class='chip'>oil</div><div class='chip'>petrol</div><blockquote>" +
-                //        "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
-                //        "</div></div>";
-            });
-
             reply += "</section></div>";
             break;
         case "top":

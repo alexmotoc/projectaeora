@@ -182,17 +182,22 @@ def interests(request):
     company_news_data = defaultdict()
     company_news_data['LSE'] = list()
     company_news_data['YAHOO'] = list()
-    #get news for tracked companies
+    #get news, data for tracked companies
+    company_data = list()
     for company in companies.split(", "):
-        financial_news_data = scraper.get_financial_news_data(company)
-        company_news_data['LSE'] = company_news_data['LSE'] + financial_news_data['LSE']
-        company_news_data['YAHOO'] = company_news_data['YAHOO'] + financial_news_data['YAHOO']   
+        if len(company) > 0:
+            financial_news_data = scraper.get_financial_news_data(company)
+            company_data.append(scraper.get_company_data(company))
+            company_news_data['LSE'] = company_news_data['LSE'] + financial_news_data['LSE']
+            company_news_data['YAHOO'] = company_news_data['YAHOO'] + financial_news_data['YAHOO']   
     sector_news_data = defaultdict()
     sector_news_data['LSE'] = list()
     sector_news_data['YAHOO'] = list()
-    #get news for tracked sectors
+    #get news, data for tracked sectors
     for sector in sectors.split(", "):
         if len(sector) > 0:
+            sector_data = scraper.get_sector_data(sector)
+            company_data = company_data + sector_data.companies
             sector_news_data['LSE'] += scraper.get_sector_data(sector).news['LSE']
             sector_news_data['YAHOO'] += scraper.get_sector_data(sector).news['YAHOO']
     #merge company and sector news, sort by date and remove duplicates
@@ -205,5 +210,14 @@ def interests(request):
     all_news_data['YAHOO'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)
     all_news_data = remove_duplicates(all_news_data)
     all_news = replies.news_reply(all_news_data, news_timeframe)
-    data = {'companies': companies.split(", "), 'sectors': sectors, 'all_news': all_news}
+    #remove duplicates from company_data
+    company_data.sort(key=lambda x: x.code, reverse=True)
+    lastc = ""
+    for c in company_data:
+        if lastc != "":
+            if c.code == lastc.code:
+                company_data.remove(c)
+        lastc = c
+    #pass data to interests template        
+    data = {'companies': company_data, 'all_news': all_news}
     return render(request, 'interests.html', data)

@@ -24,6 +24,38 @@
             <h1>My Interests</h1>
   <div class='bubble-interactive received'><section class='scrollable-container'>
              <p>Head over to settings to change tracking settings</p>
+
+
+
+
+
+             <div class='bubble-interactive received'>
+              <div class='card white'>
+               <div class='card-content black-text'>
+                 <span class='card-title'>Performance of Tracked Companies</span>
+                              <table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th><th>Bid</th><th>Offer</th></tr></thead>
+                              <tbody>
+
+            {% for company in companies %}
+                <tr><td>{{company.name}}</td><td>{{company.stock.price}}</td>
+
+                {% if company.per_diff.0 == '+' %}
+                    <td class='green-text'>{{company.stock.per_diff}}</td>
+                {% else %}
+                    <td class='red-text'>{{company.stock.per_diff}}</td>
+                {% endif %}
+                <td>{{company.stock.bid}}</td><td>{{company.stock.offer}}</td>
+                </tr>
+            {% endfor %}
+               </tbody></table></div></div></div>
+
+
+
+
+
+
+
+
   {% for news in all_news.text%}
      <div class='news-article'>
        <div class='card'>

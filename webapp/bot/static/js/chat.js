@@ -23,9 +23,39 @@ function appendReply(history, voice, data) {
 
     $("#chat-history").append(reply);
 
+    $(".suggestion-chip").on('click', function(e) {
+        var suggestion = $($($(e.target)).contents()[0]).text();
+        addQuery(suggestion);
+    })
+
     if (!history) {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
     }
+}
+
+function topPerformers(card) {
+    var reply = "<div class='bubble-interactive received'>" +
+                  "<div class='card white'>" +
+                    "<div class='card-content black-text'>" +
+                      "<span class='card-title'>" + card["title"] + "</span>" +
+                      "<table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th></tr></thead>" +
+                      "<tbody>";
+
+    card["companies"].forEach(function(obj) {
+        reply += "<tr><td>" + obj.name + "</td><td>" + obj.price +"</td>";
+
+        if (obj.percentage_change[0] == '+') {
+            reply += "<td class='green-text'>" + obj.percentage_change + "</td>";
+        } else {
+            reply += "<td class='red-text'>" + obj.percentage_change + "</td>";
+        }
+
+        reply += "</tr>";
+    });
+
+    reply += "</tbody></table></div></div></div>";
+
+    return reply;
 }
 
 function createReply(data) {
@@ -95,37 +125,22 @@ function createReply(data) {
 
             break;
         case "top":
+            reply += topPerformers(card);
+            break;
+        case "risers&fallers":
+            reply += topPerformers(card['risers']);
+            reply += topPerformers(card['fallers']);
+            break;
+        case "revenue":
             reply += "<div class='bubble-interactive received'>" +
                           "<div class='card white'>" +
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["title"] + "</span>" +
-                              "<table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th></tr></thead>" +
-                              "<tbody>";
-
-            card["companies"].forEach(function(obj) {
-                reply += "<tr><td>" + obj.name + "</td><td>" + obj.price +"</td>";
-
-                if (obj.percentage_change[0] == '+') {
-                    reply += "<td class='green-text'>" + obj.percentage_change + "</td>";
-                } else {
-                    reply += "<td class='red-text'>" + obj.percentage_change + "</td>";
-                }
-
-                reply += "</tr>";
-            });
-
-            reply += "</tbody></table></div></div></div>";
-            break;
-        case "revenue":
-            reply += "<div class = 'bubble-interactive received'>" +
-                          "<div class = 'card white'>" +
-                            "<div class = 'card-content black-text'>" +
-                              "<span class = 'card-title'>" + card["title"] + "</span>" +
-                              "<table class = 'striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
-                              "<tbody>";
+                              "<table class='striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
+                              "</tr></thead><tbody>";
 
             card["revenue_data"].forEach(function(obj) {
-                reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td><tr>";
+                reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td></tr>";
             });
 
             reply += "</tbody></table></div></div></div>";
@@ -204,6 +219,22 @@ function createReply(data) {
         default:
             var reply = simpleReply(data['text']);
     }
+  
+    // Display suggestions
+    if (data['suggestions'] != null) {
+        var suggestions = data['suggestions']
+
+        reply += '<div class="bubble-interactive received" id="suggestions">';
+
+        for (i = 0; i < suggestions.length; i++) {
+            reply +=
+            '<div class="waves-effect suggestion-chip z-depth-2">' +
+              '<span><a class="grey-text text-darken-2" >' + suggestions[i] + '</a></span>' +
+            '</div>';
+        }
+
+        reply += '</div">';
+    }
 
     return reply;
 }
@@ -219,6 +250,26 @@ function getImpact(value) {
     else if (value.charAt(0) == "-"){
         return "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>";
     }
+}
+
+function addQuery(question) {
+    if ($('#suggestions').length) {
+        $('#suggestions').remove();
+    }
+
+    var now = new Date();
+    var time = now.getHours() + ":" + now.getMinutes();
+
+    var query = "<div class='bubble sent blue lighten-1 tooltipped'" +
+                "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
+                "<span class='white-text'>" + question + "</span></div>";
+
+    $("#chat-history").append(query);
+    $('.tooltipped').tooltip({delay: 50});
+    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+    processingQuery();
+    fetchReply(question, false, false);
 }
 
 function getStyle(attribute, value){
@@ -276,6 +327,39 @@ function getUnits(attribute){
     else{
         return "";
     }
+}
+
+function processingQuery() {
+    var bufferingCircle = "<div class='preloader-wrapper small active'>" +
+                              "<div class='spinner-layer spinner-blue-only'>" +
+                                "<div class='circle-clipper left'>" +
+                                  "<div class='circle'></div>" +
+                                "</div><div class='gap-patch'>" +
+                                  "<div class='circle'></div>" +
+                                "</div><div class='circle-clipper right'>" +
+                                  "<div class='circle'></div>" +
+                                "</div>" +
+                              "</div>" +
+                            "</div>";
+    var bufferingBubble = "<div id='buffering' class='bubble-interactive received'>" + bufferingCircle + "</div>";
+    $("#chat-history").append(bufferingBubble);
+    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+    return $("#id_question").val();
+}
+
+var fetchReply = function(query) {
+    return $.ajax({
+        url: "/chat/",
+        type: "POST",
+        data: {
+            question: query
+        },
+        success: function(data) {
+            $("#buffering").remove();
+            createReply(true, data);
+        },
+    });
 }
 
 $(document).ready(function() {
@@ -341,7 +425,7 @@ $(document).ready(function() {
 
         return $("#id_question").val();
     }
-
+  
     $("#send-text").click(function(e) {
         if ($("#id_question").val() != "") {
             $("#ask-question").submit();
@@ -408,20 +492,7 @@ $(document).ready(function() {
 
     $("#ask-question").submit(function(e) {
         e.preventDefault();
-
-        var now = new Date();
-        var time = now.getHours() + ":" + now.getMinutes();
-
-        var query = "<div class='bubble sent blue lighten-1 tooltipped'" +
-                    "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
-                    "<span class='white-text'>" + $('#id_question').val() + "</span></div>";
-
-        $("#chat-history").append(query);
-        $('.tooltipped').tooltip({delay: 50});
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-
-        processingQuery();
-        fetchReply($('#id_question').val(), false, false);
+        addQuery($('#id_question').val())
         $("#id_question").val("");
     });
 });

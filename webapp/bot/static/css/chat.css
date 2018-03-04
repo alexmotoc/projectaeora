@@ -76,7 +76,7 @@
 .suggestion-chip {
     display: inline-block;
     height: auto;
-    margin: 5px 0;
+    margin-right: 5px;
     padding: 5px 10px;
     border-radius: 15px 15px 15px 15px;
     -webkit-border-radius: 15px 15px 15px 15px;

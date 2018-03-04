@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from .forms import QueryForm, UserPreferencesForm
-from bot.logic import intents
+from .logic import intents, suggestions
 from .models import Response, UserPreferences
 
 from collections import defaultdict
@@ -16,13 +16,15 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '/../../scrape
 
 from footsie import Scraper
 
+
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
+
 def chat(request):
     history = Response.objects.all()
-    response = {}
+    response = defaultdict()
 
     try:
         preferences = UserPreferences.objects.all().first()
@@ -58,8 +60,6 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
-            response = defaultdict()
-
             # SubSector must come before Sector!
             intent = r['result']['metadata']['intentName']
 
@@ -79,9 +79,16 @@ def chat(request):
                 elif 'Daily Briefing' in intent:
                     response = intents.daily_briefings_intent(preferences.companies,
                                preferences.sectors, attributes, preferences.days_old)
+                else:
+                    response['text'] = r['result']['fulfillment']['speech']
+                    response['speech'] = r['result']['fulfillment']['speech']
+                    response['type'] = 'simple.response'
 
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
+
+            if response['type'] not in ('input.unknown', 'incomplete', 'simple.response'):
+                response = suggestions.add_suggestions(response, r)
 
             form = QueryForm()
     else:
@@ -91,6 +98,7 @@ def chat(request):
         return JsonResponse(response)
     else:
         return render(request, 'chat.html', {'form': form, 'history': history})
+
 
 def settings(request):
     status = None
@@ -117,6 +125,7 @@ def settings(request):
     else:
         return render(request, 'settings.html', {'form': form})
 
+
 def get_companies(request):
     saved_companies = []
 
@@ -131,6 +140,7 @@ def get_companies(request):
     with open(os.path.dirname(__file__) + '/' + '/../../scraper/data/profiles.json') as f:
         companies = json.load(f)
         return JsonResponse({"companies": companies, "saved_companies": saved_companies})
+
 
 def get_sectors(request):
     saved_sectors = []

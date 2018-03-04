@@ -24,7 +24,8 @@ sector_attributes = {
     'highest_price': 'the highest price',
     'lowest_price': 'the lowest price',
     'rising': 'rising',
-    'falling': 'falling'
+    'falling': 'falling',
+    'performing': 'performing'
 }
 
 # What does sector or sub_sector attribute do!??

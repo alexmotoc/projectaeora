@@ -195,7 +195,7 @@ def sector_reply(sector, sector_attribute):
         number_of_companies_moving_in_requested_direction = len(data)
 
         if number_of_companies_moving_in_requested_direction == 0:
-            speech = "No "+sector.name+" companies are "+sector_attribute+". "
+            speech = "No "+sector.name+" are "+sector_attribute+". "
         else:
             speech = "The following "+sector.name+" companies are "+sector_attribute+". "
         companies = []
@@ -230,6 +230,22 @@ def sector_reply(sector, sector_attribute):
             movers['text'] = card
             movers['type'] = 'top'
 
+        return movers
+    elif sector_attribute == "performing":
+        companies = []
+        for i in range(len(data)):
+            row = defaultdict()
+            row['name'] = data[i].name
+            row['price'] = data[i].stock.price
+            row['percentage_change'] = data[i].stock.per_diff      
+            companies.append(row)
+        movers = defaultdict()
+        movers['speech'] = "Here is some data about how "+sector.name+" are performing"
+        card = defaultdict()
+        card['title'] = "Peformance of "+sector.name
+        card['companies'] = companies
+        movers['text'] = card
+        movers['type'] = 'top'
         return movers
 
 def revenue_reply(company, date_period):

@@ -12,7 +12,7 @@ jQuery(function ($) {
     };
 });
 
-function appendReply(history, voice, data) {
+function appendReply(data, history, voice) {
     if (voice) {
         var synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(data['speech']);
@@ -219,7 +219,7 @@ function createReply(data) {
         default:
             var reply = simpleReply(data['text']);
     }
-  
+
     // Display suggestions
     if (data['suggestions'] != null) {
         var suggestions = data['suggestions']
@@ -252,7 +252,7 @@ function getImpact(value) {
     }
 }
 
-function addQuery(question) {
+function addQuery(question, history, voice) {
     if ($('#suggestions').length) {
         $('#suggestions').remove();
     }
@@ -348,7 +348,7 @@ function processingQuery() {
     return $("#id_question").val();
 }
 
-var fetchReply = function(query) {
+var fetchReply = function(query, history, voice) {
     return $.ajax({
         url: "/chat/",
         type: "POST",
@@ -357,7 +357,9 @@ var fetchReply = function(query) {
         },
         success: function(data) {
             $("#buffering").remove();
-            createReply(true, data);
+
+            appendReply(data, false, voice);
+            $('.scrollable-container').hScroll();
         },
     });
 }
@@ -425,7 +427,7 @@ $(document).ready(function() {
 
         return $("#id_question").val();
     }
-  
+
     $("#send-text").click(function(e) {
         if ($("#id_question").val() != "") {
             $("#ask-question").submit();
@@ -492,7 +494,7 @@ $(document).ready(function() {
 
     $("#ask-question").submit(function(e) {
         e.preventDefault();
-        addQuery($('#id_question').val())
+        addQuery($('#id_question').val(), false, false);
         $("#id_question").val("");
     });
 });

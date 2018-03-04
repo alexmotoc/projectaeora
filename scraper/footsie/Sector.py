@@ -11,6 +11,7 @@ class Sector:
         self.news = defaultdict(list)
         self.highest_price = None
         self.lowest_price = None
+        self.performing = list()
 
     def add_company(self, company):
         self.companies.append(company)
@@ -21,6 +22,8 @@ class Sector:
         else:
             self.falling.append(company)
             self.falling.sort(key=lambda x: float(x.stock.per_diff[1:]), reverse=True)
+
+        self.performing = self.rising + self.falling[::-1]
 
         self.news['LSE'] += company.news['LSE']
         self.news['YAHOO'] += company.news['YAHOO']

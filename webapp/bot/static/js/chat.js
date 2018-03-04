@@ -69,7 +69,7 @@ function createReply(data) {
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["name"] + "</span>" +
                               "<p class='grey-text code-time'>" + card["code"] + "<br>" + card["date"] + "</p>" +
-                              "<p class='black-text price-impact'" + getStyle(card['primary_type'], card['primary']) + card['primary'] + getUnits(card['primary_type']) +
+                              "<p class='price-impact'>" + getStyle(card['primary_type'], card['primary']) + card['primary'] + getUnits(card['primary_type']) +
                               "<br>" + getStyle(card['secondary_type'], card['secondary']) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" +
                             "</div>" +
                           "</div>" +
@@ -273,7 +273,7 @@ function addQuery(question, history, voice) {
 }
 
 function getStyle(attribute, value){
-    if (attribute == "per_diff"){
+    if (attribute == "per_diff" || attribute == "diff"){
         return getImpact(value);
     }
     else if (attribute == "high"){

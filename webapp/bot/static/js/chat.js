@@ -132,7 +132,7 @@ function createReply(data) {
             break;
         case "briefing":
             card['companies'].forEach(function(obj) {
-                reply += simpleReply("Here is the latest data on " + obj.name + ".");
+                reply += simpleReply("Here is the latest data on " + obj.name + ":");
 
                 reply += "<div class='bubble-interactive received'>" +
                               "<div class='card white'>" +
@@ -174,9 +174,11 @@ function createReply(data) {
                 reply += "<p class='grey-text'>" + obj.date + "</p>";
                 reply += "</div></div></div>";
 
-                reply += simpleReply("Here are the latest news on " + obj.name + ".");
+                if ("news" in obj) {
+                    reply += simpleReply("Here are the latest news on " + obj.name + ":");
 
-                reply += createReply(obj.news);
+                    reply += createReply(obj.news);
+                }
             });
 
             card['sectors'].forEach(function(obj) {
@@ -193,7 +195,7 @@ function createReply(data) {
                 reply += createReply(obj.falling);
 
                 if ("news" in obj) {
-                    reply += simpleReply("Here are some news about " + obj.name + ".");
+                    reply += simpleReply("Here are some news about " + obj.name + ":");
                     reply += createReply(obj.news);
                 }
             });

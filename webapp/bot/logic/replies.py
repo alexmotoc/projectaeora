@@ -136,11 +136,13 @@ def news_reply(financial_news, days):
 
     if news:
         reply['speech'] = "Here are some news articles that I've found!"
+        reply['type'] = 'news'
+        reply['text'] = news
     else:
-        reply['speech'] = "I'm sorry, I couldn't find any recent articles."
-
-    reply['type'] = 'news'
-    reply['text'] = news
+        message = "I'm sorry, I couldn't find any recent articles."
+        reply['speech'] = message
+        reply['type'] = "no-news"
+        reply['text'] = message
 
     return reply
 

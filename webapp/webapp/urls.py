@@ -25,5 +25,5 @@ urlpatterns = [
     path('settings/', views.settings, name='settings'),
     path('ajax/getcompanies', views.get_companies, name='get-companies'),
     path('ajax/getsectors', views.get_sectors, name='get-sectors'),
-    path('ajax/getvoice', views.get_voice_preference, name='get-voice-preference'),
+    path('ajax/getpreferences', views.get_preferences, name='get-preferences'),
 ]

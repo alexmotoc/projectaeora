@@ -4,7 +4,7 @@ from .models import Query, UserPreferences
 
 
 class QueryForm(ModelForm):
-    question = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Type a message'}),
+    question = forms.CharField(widget=forms.TextInput(attrs={'autocomplete': 'off', 'placeholder': 'Type a message'}),
                             label='', max_length=256)
 
     class Meta:

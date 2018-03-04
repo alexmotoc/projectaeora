@@ -97,7 +97,7 @@ def chat(request):
     if request.is_ajax():
         return JsonResponse(response)
     else:
-        return render(request, 'chat.html', {'form': form, 'history': history})
+        return render(request, 'chat.html', {'form': form, 'history': history, 'colour_scheme': preferences.colour_scheme})
 
 
 def settings(request):
@@ -123,7 +123,7 @@ def settings(request):
     if request.is_ajax():
         return JsonResponse({"status": status})
     else:
-        return render(request, 'settings.html', {'form': form})
+        return render(request, 'settings.html', {'form': form, 'colour_scheme': preferences.colour_scheme})
 
 
 def get_companies(request):
@@ -157,7 +157,7 @@ def get_sectors(request):
         sectors = json.load(f)
         return JsonResponse({"sectors": sectors, "saved_sectors": saved_sectors})
 
-def get_voice_preference(request):
+def get_preferences(request):
     preferences = UserPreferences.objects.all().first()
 
-    return JsonResponse({"voice": preferences.voice})
+    return JsonResponse({'voice': preferences.voice, 'colour_scheme': preferences.colour_scheme})

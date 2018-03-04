@@ -97,11 +97,17 @@
                 </div>
               </div>
               <div class="row">
-                <input id="save-preferences" class="waves-effect waves-light btn indigo" type="submit" name="update-preferences" value="Save">
+                <input id="save-preferences" class="waves-effect waves-light btn
+                {% include 'colour-scheme-primary.html' %}
+                {% if colour_scheme == 'light' %} light-submit-button {% endif %}"
+                type="submit" name="update-preferences" value="Save">
               </div>
             </form>
           </div>
         </div>
+
+        {% include "help-modal.html" %}
+        
       </main>
 
       <!--Import jQuery before materialize.js-->

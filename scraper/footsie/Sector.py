@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import datetime
 
 class Sector:
@@ -7,7 +8,7 @@ class Sector:
         self.companies = list()
         self.rising = list()
         self.falling = list()
-        self.news = list()
+        self.news = defaultdict(list)
         self.highest_price = None
         self.lowest_price = None
 
@@ -21,9 +22,8 @@ class Sector:
             self.falling.append(company)
             self.falling.sort(key=lambda x: float(x.stock.per_diff[1:]), reverse=True)
 
-        for n in company.news:
-            self.news.append(n)
-        self.news.sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True) #latest article first
+        self.news['LSE'] += company.news['LSE']
+        self.news['YAHOO'] += company.news['YAHOO']
 
         if self.highest_price == None:
             self.highest_price = company

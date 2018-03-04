@@ -6,6 +6,7 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/settings.css" %}"/>
       <link type="text/css" rel="stylesheet" href="{% static "css/sidebar.css" %}"/>
       <link type="text/css" rel="stylesheet" href="{% static "css/main-offset.css" %}"/>
 
@@ -39,16 +40,7 @@
                 <div id="track-sectors" class="chips chips-initial chips-autocomplete"></div>
                 {{ form.sectors }}
               </div>
-              <h5>Attributes</h5>
-              <div class="row">
-                <div class="switch">
-                  <label>
-                    {{ form.current_price.label }}
-                    {{ form.current_price }}
-                    <span class="lever"></span>
-                  </label>
-                </div>
-              </div>
+              <h5>Card attributes</h5>
               <div class="row">
                 <div class="switch">
                   <label>
@@ -76,6 +68,7 @@
                   </label>
                 </div>
               </div>
+              <h5>News</h5>
               <div class="row">
                 <div class="switch">
                   <label>
@@ -85,6 +78,15 @@
                   </label>
                 </div>
               </div>
+              <div class="row">
+                <div class="col s4 news-range">
+                  <p class="range-field grey-text news-days-label">
+                    {{ form.days_old.label }}
+                    {{ form.days_old }}
+                  </p>
+                </div>
+              </div>
+              <h5>Output</h5>
               <div class="row">
                 <div class="switch">
                   <label>

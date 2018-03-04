@@ -50,6 +50,7 @@
 
 .news-article {
     min-width: 305px;
+    max-width: 305px;
     margin: 10px;
 }
 

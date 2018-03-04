@@ -12,6 +12,27 @@ jQuery(function ($) {
     };
 });
 
+function appendReply(history, voice, data) {
+    if (voice) {
+        var synth = window.speechSynthesis;
+        var utterThis = new SpeechSynthesisUtterance(data['speech']);
+        synth.speak(utterThis);
+    }
+
+    var reply = createReply(data);
+
+    $("#chat-history").append(reply);
+
+    $(".suggestion-chip").on('click', function(e) {
+        var suggestion = $($($(e.target)).contents()[0]).text();
+        addQuery(suggestion);
+    })
+
+    if (!history) {
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+    }
+}
+
 function topPerformers(card) {
     var reply = "<div class='bubble-interactive received'>" +
                   "<div class='card white'>" +
@@ -37,37 +58,81 @@ function topPerformers(card) {
     return reply;
 }
 
-function createReply(voice, data) {
-    if (voice) {
-        var synth = window.speechSynthesis;
-        var utterThis = new SpeechSynthesisUtterance(data['speech']);
-        synth.speak(utterThis);
-    }
+function createReply(data) {
     var card = data["text"];
+    var reply = '';
+
     switch(data["type"]) {
         case "company":
-            var reply =  "<div class='bubble-interactive received'>" +
+            reply +=  "<div class='bubble-interactive received'>" +
                           "<div class='card white'>" +
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["name"] + "</span>" +
                               "<p class='grey-text code-time'>" + card["code"] + "<br>" + card["date"] + "</p>" +
-                              "<p class='price-impact'>" + getStyle(card['primary_type'], card["primary"]) + card['primary'] + getUnits(card['primary_type']) +
-                              "<br>" + getStyle(card['secondary_type'], card["secondary"]) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" +
+                              "<p class='black-text price-impact'" + getStyle(card['primary_type'], card['primary']) + card['primary'] + getUnits(card['primary_type']) +
+                              "<br>" + getStyle(card['secondary_type'], card['secondary']) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" +
                             "</div>" +
                           "</div>" +
                         "</div>";
             break;
         case "news":
+            reply += "<div class='bubble-interactive received'><section class='scrollable-container'>";
+
+            card.forEach(function(obj) {
+                reply +=  "<div class='news-article'>" +
+                   "<div class='card'>" +
+                     "<div class='card-content'>" +
+                       "<span class='card-title grey-text text-darken-4'>" + obj.headline + "</span>";
+
+                if (obj.impact != "-") {
+                    reply += "<span>" + getImpact(obj.impact) + obj.impact + "</span>";
+                }
+
+                reply += "<p>" + obj.summary+ "</p>"
+
+                if (obj.keywords.length == 5) {
+                    reply += "<blockquote>"
+                    for (var i = 0; i < 5; i++) {
+                        try {
+                            reply += "<div class='chip'>" + obj.keywords[i] + "</div>"
+                        } catch(err) {
+                            break;
+                        }
+                    }
+                    reply += "</blockquote>"
+                }
+
+                if (obj.sentiment != "none") {
+                    reply += "<p class='grey-text'>Sentiment: ";
+                    if (obj.sentiment == "positive"){
+                        reply += "<span class='green-text'>Positive</span>"
+                    }
+                    else if (obj.sentiment == "neutral"){
+                        reply += "<span class='grey-text'>Neutral</span>"
+                    }
+                    else if (obj.sentiment == "negative"){
+                        reply += "<span class='red-text'>Negative</span>"
+                    }
+                    reply += "</p>"
+                }
+
+                reply += "<p class = 'grey-text'>Date published: " + obj.date + "</p>"
+                reply += "<p class = 'grey-text'>Source: " + obj.source + "</p>"
+                reply += "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
+                "</div></div></div>";
+            });
+            reply += "</section></div>";
+
             break;
         case "top":
-            var reply = topPerformers(card);
+            reply += topPerformers(card);
             break;
         case "risers&fallers":
-            var reply = topPerformers(card['risers']);
+            reply += topPerformers(card['risers']);
             reply += topPerformers(card['fallers']);
             break;
         case "revenue":
-            var reply = "<div class='bubble-interactive received'>" +
+            reply += "<div class='bubble-interactive received'>" +
                           "<div class='card white'>" +
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["title"] + "</span>" +
@@ -80,38 +145,110 @@ function createReply(voice, data) {
 
             reply += "</tbody></table></div></div></div>";
             break;
+        case "briefing":
+            card['companies'].forEach(function(obj) {
+                reply += simpleReply("Here is the latest data on " + obj.name + ":");
+
+                reply += "<div class='bubble-interactive received'>" +
+                              "<div class='card white'>" +
+                                "<div class='card-content black-text'>" +
+                                  "<span class='card-title'>" + obj.name + "</span>" +
+                                  "<table class='centered'><thead><tr>";
+
+                reply += "<th>Price</th>";
+
+                if ("high" in obj) {
+                    reply += "<th>High</th>";
+                }
+
+                if ("low" in obj) {
+                    reply += "<th>Low</th>";
+                }
+
+                if ("per_diff" in obj) {
+                    reply += "<th>Percentage change</th>";
+                }
+
+                reply += "</tr></thead><tbody><tr>";
+
+                reply += "<td>" + obj.price + "</td>";
+
+                if ("high" in obj) {
+                    reply += "<td>" + obj.high + "</td>";
+                }
+
+                if ("low" in obj) {
+                    reply += "<td>" + obj.low + "</td>";
+                }
+
+                if ("per_diff" in obj) {
+                    reply += "<td>" + getImpact(obj.per_diff) + obj.per_diff + "</span></td>";
+                }
+
+                reply += "</tr></tbody></table>";
+                reply += "<p class='grey-text'>" + obj.date + "</p>";
+                reply += "</div></div></div>";
+
+                if ("news" in obj) {
+                    reply += simpleReply("Here are the latest news on " + obj.name + ":");
+
+                    reply += createReply(obj.news);
+                }
+            });
+
+            card['sectors'].forEach(function(obj) {
+                reply += simpleReply("The highest price in " + obj.name + " is:");
+                reply += createReply(obj.highest_price);
+
+                reply += simpleReply("The lowest price in " + obj.name + " is:");
+                reply += createReply(obj.lowest_price);
+
+                reply += simpleReply("The rising companies in " + obj.name + " are:");
+                reply += createReply(obj.rising);
+
+                reply += simpleReply("The falling companies in " + obj.name + " are:");
+                reply += createReply(obj.falling);
+
+                if ("news" in obj) {
+                    reply += simpleReply("Here are some news about " + obj.name + ":");
+                    reply += createReply(obj.news);
+                }
+            });
+
+            break;
         default:
-            var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["text"] + "</span></div>";
+            var reply = simpleReply(data['text']);
     }
-
-    $("#chat-history").append(reply);
-    $(".received").last().removeClass("scale-out").addClass("scale-in");
-
+  
     // Display suggestions
     if (data['suggestions'] != null) {
         var suggestions = data['suggestions']
 
-        var suggestion_div = '<div class="bubble-interactive received" id="suggestions">';
+        reply += '<div class="bubble-interactive received" id="suggestions">';
 
         for (i = 0; i < suggestions.length; i++) {
-            suggestion_div +=
+            reply +=
             '<div class="waves-effect suggestion-chip z-depth-2">' +
               '<span><a class="grey-text text-darken-2" >' + suggestions[i] + '</a></span>' +
             '</div>';
         }
 
-        suggestion_div += '</div">';
-
-        $("#chat-history").append(suggestion_div);
-
-        $(".suggestion-chip").on('click', function(e) {
-            var suggestion = $($($(e.target)).contents()[0]).text();
-            addQuery(suggestion);
-        })
+        reply += '</div">';
     }
 
-    if (voice) {
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+    return reply;
+}
+
+function simpleReply(text) {
+    return "<div class='bubble received blue lighten-1'><span class='white-text'>" + text + "</span></div>";
+}
+
+function getImpact(value) {
+    if (value.charAt(0) == "+"){
+        return "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>";
+    }
+    else if (value.charAt(0) == "-"){
+        return "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>";
     }
 }
 
@@ -123,81 +260,72 @@ function addQuery(question) {
     var now = new Date();
     var time = now.getHours() + ":" + now.getMinutes();
 
-    var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out tooltipped'" +
+    var query = "<div class='bubble sent blue lighten-1 tooltipped'" +
                 "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
                 "<span class='white-text'>" + question + "</span></div>";
 
     $("#chat-history").append(query);
     $('.tooltipped').tooltip({delay: 50});
-    $(".sent").last().removeClass("scale-out").addClass("scale-in");
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
     processingQuery();
-    fetchReply(question);
+    fetchReply(question, false, false);
 }
 
 function getStyle(attribute, value){
-    if (attribute == "per_diff" || attribute == "diff"){
-        if (value.charAt(0) == "+"){
-            return "<span class='green-text'><i class='material-icons valign-icon'>trending_up</i>"
-        }
-        else if (value.charAt(0) == "-"){
-            return "<span class='red-text'><i class='material-icons valign-icon'>trending_down</i>"
-        }
-        else{
-          return "<span class='black-text->'"
-        }
+    if (attribute == "per_diff"){
+        return getImpact(value);
     }
     else if (attribute == "high"){
-        return "<span class='black-text'>High: "
+        return "<span class='black-text'>High: ";
     }
     else if (attribute == "low"){
-        return "<span class='black-text'>Low: "
+        return "<span class='black-text'>Low: ";
     }
     else if (attribute == "market_cap"){
-        return "<span class='black-text'>Market Cap: "
+        return "<span class='black-text'>Market Cap: ";
     }
     else if (attribute == "revenue"){
-        return "<span class='black-text'>Revenue: "
+        return "<span class='black-text'>Revenue: ";
     }
     else if (attribute == "bid"){
-        return "<span class='black-text'>Bid: "
+        return "<span class='black-text'>Bid: ";
     }
     else if (attribute == "offer"){
-        return "<span class='black-text'>Offer: "
+        return "<span class='black-text'>Offer: ";
     }
     else if (attribute == "sector"){
-        return "<span class='black-text'>Sector: "
+        return "<span class='black-text'>Sector: ";
     }
     else if (attribute == "sub_sector"){
-        return "<span class='black-text'>Sub-Sector: "
+        return "<span class='black-text'>Sub-Sector: ";
     }
     else if (attribute == "volume"){
-        return "<span class='black-text'>Volume: "
+        return "<span class='black-text'>Volume: ";
     }
     else if (attribute == "last_close_value"){
-        return "<span class='black-text'>Last Close Value: "
+        return "<span class='black-text'>Last Close Value: ";
     }
     else if (attribute == "last_close_date"){
-        return "<span class='black-text'>Last Close Date: "
+        return "<span class='black-text'>Last Close Date: ";
     }
     else if (attribute == "price"){
-        return "<span class='black-text'>Price: "
+        return "<span class='black-text'>Price: ";
     }
     else{
-        return "<span class='black-text'>"
+        return "<span class='black-text'>";
     }
 }
 
 function getUnits(attribute){
     if (attribute == "per_diff"){
-        return "%"
+        return "%";
     }
     else if (attribute == "price"){
-        return " GBX"
+        return " GBX";
     }
     else{
-        return ""
+        return "";
     }
 }
 
@@ -239,6 +367,15 @@ $(document).ready(function() {
 
     $('.tooltipped').tooltip({delay: 50});
 
+    var voice;
+
+    $.ajax({
+        url: '/ajax/getvoice',
+        success: function(result) {
+            voice = result.voice;
+        }
+    });
+
     var csrftoken = $.cookie('csrftoken');
 
     function csrfSafeMethod(method) {
@@ -254,6 +391,41 @@ $(document).ready(function() {
         }
     });
 
+    var fetchReply = function(query, history, voice) {
+        return $.ajax({
+            url: "/chat/",
+            type: "POST",
+            data: {
+                question: query
+            },
+            success: function(data) {
+                $("#buffering").remove();
+
+                appendReply(false, voice, data);
+                $('.scrollable-container').hScroll();
+            },
+        });
+    }
+
+    function processingQuery() {
+        var bufferingCircle = "<div class='preloader-wrapper small active'>" +
+                                  "<div class='spinner-layer spinner-blue-only'>" +
+                                    "<div class='circle-clipper left'>" +
+                                      "<div class='circle'></div>" +
+                                    "</div><div class='gap-patch'>" +
+                                      "<div class='circle'></div>" +
+                                    "</div><div class='circle-clipper right'>" +
+                                      "<div class='circle'></div>" +
+                                    "</div>" +
+                                  "</div>" +
+                                "</div>";
+        var bufferingBubble = "<div id='buffering' class='bubble-interactive received'>" + bufferingCircle + "</div>";
+        $("#chat-history").append(bufferingBubble);
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+        return $("#id_question").val();
+    }
+  
     $("#send-text").click(function(e) {
         if ($("#id_question").val() != "") {
             $("#ask-question").submit();
@@ -281,9 +453,8 @@ $(document).ready(function() {
                 var finalTranscript = "";
 
                 recognition.onspeechstart = function(event) {
-                    var queryBubble = "<div class='bubble sent blue lighten-1 scale-transition scale-out'><span class='white-text'></span></div>";
+                    var queryBubble = "<div class='bubble sent blue lighten-1'><span class='white-text'></span></div>";
                     $("#chat-history").append(queryBubble);
-                    $(".sent").last().removeClass("scale-out").addClass("scale-in");
                     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
                 };
 
@@ -304,9 +475,8 @@ $(document).ready(function() {
 
                 recognition.onspeechend = function(event) {
                     recognition.abort();
-                    // $("#send-voice").removeClass("pulse");
                     processingQuery();
-                    fetchReply(finalTranscript);
+                    fetchReply(finalTranscript, voice);
                 }
 
                 recognition.onend = function(event) {

@@ -22,8 +22,9 @@ class UserPreferencesForm(ModelForm):
     colour_scheme = forms.ChoiceField(choices=COLOUR_SCHEME_CHOICES, required=False)
     companies = forms.CharField(widget=forms.HiddenInput(), required=False)
     sectors = forms.CharField(widget=forms.HiddenInput(), required=False)
+    days_old = forms.IntegerField(label='How old should the news be? (days)',
+                    widget=forms.NumberInput(attrs={'type':'range', 'min': 1, 'max': 14}))
 
     class Meta:
         model = UserPreferences
         fields = '__all__'
-

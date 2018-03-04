@@ -12,20 +12,20 @@ jQuery(function ($) {
     };
 });
 
-function appendReply(data, history, voice) {
+function appendReply(data, colour, history, voice) {
     if (voice) {
         var synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(data['speech']);
         synth.speak(utterThis);
     }
 
-    var reply = createReply(data);
+    var reply = createReply(data, colour);
 
     $("#chat-history").append(reply);
 
     $(".suggestion-chip").on('click', function(e) {
         var suggestion = $($($(e.target)).contents()[0]).text();
-        addQuery(suggestion);
+        addQuery(suggestion, colour);
     })
 
     if (!history) {
@@ -58,7 +58,7 @@ function topPerformers(card) {
     return reply;
 }
 
-function createReply(data) {
+function createReply(data, colour) {
     var card = data["text"];
     var reply = '';
 
@@ -147,7 +147,7 @@ function createReply(data) {
             break;
         case "briefing":
             card['companies'].forEach(function(obj) {
-                reply += simpleReply("Here is the latest data on " + obj.name + ":");
+                reply += simpleReply("Here is the latest data on " + obj.name + ":", colour);
 
                 reply += "<div class='bubble-interactive received'>" +
                               "<div class='card white'>" +
@@ -190,34 +190,34 @@ function createReply(data) {
                 reply += "</div></div></div>";
 
                 if ("news" in obj) {
-                    reply += simpleReply("Here are the latest news on " + obj.name + ":");
+                    reply += simpleReply("Here are the latest news on " + obj.name + ":", colour);
 
-                    reply += createReply(obj.news);
+                    reply += createReply(obj.news, colour);
                 }
             });
 
             card['sectors'].forEach(function(obj) {
-                reply += simpleReply("The highest price in " + obj.name + " is:");
+                reply += simpleReply("The highest price in " + obj.name + " is:", colour);
                 reply += createReply(obj.highest_price);
 
-                reply += simpleReply("The lowest price in " + obj.name + " is:");
+                reply += simpleReply("The lowest price in " + obj.name + " is:", colour);
                 reply += createReply(obj.lowest_price);
 
-                reply += simpleReply("The rising companies in " + obj.name + " are:");
+                reply += simpleReply("The rising companies in " + obj.name + " are:", colour);
                 reply += createReply(obj.rising);
 
-                reply += simpleReply("The falling companies in " + obj.name + " are:");
+                reply += simpleReply("The falling companies in " + obj.name + " are:", colour);
                 reply += createReply(obj.falling);
 
                 if ("news" in obj) {
-                    reply += simpleReply("Here are some news about " + obj.name + ":");
+                    reply += simpleReply("Here are some news about " + obj.name + ":", colour);
                     reply += createReply(obj.news);
                 }
             });
 
             break;
         default:
-            var reply = simpleReply(data['text']);
+            var reply = simpleReply(data['text'], colour);
     }
 
     // Display suggestions
@@ -228,7 +228,7 @@ function createReply(data) {
 
         for (i = 0; i < suggestions.length; i++) {
             reply +=
-            '<div class="waves-effect suggestion-chip z-depth-2">' +
+            '<div class="waves-effect suggestion-chip suggestion-chip-' + colour + ' z-depth-2">' +
               '<span><a class="grey-text text-darken-2" >' + suggestions[i] + '</a></span>' +
             '</div>';
         }
@@ -239,8 +239,28 @@ function createReply(data) {
     return reply;
 }
 
-function simpleReply(text) {
-    return "<div class='bubble received blue lighten-1'><span class='white-text'>" + text + "</span></div>";
+function simpleReply(text, colour) {
+    var reply = "<div class='bubble received ";
+
+    if (colour == "indigo") {
+        reply += "indigo lighten-1";
+    } else if (colour == "dark") {
+        reply += "grey darken-3";
+    } else {
+        reply += "grey lighten-3";
+    }
+
+    reply += "'><span class='";
+
+    if (colour == "light") {
+        reply += "black-text";
+    } else {
+        reply += "white-text";
+    }
+
+    reply += "'>" + text + "</span></div>";
+
+    return reply;
 }
 
 function getImpact(value) {
@@ -252,7 +272,7 @@ function getImpact(value) {
     }
 }
 
-function addQuery(question, history, voice) {
+function addQuery(question, colour, history, voice) {
     if ($('#suggestions').length) {
         $('#suggestions').remove();
     }
@@ -260,16 +280,32 @@ function addQuery(question, history, voice) {
     var now = new Date();
     var time = now.getHours() + ":" + now.getMinutes();
 
-    var query = "<div class='bubble sent blue lighten-1 tooltipped'" +
-                "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
-                "<span class='white-text'>" + question + "</span></div>";
+    var query = "<div class='bubble sent ";
+
+    if (colour == "indigo") {
+        query += "indigo";
+    } else if (colour == "dark") {
+        query += "grey darken-4";
+    } else {
+        query += "grey lighten-2";
+    }
+
+    query += " tooltipped' data-position='right' data-delay='50' data-tooltip='" + time + "'><span class='";
+
+    if (colour == "light") {
+        query += "black-text";
+    } else {
+        query += "white-text";
+    }
+
+    query += "'>" + question + "</span></div>";
 
     $("#chat-history").append(query);
     $('.tooltipped').tooltip({delay: 50});
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
     processingQuery();
-    fetchReply(question, false, false);
+    fetchReply(question, colour, false, false);
 }
 
 function getStyle(attribute, value){
@@ -348,7 +384,7 @@ function processingQuery() {
     return $("#id_question").val();
 }
 
-var fetchReply = function(query, history, voice) {
+var fetchReply = function(query, colour, history, voice) {
     return $.ajax({
         url: "/chat/",
         type: "POST",
@@ -358,7 +394,7 @@ var fetchReply = function(query, history, voice) {
         success: function(data) {
             $("#buffering").remove();
 
-            appendReply(data, false, voice);
+            appendReply(data, colour, false, voice);
             $('.scrollable-container').hScroll();
         },
     });
@@ -370,11 +406,13 @@ $(document).ready(function() {
     $('.tooltipped').tooltip({delay: 50});
 
     var voice;
+    var colour;
 
     $.ajax({
-        url: '/ajax/getvoice',
+        url: '/ajax/getpreferences',
         success: function(result) {
             voice = result.voice;
+            colour = result.colour_scheme;
         }
     });
 
@@ -494,7 +532,7 @@ $(document).ready(function() {
 
     $("#ask-question").submit(function(e) {
         e.preventDefault();
-        addQuery($('#id_question').val(), false, false);
+        addQuery($('#id_question').val(), colour, false, false);
         $("#id_question").val("");
     });
 });

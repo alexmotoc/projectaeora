@@ -32,13 +32,16 @@
             <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>
 
             {% for query_response in history %}
-            <div class="bubble sent blue lighten-1 tooltipped" data-position="right" data-delay="50" data-tooltip="{{ query_response.query.created_at }}" >
-              <span class="white-text">{{ query_response.query.question }}</span>
+            <div class="bubble sent {% include 'colour-scheme-primary.html' %} tooltipped"
+              data-position="right" data-delay="50" data-tooltip="{{ query_response.query.created_at }}" >
+              <span class="{% if colour_scheme == 'light' %} black-text
+              {% else %} white-text {% endif %}">{{ query_response.query.question }}</span>
             </div>
 
             <script>
               var data = JSON.parse('{{ query_response.response | escapejs }}');
-              appendReply(data, true, false);
+              var colour = '{{ colour_scheme | escapejs }}';
+              appendReply(data, colour, true, false);
             </script>
             {% endfor %}
 
@@ -97,8 +100,7 @@
             </div>
           </div>
         </div>
-    </footer>
-
+      </footer>
 
     </body>
   </html>

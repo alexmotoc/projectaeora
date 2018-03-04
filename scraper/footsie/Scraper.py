@@ -190,7 +190,7 @@ class Scraper:
 
             # Process variance cell
             per_diff = variance.text[:variance.text.find('%')]
-            diff = variance.text[variance.text.find('%') + 1:]
+            diff = variance.findNext('span').text.replace("(","").replace(")","").replace("\n","").strip()
 
             # Get date information
             disclaimer = soup.find('div', {'class': 'disclaimer_gray'})

@@ -48,14 +48,22 @@ def sector_query_intent(r, is_sector, days):
     #if required entities have been specified get sector/sub-sector data
     if is_sector: #is a SectorQuery
         if r['result']['parameters']['sector'] == '' or r['result']['parameters']['sector_attribute'] == '':
-            return r['result']['fulfillment']['speech']
+            reply = {}
+            reply['text'] = r['result']['fulfillment']['speech']
+            reply['speech'] = r['result']['fulfillment']['speech']
+            reply['type'] = 'incomplete'
+            return reply
         else:
             sector_name = r['result']['parameters']['sector']
             sector_attribute = r['result']['parameters']['sector_attribute']
             sector = scraper.get_sector_data(sector_name)
     else: #is a SubSectorQuery
         if r['result']['parameters']['subsector'] == '' or r['result']['parameters']['sector_attribute'] == '':
-            return r['result']['fulfillment']['speech']
+            reply = {}
+            reply['text'] = r['result']['fulfillment']['speech']
+            reply['speech'] = r['result']['fulfillment']['speech']
+            reply['type'] = 'incomplete'
+            return reply
         else:
             sector_name = r['result']['parameters']['subsector']
             sector_attribute = r['result']['parameters']['sector_attribute']

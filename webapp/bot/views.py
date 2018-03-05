@@ -155,19 +155,17 @@ def get_voice_preference(request):
 
 
 def remove_duplicates(news_data):
-    lastn = ""
-    for n in news_data['LSE']:
-        if lastn != "":
-            if n.url == lastn.url:
-                news_data['LSE'].remove(n)
-        lastn = n
-    lastn = ""
-    for n in news_data['YAHOO']:
-        if lastn != "":
-            if n.url == lastn.url:
-                news_data['YAHOO'].remove(n)
-        lastn = n
-    return news_data
+    urls = list()
+    news_list = list()
+    for n in news_data:
+        if not(n.url in urls):
+            news_list.append(n)
+        else:
+            for n1 in news_list:
+                if n.url == n1.url and n.company not in n1.company:
+                    n1.company += ", "+n.company
+        urls.append(n.url)
+    return news_list
 
 def interests(request):
     try:
@@ -208,10 +206,11 @@ def interests(request):
     all_news_data['YAHOO'] = company_news_data['YAHOO'] + sector_news_data['YAHOO'] 
     all_news_data['LSE'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)   
     all_news_data['YAHOO'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)
-    all_news_data = remove_duplicates(all_news_data)
+    all_news_data['LSE'] = remove_duplicates(all_news_data['LSE'])
+    all_news_data['YAHOO'] = remove_duplicates(all_news_data['YAHOO'])
     all_news = replies.news_reply(all_news_data, news_timeframe)
     #remove duplicates from company_data
-    company_data.sort(key=lambda x: x.code, reverse=True)
+    company_data.sort(key=lambda x: x.code, reverse=False)
     lastc = ""
     for c in company_data:
         if lastc != "":

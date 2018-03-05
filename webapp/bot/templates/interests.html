@@ -39,7 +39,7 @@
             {% for company in companies %}
                 <tr><td>{{company.name}}</td><td>{{company.stock.price}}</td>
 
-                {% if company.per_diff.0 == '+' %}
+                {% if company.stock.per_diff.0 == '+' %}
                     <td class='green-text'>{{company.stock.per_diff}}</td>
                 {% else %}
                     <td class='red-text'>{{company.stock.per_diff}}</td>

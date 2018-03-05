@@ -26,9 +26,9 @@ def chat(request):
     history = Response.objects.all()
     response = defaultdict()
 
-    try:
-        preferences = UserPreferences.objects.all().first()
-    except:
+    preferences = UserPreferences.objects.all().first()
+
+    if preferences == None:
         preferences = UserPreferences.objects.create()
         preferences.save()
 

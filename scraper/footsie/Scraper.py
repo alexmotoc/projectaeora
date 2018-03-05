@@ -253,6 +253,8 @@ class Scraper:
 
         response = requests.get(url)
         financial_news = defaultdict()
+        financial_news['LSE'] = list()
+        financial_news['YAHOO'] = list()
         lse_news = list()
 
         if response.status_code == 200:

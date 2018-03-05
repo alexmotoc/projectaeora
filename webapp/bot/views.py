@@ -70,6 +70,8 @@ def chat(request):
             else:
                 if 'Footsie' in intent:
                     response = intents.footsie_intent(r, preferences.days_old)
+                elif 'ComparisonIntent' in intent:
+                    response = intents.comparison_intent(r)
                 elif 'SubSectorQuery' in intent:
                     response = intents.sector_query_intent(r, False, preferences.days_old)
                 elif 'SectorQuery' in intent:
@@ -87,7 +89,7 @@ def chat(request):
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
 
-            if response['type'] not in ('briefing', 'input.unknown', 'incomplete', 'simple.response'):
+            if response['type'] not in ('comparison', 'briefing', 'input.unknown', 'incomplete', 'simple.response'):
                 response = suggestions.add_suggestions(response, r)
 
             form = QueryForm()

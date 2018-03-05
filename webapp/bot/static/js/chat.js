@@ -131,6 +131,26 @@ function createReply(data, colour) {
             reply += topPerformers(card['risers']);
             reply += topPerformers(card['fallers']);
             break;
+        case "comparison":
+            reply += "<div class='bubble-interactive received'><section class='scrollable-container'>";
+
+            console.log(data);
+            card.forEach(function(obj) {
+                reply += "<div class='company-comparison'>" +
+                            "<div class='card white'>" +
+                            "<div class='card-content black-text'>" +
+                              "<span class='card-title'>" + obj["text"]["name"] + "</span>" +
+                              "<p class='grey-text code-time'>" + obj["text"]["code"] + "<br>" + obj["text"]["date"] + "</p>" +
+                              "<p class='price-impact'>" + getStyle(obj["text"]['primary_type'], obj["text"]['primary']) + obj["text"]['primary'] + getUnits(obj["text"]['primary_type']) +
+                              "<br>" + getStyle(obj["text"]['secondary_type'], obj["text"]['secondary']) + obj["text"]['secondary'] + getUnits(obj["text"]['secondary_type']) + "</p>" +
+                            "</div>" +
+                            "</div>" + 
+                          "</div>"
+            });
+
+            reply += "</section></div>";
+
+            break;
         case "revenue":
             reply += "<div class='bubble-interactive received'>" +
                           "<div class='card white'>" +

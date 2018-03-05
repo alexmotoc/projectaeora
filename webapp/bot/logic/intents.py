@@ -42,6 +42,21 @@ def footsie_intent(r, days):
             company = scraper.get_company_data(company_code)
             return replies.get_company_reply(company, attribute)
 
+def comparison_intent(r):
+    if r['result']['actionIncomplete']:
+        reply = {}
+        reply['text'] = r['result']['fulfillment']['speech']
+        reply['speech'] = r['result']['fulfillment']['speech']
+        reply['type'] = 'incomplete'
+        return reply
+    else:
+        first_company = r['result']['parameters']['company']
+        second_company = r['result']['parameters']['company1']
+        scraper = Scraper.Scraper()
+
+        return replies.comparison_reply(scraper.get_company_data(first_company),
+                scraper.get_company_data(second_company))
+
 def sector_query_intent(r, is_sector, days):
     scraper = Scraper.Scraper()
     sector = None
@@ -84,7 +99,7 @@ def sector_query_intent(r, is_sector, days):
 
 def top_risers_intent(r):
     response = {}
-    
+
     if r['result']['parameters']['rise_fall'] == '':
         return r['result']['fulfillment']['speech']
     else:

@@ -178,6 +178,20 @@ def get_company_reply(company, attribute):
 
     return reply
 
+def comparison_reply(first_company, second_company):
+    reply = defaultdict()
+
+    companies = []
+
+    companies.append(get_company_reply(first_company, 'price'))
+    companies.append(get_company_reply(second_company, 'price'))
+
+    reply['text'] = companies
+    reply['type'] = 'comparison'
+    reply['speech'] = 'Here is the side by side comparison of ' + first_company.name + ' and ' + second_company.name
+
+    return reply
+
 def sector_reply(sector, sector_attribute):
     data = getattr(sector, sector_attribute)
 
@@ -237,7 +251,7 @@ def sector_reply(sector, sector_attribute):
             row = defaultdict()
             row['name'] = data[i].name
             row['price'] = data[i].stock.price
-            row['percentage_change'] = data[i].stock.per_diff      
+            row['percentage_change'] = data[i].stock.per_diff
             companies.append(row)
         movers = defaultdict()
         movers['speech'] = "Here is some data about how "+sector.name+" are performing"
@@ -258,7 +272,7 @@ def revenue_reply(company, date_period):
     response['speech'] = "Here is the revenue data for " + company.name
     response['type'] = "revenue"
     response['text'] = card
-    
+
     valid_date = False
 
     if not date_period:
@@ -283,9 +297,9 @@ def revenue_reply(company, date_period):
         response['speech'] = "I'm sorry, I couldn't find the data you were looking for."
         response['text'] = "I'm sorry, I couldn't find the data you were looking for."
         response['type'] = 'error'
-       
+
     return response
-  
+
 def daily_briefings(companies, sectors, attributes, days):
     response = {}
 

@@ -17,6 +17,8 @@ company_attributes = {
     'price': 'price',
     'last_close_value': 'the last close value',
     'high': 'the current high'
+    'sector': 'which sector is it in'
+    'sub_sector': 'which sub-sector is it in'
 }
 
 sector_attributes = {

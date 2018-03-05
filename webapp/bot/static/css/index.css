@@ -3,21 +3,6 @@ nav {
   background-color: white;
   height: 64px;
 }
-/*
-.navbar-fixed .nav-wrapper #top-nav .brand-logo img {
-    height: 64px;
-}
-
-/*
-@media (max-width: 600px) {
-  .navbar-fixed .nav-wrapper #top-nav .brand-logo img {
-      height: 56px;
-  }
-}
-
-/* #top-nav {
-  height: 64px;
-} */
 
 .nav-button {
   color: black;
@@ -31,87 +16,20 @@ li.active {
   font-weight: bold;
 }
 
-/*.nav-buttons {
-  margin-left: 15%;
-}*/
-
-.parallax-container {
-  height: 800px;
+canvas {
+  display: block;
+  vertical-align: bottom;
 }
 
-#overview-text {
-  font-size: 1.6em;
-  padding-top: 20px;
-  padding-bottom: 40px;
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
-#introducing-aeora {
-  margin-top: 75px;
-}
-
-.bubble {
-    display: inline-block;
-    height: auto;
-    max-width: 50%;
-    clear: both;
-    margin: 5px 0;
-    padding: 5px 10px;
-    border-radius: 15px 15px 15px 15px;
-    -webkit-border-radius: 15px 15px 15px 15px;
-    word-wrap: break-word;
-}
-
-.bubble-interactive {
-    display: inline-block;
-    max-width: 100%;
-    height: auto;
-    clear: both;
-    margin: 5px 0;
-    padding: 5px 10px;
-    border-radius: 15px 15px 15px 15px;
-    -webkit-border-radius: 15px 15px 15px 15px;
-    word-wrap: break-word;
-}
-
-.code-time {
-    float: left;
-}
-
-.price-impact {
-    text-align: right;
-}
-
-.card {
-    min-width: 300px;
-}
-
-.suggestion-chip {
-    display: inline-block;
-    height: auto;
-    margin: 5px 0;
-    padding: 5px 10px;
-    border-radius: 15px 15px 15px 15px;
-    -webkit-border-radius: 15px 15px 15px 15px;
-    word-wrap: break-word;
-}
-
-.suggestion-chip:hover {
-    background-color: #5c6bc0;
-}
-
-.suggestion-chip:hover a {
-    color: white!important;
-}
-
-.sent {
-    float: right;
-}
-
-.received {
-    float: left;
-}
-
-#demo {
-  margin-right: auto;
-  margin-left: auto;
+#intro {
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%,-50%);
 }

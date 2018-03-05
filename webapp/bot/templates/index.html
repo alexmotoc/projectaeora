@@ -7,6 +7,7 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="{% static "css/index.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/chat.css" %}"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -20,8 +21,7 @@
       <div class="navbar-fixed">
         <nav id="top-nav">
            <div class="nav-wrapper">
-             <a href="index.html" class="brand-logo"><img src="{% static "images/logo.png" %}" height="56px"></a>
-              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons"></i>menu</a>
+             <a href="/" class="brand-logo"><img src="{% static "images/logo.png" %}" height="56px"></a>
               <ul class="right hide-on-med-and-down nav-buttons">
                 <li class="active"><a class="nav-button" href="#!">Overview</a></li>
                 <li><a class="nav-button" href="chat">Chat</a></li>
@@ -33,83 +33,84 @@
             </div>
          </nav>
       </div>
-      <div class="section white">
-        <div class="row container center">
-         <h1 class="header" id="introducing-aeora">Introducing Aeora.</h1>
+      <section>
+        <div id="particles-js" class="indigo"></div>
+        <div id="intro" class="container">
+          <div class="row center">
+            <h1 class="white-text"><span class="typed"></span></h1>
+            <h2 class="white-text">The virtual assistant that helps with financial queries</h2>
+          </div>
+          <div class="row center">
+            <a href="/chat/" class="waves-effect waves-light btn-large red">Get started</a>
+          </div>
+          <!-- <div class="row center">
+            <a href="#introducing-aeora">
+              <img src="https://www.playmatetennis.com/v1/wp-content/uploads/2017/06/arrow-down-navigation1.gif" height="100px"/>
+            </a>
+          </div> -->
         </div>
-      </div>
-      <div class="parallax-container">
-        <div class="parallax"><img src="{% static "images/parallaxbackground1.jpg" %}"></div>
-      </div>
-      <div class="section white overview-section">
-        <div class="row container center">
-         <h2 class="header">Find out what you need, fast.</h2>
-         <p class="grey-text text-darken-3 lighten-3" id="overview-text">Aeora is a personal assistant, built to interact with traders via voice interface or text, to help answer queries by providing an instant and accurate reply.</p>
+      </section>
+      <div class="container">
+        <div id="introducing-aeora" class="section white">
+          <div class="row center">
+            <h1>Introducing Aeora.</h1>
+            <img class="responsive-img" src="{% static 'images/laptop_view.gif' %}">
+            <p class="flow-text">The ChatBot for traders, providing answers to questions on the FTSE 100.<br>
+            Built for quick and intellectual conversations.</p>
+          </div>
         </div>
-        <div class="row container">
-          <div class="row container" id="demo">
-            <div class="bubble sent blue lighten-1" id="bubble1">
-                <span class="white-text">Hello Aeora</span>
+        <!-- TODO: Add a couple of elements -->
+        <!-- <div class="section white">
+          <div class="row center">
+            <h2>Visualisations to help you make better decisions.</h2>
+          </div>
+        </div> -->
+        <div class="section white">
+          <div class="row center">
+          </div>
+        </div>
+        <div class="section white">
+          <div class="row center">
+            <div class="col s12 m8 l6">
+              <img src="{% static 'images/phone_view.gif' %}" width="280">
             </div>
-            <div class="bubble received blue lighten-1" id="bubble2">
-                <span class="white-text">Hi, how can I help?</span>
+            <div class="col s12 m4 l6">
+              <h2 class="header">Find out what you need, fast.</h2>
+              <p class="flow-text">
+                Aeora is a personal assistant, built to interact with traders via voice or text,
+                to help answer queries by providing an instant and accurate replies.</p>
             </div>
-            <div class="bubble sent blue lighten-1" id="bubble3">
-                <span class="white-text">What's the stock price of Barclays?</span>
+          </div>
+        </div>
+        <div class="section white">
+          <div class="row center">
+            <div class="col s12 m4 l6">
+              <h2>Designed for you.</h2>
+              <p class="flow-text">
+                Whether you want to give Aeora a fresh a look or add your favourite
+                companies and sectors for tracking it's all there at the touch of button.</p>
             </div>
-            <div class="bubble-interactive received" id="bubble4">
-              <div class="card white">
-                <div class="card-content black-text">
-                  <span class="card-title">BARCLAYS PLC</span>
-                  <p class="grey-text code-time">
-                    BARC<br>
-                    27-Feb-2018 11:04
-                  </p>
-                  <p class="price-impact">
-                    <span class="black-text">
-                      Price: 210.85 GBX<br>
-                      <span class="green-text"><i class="material-icons valign-icon">
-                        trending_up</i>+1.13%
-                      </span>
-                    </span>
-                  </p>
-                </div>
-              </div>
+            <div class = "col s12 m8 l6">
+              <img src="{% static 'images/settings_view.png' %}">
             </div>
-            <div class="bubble sent blue lighten-1" id="bubble5">
-                <span class="white-text">Thanks, which banks are falling at the moment?</span>
-            </div>
-            <div class="bubble-interactive received" id="bubble6">
-              <div class="card white">
-                <div class="card-content black-text">
-                  <span class="card-title">4/5 Banks are falling</span>
-                  <table class="striped">
-                    <thead>
-                      <tr><th>Name</th><th>Price</th><th>%+/-</th></tr>
-                    </thead>
-                    <tbody>
-                      <tr><td>STANDARD CHARTERED PLC</td><td>810.80</td><td class="red-text">-3.36</td></tr>
-                      <tr><td>ROYAL BANK OF SCOTLAND GROUP PLC</td><td>267.70</td><td class="red-text">-1.00</td></tr>
-                      <tr><td>LLOYDS BANKING GROUP PLC</td><td>68.80</td><td class="red-text">-0.33</td></tr>
-                      <tr><td>HSBC HOLDINGS PLC</td><td>717.10</td><td class="red-text">-0.29</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="bubble sent blue lighten-1" id="bubble5">
-                <span class="white-text">What's in the news about Coca-Cola?</span>
-            </div>
-
           </div>
         </div>
       </div>
-
       </main>
+
+      <footer class="page-footer white">
+        <div class="footer-copyright">
+          <div class="container">
+            <span class="grey-text text-darken-4">© 2018 Aeora</span>
+          </div>
+        </div>
+      </footer>
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
       <script type="text/javascript" src="{% static "js/index.js" %}"></script>
     </body>
   </html>

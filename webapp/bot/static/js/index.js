@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    $(".button-collapse").sideNav();
+
       var particles = {
         "particles": {
           "number": {

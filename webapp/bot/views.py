@@ -12,20 +12,27 @@ import os
 import requests
 
 import sys
+
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '/../../scraper'))
 
-from footsie import Scraper
 
-
-# Create your views here.
 def index(request):
+    """
+    :param request: A HTTP request
+    :return: A rendering of the index.html template
+    """
     return render(request, 'index.html')
 
 
 def chat(request):
+    """
+    :param request: A HTTP request
+    :return: Either a rendering of chat.html, or JSON containing the response to a user's query.
+    """
     history = Response.objects.all()
     response = defaultdict()
 
+    # get the user's preferences model, or create a default one if UserPreferences do not exist
     try:
         preferences = UserPreferences.objects.all().first()
     except:
@@ -36,8 +43,8 @@ def chat(request):
 
     for field in preferences._meta.get_fields():
         if field.get_internal_type() == 'BooleanField' \
-           and field.name != 'voice' and getattr(preferences, field.name):
-                attributes.append(field.name)
+                and field.name != 'voice' and getattr(preferences, field.name):
+            attributes.append(field.name)
 
     if request.method == 'POST':
         form = QueryForm(request.POST)
@@ -46,6 +53,7 @@ def chat(request):
             query = form.save()
             question = form.cleaned_data['question']
 
+            # send query to Dialogflow
             dialogflow_key = os.environ.get('DIALOGFLOW_CLIENT_ACCESS_TOKEN')
             dialogflow_api = 'https://api.dialogflow.com/v1/query?v=20150910'
             headers = {'Authorization': 'Bearer ' + dialogflow_key,
@@ -60,13 +68,14 @@ def chat(request):
             r = requests.post(dialogflow_api, headers=headers, data=payload)
             r = r.json()
 
-            # SubSector must come before Sector!
             intent = r['result']['metadata']['intentName']
 
             if r['result']['action'] == "input.unknown":
                 response['text'] = r['result']['fulfillment']['speech']
                 response['type'] = 'input.unknown'
                 response['speech'] = r['result']['fulfillment']['speech']
+            # check what intent the query had and form the response respectively
+            # SubSector must come before Sector due to SectorQuery being a sub-string of SubSectorQuery!
             else:
                 if 'Footsie' in intent:
                     response = intents.footsie_intent(r, preferences.days_old)
@@ -78,15 +87,18 @@ def chat(request):
                     response = intents.top_risers_intent(r)
                 elif 'Daily Briefing' in intent:
                     response = intents.daily_briefings_intent(preferences.companies,
-                               preferences.sectors, attributes, preferences.days_old)
+                                                              preferences.sectors, attributes, preferences.days_old)
+                # else the response will be simple and simply echo the response that comes from Dialogflow
                 else:
                     response['text'] = r['result']['fulfillment']['speech']
                     response['speech'] = r['result']['fulfillment']['speech']
                     response['type'] = 'simple.response'
 
+            # save the query and response
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
 
+            # if the response type is one that can have suggestions then add suggestions to the response
             if response['type'] not in ('briefing', 'input.unknown', 'incomplete', 'simple.response'):
                 response = suggestions.add_suggestions(response, r)
 
@@ -97,16 +109,22 @@ def chat(request):
     if request.is_ajax():
         return JsonResponse(response)
     else:
-        return render(request, 'chat.html', {'form': form, 'history': history, 'colour_scheme': preferences.colour_scheme})
+        return render(request, 'chat.html',
+                      {'form': form, 'history': history, 'colour_scheme': preferences.colour_scheme})
 
 
 def settings(request):
+    """
+    :param request: A HTTP request.
+    :return: JSON containing the status of saving the preferences if the request was from AJAX or a rendering of the
+    settings page if it as a GET request.
+    """
     status = None
 
     try:
         preferences = UserPreferences.objects.all().first()
     except:
-        preferences = User.Preferences.objects.create()
+        preferences = UserPreferences.objects.create()
         preferences.save()
 
     if request.method == 'POST':
@@ -127,6 +145,10 @@ def settings(request):
 
 
 def get_companies(request):
+    """
+    :param request: A HTTP request.
+    :return: JSON containing the user's saved companies, and JSON containing all of the companies in the FTSE100.
+    """
     saved_companies = []
 
     try:
@@ -143,6 +165,11 @@ def get_companies(request):
 
 
 def get_sectors(request):
+    """
+    :param request: A HTTP request
+    :return: JSON containing the user's saved sectors, and JSON containing all of the sectors in the FTSE100.
+    """
+
     saved_sectors = []
 
     try:
@@ -157,7 +184,12 @@ def get_sectors(request):
         sectors = json.load(f)
         return JsonResponse({"sectors": sectors, "saved_sectors": saved_sectors})
 
+
 def get_preferences(request):
+    """
+    :param request: A HTTP request.
+    :return: JSON containing the user's voice preference and colour scheme preference.
+    """
     preferences = UserPreferences.objects.all().first()
 
     return JsonResponse({'voice': preferences.voice, 'colour_scheme': preferences.colour_scheme})

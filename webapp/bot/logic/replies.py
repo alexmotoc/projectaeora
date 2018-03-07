@@ -169,6 +169,10 @@ def news_reply(financial_news, days, positive_negative):
         reply['text'] = news
 
         if positive_negative:
+            number_positive = 'no' if number_positive == 0 else number_positive
+            number_neutral = 'no' if number_neutral == 0 else number_neutral
+            number_negative = 'no' if number_negative == 0 else number_negative
+
             reply["positive_negative"] = "There are {} positive, {} neutral and {} negative articles.".format(
                 number_neutral, number_positive, number_negative)
             reply['speech'] += " "

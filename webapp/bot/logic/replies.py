@@ -178,19 +178,29 @@ def get_company_reply(company, attribute):
 
     return reply
 
-def comparison_reply(first_company, second_company):
+
+def comparison_reply(company_data):
     reply = defaultdict()
 
     companies = []
+    for i in range(len(company_data)):
+        print(company_data[i].name)
+        companies.append(get_company_reply(company_data[i], 'price'))
 
-    companies.append(get_company_reply(first_company, 'price'))
-    companies.append(get_company_reply(second_company, 'price'))
-
-    reply['text'] = companies
-    reply['type'] = 'comparison'
-    reply['speech'] = 'Here is the side by side comparison of ' + first_company.name + ' and ' + second_company.name
+    if len(companies) == 1:
+        reply['text'] = companies
+        print(companies)
+        reply['type'] = 'comparison'
+        reply['speech'] = "The price of {} is {}.".format(companies[0]['text']['name'], companies[0]['text']['primary'])
+    else:
+        reply['text'] = companies
+        reply['type'] = 'comparison'
+        reply['speech'] = 'Here is the side by side comparison of ' + company_data[0].name
+        for i in range(1, len(company_data)):
+            reply['speech'] += ' and {}'.format(company_data[i].name)
 
     return reply
+
 
 def sector_reply(sector, sector_attribute):
     data = getattr(sector, sector_attribute)

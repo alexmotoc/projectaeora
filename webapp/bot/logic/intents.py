@@ -51,12 +51,16 @@ def comparison_intent(r):
         reply['type'] = 'incomplete'
         return reply
     else:
-        first_company = r['result']['parameters']['company']
-        second_company = r['result']['parameters']['company1']
+        companies = r['result']['parameters']['company']
         scraper = Scraper.Scraper()
 
-        return replies.comparison_reply(scraper.get_company_data(first_company),
-                                        scraper.get_company_data(second_company))
+        company_data = []
+        for company in companies:
+            company_data.append(scraper.get_company_data(company))
+
+        company_data = list(set(company_data))
+
+        return replies.comparison_reply(company_data)
 
 
 def sector_query_intent(r, is_sector, days):

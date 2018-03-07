@@ -3,7 +3,7 @@
 **The ChatBot for traders, providing answers to questions on the FTSE 100.   
 Built for quick and intellectual conversations.**
 
-![Laptop view](bot/static/images/laptop_view.gif)
+![Laptop view](webapp/bot/static/images/laptop_view.gif)
 
 ## Installation
 Install all the dependencies using the command:

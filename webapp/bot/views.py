@@ -89,6 +89,8 @@ def chat(request):
             reply = Response(query=query, response=json.dumps(response))
             reply.save()
 
+            print(response)
+
             if response['type'] not in ('comparison', 'briefing', 'input.unknown', 'incomplete', 'simple.response'):
                 response = suggestions.add_suggestions(response, r)
 

@@ -55,11 +55,11 @@ def comparison_intent(r):
         companies = r['result']['parameters']['company']
         scraper = Scraper.Scraper()
 
+        companies = list(set(companies))
+
         company_data = []
         for company in companies:
             company_data.append(scraper.get_company_data(company))
-
-        company_data = list(set(company_data))
 
         return replies.comparison_reply(company_data)
 
@@ -98,9 +98,9 @@ def sector_query_intent(r, is_sector, days):
             start_date = datetime.strptime(start, '%Y-%m-%d')
             end_date = datetime.strptime(end, '%Y-%m-%d')
             difference = end_date.date() - start_date.date()
-            return replies.news_reply(sector.news, difference.days)
+            return replies.news_reply(sector.news, difference.days, '')
         else:
-            return replies.news_reply(sector.news, days)
+            return replies.news_reply(sector.news, days, '')
     else:
         return replies.sector_reply(sector, sector_attribute)
 
@@ -109,7 +109,11 @@ def top_risers_intent(r):
     response = {}
 
     if r['result']['parameters']['rise_fall'] == '':
-        return r['result']['fulfillment']['speech']
+        reply = {}
+        reply['text'] = r['result']['fulfillment']['speech']
+        reply['speech'] = r['result']['fulfillment']['speech']
+        reply['type'] = 'incomplete'
+        return reply
     else:
         scraper = Scraper.Scraper()
         if r['result']['parameters']['rise_fall'] == "risers":

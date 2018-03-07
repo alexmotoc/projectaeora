@@ -155,7 +155,7 @@ def news_reply(financial_news, days, positive_negative):
 
     if positive_negative:
         reply["positive_negative"] = "There are {} positive, {} neutral and {} negative articles.".format(
-            number_neutral, number_positive, number_negative)
+            number_positive, number_neutral, number_negative)
         reply['speech'] += " "
         reply['speech'] += reply['positive_negative']
 
@@ -352,7 +352,7 @@ def daily_briefings(companies, sectors, attributes, days):
                     value = getattr(company, attr)
 
                 if attr == 'news':
-                    card[attr] = news_reply(value, days)
+                    card[attr] = news_reply(value, days, '')
                 else:
                     card[attr] = value
             company_cards.append(card)
@@ -373,7 +373,7 @@ def daily_briefings(companies, sectors, attributes, days):
 
             # Check if user wants sector news
             if 'news' in attributes:
-                card['news'] = news_reply(sector.news, days)
+                card['news'] = news_reply(sector.news, days, '')
 
             sector_cards.append(card)
 

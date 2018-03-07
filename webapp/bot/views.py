@@ -197,7 +197,7 @@ def get_preferences(request):
     """
     preferences = UserPreferences.objects.all().first()
 
-    return JsonResponse({"voice": preferences.voice})
+    return JsonResponse({"voice": preferences.voice, "colour_scheme": preferences.colour_scheme})
 
 
 def remove_duplicates(news_list):
@@ -220,7 +220,7 @@ def remove_duplicates(news_list):
 
 def interests(request):
     """
-    :param request: A HTTP request 
+    :param request: A HTTP request
     :return: A rendering of interests.html
     """
     try:
@@ -228,7 +228,7 @@ def interests(request):
     except:
         preferences = UserPreferences.objects.create()
         preferences.save()
-        
+
     news_timeframe = preferences.days_old
     companies = preferences.companies
     sectors = preferences.sectors
@@ -239,20 +239,20 @@ def interests(request):
     #get news, data for tracked companies
     company_data = list()
     updated = ""
-    
+
     for company in companies.split(", "):
         if len(company) > 0:
             financial_news_data = scraper.get_financial_news_data(company)
             company_data.append(scraper.get_company_data(company))
             updated = "Last updated: "+company_data[-1].date
             company_news_data['LSE'] = company_news_data['LSE'] + financial_news_data['LSE']
-            company_news_data['YAHOO'] = company_news_data['YAHOO'] + financial_news_data['YAHOO']   
-            
+            company_news_data['YAHOO'] = company_news_data['YAHOO'] + financial_news_data['YAHOO']
+
     sector_news_data = defaultdict()
     sector_news_data['LSE'] = list()
     sector_news_data['YAHOO'] = list()
     #get news, data for tracked sectors
-    
+
     for sector in sectors.split(", "):
         if len(sector) > 0:
             sector_data = scraper.get_sector_data(sector)
@@ -260,13 +260,13 @@ def interests(request):
             sector_news_data['LSE'] += scraper.get_sector_data(sector).news['LSE']
             sector_news_data['YAHOO'] += scraper.get_sector_data(sector).news['YAHOO']
     #merge company and sector news, sort by date and remove duplicates
-    
+
     all_news_data = defaultdict()
     all_news_data['LSE'] = list()
     all_news_data['YAHOO'] = list()
     all_news_data['LSE'] = company_news_data['LSE'] + sector_news_data['LSE']
-    all_news_data['YAHOO'] = company_news_data['YAHOO'] + sector_news_data['YAHOO'] 
-    all_news_data['LSE'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)   
+    all_news_data['YAHOO'] = company_news_data['YAHOO'] + sector_news_data['YAHOO']
+    all_news_data['LSE'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)
     all_news_data['YAHOO'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)
     all_news_data['LSE'] = remove_duplicates(all_news_data['LSE'])
     all_news_data['YAHOO'] = remove_duplicates(all_news_data['YAHOO'])
@@ -274,13 +274,13 @@ def interests(request):
     #remove duplicates from company_data
     company_data.sort(key=lambda x: x.code, reverse=False)
     lastc = ""
-    
+
     for c in company_data:
         if lastc != "":
             if c.code == lastc.code:
                 company_data.remove(c)
         lastc = c
-        
-    #pass data to interests template        
+
+    #pass data to interests template
     data = {'companies': company_data, 'all_news': all_news, 'updated': updated}
     return render(request, 'interests.html', data)

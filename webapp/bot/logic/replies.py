@@ -167,7 +167,7 @@ def news_reply(financial_news, days, positive_negative):
         reply['speech'] = "Here are some news articles that I've found!"
         reply['type'] = 'news'
         reply['text'] = news
-        
+
         if positive_negative:
             reply["positive_negative"] = "There are {} positive, {} neutral and {} negative articles.".format(
                 number_neutral, number_positive, number_negative)
@@ -219,7 +219,7 @@ def get_company_reply(company, attribute):
 
     return reply
 
-  
+
 def comparison_reply(company_data):
     reply = defaultdict()
 
@@ -235,13 +235,13 @@ def comparison_reply(company_data):
         reply['text'] = companies
         reply['type'] = 'comparison'
         reply['speech'] = 'Here is the side by side comparison of ' + company_data[0].name
-        
+
         for i in range(1, len(company_data)):
             reply['speech'] += ' and {}'.format(company_data[i].name)
 
     return reply
 
-  
+
 def sector_reply(sector, sector_attribute):
     """
     :param sector: A Sector whose data was requested
@@ -362,7 +362,7 @@ def revenue_reply(company, date_period):
 
     return response
 
-  
+
 def daily_briefings(companies, sectors, attributes, days):
     """
     :param companies: A list of Company objects
@@ -397,7 +397,7 @@ def daily_briefings(companies, sectors, attributes, days):
                     value = getattr(company, attr)
 
                 if attr == 'news':
-                    card[attr] = news_reply(value, days)
+                    card[attr] = news_reply(value, days, '')
                 else:
                     card[attr] = value
             company_cards.append(card)
@@ -418,7 +418,7 @@ def daily_briefings(companies, sectors, attributes, days):
 
             # Check if user wants sector news
             if 'news' in attributes:
-                card['news'] = news_reply(sector.news, days)
+                card['news'] = news_reply(sector.news, days, '')
 
             sector_cards.append(card)
 

@@ -270,7 +270,7 @@ def interests(request):
     all_news_data['YAHOO'].sort(key=lambda x: datetime.strptime(x.date, '%H:%M %d-%b-%Y'), reverse=True)
     all_news_data['LSE'] = remove_duplicates(all_news_data['LSE'])
     all_news_data['YAHOO'] = remove_duplicates(all_news_data['YAHOO'])
-    all_news = replies.news_reply(all_news_data, news_timeframe)
+    all_news = replies.news_reply(all_news_data, news_timeframe, '')
     #remove duplicates from company_data
     company_data.sort(key=lambda x: x.code, reverse=False)
     lastc = ""

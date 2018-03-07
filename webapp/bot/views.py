@@ -12,20 +12,27 @@ import os
 import requests
 
 import sys
+
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '/../../scraper'))
 
-from footsie import Scraper
 
-
-# Create your views here.
 def index(request):
+    """
+    :param request: A HTTP request
+    :return: A rendering of the index.html template
+    """
     return render(request, 'index.html')
 
 
 def chat(request):
+    """
+    :param request: A HTTP request
+    :return: Either a rendering of chat.html, or JSON containing the response to a user's query.
+    """
     history = Response.objects.all()
     response = defaultdict()
 
+    # get the user's preferences model, or create a default one if UserPreferences do not exist
     preferences = UserPreferences.objects.all().first()
 
     if preferences == None:
@@ -36,8 +43,8 @@ def chat(request):
 
     for field in preferences._meta.get_fields():
         if field.get_internal_type() == 'BooleanField' \
-           and field.name != 'voice' and getattr(preferences, field.name):
-                attributes.append(field.name)
+                and field.name != 'voice' and getattr(preferences, field.name):
+            attributes.append(field.name)
 
     try:
         if request.method == 'POST':
@@ -105,16 +112,22 @@ def chat(request):
     if request.is_ajax():
         return JsonResponse(response)
     else:
-        return render(request, 'chat.html', {'form': form, 'history': history, 'colour_scheme': preferences.colour_scheme})
+        return render(request, 'chat.html',
+                      {'form': form, 'history': history, 'colour_scheme': preferences.colour_scheme})
 
 
 def settings(request):
+    """
+    :param request: A HTTP request.
+    :return: JSON containing the status of saving the preferences if the request was from AJAX or a rendering of the
+    settings page if it as a GET request.
+    """
     status = None
 
     try:
         preferences = UserPreferences.objects.all().first()
     except:
-        preferences = User.Preferences.objects.create()
+        preferences = UserPreferences.objects.create()
         preferences.save()
 
     if request.method == 'POST':
@@ -135,6 +148,10 @@ def settings(request):
 
 
 def get_companies(request):
+    """
+    :param request: A HTTP request.
+    :return: JSON containing the user's saved companies, and JSON containing all of the companies in the FTSE100.
+    """
     saved_companies = []
 
     try:
@@ -151,6 +168,11 @@ def get_companies(request):
 
 
 def get_sectors(request):
+    """
+    :param request: A HTTP request
+    :return: JSON containing the user's saved sectors, and JSON containing all of the sectors in the FTSE100.
+    """
+
     saved_sectors = []
 
     try:
@@ -165,7 +187,12 @@ def get_sectors(request):
         sectors = json.load(f)
         return JsonResponse({"sectors": sectors, "saved_sectors": saved_sectors})
 
+
 def get_preferences(request):
+    """
+    :param request: A HTTP request.
+    :return: JSON containing the user's voice preference and colour scheme preference.
+    """
     preferences = UserPreferences.objects.all().first()
 
     return JsonResponse({'voice': preferences.voice, 'colour_scheme': preferences.colour_scheme})

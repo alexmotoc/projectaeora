@@ -30,10 +30,12 @@ sector_attributes = {
     'performing': 'performance'
 }
 
-# What does sector or sub_sector attribute do!??
-
 
 def get_sector(company_code):
+    """
+    :param company_code: A company code for a FTSE 100 company.
+    :return: The sector which the company is in.
+    """
     for sector in sector_json:
         for sub_sector in sector_json[sector]:
             for company in sector_json[sector][sub_sector]:
@@ -42,7 +44,10 @@ def get_sector(company_code):
 
 
 def get_companies_in_sector(requested_sector):
-    # returns list of codes of companies in the requested_sector
+    """
+    :param requested_sector: A sector that's in the FTSE100.
+    :return: A list of company codes for all of the companies that are in requested_sector.
+    """
     companies_in_sector = list()
     for sector in sector_json:
         if sector == requested_sector:
@@ -54,6 +59,10 @@ def get_companies_in_sector(requested_sector):
 
 
 def get_sub_sectors(sector):
+    """
+    :param sector: A sector that's in the FTSE100.
+    :return: The sub-sectors that are in the specified sector.
+    """
     sub_sectors = []
     for sector_element in sector_json:
         if sector_element == sector:
@@ -63,6 +72,11 @@ def get_sub_sectors(sector):
 
 
 def get_sector_sub_sectors(sub_sector):
+    """
+    :param sub_sector: A sub-sector that's in the FTSE100.
+    :return: The sector that the sub-sector is contained within and a list containing all of the sub-sectors that are
+    within that sector.
+    """
     sub_sectors = []
     for sector in sector_json:
         for sub_sector_element in sector_json[sector]:
@@ -73,7 +87,12 @@ def get_sector_sub_sectors(sub_sector):
 
 
 def add_suggestions(response, dialogflow_response):
-
+    """
+    :param response: A dictionary that contains the information which is to be passed to the front-end.
+    :param dialogflow_response: The JSON response from dialogflow.
+    :return: The response dictionary with a suggestions index, that contains a list of suggestions that are
+    dependent on the intent of the query.
+    """
     # if about a company
     if 'attribute' in dialogflow_response['result']['parameters']:
         company_code = dialogflow_response['result']['parameters']['company']
@@ -83,9 +102,11 @@ def add_suggestions(response, dialogflow_response):
 
         companies_in_sector = get_companies_in_sector(sector)
 
+        # remove the company that the user asked about from the list of companies in the sector
         companies_in_sector.remove(company_code)
 
         suggestions = []
+        # add suggestions for other companies that are in the sector
         for i in range(2):
             if len(companies_in_sector) > 0:
                 suggestion = random.choice(companies_in_sector)
@@ -93,8 +114,10 @@ def add_suggestions(response, dialogflow_response):
                 suggestions.append("What about {}?".format(suggestion))
 
         attributes = company_attributes.copy()
+        # remove the attribute that the user asked about from the list of attributes
         del attributes[attribute]
 
+        # add suggestions for other attributes.
         for i in range(4 - len(suggestions)):
             suggestion = random.choice(list(attributes.keys()))
             del attributes[suggestion]
@@ -117,35 +140,44 @@ def add_suggestions(response, dialogflow_response):
         suggestions = []
 
         attributes = sector_attributes.copy()
+        # remove the attribute that the user asked about from the list of attributes
         del attributes[sector_attribute]
 
+        # if the user query was about a sector
         if 'sector' in dialogflow_response['result']['parameters']:
+            # add suggestions for other sub-sectors that are in the sector
             for i in range(min(2, len(sub_sectors))):
                 suggestion = random.choice(sub_sectors)
                 sub_sectors.remove(suggestion)
                 suggestions.append("What about {}?".format(suggestion))
 
+            # add suggestions for other attributes
             for i in range(4 - len(suggestions)):
                 suggestion = random.choice(list(attributes.keys()))
                 del attributes[suggestion]
                 suggestions.append("What about {}?".format(sector_attributes[suggestion]))
+
+        # else the user's query was about a sub-sector
         else:
             suggestions.append("What about {}?".format(sector))
 
+            # remove the sub-sector that the user asked about from the list of sub-sectors
             sub_sectors.remove(sub_sector)
 
+            # add suggestions for other sub-sectors
             for i in range(min(2, len(sub_sectors))):
-                print('test')
                 suggestion = random.choice(sub_sectors)
                 sub_sectors.remove(suggestion)
                 suggestions.append("What about {}?".format(suggestion))
 
+            # add suggestions for other attributes
             for i in range(4 - len(suggestions)):
                 suggestion = random.choice(list(attributes.keys()))
                 del attributes[suggestion]
                 suggestions.append("What about {}?".format(sector_attributes[suggestion]))
 
         response["suggestions"] = suggestions
+
     # else about risers
     else:
         if dialogflow_response['result']['parameters']['rise_fall'] == "risers":

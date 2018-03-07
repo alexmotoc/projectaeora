@@ -282,5 +282,5 @@ def interests(request):
         lastc = c
 
     #pass data to interests template
-    data = {'companies': company_data, 'all_news': all_news, 'updated': updated}
+    data = {'companies': company_data, 'all_news': all_news, 'updated': updated, 'colour_scheme': preferences.colour_scheme}
     return render(request, 'interests.html', data)

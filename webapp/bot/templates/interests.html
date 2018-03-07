@@ -18,95 +18,88 @@
     <body>
       {% include "sidebar.html" %}
 
-      <main>
-        <div class="row">
-          <div class="col s10 offset-s1">
-            <h1>My Interests</h1>
-  <div class='bubble-interactive received'><section class='scrollable-container'>
-             <p>Head over to settings to change tracking settings</p>
-
-
-
-
-
+     <main>
+       <div class="row">
+         <div class="col s10 offset-s1">
+           <h1>My Interests</h1>
+           <div class='bubble-interactive received'><section class='scrollable-container'>
+           {% if companies|length == 0 %}
+             <p>Go to settings to track companies and sectors</p>  
+           {% else %}
+             <p>{{updated}}&nbsp&nbsp&nbsp&nbsp<a href="javascript:location.reload(true)">Refresh this page</a></p>
              <div class='bubble-interactive received'>
               <div class='card white'>
                <div class='card-content black-text'>
                  <span class='card-title'>Performance of Tracked Companies</span>
-                              <table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th><th>Bid</th><th>Offer</th></tr></thead>
-                              <tbody>
+                 <table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th><th>Bid</th><th>Offer</th></tr></thead>
+                   <tbody>
 
-            {% for company in companies %}
-                <tr><td>{{company.name}}</td><td>{{company.stock.price}}</td>
+                   {% for company in companies %}
+                     <tr><td>{{company.name}}</td><td>{{company.stock.price}}</td>
 
-                {% if company.stock.per_diff.0 == '+' %}
-                    <td class='green-text'>{{company.stock.per_diff}}</td>
-                {% else %}
-                    <td class='red-text'>{{company.stock.per_diff}}</td>
-                {% endif %}
-                <td>{{company.stock.bid}}</td><td>{{company.stock.offer}}</td>
-                </tr>
-            {% endfor %}
-               </tbody></table></div></div></div>
+                     {% if company.stock.per_diff.0 == '+' %}
+                         <td class='green-text'>{{company.stock.per_diff}}</td>
+                     {% else %}
+                         <td class='red-text'>{{company.stock.per_diff}}</td>
+                     {% endif %}
+                         <td>{{company.stock.bid}}</td><td>{{company.stock.offer}}</td>
+                     </tr>
+                   {% endfor %}
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+           </div>
 
+           {% for news in all_news.text%}
+           <div class='news-article'>
+             <div class='card'>
+               <div class='card-content'>
+                 <div class='chip'>{{news.company}}</div>
+                   <span class='card-title grey-text text-darken-4'>{{news.headline}}</span>
 
+                   <p>{{news.summary}}</p> 
 
+                   <blockquote>
+                   {% for keyword in news.keywords%}
+                   <div class='chip'>{{keyword}}</div>
+                   {% endfor %}
+                   </blockquote>
 
+                 {% if news.impact != "-"%}
+                   {% if news.impact.0 == "+"%}
+                   <span class='green-text'>Impact: <i class='material-icons valign-icon'>trending_up</i>
+                   {% elif news.impact.0 == "-" %}
+                   <span class='red-text'><i class='material-icons valign-icon'>trending_down</i>
+                   {% endif %}
+    {{news.impact}}</span>
+                 {% endif %}
 
+                 {% if news.sentiment != "none" %}
+                   <p class='grey-text'>Sentiment: 
+                 {% if news.sentiment == "positive" %}
+                   <span class='green-text'>Positive</span>
+                 {% elif news.sentiment == "neutral" %}
+                   <span class='grey-text'>Neutral</span>
+                 {% elif news.sentiment == "negative" %}
+                   <span class='red-text'>Negative</span>
+                 {% endif %}
+                   </p>
+                 {% endif %}
 
-
-
-  {% for news in all_news.text%}
-     <div class='news-article'>
-       <div class='card'>
-         <div class='card-content'>
-           <div class='chip'>{{news.company}}</div>
-           <span class='card-title grey-text text-darken-4'>{{news.headline}}</span>
-
-           <p>{{news.summary}}</p> 
-
-            <blockquote>
-            {% for keyword in news.keywords%}
-            <div class='chip'>{{keyword}}</div>
-            {% endfor %}
-            </blockquote>
-
-{% if news.impact != "-"%}
-  {% if news.impact.0 == "+"%}
-           <span class='green-text'>Impact: <i class='material-icons valign-icon'>trending_up</i>
-  {% elif news.impact.0 == "-" %}
-           <span class='red-text'><i class='material-icons valign-icon'>trending_down</i>
-  {% endif %}
-  {{news.impact}}</span>
-{% endif %}
-
-           {% if news.sentiment != "none" %}
-            <p class='grey-text'>Sentiment: 
-            {% if news.sentiment == "positive" %}
-            <span class='green-text'>Positive</span>
-            {% elif news.sentiment == "neutral" %}
-            <span class='grey-text'>Neutral</span>
-            {% elif news.sentiment == "negative" %}
-            <span class='red-text'>Negative</span>
-            {% endif %}
-            </p>
-           {% endif %}
-
-
-
-            <p class = 'grey-text'>Date published: {{news.date}}</p>
-            <p class = 'grey-text'>Source: {{news.source}}</p>
-            <div class='card-action'><p><a href="{{news.url}}">Go to article</a></p></div>
-          </div>
-        </div>
+                   <p class = 'grey-text'>Date published: {{news.date}}</p>
+                   <p class = 'grey-text'>Source: {{news.source}}</p>
+                 <div class='card-action'><p><a href="{{news.url}}">Go to article</a></p></div>
+               </div>
+             </div>
+           </div>
+           {% endfor %}
+         </section>
+         </div>
        </div>
-  {% endfor %}
-       </section>
      </div>
-
-          </div>
-        </div>
-      </main>
+   {% endif %}
+   </main>
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

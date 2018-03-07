@@ -154,20 +154,29 @@ def get_voice_preference(request):
     return JsonResponse({"voice": preferences.voice})
 
 
-def remove_duplicates(news_data):
+def remove_duplicates(news_list):
+    """
+    :param news_list: A list of News objects
+    :return: A list of News objects where none have the same url
+    """
     urls = list()
-    news_list = list()
-    for n in news_data:
+    news_list_no_duplicates = list()
+    for n in news_list:
         if not(n.url in urls):
-            news_list.append(n)
+            news_list_no_duplicates.append(n)
         else:
-            for n1 in news_list:
+            for n1 in news_list_no_duplicates:
                 if n.url == n1.url and n.company not in n1.company:
                     n1.company += ", "+n.company
         urls.append(n.url)
-    return news_list
+    return news_list_no_duplicates
+
 
 def interests(request):
+    """
+    :param request: A HTTP request 
+    :return: A rendering of interests.html
+    """
     try:
         preferences = UserPreferences.objects.all().first()
     except:
@@ -182,10 +191,12 @@ def interests(request):
     company_news_data['YAHOO'] = list()
     #get news, data for tracked companies
     company_data = list()
+    updated = ""
     for company in companies.split(", "):
         if len(company) > 0:
             financial_news_data = scraper.get_financial_news_data(company)
             company_data.append(scraper.get_company_data(company))
+            updated = "Last updated: "+company_data[-1].date
             company_news_data['LSE'] = company_news_data['LSE'] + financial_news_data['LSE']
             company_news_data['YAHOO'] = company_news_data['YAHOO'] + financial_news_data['YAHOO']   
     sector_news_data = defaultdict()
@@ -218,5 +229,5 @@ def interests(request):
                 company_data.remove(c)
         lastc = c
     #pass data to interests template        
-    data = {'companies': company_data, 'all_news': all_news}
+    data = {'companies': company_data, 'all_news': all_news, 'updated': updated}
     return render(request, 'interests.html', data)

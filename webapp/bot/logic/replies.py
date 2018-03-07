@@ -139,7 +139,8 @@ def news_reply(financial_news, days):
         reply['type'] = 'news'
         reply['text'] = news
     else:
-        message = "I'm sorry, I couldn't find any recent articles."
+        message = "I'm sorry, I couldn't find any recent articles. Try increasing the date period from the " \
+                  "settings page or asking for an older date."
         reply['speech'] = message
         reply['type'] = "no-news"
         reply['text'] = message
@@ -237,7 +238,7 @@ def sector_reply(sector, sector_attribute):
             row = defaultdict()
             row['name'] = data[i].name
             row['price'] = data[i].stock.price
-            row['percentage_change'] = data[i].stock.per_diff      
+            row['percentage_change'] = data[i].stock.per_diff
             companies.append(row)
         movers = defaultdict()
         movers['speech'] = "Here is some data about how "+sector.name+" are performing"
@@ -258,7 +259,7 @@ def revenue_reply(company, date_period):
     response['speech'] = "Here is the revenue data for " + company.name
     response['type'] = "revenue"
     response['text'] = card
-    
+
     valid_date = False
 
     if not date_period:
@@ -283,9 +284,9 @@ def revenue_reply(company, date_period):
         response['speech'] = "I'm sorry, I couldn't find the data you were looking for."
         response['text'] = "I'm sorry, I couldn't find the data you were looking for."
         response['type'] = 'error'
-       
+
     return response
-  
+
 def daily_briefings(companies, sectors, attributes, days):
     response = {}
 

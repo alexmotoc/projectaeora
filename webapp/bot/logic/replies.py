@@ -148,7 +148,8 @@ def news_reply(financial_news, days, positive_negative):
         reply['type'] = 'news'
         reply['text'] = news
     else:
-        message = "I'm sorry, I couldn't find any recent articles."
+        message = "I'm sorry, I couldn't find any recent articles. Try increasing the date period from the " \
+                  "settings page or asking for an older date."
         reply['speech'] = message
         reply['type'] = "no-news"
         reply['text'] = message

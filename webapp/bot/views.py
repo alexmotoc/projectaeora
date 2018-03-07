@@ -26,9 +26,9 @@ def chat(request):
     history = Response.objects.all()
     response = defaultdict()
 
-    try:
-        preferences = UserPreferences.objects.all().first()
-    except:
+    preferences = UserPreferences.objects.all().first()
+
+    if preferences == None:
         preferences = UserPreferences.objects.create()
         preferences.save()
 
@@ -39,62 +39,68 @@ def chat(request):
            and field.name != 'voice' and getattr(preferences, field.name):
                 attributes.append(field.name)
 
-    if request.method == 'POST':
-        form = QueryForm(request.POST)
+    try:
+        if request.method == 'POST':
+            form = QueryForm(request.POST)
 
-        if form.is_valid():
-            query = form.save()
-            question = form.cleaned_data['question']
+            if form.is_valid():
+                query = form.save()
+                question = form.cleaned_data['question']
 
-            dialogflow_key = os.environ.get('DIALOGFLOW_CLIENT_ACCESS_TOKEN')
-            dialogflow_api = 'https://api.dialogflow.com/v1/query?v=20150910'
-            headers = {'Authorization': 'Bearer ' + dialogflow_key,
-                       'Content-Type': 'application/json'}
-            payload = json.dumps({
-                "lang": "en",
-                "query": question,
-                "sessionId": "12345",
-                "timezone": "Africa/Casablacontent_type='application/xhtml+xml'nca"
-            })
+                dialogflow_key = os.environ.get('DIALOGFLOW_CLIENT_ACCESS_TOKEN')
+                dialogflow_api = 'https://api.dialogflow.com/v1/query?v=20150910'
+                headers = {'Authorization': 'Bearer ' + dialogflow_key,
+                           'Content-Type': 'application/json'}
+                payload = json.dumps({
+                    "lang": "en",
+                    "query": question,
+                    "sessionId": "12345",
+                    "timezone": "Africa/Casablacontent_type='application/xhtml+xml'nca"
+                })
 
-            r = requests.post(dialogflow_api, headers=headers, data=payload)
-            r = r.json()
+                r = requests.post(dialogflow_api, headers=headers, data=payload)
+                r = r.json()
 
-            # SubSector must come before Sector!
-            intent = r['result']['metadata']['intentName']
+                # SubSector must come before Sector!
+                intent = r['result']['metadata']['intentName']
 
-            if r['result']['action'] == "input.unknown":
-                response['text'] = r['result']['fulfillment']['speech']
-                response['type'] = 'input.unknown'
-                response['speech'] = r['result']['fulfillment']['speech']
-            else:
-                if 'Footsie' in intent:
-                    response = intents.footsie_intent(r, preferences.days_old)
-                elif 'ComparisonIntent' in intent:
-                    response = intents.comparison_intent(r)
-                elif 'SubSectorQuery' in intent:
-                    response = intents.sector_query_intent(r, False, preferences.days_old)
-                elif 'SectorQuery' in intent:
-                    response = intents.sector_query_intent(r, True, preferences.days_old)
-                elif 'TopRisers' in intent:
-                    response = intents.top_risers_intent(r)
-                elif 'Daily Briefing' in intent:
-                    response = intents.daily_briefings_intent(preferences.companies,
-                               preferences.sectors, attributes, preferences.days_old)
-                else:
+                if r['result']['action'] == "input.unknown":
                     response['text'] = r['result']['fulfillment']['speech']
-                    response['speech'] = r['result']['fulfillment']['speech']
                     response['type'] = 'simple.response'
+                    response['speech'] = r['result']['fulfillment']['speech']
+                else:
+                    if 'Footsie' in intent:
+                        response = intents.footsie_intent(r, preferences.days_old)
+                    elif 'ComparisonIntent' in intent:
+                        response = intents.comparison_intent(r)
+                    elif 'SubSectorQuery' in intent:
+                        response = intents.sector_query_intent(r, False, preferences.days_old)
+                    elif 'SectorQuery' in intent:
+                        response = intents.sector_query_intent(r, True, preferences.days_old)
+                    elif 'TopRisers' in intent:
+                        response = intents.top_risers_intent(r)
+                    elif 'Daily Briefing' in intent:
+                        response = intents.daily_briefings_intent(preferences.companies,
+                                   preferences.sectors, attributes, preferences.days_old)
+                    else:
+                        response['text'] = r['result']['fulfillment']['speech']
+                        response['speech'] = r['result']['fulfillment']['speech']
+                        response['type'] = 'simple.response'
 
-            reply = Response(query=query, response=json.dumps(response))
-            reply.save()
+                reply = Response(query=query, response=json.dumps(response))
+                reply.save()
 
-            if response['type'] not in ('comparison', 'briefing', 'input.unknown', 'incomplete', 'simple.response'):
-                response = suggestions.add_suggestions(response, r)
+                if response['type'] not in ('comparison', 'briefing', 'input.unknown', 'incomplete', 'simple.response'):
+                    response = suggestions.add_suggestions(response, r)
 
+                form = QueryForm()
+        else:
             form = QueryForm()
-    else:
-        form = QueryForm()
+    except:
+        message = 'Ooops. Something went wrong.'
+        response['text'] = message
+        response['speech'] = message
+        response['type'] = 'error'
 
     if request.is_ajax():
         return JsonResponse(response)

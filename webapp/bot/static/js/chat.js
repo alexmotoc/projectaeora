@@ -125,7 +125,6 @@ function createReply(data, colour) {
 
             if(data['positive_negative'] != null)
                 reply += simpleReply(data['positive_negative'], colour);
-                
             break;
         case "top":
             reply += topPerformers(card);
@@ -137,7 +136,6 @@ function createReply(data, colour) {
         case "comparison":
             reply += "<div class='bubble-interactive received'><section class='scrollable-container'>";
 
-            console.log(data);
             card.forEach(function(obj) {
                 reply += "<div class='company-comparison'>" +
                             "<div class='card white'>" +
@@ -147,7 +145,7 @@ function createReply(data, colour) {
                               "<p class='price-impact'>" + getStyle(obj["text"]['primary_type'], obj["text"]['primary']) + obj["text"]['primary'] + getUnits(obj["text"]['primary_type']) +
                               "<br>" + getStyle(obj["text"]['secondary_type'], obj["text"]['secondary']) + obj["text"]['secondary'] + getUnits(obj["text"]['secondary_type']) + "</p>" +
                             "</div>" +
-                            "</div>" + 
+                            "</div>" +
                           "</div>"
             });
 
@@ -323,12 +321,19 @@ function getImpact(value) {
 }
 
 function addQuery(question, colour, history, voice) {
+    console.log(colour);
     if ($('#suggestions').length) {
         $('#suggestions').remove();
     }
 
     var now = new Date();
-    var time = now.getHours() + ":" + now.getMinutes();
+    var time = now.getHours() + ":";
+
+    if (now.getMinutes() < 10) {
+        time += "0";
+    }
+
+    time += now.getMinutes();
 
     var query = getQuery(question, colour);
 

@@ -123,6 +123,9 @@ function createReply(data, colour) {
             });
             reply += "</section></div>";
 
+            if(data['positive_negative'] != null)
+                reply += simpleReply(data['positive_negative'], colour);
+                
             break;
         case "top":
             reply += topPerformers(card);

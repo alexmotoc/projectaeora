@@ -26,15 +26,16 @@ def footsie_intent(r, days):
 
         if attribute == "news":
             date_period = r['result']['parameters']['date-period']
+            positive_negative = r['result']['parameters']['positive_negative']
 
             if date_period:
                 start, end = date_period.split('/')
                 start_date = datetime.strptime(start, '%Y-%m-%d')
                 end_date = datetime.strptime(end, '%Y-%m-%d')
                 difference = end_date.date() - start_date.date()
-                return replies.news_reply(scraper.get_financial_news_data(company_code), difference.days)
+                return replies.news_reply(scraper.get_financial_news_data(company_code), difference.days, positive_negative)
             else:
-                return replies.news_reply(scraper.get_financial_news_data(company_code), days)
+                return replies.news_reply(scraper.get_financial_news_data(company_code), days, positive_negative)
         elif attribute == "revenue":
             company = scraper.get_company_data(company_code)
             return replies.revenue_reply(company, r['result']['parameters']['date-period'])

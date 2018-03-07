@@ -97,7 +97,8 @@ def big_movers_card(top5, risers=True):
 
     return big_movers
 
-def news_reply(financial_news, days):
+
+def news_reply(financial_news, days, positive_negative):
     reply = defaultdict()
 
     lse_news = []
@@ -116,6 +117,7 @@ def news_reply(financial_news, days):
             lse_news.append(row)
 
     yahoo_news = []
+    number_positive = number_neutral = number_negative = 0
     for i in financial_news['YAHOO']:
         date = datetime.strptime(i.date, '%H:%M %d-%b-%Y')
         if date.date() >= datetime.now().date() - timedelta(days):
@@ -131,6 +133,13 @@ def news_reply(financial_news, days):
             row["sentiment"], row["keywords"] = get_analysis(i.description)
             yahoo_news.append(row)
 
+            if row["sentiment"] == "positive":
+                number_positive += 1
+            elif row["sentiment"] == "neutral":
+                number_neutral += 1
+            else:
+                number_negative += 1
+
     news = lse_news + yahoo_news
     news.sort(key=lambda x: datetime.strptime(x["date"], '%H:%M %d-%b-%Y'), reverse=True)
 
@@ -143,6 +152,12 @@ def news_reply(financial_news, days):
         reply['speech'] = message
         reply['type'] = "no-news"
         reply['text'] = message
+
+    if positive_negative:
+        reply["positive_negative"] = "There are {} positive, {} neutral and {} negative articles.".format(
+            number_neutral, number_positive, number_negative)
+        reply['speech'] += " "
+        reply['speech'] += reply['positive_negative']
 
     return reply
 

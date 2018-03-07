@@ -1,0 +1,51 @@
+[
+  {
+    "value": "news",
+    "synonyms": [
+      "news"
+    ]
+  },
+  {
+    "value": "highest_price",
+    "synonyms": [
+      "highest_price",
+      "highest price"
+    ]
+  },
+  {
+    "value": "lowest_price",
+    "synonyms": [
+      "lowest_price",
+      "lowest price"
+    ]
+  },
+  {
+    "value": "rising",
+    "synonyms": [
+      "risers",
+      "rising",
+      "risen"
+    ]
+  },
+  {
+    "value": "falling",
+    "synonyms": [
+      "fallers",
+      "falling",
+      "fallen"
+    ]
+  },
+  {
+    "value": "performing",
+    "synonyms": [
+      "performing",
+      "rising or falling",
+      "rising and falling",
+      "falling and rising",
+      "falling or rising",
+      "doing",
+      "getting on",
+      "performance"
+    ]
+  }
+]

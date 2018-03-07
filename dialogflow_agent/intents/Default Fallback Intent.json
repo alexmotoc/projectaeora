@@ -1,7 +1,7 @@
 {
   "id": "7d60dfe3-e4e2-4833-9468-a99a6c5f9aed",
   "name": "Default Fallback Intent",
-  "auto": true,
+  "auto": false,
   "contexts": [],
   "responses": [
     {
@@ -18,14 +18,17 @@
             "I missed what you said. Say it again?",
             "Sorry, could you say that again?",
             "Sorry, can you say that again?",
-            "Can you say that again?",
+            "Sorry, I don\u0027t understand. Please try again.",
             "Sorry, I didn\u0027t get that.",
+            "Sorry, I can\u0027t help with that.",
             "Sorry, what was that?",
             "One more time?",
             "What was that?",
             "Say that again?",
             "I didn\u0027t get that.",
-            "I missed that."
+            "I missed that.",
+            "I didn\u0027t understand that, can you try again?",
+            "Sorry I didn\u0027t understand, try saying it differently."
           ]
         }
       ],
@@ -36,6 +39,7 @@
   "priority": 500000,
   "webhookUsed": false,
   "webhookForSlotFilling": false,
+  "lastUpdate": 1519826351,
   "fallbackIntent": true,
   "events": []
 }

@@ -1,0 +1,152 @@
+[
+  {
+    "id": "1f017c72-7745-41cd-8e84-41f3e32865dc",
+    "data": [
+      {
+        "text": "What about in ",
+        "userDefined": false
+      },
+      {
+        "text": "2011",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431816
+  },
+  {
+    "id": "0df0669a-f2d8-459b-8b77-f576f9a428af",
+    "data": [
+      {
+        "text": "What about in ",
+        "userDefined": false
+      },
+      {
+        "text": "2016",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431816
+  },
+  {
+    "id": "9cdab77c-ba22-432d-9e96-3a3e722315d9",
+    "data": [
+      {
+        "text": "What about in ",
+        "userDefined": false
+      },
+      {
+        "text": "2015",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431816
+  },
+  {
+    "id": "fcd49a1b-27d0-41ac-ab1d-4e1a0a8f7eff",
+    "data": [
+      {
+        "text": "What about in ",
+        "userDefined": false
+      },
+      {
+        "text": "2012",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431816
+  },
+  {
+    "id": "7f795e1b-1f69-4ab3-8e7e-7dd02ef45fc6",
+    "data": [
+      {
+        "text": "What about in ",
+        "userDefined": false
+      },
+      {
+        "text": "2014",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431816
+  },
+  {
+    "id": "57289b42-4fc4-460d-b322-e154475c9f8e",
+    "data": [
+      {
+        "text": "What about in ",
+        "userDefined": false
+      },
+      {
+        "text": "2013",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431816
+  },
+  {
+    "id": "5fd73e73-b0cc-4e85-9853-9643ae71515e",
+    "data": [
+      {
+        "text": "What about in ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431816
+  }
+]

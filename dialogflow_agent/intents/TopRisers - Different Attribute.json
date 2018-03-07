@@ -1,0 +1,47 @@
+{
+  "id": "5603ca35-c2c8-4fc5-a090-2ac36f243e2c",
+  "parentId": "03726717-cb8d-4f1f-966f-5265febdec3c",
+  "rootParentId": "03726717-cb8d-4f1f-966f-5265febdec3c",
+  "name": "TopRisers - Different Attribute",
+  "auto": true,
+  "contexts": [
+    "TopRisers-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "TopRisers.TopRisers-custom",
+      "affectedContexts": [
+        {
+          "name": "TopRisers-followup",
+          "parameters": {},
+          "lifespan": 3
+        }
+      ],
+      "parameters": [
+        {
+          "id": "065b1fba-f901-4ed0-8cbc-1d9296740c62",
+          "dataType": "@rise_fall",
+          "name": "rise_fall",
+          "value": "$rise_fall",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1519991596,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -1,0 +1,28 @@
+{
+  "id": "399a8419-a8f0-4a26-8bcf-f01e343c4082",
+  "name": "Daily Briefing Intent",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520339525,
+  "fallbackIntent": false,
+  "events": []
+}

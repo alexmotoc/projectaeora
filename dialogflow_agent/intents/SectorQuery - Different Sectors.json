@@ -1,0 +1,70 @@
+{
+  "id": "9b88bd9c-a6ff-4c20-93ce-0e80902548ef",
+  "parentId": "b2a19b9c-eac2-42a2-8b74-0d3ee351cbce",
+  "rootParentId": "b2a19b9c-eac2-42a2-8b74-0d3ee351cbce",
+  "name": "SectorQuery - Different Sectors",
+  "auto": true,
+  "contexts": [
+    "SectorQuery-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "SectorQuery.SectorQuery-custom",
+      "affectedContexts": [
+        {
+          "name": "SectorQuery-followup",
+          "parameters": {},
+          "lifespan": 3
+        }
+      ],
+      "parameters": [
+        {
+          "id": "bfa5965c-350e-4ef0-ab00-cae7e6c6dd15",
+          "required": false,
+          "dataType": "@sector",
+          "name": "sector",
+          "value": "$sector",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which sector would you like to know about?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "32294d23-4632-4c8d-bbbd-de9fbc48e7a8",
+          "required": false,
+          "dataType": "@sector_attribute",
+          "name": "sector_attribute",
+          "value": "#SectorQuery-followup.sector_attribute",
+          "isList": false
+        },
+        {
+          "id": "88ac02ec-f5cc-42f5-9e0d-178b81c54170",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "#SectorQuery-followup.date-period",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520422737,
+  "fallbackIntent": false,
+  "events": []
+}

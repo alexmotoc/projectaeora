@@ -1,0 +1,499 @@
+[
+  {
+    "id": "25e13e01-b978-4fb7-8b48-44b22b286d71",
+    "data": [
+      {
+        "text": "What ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is there for ",
+        "userDefined": false
+      },
+      {
+        "text": "Banks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "today",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422004
+  },
+  {
+    "id": "5e810537-649f-4b0d-9fca-6b3205c28405",
+    "data": [
+      {
+        "text": "What the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " on ",
+        "userDefined": false
+      },
+      {
+        "text": "Banks",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "this week",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520284792
+  },
+  {
+    "id": "3db89c57-aceb-4784-9dd3-9b7c5009ab4d",
+    "data": [
+      {
+        "text": "are ",
+        "userDefined": false
+      },
+      {
+        "text": "pharmaceuticals \u0026 biotechnology",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "rising or falling",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "e9c28ac8-5811-4368-8af2-793ef2cc3d5f",
+    "data": [
+      {
+        "text": "how are ",
+        "userDefined": false
+      },
+      {
+        "text": "beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "performing",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "674bba39-f44f-4bb0-bb99-83ac9d71125f",
+    "data": [
+      {
+        "text": "Have ",
+        "userDefined": false
+      },
+      {
+        "text": "Mobile Telecommunications",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "fallen",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "42e59f29-2fbc-44c6-a1b2-7f59b9e52c16",
+    "data": [
+      {
+        "text": "News",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " on ",
+        "userDefined": false
+      },
+      {
+        "text": "Equity Investment Instruments",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "303a1000-0222-47f6-b320-367054df0ddf",
+    "data": [
+      {
+        "text": "Highest price",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "Fixed Line Telecommunications",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "bad75894-e6f0-4b11-9d23-c3f7cb51d0c4",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "Banks",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " are ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "ff8eac43-05b8-4b42-8204-dc2870233e2f",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " on ",
+        "userDefined": false
+      },
+      {
+        "text": "Life Insurance",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "f952506c-319c-4ec6-aa21-c75d1661da01",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "lowest price",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "Automobiles \u0026 Parts",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "05556003-f47a-47cd-ad20-34c63cb786aa",
+    "data": [
+      {
+        "text": "Who are the ",
+        "userDefined": false
+      },
+      {
+        "text": "risers",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "Media",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "5cfa3d43-6b65-4033-be55-42727258f25e",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "Tobacco",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " companies are ",
+        "userDefined": false
+      },
+      {
+        "text": "falling",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "f3693296-142d-437e-8ac9-d8faf74b2f02",
+    "data": [
+      {
+        "text": "Are ",
+        "userDefined": false
+      },
+      {
+        "text": "Oil \u0026 Gas Producers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "c55ddfab-8d91-44df-a830-99c8dad7aabe",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "highest price",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in the ",
+        "userDefined": false
+      },
+      {
+        "text": "Foresty \u0026 Paper",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "sector",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  },
+  {
+    "id": "339d4984-012e-4d17-bd86-837d9a996d2e",
+    "data": [
+      {
+        "text": "Are ",
+        "userDefined": false
+      },
+      {
+        "text": "Chemicals",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " in the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179241
+  }
+]

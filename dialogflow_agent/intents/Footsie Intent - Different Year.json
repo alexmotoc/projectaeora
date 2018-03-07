@@ -1,0 +1,68 @@
+{
+  "id": "00b617a3-fe13-441b-a585-a24120c4b168",
+  "name": "Footsie Intent - Different Year",
+  "auto": true,
+  "contexts": [
+    "FootsieIntent-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "FootsieIntent.FootsieIntent-custom",
+      "affectedContexts": [
+        {
+          "name": "FootsieIntent-followup",
+          "parameters": {},
+          "lifespan": 3
+        }
+      ],
+      "parameters": [
+        {
+          "id": "56c0c204-4737-4580-8c1f-f1e0f3555929",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
+          "isList": false
+        },
+        {
+          "id": "ea5a5d6c-04b9-4de4-8519-88e7cdb8533c",
+          "required": false,
+          "dataType": "@attribute",
+          "name": "attribute",
+          "value": "#FootsieIntent-followup.attribute",
+          "isList": false
+        },
+        {
+          "id": "8b63836e-3e07-4df1-8526-6d37e471fbd1",
+          "required": false,
+          "dataType": "@company",
+          "name": "company",
+          "value": "#FootsieIntent-followup.company",
+          "isList": false
+        },
+        {
+          "id": "184da449-f5f1-4c66-88bb-2398d8bc08a5",
+          "dataType": "@positive_negative",
+          "name": "positive_negative",
+          "value": "#FootsieIntent-followup.positive_negative"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520431816,
+  "fallbackIntent": false,
+  "events": []
+}

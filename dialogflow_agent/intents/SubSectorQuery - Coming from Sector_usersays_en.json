@@ -1,0 +1,112 @@
+[
+  {
+    "id": "12f5c427-bdfe-43b3-9c1f-e445928fc886",
+    "data": [
+      {
+        "text": "And what about ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422987
+  },
+  {
+    "id": "0faff3e3-993f-456b-9671-b71b45c7ec39",
+    "data": [
+      {
+        "text": "And could you tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422987
+  },
+  {
+    "id": "a97d9981-402d-4909-94c0-a91cf77fcb9d",
+    "data": [
+      {
+        "text": "And for ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422987
+  },
+  {
+    "id": "3673fefd-0ab9-49cc-b782-843b9553b078",
+    "data": [
+      {
+        "text": "And ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422987
+  },
+  {
+    "id": "dcc6354b-0453-45c1-ad48-8015a62567fd",
+    "data": [
+      {
+        "text": "What about ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422987
+  }
+]

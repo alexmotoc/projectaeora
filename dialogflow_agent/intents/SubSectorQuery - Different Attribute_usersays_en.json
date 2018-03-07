@@ -1,0 +1,178 @@
+[
+  {
+    "id": "b6edd475-3973-4808-9af1-b405caf901c2",
+    "data": [
+      {
+        "text": "and the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422934
+  },
+  {
+    "id": "0a7cdccc-bc11-4ece-9d90-b4fe993c30c3",
+    "data": [
+      {
+        "text": "And who\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "falling",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422934
+  },
+  {
+    "id": "d3351cdc-6a58-48cd-8f7b-9bd257a438f5",
+    "data": [
+      {
+        "text": "And who\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422934
+  },
+  {
+    "id": "17648cee-aa51-4f02-b789-ae28ecf90d58",
+    "data": [
+      {
+        "text": "What about who\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422934
+  },
+  {
+    "id": "916912b9-9629-4a87-9c3b-3969873a6fe6",
+    "data": [
+      {
+        "text": "What about who\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "falling",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422934
+  },
+  {
+    "id": "64154624-3f7a-4844-bd84-e60a676774bb",
+    "data": [
+      {
+        "text": "What about the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422934
+  },
+  {
+    "id": "b7be2355-658a-48f6-ad3c-77fa2c1e9f66",
+    "data": [
+      {
+        "text": "What about the ",
+        "userDefined": false
+      },
+      {
+        "text": "lowest price",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422934
+  },
+  {
+    "id": "4b0b8b17-3e0c-4375-bdbd-d9ecbc578f19",
+    "data": [
+      {
+        "text": "What about the ",
+        "userDefined": false
+      },
+      {
+        "text": "highest price",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422934
+  }
+]

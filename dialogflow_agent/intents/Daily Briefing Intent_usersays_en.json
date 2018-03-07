@@ -1,0 +1,416 @@
+[
+  {
+    "id": "6e854735-d4a1-4276-a07b-e3b0f06f6d36",
+    "data": [
+      {
+        "text": "What have the companies that I\u0027ve been following been doing?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "da03a539-551f-4dac-9737-86bab3d48fd3",
+    "data": [
+      {
+        "text": "Tell me about my faves",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "338536b0-1fc8-4b53-9a0d-b3295b839c7e",
+    "data": [
+      {
+        "text": "What have my favourite companies been doing?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "d4a81972-d61a-40b6-99de-de76fc2cafb7",
+    "data": [
+      {
+        "text": "What have my favourite companies been up to?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "11d179c5-9a14-4a15-a0a4-c8e9f4ec1611",
+    "data": [
+      {
+        "text": "It\u0027s that time of the day!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "e5f749f8-9efe-44f4-b57c-f0667bdf3b92",
+    "data": [
+      {
+        "text": "It\u0027s my favourite time of the day again!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "422b8430-1fb9-4054-963d-26904065244e",
+    "data": [
+      {
+        "text": "Daily",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "5ddb6d6a-5118-4142-9248-24047814f3f9",
+    "data": [
+      {
+        "text": "Time for my daily!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "471bbabb-fb0b-46ed-9b87-68d411782f3a",
+    "data": [
+      {
+        "text": "My day",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "6c54fd1c-77fd-4bf1-909e-c9172615dbc9",
+    "data": [
+      {
+        "text": "Tell me about my day",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "69abb484-a36a-4e75-b430-c5cceb2ef4bf",
+    "data": [
+      {
+        "text": "Briefing time!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "9a6c3614-0663-4a0f-845d-a0af1278e600",
+    "data": [
+      {
+        "text": "Morning Aeora",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "2a80f183-9497-44db-b258-7a49f68c1746",
+    "data": [
+      {
+        "text": "mornin",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1520339467
+  },
+  {
+    "id": "d2c2b96b-e36e-4528-b68f-894bc1c42f1e",
+    "data": [
+      {
+        "text": "Morning",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "80cf3d60-52bb-4f17-807a-c4b8198de603",
+    "data": [
+      {
+        "text": "How\u0027s my day looking?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "cd80a62c-5eb2-482e-b725-0d8ef03e44bf",
+    "data": [
+      {
+        "text": "How\u0027s everything looking?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "12b1e215-c90e-4f92-9f95-3cff9adedbc0",
+    "data": [
+      {
+        "text": "Brief",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "7378a4f3-b0d7-4dc5-be0f-1a03f72908ef",
+    "data": [
+      {
+        "text": "Briefing",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "b84b825b-690c-40ce-9bde-f625429a6e10",
+    "data": [
+      {
+        "text": "What happened overnight?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "cb8b2a56-1921-4778-be7a-c7fa5f83032d",
+    "data": [
+      {
+        "text": "Rise",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " and shine",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "e56c271a-ece2-446c-bac5-d96332ed66a2",
+    "data": [
+      {
+        "text": "Good Morning Aeora!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "e73610e9-61ba-4cde-abe2-63904ef8435c",
+    "data": [
+      {
+        "text": "Tell me about the day",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "bdac1e3d-91a3-4d39-8d4d-38db20f5fb32",
+    "data": [
+      {
+        "text": "Tell me about the day so far",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "82af9ba7-923e-4a2b-ba76-de8003fa1c1c",
+    "data": [
+      {
+        "text": "What\u0027s happening atm",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "a126045a-6fac-4c3c-a661-1a8288263e54",
+    "data": [
+      {
+        "text": "What\u0027s happening at the moment?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "ee34ec54-24b3-43f5-8acf-be48d16a17e7",
+    "data": [
+      {
+        "text": "daily briefing",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "cbf48306-cf04-4114-805e-a05b89216012",
+    "data": [
+      {
+        "text": "What\u0027s been happening",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "0a07f3c4-8c86-4c0f-bdcc-325f755519ca",
+    "data": [
+      {
+        "text": "Wakey wakey",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "aa3fd7f2-3a1a-4d5b-9563-59573278851a",
+    "data": [
+      {
+        "text": "Could I have my daily briefing?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "c3043742-108f-451d-9d26-61d381495bcf",
+    "data": [
+      {
+        "text": "Has much happened recently?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "0a7fe790-c2e8-49a9-ac82-e15f2b41c2d7",
+    "data": [
+      {
+        "text": "Buenos Dias",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "26431e0b-cf4e-462f-b529-c6bd2dff607f",
+    "data": [
+      {
+        "text": "Buenos Dias, mi amigo",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1520339467
+  },
+  {
+    "id": "3f7de57f-ed95-4081-8ee0-8fbf2115bfc5",
+    "data": [
+      {
+        "text": "What\u0027s happened overnight?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  },
+  {
+    "id": "f91956e9-2293-4c91-ac98-9341b160d88e",
+    "data": [
+      {
+        "text": "Good Morning",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520339467
+  }
+]

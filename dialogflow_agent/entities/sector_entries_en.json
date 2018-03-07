@@ -2,13 +2,16 @@
   {
     "value": "General Retailers",
     "synonyms": [
-      "General Retailers"
+      "General Retailers",
+      "General Retail"
     ]
   },
   {
     "value": "Real Estate Investment Trusts",
     "synonyms": [
-      "Real Estate Investment Trusts"
+      "Real Estate Investment Trusts",
+      "Real Estate",
+      "Real Estate Investment"
     ]
   },
   {
@@ -18,33 +21,47 @@
     ]
   },
   {
-    "value": "Forestry & Paper",
+    "value": "Forestry \u0026 Paper",
     "synonyms": [
-      "Forestry & Paper"
+      "Forestry \u0026 Paper",
+      "Forestry and Paper",
+      "Forestry"
     ]
   },
   {
-    "value": "Construction & Materials",
+    "value": "Construction \u0026 Materials",
     "synonyms": [
-      "Construction & Materials"
+      "Construction \u0026 Materials",
+      "Construction and Materials",
+      "Construction",
+      "Materials"
     ]
   },
   {
-    "value": "Gas, Water & Multiutilities",
+    "value": "Gas, Water \u0026 Multiutilities",
     "synonyms": [
-      "Gas, Water & Multiutilities"
+      "Gas, Water \u0026 Multiutilities",
+      "Gas, Water and Multiutilities",
+      "Water",
+      "Utilities"
     ]
   },
   {
-    "value": "Household Goods & Home Construction",
+    "value": "Household Goods \u0026 Home Construction",
     "synonyms": [
-      "Household Goods & Home Construction"
+      "Household Goods \u0026 Home Construction",
+      "Household Goods and Home Construction",
+      "Household Goods",
+      "Home Construction"
     ]
   },
   {
-    "value": "Electronic & Electrical Equipment",
+    "value": "Electronic \u0026 Electrical Equipment",
     "synonyms": [
-      "Electronic & Electrical Equipment"
+      "Electronic \u0026 Electrical Equipment",
+      "Electronic and Electrical Equipment",
+      "Electronics",
+      "Electrical Equipment"
     ]
   },
   {
@@ -60,15 +77,21 @@
     ]
   },
   {
-    "value": "Pharmaceuticals & Biotechnology",
+    "value": "Pharmaceuticals \u0026 Biotechnology",
     "synonyms": [
-      "Pharmaceuticals & Biotechnology"
+      "Pharmaceuticals \u0026 Biotechnology",
+      "Pharmaceuticals and Biotechnology",
+      "Pharmaceuticals",
+      "Biotechnology"
     ]
   },
   {
-    "value": "Industrial Metals & Mining",
+    "value": "Industrial Metals \u0026 Mining",
     "synonyms": [
-      "Industrial Metals & Mining"
+      "Industrial Metals \u0026 Mining",
+      "Industrial Metals and Mining",
+      "Industrial Metals",
+      "Metals"
     ]
   },
   {
@@ -78,9 +101,13 @@
     ]
   },
   {
-    "value": "Software & Computer Services",
+    "value": "Software \u0026 Computer Services",
     "synonyms": [
-      "Software & Computer Services"
+      "Software \u0026 Computer Services",
+      "Software and Computer Services",
+      "Software",
+      "Computer Services",
+      "Computers"
     ]
   },
   {
@@ -96,15 +123,23 @@
     ]
   },
   {
-    "value": "Health Care Equipment & Services",
+    "value": "Health Care Equipment \u0026 Services",
     "synonyms": [
-      "Health Care Equipment & Services"
+      "Health Care Equipment \u0026 Services",
+      "Health Care Equipment and Services",
+      "Healthcare Equipment \u0026 Services",
+      "Healthcare Equipment and Services",
+      "Health Care",
+      "Healthcare",
+      "Health Care Equipment",
+      "Healthcare Equipment"
     ]
   },
   {
     "value": "Food Producers",
     "synonyms": [
-      "Food Producers"
+      "Food Producers",
+      "Food"
     ]
   },
   {
@@ -114,15 +149,21 @@
     ]
   },
   {
-    "value": "Aerospace & Defense",
+    "value": "Aerospace \u0026 Defense",
     "synonyms": [
-      "Aerospace & Defense"
+      "Aerospace \u0026 Defense",
+      "Aerospace and Defense",
+      "Aerospace",
+      "Defense"
     ]
   },
   {
-    "value": "Travel & Leisure",
+    "value": "Travel \u0026 Leisure",
     "synonyms": [
-      "Travel & Leisure"
+      "Travel \u0026 Leisure",
+      "Travel and Leisure",
+      "Travel",
+      "Leisure"
     ]
   },
   {
@@ -138,9 +179,14 @@
     ]
   },
   {
-    "value": "Food & Drug Retailers",
+    "value": "Food \u0026 Drug Retailers",
     "synonyms": [
-      "Food & Drug Retailers"
+      "Food \u0026 Drug Retailers",
+      "Food and Drug Retailers",
+      "Food Retailers",
+      "Drug",
+      "Drugs",
+      "Drug Retailers"
     ]
   },
   {
@@ -168,15 +214,20 @@
     ]
   },
   {
-    "value": "Automobiles & Parts",
+    "value": "Automobiles \u0026 Parts",
     "synonyms": [
-      "Automobiles & Parts"
+      "Automobiles \u0026 Parts",
+      "Automobiles and Parts"
     ]
   },
   {
-    "value": "Oil & Gas Producers",
+    "value": "Oil \u0026 Gas Producers",
     "synonyms": [
-      "Oil & Gas Producers"
+      "Oil \u0026 Gas Producers",
+      "Oil and Gas Producers",
+      "Oil Producers",
+      "Oil",
+      "Gas Producers"
     ]
   },
   {
@@ -195,6 +246,13 @@
     "value": "Tobacco",
     "synonyms": [
       "Tobacco"
+    ]
+  },
+  {
+    "value": "Foresty \u0026 Paper",
+    "synonyms": [
+      "Foresty \u0026 Paper",
+      "Forestry and Paper"
     ]
   }
 ]

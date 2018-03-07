@@ -111,7 +111,7 @@ def big_movers_card(top5, risers=True):
     return big_movers
 
 
-def news_reply(financial_news, days):
+def news_reply(financial_news, days, positive_negative):
     """
     :param financial_news: A dictionary containing lists of LSE news and YAHOO news
     :param days: An integer specifying the number of days of news the response should contain
@@ -135,6 +135,7 @@ def news_reply(financial_news, days):
             lse_news.append(row)
     # filter out YAHOO news that is too old
     yahoo_news = []
+    number_positive = number_neutral = number_negative = 0
     for i in financial_news['YAHOO']:
         date = datetime.strptime(i.date, '%H:%M %d-%b-%Y')
         if date.date() >= datetime.now().date() - timedelta(days):
@@ -150,6 +151,13 @@ def news_reply(financial_news, days):
             row["sentiment"], row["keywords"] = get_analysis(i.description)
             yahoo_news.append(row)
 
+            if row["sentiment"] == "positive":
+                number_positive += 1
+            elif row["sentiment"] == "neutral":
+                number_neutral += 1
+            else:
+                number_negative += 1
+
     news = lse_news + yahoo_news
     news.sort(key=lambda x: datetime.strptime(x["date"], '%H:%M %d-%b-%Y'), reverse=True)
 
@@ -157,8 +165,15 @@ def news_reply(financial_news, days):
         reply['speech'] = "Here are some news articles that I've found!"
         reply['type'] = 'news'
         reply['text'] = news
+        
+        if positive_negative:
+            reply["positive_negative"] = "There are {} positive, {} neutral and {} negative articles.".format(
+                number_neutral, number_positive, number_negative)
+            reply['speech'] += " "
+            reply['speech'] += reply['positive_negative']
     else:
-        message = "I'm sorry, I couldn't find any recent articles."
+        message = "I'm sorry, I couldn't find any recent articles. Try increasing the date period from the " \
+                  "settings page or asking for an older date."
         reply['speech'] = message
         reply['type'] = "no-news"
         reply['text'] = message
@@ -202,7 +217,29 @@ def get_company_reply(company, attribute):
 
     return reply
 
+  
+def comparison_reply(company_data):
+    reply = defaultdict()
 
+    companies = []
+    for i in range(len(company_data)):
+        companies.append(get_company_reply(company_data[i], 'price'))
+
+    if len(companies) == 1:
+        reply['text'] = companies
+        reply['type'] = 'comparison'
+        reply['speech'] = "The price of {} is {}.".format(companies[0]['text']['name'], companies[0]['text']['primary'])
+    else:
+        reply['text'] = companies
+        reply['type'] = 'comparison'
+        reply['speech'] = 'Here is the side by side comparison of ' + company_data[0].name
+        
+        for i in range(1, len(company_data)):
+            reply['speech'] += ' and {}'.format(company_data[i].name)
+
+    return reply
+
+  
 def sector_reply(sector, sector_attribute):
     """
     :param sector: A Sector whose data was requested
@@ -268,7 +305,7 @@ def sector_reply(sector, sector_attribute):
             row = defaultdict()
             row['name'] = data[i].name
             row['price'] = data[i].stock.price
-            row['percentage_change'] = data[i].stock.per_diff      
+            row['percentage_change'] = data[i].stock.per_diff
             companies.append(row)
         movers = defaultdict()
         movers['speech'] = "Here is some data about how "+sector.name+" are performing"
@@ -295,7 +332,7 @@ def revenue_reply(company, date_period):
     response['speech'] = "Here is the revenue data for " + company.name
     response['type'] = "revenue"
     response['text'] = card
-    
+
     valid_date = False
 
     if not date_period:
@@ -320,10 +357,10 @@ def revenue_reply(company, date_period):
         response['speech'] = "I'm sorry, I couldn't find the data you were looking for."
         response['text'] = "I'm sorry, I couldn't find the data you were looking for."
         response['type'] = 'error'
-       
+
     return response
 
-
+  
 def daily_briefings(companies, sectors, attributes, days):
     """
     :param companies: A list of Company objects

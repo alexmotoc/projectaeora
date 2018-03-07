@@ -14,11 +14,11 @@ company_attributes = {
     'low': 'the current low',
     'volume': 'the current volume',
     'market_cap': 'the market cap',
-    'price': 'price',
+    'price': 'the price',
     'last_close_value': 'the last close value',
     'high': 'the current high',
-    'sector': 'which sector is it in',
-    'sub_sector': 'which sub-sector is it in'
+    'sector': 'which sector it is in',
+    'sub_sector': 'which sub-sector it is in'
 }
 
 sector_attributes = {
@@ -27,7 +27,7 @@ sector_attributes = {
     'lowest_price': 'the lowest price',
     'rising': 'rising',
     'falling': 'falling',
-    'performing': 'performing'
+    'performing': 'performance'
 }
 
 

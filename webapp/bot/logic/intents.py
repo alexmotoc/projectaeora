@@ -1,11 +1,14 @@
-from footsie import Scraper
-from bot.logic import replies
 from collections import defaultdict
 from datetime import datetime, timedelta
+
 import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../../../scraper'))
+
+from footsie import Scraper
+
+from bot.logic import replies
 
 
 def footsie_intent(r, days):
@@ -30,25 +33,42 @@ def footsie_intent(r, days):
         if attribute == "news":
             date_period = r['result']['parameters']['date-period']
             # if user specified a news timeframe
+            positive_negative = r['result']['parameters']['positive_negative']
             if date_period:
                 # calculate how many days of news were requested
                 start, end = date_period.split('/')
                 start_date = datetime.strptime(start, '%Y-%m-%d')
                 end_date = datetime.strptime(end, '%Y-%m-%d')
                 difference = end_date.date() - start_date.date()
-                return replies.news_reply(scraper.get_financial_news_data(company_code), difference.days)
+                return replies.news_reply(scraper.get_financial_news_data(company_code), difference.days, positive_negative)
             else:
-                return replies.news_reply(scraper.get_financial_news_data(company_code), days)
-        
-        # else if the query asks for revenue data use replies.revenue_reply
+                return replies.news_reply(scraper.get_financial_news_data(company_code), days, positive_negative)
         elif attribute == "revenue":
             company = scraper.get_company_data(company_code)
             return replies.revenue_reply(company, r['result']['parameters']['date-period'])
-
-        # else use replies.company_reply
         else:
             company = scraper.get_company_data(company_code)
             return replies.get_company_reply(company, attribute)
+
+
+def comparison_intent(r):
+    if r['result']['actionIncomplete']:
+        reply = {}
+        reply['text'] = r['result']['fulfillment']['speech']
+        reply['speech'] = r['result']['fulfillment']['speech']
+        reply['type'] = 'incomplete'
+        return reply
+    else:
+        companies = r['result']['parameters']['company']
+        scraper = Scraper.Scraper()
+
+        company_data = []
+        for company in companies:
+            company_data.append(scraper.get_company_data(company))
+
+        company_data = list(set(company_data))
+
+        return replies.comparison_reply(company_data)
 
 
 def sector_query_intent(r, is_sector, days):
@@ -106,7 +126,7 @@ def top_risers_intent(r):
     :return: A dictionary containing the layout of the card to be displayed
     """
     response = {}
-    
+
     if r['result']['parameters']['rise_fall'] == '':
         return r['result']['fulfillment']['speech']
     else:

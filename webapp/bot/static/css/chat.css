@@ -54,6 +54,10 @@
     margin: 10px;
 }
 
+.company-comparison {
+    margin-right: 10px;
+}
+
 .code-time {
     float: left;
 }
@@ -76,19 +80,35 @@
 .suggestion-chip {
     display: inline-block;
     height: auto;
-    margin: 5px 0;
+    margin: 5px;
     padding: 5px 10px;
     border-radius: 15px 15px 15px 15px;
     -webkit-border-radius: 15px 15px 15px 15px;
     word-wrap: break-word;
 }
 
-.suggestion-chip:hover {
+.suggestion-chip-indigo:hover {
     background-color: #5c6bc0;
 }
 
-.suggestion-chip:hover a {
+.suggestion-chip-indigo:hover a {
     color: white!important;
+}
+
+.suggestion-chip-dark:hover {
+    background-color: #424242;
+}
+
+.suggestion-chip-dark:hover a {
+    color: white!important;
+}
+
+.suggestion-chip-light:hover {
+    background-color: #eeeeee;
+}
+
+.suggestion-chip-light:hover a {
+    color: black!important;
 }
 
 .sent {

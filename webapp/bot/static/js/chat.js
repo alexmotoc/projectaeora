@@ -12,29 +12,71 @@ jQuery(function ($) {
     };
 });
 
-function createReply(history, voice, data) {
+function appendReply(data, colour, history, voice) {
     if (voice) {
         var synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(data['speech']);
         synth.speak(utterThis);
     }
 
+    var reply = createReply(data, colour);
+
+    $("#chat-history").append(reply);
+
+    $(".suggestion-chip").on('click', function(e) {
+        var suggestion = $($($(e.target)).contents()[0]).text();
+        addQuery(suggestion, colour);
+    })
+
+    if (!history) {
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+    }
+}
+
+function topPerformers(card) {
+    var reply = "<div class='bubble-interactive received'>" +
+                  "<div class='card white'>" +
+                    "<div class='card-content black-text'>" +
+                      "<span class='card-title'>" + card["title"] + "</span>" +
+                      "<table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th></tr></thead>" +
+                      "<tbody>";
+
+    card["companies"].forEach(function(obj) {
+        reply += "<tr><td>" + obj.name + "</td><td>" + obj.price +"</td>";
+
+        if (obj.percentage_change[0] == '+') {
+            reply += "<td class='green-text'>" + obj.percentage_change + "</td>";
+        } else {
+            reply += "<td class='red-text'>" + obj.percentage_change + "</td>";
+        }
+
+        reply += "</tr>";
+    });
+
+    reply += "</tbody></table></div></div></div>";
+
+    return reply;
+}
+
+function createReply(data, colour) {
     var card = data["text"];
+    var reply = '';
+
     switch(data["type"]) {
         case "company":
-            var reply =  "<div class='bubble-interactive received'>" +
+            reply +=  "<div class='bubble-interactive received'>" +
                           "<div class='card white'>" +
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["name"] + "</span>" +
                               "<p class='grey-text code-time'>" + card["code"] + "<br>" + card["date"] + "</p>" +
-                              "<p class='black-text price-impact'" + getStyle(card['primary_type'], card['primary']) + card['primary'] + getUnits(card['primary_type']) +
+                              "<p class='price-impact'>" + getStyle(card['primary_type'], card['primary']) + card['primary'] + getUnits(card['primary_type']) +
                               "<br>" + getStyle(card['secondary_type'], card['secondary']) + card['secondary'] + getUnits(card['secondary_type']) + "</p>" +
                             "</div>" +
                           "</div>" +
                         "</div>";
             break;
         case "news":
-            var reply = "<div class='bubble-interactive received'><section class='scrollable-container'>";
+            reply += "<div class='bubble-interactive received'><section class='scrollable-container'>";
 
             card.forEach(function(obj) {
                 reply +=  "<div class='news-article'>" +
@@ -73,7 +115,7 @@ function createReply(history, voice, data) {
                     }
                     reply += "</p>"
                 }
-                
+
                 reply += "<p class = 'grey-text'>Date published: " + obj.date + "</p>"
                 reply += "<p class = 'grey-text'>Source: " + obj.source + "</p>"
                 reply += "<div class='card-action'><p><a href=" + obj.url + ">Go to article</a></p></div>" +
@@ -81,57 +123,194 @@ function createReply(history, voice, data) {
             });
             reply += "</section></div>";
 
+            if(data['positive_negative'] != null)
+                reply += simpleReply(data['positive_negative'], colour);
+                
             break;
         case "top":
-            var reply = "<div class='bubble-interactive received'>" +
+            reply += topPerformers(card);
+            break;
+        case "risers&fallers":
+            reply += topPerformers(card['risers']);
+            reply += topPerformers(card['fallers']);
+            break;
+        case "comparison":
+            reply += "<div class='bubble-interactive received'><section class='scrollable-container'>";
+
+            console.log(data);
+            card.forEach(function(obj) {
+                reply += "<div class='company-comparison'>" +
+                            "<div class='card white'>" +
+                            "<div class='card-content black-text'>" +
+                              "<span class='card-title'>" + obj["text"]["name"] + "</span>" +
+                              "<p class='grey-text code-time'>" + obj["text"]["code"] + "<br>" + obj["text"]["date"] + "</p>" +
+                              "<p class='price-impact'>" + getStyle(obj["text"]['primary_type'], obj["text"]['primary']) + obj["text"]['primary'] + getUnits(obj["text"]['primary_type']) +
+                              "<br>" + getStyle(obj["text"]['secondary_type'], obj["text"]['secondary']) + obj["text"]['secondary'] + getUnits(obj["text"]['secondary_type']) + "</p>" +
+                            "</div>" +
+                            "</div>" + 
+                          "</div>"
+            });
+
+            reply += "</section></div>";
+
+            break;
+        case "revenue":
+            reply += "<div class='bubble-interactive received'>" +
                           "<div class='card white'>" +
                             "<div class='card-content black-text'>" +
                               "<span class='card-title'>" + card["title"] + "</span>" +
-                              "<table class='striped'><thead><tr><th>Name</th><th>Price</th><th>%+/-</th></tr></thead>" +
-                              "<tbody>";
-
-            card["companies"].forEach(function(obj) {
-                reply += "<tr><td>" + obj.name + "</td><td>" + obj.price +"</td>";
-
-                if (obj.percentage_change[0] == '+') {
-                    reply += "<td class='green-text'>" + obj.percentage_change + "</td>";
-                } else {
-                    reply += "<td class='red-text'>" + obj.percentage_change + "</td>";
-                }
-
-                reply += "</tr>";
-            });
-
-            reply += "</tbody></table></div></div></div>";
-            break;
-        case "revenue":
-            var reply = "<div class = 'bubble-interactive received'>" +
-                          "<div class = 'card white'>" +
-                            "<div class = 'card-content black-text'>" +
-                              "<span class = 'card-title'>" + card["title"] + "</span>" +
-                              "<table class = 'striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
-                              "<tbody>";
+                              "<table class='striped'><thead><tr><th>Date</th><th>Revenue (&poundm)</th>" +
+                              "</tr></thead><tbody>";
 
             card["revenue_data"].forEach(function(obj) {
-                reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td><tr>";
+                reply += "<tr><td>" + obj.date + "</td><td>" + obj.revenue +"</td></tr>";
             });
 
             reply += "</tbody></table></div></div></div>";
             break;
         case "briefing":
-            console.log(data);
-            var reply = "";
+            card['companies'].forEach(function(obj) {
+                reply += simpleReply("Here is the latest data on " + obj.name + ":", colour);
+
+                reply += "<div class='bubble-interactive received'>" +
+                              "<div class='card white'>" +
+                                "<div class='card-content black-text'>" +
+                                  "<span class='card-title'>" + obj.name + "</span>" +
+                                  "<table class='centered'><thead><tr>";
+
+                reply += "<th>Price</th>";
+
+                if ("high" in obj) {
+                    reply += "<th>High</th>";
+                }
+
+                if ("low" in obj) {
+                    reply += "<th>Low</th>";
+                }
+
+                if ("per_diff" in obj) {
+                    reply += "<th>Percentage change</th>";
+                }
+
+                reply += "</tr></thead><tbody><tr>";
+
+                reply += "<td>" + obj.price + "</td>";
+
+                if ("high" in obj) {
+                    reply += "<td>" + obj.high + "</td>";
+                }
+
+                if ("low" in obj) {
+                    reply += "<td>" + obj.low + "</td>";
+                }
+
+                if ("per_diff" in obj) {
+                    reply += "<td>" + getImpact(obj.per_diff) + obj.per_diff + "</span></td>";
+                }
+
+                reply += "</tr></tbody></table>";
+                reply += "<p class='grey-text'>" + obj.date + "</p>";
+                reply += "</div></div></div>";
+
+                if ("news" in obj) {
+                    reply += simpleReply("Here are the latest news on " + obj.name + ":", colour);
+
+                    reply += createReply(obj.news, colour);
+                }
+            });
+
+            card['sectors'].forEach(function(obj) {
+                reply += simpleReply("The highest price in " + obj.name + " is:", colour);
+                reply += createReply(obj.highest_price);
+
+                reply += simpleReply("The lowest price in " + obj.name + " is:", colour);
+                reply += createReply(obj.lowest_price);
+
+                reply += simpleReply("The rising companies in " + obj.name + " are:", colour);
+                reply += createReply(obj.rising);
+
+                reply += simpleReply("The falling companies in " + obj.name + " are:", colour);
+                reply += createReply(obj.falling);
+
+                if ("news" in obj) {
+                    reply += simpleReply("Here are some news about " + obj.name + ":", colour);
+                    reply += createReply(obj.news);
+                }
+            });
+
             break;
         default:
-            var reply = "<div class='bubble received blue lighten-1 scale-transition scale-out'><span class='white-text'>" + data["text"] + "</span></div>";
+            var reply = simpleReply(data['text'], colour);
     }
 
-    $("#chat-history").append(reply);
-    $(".received").last().removeClass("scale-out").addClass("scale-in");
+    // Display suggestions
+    if (data['suggestions'] != null) {
+        var suggestions = data['suggestions']
 
-    if (!history) {
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+        reply += '<div class="bubble-interactive received" id="suggestions">';
+
+        for (i = 0; i < suggestions.length; i++) {
+            reply +=
+            '<div class="waves-effect suggestion-chip suggestion-chip-' + colour + ' z-depth-2">' +
+              '<span><a class="grey-text text-darken-2" >' + suggestions[i] + '</a></span>' +
+            '</div>';
+        }
+
+        reply += '</div">';
     }
+
+    return reply;
+}
+
+function simpleReply(text, colour) {
+    var reply = "<div class='bubble received ";
+
+    if (colour == "indigo") {
+        reply += "indigo lighten-1";
+    } else if (colour == "dark") {
+        reply += "grey darken-3";
+    } else {
+        reply += "grey lighten-3";
+    }
+
+    reply += "'><span class='";
+
+    if (colour == "light") {
+        reply += "black-text";
+    } else {
+        reply += "white-text";
+    }
+
+    reply += "'>" + text + "</span></div>";
+
+    return reply;
+}
+
+function getQuery(text, colour) {
+    var now = new Date();
+    var time = now.getHours() + ":" + now.getMinutes();
+
+    var query = "<div class='bubble sent ";
+
+    if (colour == "indigo") {
+        query += "indigo";
+    } else if (colour == "dark") {
+        query += "grey darken-4";
+    } else {
+        query += "grey lighten-2";
+    }
+
+    query += " tooltipped' data-position='right' data-delay='50' data-tooltip='" + time + "'><span class='";
+
+    if (colour == "light") {
+        query += "black-text";
+    } else {
+        query += "white-text";
+    }
+
+    query += "'>" + text + "</span></div>";
+
+    return query;
 }
 
 function getImpact(value) {
@@ -143,8 +322,26 @@ function getImpact(value) {
     }
 }
 
+function addQuery(question, colour, history, voice) {
+    if ($('#suggestions').length) {
+        $('#suggestions').remove();
+    }
+
+    var now = new Date();
+    var time = now.getHours() + ":" + now.getMinutes();
+
+    var query = getQuery(question, colour);
+
+    $("#chat-history").append(query);
+    $('.tooltipped').tooltip({delay: 50});
+    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+    processingQuery();
+    fetchReply(question, colour, false, false);
+}
+
 function getStyle(attribute, value){
-    if (attribute == "per_diff"){
+    if (attribute == "per_diff" || attribute == "diff"){
         return getImpact(value);
     }
     else if (attribute == "high"){
@@ -200,17 +397,54 @@ function getUnits(attribute){
     }
 }
 
+var fetchReply = function(query, colour, history, voice) {
+    return $.ajax({
+        url: "/chat/",
+        type: "POST",
+        data: {
+            question: query
+        },
+        success: function(data) {
+            $("#buffering").remove();
+
+            appendReply(data, colour, false, voice);
+            $('.scrollable-container').hScroll();
+        },
+    });
+}
+
+function processingQuery() {
+    var bufferingCircle = "<div class='preloader-wrapper small active'>" +
+                              "<div class='spinner-layer spinner-blue-only'>" +
+                                "<div class='circle-clipper left'>" +
+                                  "<div class='circle'></div>" +
+                                "</div><div class='gap-patch'>" +
+                                  "<div class='circle'></div>" +
+                                "</div><div class='circle-clipper right'>" +
+                                  "<div class='circle'></div>" +
+                                "</div>" +
+                              "</div>" +
+                            "</div>";
+    var bufferingBubble = "<div id='buffering' class='bubble-interactive received'>" + bufferingCircle + "</div>";
+    $("#chat-history").append(bufferingBubble);
+    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+    return $("#id_question").val();
+}
+
 $(document).ready(function() {
     $('.scrollable-container').hScroll();
 
     $('.tooltipped').tooltip({delay: 50});
 
     var voice;
+    var colour;
 
     $.ajax({
-        url: '/ajax/getvoice',
+        url: '/ajax/getpreferences',
         success: function(result) {
             voice = result.voice;
+            colour = result.colour_scheme;
         }
     });
 
@@ -228,41 +462,6 @@ $(document).ready(function() {
             }
         }
     });
-
-    var fetchReply = function(query, history, voice) {
-        return $.ajax({
-            url: "/chat/",
-            type: "POST",
-            data: {
-                question: query
-            },
-            success: function(data) {
-                $("#buffering").remove();
-
-                createReply(false, voice, data);
-                $('.scrollable-container').hScroll();
-            },
-        });
-    }
-
-    function processingQuery() {
-        var bufferingCircle = "<div class='preloader-wrapper small active'>" +
-                                  "<div class='spinner-layer spinner-blue-only'>" +
-                                    "<div class='circle-clipper left'>" +
-                                      "<div class='circle'></div>" +
-                                    "</div><div class='gap-patch'>" +
-                                      "<div class='circle'></div>" +
-                                    "</div><div class='circle-clipper right'>" +
-                                      "<div class='circle'></div>" +
-                                    "</div>" +
-                                  "</div>" +
-                                "</div>";
-        var bufferingBubble = "<div id='buffering' class='bubble-interactive received'>" + bufferingCircle + "</div>";
-        $("#chat-history").append(bufferingBubble);
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-
-        return $("#id_question").val();
-    }
 
     $("#send-text").click(function(e) {
         if ($("#id_question").val() != "") {
@@ -291,9 +490,8 @@ $(document).ready(function() {
                 var finalTranscript = "";
 
                 recognition.onspeechstart = function(event) {
-                    var queryBubble = "<div class='bubble sent blue lighten-1 scale-transition scale-out'><span class='white-text'></span></div>";
+                    var queryBubble = getQuery('', colour);
                     $("#chat-history").append(queryBubble);
-                    $(".sent").last().removeClass("scale-out").addClass("scale-in");
                     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
                 };
 
@@ -315,7 +513,7 @@ $(document).ready(function() {
                 recognition.onspeechend = function(event) {
                     recognition.abort();
                     processingQuery();
-                    fetchReply(finalTranscript, voice);
+                    fetchReply(finalTranscript, colour, false, voice);
                 }
 
                 recognition.onend = function(event) {
@@ -331,21 +529,7 @@ $(document).ready(function() {
 
     $("#ask-question").submit(function(e) {
         e.preventDefault();
-
-        var now = new Date();
-        var time = now.getHours() + ":" + now.getMinutes();
-
-        var query = "<div class='bubble sent blue lighten-1 scale-transition scale-out tooltipped'" +
-                    "data-position='right' data-delay='50' data-tooltip='" + time + "'>" +
-                    "<span class='white-text'>" + $('#id_question').val() + "</span></div>";
-
-        $("#chat-history").append(query);
-        $('.tooltipped').tooltip({delay: 50});
-        $(".sent").last().removeClass("scale-out").addClass("scale-in");
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-
-        processingQuery();
-        fetchReply($('#id_question').val(), false, false);
+        addQuery($('#id_question').val(), colour, false, false);
         $("#id_question").val("");
     });
 });

@@ -28,7 +28,6 @@ class UserPreferences(models.Model):
     sectors = models.TextField(default='')
 
     # The properties beneath are for if the user wants to receive them in their daily briefing.
-    current_price = models.BooleanField(default=True)
     daily_high = models.BooleanField(default=True)
     daily_low = models.BooleanField(default=True)
     percentage_change = models.BooleanField(default=True)

@@ -1,4 +1,35 @@
 nav {
   color: black;
   background-color: white;
+  height: 64px;
+}
+
+.nav-button {
+  color: black;
+  line-height: 64px;
+  width: 100;
+  text-align: center;
+}
+
+li.active {
+  border-bottom: 3px solid #42a5f5;
+  font-weight: bold;
+}
+
+canvas {
+  display: block;
+  vertical-align: bottom;
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#intro {
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%,-50%);
 }

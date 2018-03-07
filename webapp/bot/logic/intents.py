@@ -7,9 +7,9 @@ import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../../../scraper'))
 
 from footsie import Scraper
-from bot.logic import replies
 
 from bot.logic import replies
+
 
 def footsie_intent(r, days):
     # Check whether all required entities have been specified
@@ -42,6 +42,7 @@ def footsie_intent(r, days):
             company = scraper.get_company_data(company_code)
             return replies.get_company_reply(company, attribute)
 
+
 def comparison_intent(r):
     if r['result']['actionIncomplete']:
         reply = {}
@@ -55,13 +56,14 @@ def comparison_intent(r):
         scraper = Scraper.Scraper()
 
         return replies.comparison_reply(scraper.get_company_data(first_company),
-                scraper.get_company_data(second_company))
+                                        scraper.get_company_data(second_company))
+
 
 def sector_query_intent(r, is_sector, days):
     scraper = Scraper.Scraper()
     sector = None
-    #if required entities have been specified get sector/sub-sector data
-    if is_sector: #is a SectorQuery
+    # if required entities have been specified get sector/sub-sector data
+    if is_sector:  # is a SectorQuery
         if r['result']['parameters']['sector'] == '' or r['result']['parameters']['sector_attribute'] == '':
             reply = {}
             reply['text'] = r['result']['fulfillment']['speech']
@@ -72,7 +74,7 @@ def sector_query_intent(r, is_sector, days):
             sector_name = r['result']['parameters']['sector']
             sector_attribute = r['result']['parameters']['sector_attribute']
             sector = scraper.get_sector_data(sector_name)
-    else: #is a SubSectorQuery
+    else:  # is a SubSectorQuery
         if r['result']['parameters']['subsector'] == '' or r['result']['parameters']['sector_attribute'] == '':
             reply = {}
             reply['text'] = r['result']['fulfillment']['speech']
@@ -97,6 +99,7 @@ def sector_query_intent(r, is_sector, days):
     else:
         return replies.sector_reply(sector, sector_attribute)
 
+
 def top_risers_intent(r):
     response = {}
 
@@ -110,7 +113,7 @@ def top_risers_intent(r):
         elif r['result']['parameters']['rise_fall'] == "fallers":
             fallers = scraper.get_top5(False)
             response = replies.big_movers_card(fallers, False)
-        else: #get both
+        else:  # get both
             risers = scraper.get_top5()
             fallers = scraper.get_top5(False)
             risers_response = replies.big_movers_card(risers)
@@ -120,6 +123,7 @@ def top_risers_intent(r):
             response['text'] = {'risers': risers_response['text'], 'fallers': fallers_response['text']}
 
     return response
+
 
 def daily_briefings_intent(companies, sectors, attributes, days):
     scraper = Scraper.Scraper()

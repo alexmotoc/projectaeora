@@ -25,5 +25,6 @@ urlpatterns = [
     path('settings/', views.settings, name='settings'),
     path('ajax/getcompanies', views.get_companies, name='get-companies'),
     path('ajax/getsectors', views.get_sectors, name='get-sectors'),
+    path('interests/', views.interests, name='interests'),
     path('ajax/getpreferences', views.get_preferences, name='get-preferences'),
 ]

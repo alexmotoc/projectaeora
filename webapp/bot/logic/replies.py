@@ -132,6 +132,7 @@ def news_reply(financial_news, days, positive_negative):
             row["summary"] = "No summary is available."
             row["sentiment"] = "none"
             row["keywords"] = list()
+            row["company"] = el.company
             lse_news.append(row)
     # filter out YAHOO news that is too old
     yahoo_news = []
@@ -149,6 +150,7 @@ def news_reply(financial_news, days, positive_negative):
             if row["summary"][-3:] != "...":
                 row["summary"] += "..."
             row["sentiment"], row["keywords"] = get_analysis(i.description)
+            row["company"] = i.company
             yahoo_news.append(row)
 
             if row["sentiment"] == "positive":

@@ -174,7 +174,7 @@ def news_reply(financial_news, days, positive_negative):
             number_negative = 'no' if number_negative == 0 else number_negative
 
             reply["positive_negative"] = "There are {} positive, {} neutral and {} negative articles.".format(
-                number_neutral, number_positive, number_negative)
+                number_positive, number_neutral, number_negative)
             reply['speech'] += " "
             reply['speech'] += reply['positive_negative']
     else:

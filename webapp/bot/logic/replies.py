@@ -320,21 +320,24 @@ def sector_reply(sector, sector_attribute):
         card['companies'] = companies
         movers['text'] = card
         movers['type'] = 'top'
-        return movers    
-    elif sector_attribute == "companies":
-        companies = []
-        for i in range(len(data)):
-            row = defaultdict()
-            row['name'] = data[i].name
-            companies.append(row)
-        movers = defaultdict()
-        movers['speech'] = "Here are the members of "+sector.name
-        card = defaultdict()
-        card['title'] = "Members "+sector.name
-        card['companies'] = companies
-        movers['text'] = card
-        movers['type'] = 'members'
-        return movers  
+        return movers
+
+
+def members_reply(sector):
+    data = sector.companies
+    companies = []
+    for i in range(len(data)):
+        row = defaultdict()
+        row['name'] = data[i].name
+        companies.append(row)
+    movers = defaultdict()
+    movers['speech'] = "Here are the members of " + sector.name
+    card = defaultdict()
+    card['title'] = "Members of " + sector.name
+    card['companies'] = companies
+    movers['text'] = card
+    movers['type'] = 'members'
+    return movers
 
 
 def revenue_reply(company, date_period):

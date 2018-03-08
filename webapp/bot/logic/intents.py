@@ -120,6 +120,12 @@ def sector_query_intent(r, is_sector, days):
         return replies.sector_reply(sector, sector_attribute)
 
 
+def sector_members(r):
+    scraper = Scraper.Scraper()
+    sector_name = r['result']['parameters']['sector']
+    sector = scraper.get_sector_data(sector_name)
+    return replies.members_reply(sector)
+
 def top_risers_intent(r):
     """
     :param r: A JSON object received from Dialogflow

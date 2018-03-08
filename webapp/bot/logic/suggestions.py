@@ -27,8 +27,7 @@ sector_attributes = {
     'lowest_price': 'the lowest price',
     'rising': 'rising',
     'falling': 'falling',
-    'performing': 'performance',
-    'companies': 'companies'
+    'performing': 'performance'
 }
 
 

@@ -58,6 +58,23 @@ function topPerformers(card) {
     return reply;
 }
 
+function members(card) {
+    var reply = "<div class='bubble-interactive received'>" +
+                  "<div class='card white'>" +
+                    "<div class='card-content black-text'>" +
+                      "<span class='card-title'>" + card["title"] + "</span>" +
+                      "<table class='striped'><thead><tr><th>Name</th></tr></thead>" +
+                      "<tbody>";
+
+    card["companies"].forEach(function(obj) {
+        reply += "<tr><td>" + obj.name + "</td></tr>";
+    });
+
+    reply += "</tbody></table></div></div></div>";
+
+    return reply;
+}
+
 function createReply(data, colour) {
     var card = data["text"];
     var reply = '';
@@ -128,6 +145,9 @@ function createReply(data, colour) {
             break;
         case "top":
             reply += topPerformers(card);
+            break;
+        case "members":
+            reply += members(card)
             break;
         case "risers&fallers":
             reply += topPerformers(card['risers']);

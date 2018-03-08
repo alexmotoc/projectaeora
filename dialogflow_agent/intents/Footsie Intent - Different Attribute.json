@@ -1,0 +1,70 @@
+{
+  "id": "ad8e5c51-9469-441b-9031-128698af5e5f",
+  "name": "Footsie Intent - Different Attribute",
+  "auto": true,
+  "contexts": [
+    "FootsieIntent-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "FootsieIntent.FootsieIntent-custom",
+      "affectedContexts": [
+        {
+          "name": "FootsieIntent-followup",
+          "parameters": {},
+          "lifespan": 3
+        }
+      ],
+      "parameters": [
+        {
+          "id": "fcdb8288-597a-479e-be45-81e40e955ad8",
+          "required": false,
+          "dataType": "@attribute",
+          "name": "attribute",
+          "value": "$attribute",
+          "prompts": [],
+          "defaultValue": "",
+          "isList": false
+        },
+        {
+          "id": "ea6d24e2-223c-428f-9a9a-68529b7d5e6a",
+          "required": false,
+          "dataType": "@company",
+          "name": "company",
+          "value": "#FootsieIntent-followup.company",
+          "isList": false
+        },
+        {
+          "id": "2426387b-8cfc-4369-9def-c30cfaed576f",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
+          "isList": false
+        },
+        {
+          "id": "ad0cae44-70a0-4b37-b791-6b1f5b8eb10c",
+          "dataType": "@positive_negative",
+          "name": "positive_negative",
+          "value": "#FootsieIntent-followup.positive_negative"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520431786,
+  "fallbackIntent": false,
+  "events": []
+}

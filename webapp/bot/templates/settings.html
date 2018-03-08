@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/settings.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/sidebar.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/main-offset.css" %}"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta charset="utf-8">
+      <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo.png' %}" />
+      <title>Settings</title>
+    </head>
+
+    <body>
+      {% include "sidebar.html" %}
+
+      <main>
+        <div class="row">
+          <div class="col s10 offset-s1">
+            <h1>Settings</h1>
+            <form id="preferences-form" action="/settings/" method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="input-field">
+                  {{ form.colour_scheme }}
+                  {{ form.colour_scheme.label_tag }}
+                </div>
+              </div>
+              <h5>Daily briefings</h5>
+              <div class="row">
+                  <div id="track-companies" class="chips chips-initial chips-autocomplete"></div>
+                  {{ form.companies }}
+              </div>
+              <div class="row">
+                <div id="track-sectors" class="chips chips-initial chips-autocomplete"></div>
+                {{ form.sectors }}
+              </div>
+              <h5>Card attributes</h5>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.daily_high.label }}
+                    {{ form.daily_high }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.daily_low.label }}
+                    {{ form.daily_low }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.percentage_change.label }}
+                    {{ form.percentage_change }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <h5>News</h5>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.news.label }}
+                    {{ form.news }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s4 news-range">
+                  <p class="range-field grey-text news-days-label">
+                    {{ form.days_old.label }}
+                    {{ form.days_old }}
+                  </p>
+                </div>
+              </div>
+              <h5>Output</h5>
+              <div class="row">
+                <div class="switch">
+                  <label>
+                    {{ form.voice.label }}
+                    {{ form.voice }}
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <input id="save-preferences" class="waves-effect waves-light btn
+                {% include 'colour-scheme-primary.html' %}
+                {% if colour_scheme == 'light' %} light-submit-button {% endif %}"
+                type="submit" name="update-preferences" value="Save">
+              </div>
+            </form>
+          </div>
+        </div>
+
+        {% include "help-modal.html" %}
+        {% include "status-modal.html" %}
+
+      </main>
+
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/settings.js" %}"></script>
+    </body>
+  </html>

@@ -1,0 +1,202 @@
+[
+  {
+    "id": "17990620-f519-49a9-9707-2e3469975124",
+    "data": [
+      {
+        "text": "Who are the ",
+        "userDefined": false
+      },
+      {
+        "text": "big performers",
+        "alias": "rise_fall",
+        "meta": "@rise_fall",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520442656
+  },
+  {
+    "id": "2721a505-5715-4f9c-bf99-4f45118b19e7",
+    "data": [
+      {
+        "text": "Who are the ",
+        "userDefined": false
+      },
+      {
+        "text": "top performers",
+        "alias": "rise_fall",
+        "meta": "@rise_fall",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520442656
+  },
+  {
+    "id": "0a2bebc2-0d6e-4ecc-90cf-59d4b058b04c",
+    "data": [
+      {
+        "text": "Which companies are ",
+        "userDefined": false
+      },
+      {
+        "text": "falling",
+        "alias": "rise_fall",
+        "meta": "@rise_fall",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520442656
+  },
+  {
+    "id": "2954a371-edb8-4f6f-bfd0-15e8708aa31e",
+    "data": [
+      {
+        "text": "Which companies are ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "rise_fall",
+        "meta": "@rise_fall",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520442656
+  },
+  {
+    "id": "5d2be013-ae82-49f5-bd7c-fb6f8bb888ec",
+    "data": [
+      {
+        "text": "Who are the top ",
+        "userDefined": false
+      },
+      {
+        "text": "fallers",
+        "alias": "rise_fall",
+        "meta": "@rise_fall",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520442656
+  },
+  {
+    "id": "1d7321c2-f03e-4736-971b-cafadbcdd076",
+    "data": [
+      {
+        "text": "Who are the top ",
+        "userDefined": false
+      },
+      {
+        "text": "risers",
+        "alias": "rise_fall",
+        "meta": "@rise_fall",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520442656
+  },
+  {
+    "id": "ba087272-0518-4cba-9c32-750ad7b0df88",
+    "data": [
+      {
+        "text": "Who are the ",
+        "userDefined": false
+      },
+      {
+        "text": "big movers",
+        "alias": "rise_fall",
+        "meta": "@rise_fall",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520442656
+  },
+  {
+    "id": "939208e7-f7a1-412e-a590-53881656e890",
+    "data": [
+      {
+        "text": "Top",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Fallers",
+        "alias": "rise_fall",
+        "meta": "@rise_fall",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520442656
+  },
+  {
+    "id": "47699edb-e19f-461e-8d79-5089bf598695",
+    "data": [
+      {
+        "text": "Top",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Risers",
+        "alias": "rise_fall",
+        "meta": "@rise_fall",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520442656
+  }
+]

@@ -1,0 +1,83 @@
+{
+  "id": "b2a19b9c-eac2-42a2-8b74-0d3ee351cbce",
+  "name": "SectorQuery",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "SectorQuery-followup",
+          "parameters": {},
+          "lifespan": 3
+        },
+        {
+          "name": "SectorQuery-followup-2",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "5fa822c8-7a49-48e4-a262-eb86eb81e175",
+          "required": true,
+          "dataType": "@sector",
+          "name": "sector",
+          "value": "$sector",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which sector do you want to find out about?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "056d2108-fe7f-4e8e-9000-82363c90da53",
+          "required": true,
+          "dataType": "@sector_attribute",
+          "name": "sector_attribute",
+          "value": "$sector_attribute",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What do you want to find out about $sector"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "767c24cc-132a-4cba-991c-e4801bdc676e",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
+          "isList": false
+        },
+        {
+          "id": "0ed2e49d-f6a6-4b01-81f9-e5e2ee784b66",
+          "dataType": "@subsector",
+          "name": "subsector",
+          "value": "$subsector",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520422004,
+  "fallbackIntent": false,
+  "events": []
+}

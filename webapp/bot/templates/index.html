@@ -6,19 +6,113 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/index.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/chat.css" %}"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <meta charset="utf-8">
-      <title>Bot</title>
+      <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo.png' %}" />
+      <title>Welcome to Aeora</title>
     </head>
 
     <body>
       <main>
+        <!--define the nav-bar at the top of the screen -->
+      <div class="navbar-fixed">
+        <nav id="top-nav">
+           <div class="nav-wrapper">
+             <a href="/" class="brand-logo"><img src="{% static "images/logo.png" %}" height="56px"></a>
+            <a href="/" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down nav-buttons">
+                <li class="active"><a class="nav-button" href="/">Overview</a></li>
+                <li><a class="nav-button" href="chat">Chat</a></li>
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+                <li><a href="/">Overview</a></li>
+                <li><a href="chat">Chat</a></li>
+              </ul>
+            </div>
+         </nav>
+      </div>
+      <section>
+        <div id="particles-js" class="indigo"></div>
+        <div id="intro" class="container">
+          <div class="row center">
+            <h1 class="white-text"><span class="typed"></span></h1>
+            <h2 class="white-text">The virtual assistant that helps with financial queries</h2>
+          </div>
+          <div class="row center">
+            <a href="/chat/" class="waves-effect waves-light btn-large red">Get started</a>
+          </div>
+          <!-- <div class="row center">
+            <a href="#introducing-aeora">
+              <img src="https://www.playmatetennis.com/v1/wp-content/uploads/2017/06/arrow-down-navigation1.gif" height="100px"/>
+            </a>
+          </div> -->
+        </div>
+      </section>
+      <div class="container">
+        <div id="introducing-aeora" class="section white">
+          <div class="row center">
+            <h1>Introducing Aeora.</h1>
+            <img class="responsive-img" src="{% static 'images/laptop_view.gif' %}">
+            <p class="flow-text">The ChatBot for traders, providing answers to questions on the FTSE 100.<br>
+            Built for quick and intellectual conversations.</p>
+          </div>
+        </div>
+        <!-- TODO: Add a couple of elements -->
+        <!-- <div class="section white">
+          <div class="row center">
+            <h2>Visualisations to help you make better decisions.</h2>
+          </div>
+        </div> -->
+        <div class="section white">
+          <div class="row center">
+          </div>
+        </div>
+        <div class="section white">
+          <div class="row center">
+            <div class="col s12 m8 l6">
+              <img src="{% static 'images/phone_view.gif' %}" width="280">
+            </div>
+            <div class="col s12 m4 l6">
+              <h2 class="header">Find out what you need, fast.</h2>
+              <p class="flow-text">
+                Aeora is a personal assistant, built to interact with traders via voice or text,
+                to help answer queries by providing instant and accurate replies.</p>
+            </div>
+          </div>
+        </div>
+        <div class="section white">
+          <div class="row center">
+            <div class="col s12 m4 l6">
+              <h2>Designed for you.</h2>
+              <p class="flow-text">
+                Whether you want to give Aeora a fresh look or add your favourite
+                companies and sectors for tracking it's all there at the touch of button.</p>
+            </div>
+            <div class = "col s12 m8 l6">
+              <img src="{% static 'images/settings_view.png' %}">
+            </div>
+          </div>
+        </div>
+      </div>
       </main>
+
+      <footer class="page-footer white">
+        <div class="footer-copyright">
+          <div class="container">
+            <span class="grey-text text-darken-4">© 2018 Aeora</span>
+          </div>
+        </div>
+      </footer>
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+      <script type="text/javascript" src="{% static "js/index.js" %}"></script>
     </body>
   </html>

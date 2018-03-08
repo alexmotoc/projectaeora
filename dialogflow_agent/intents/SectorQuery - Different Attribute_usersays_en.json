@@ -1,0 +1,240 @@
+[
+  {
+    "id": "daf1dcee-6f6b-4703-bf37-d41abf16e804",
+    "data": [
+      {
+        "text": "And the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422835
+  },
+  {
+    "id": "f715201a-4508-4780-8264-786c27412dc7",
+    "data": [
+      {
+        "text": "And could you let me know whose ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422835
+  },
+  {
+    "id": "ed01aa33-aa93-457e-8b55-919ab93a50ac",
+    "data": [
+      {
+        "text": "And could you tell me whose ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422835
+  },
+  {
+    "id": "e8e63887-4eb0-4eb9-bb0f-f1dd22919dc8",
+    "data": [
+      {
+        "text": "And whose ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422835
+  },
+  {
+    "id": "a9cb7313-50d8-46c9-8691-d5f37e93df69",
+    "data": [
+      {
+        "text": "And ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422835
+  },
+  {
+    "id": "ff271ea9-8f0d-4109-a5c2-36af2990d5b6",
+    "data": [
+      {
+        "text": "And whose ",
+        "userDefined": false
+      },
+      {
+        "text": "falling",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422835
+  },
+  {
+    "id": "f4236683-a63a-481d-a092-8962d9ba06b4",
+    "data": [
+      {
+        "text": "What about whose ",
+        "userDefined": false
+      },
+      {
+        "text": "falling",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520283741
+  },
+  {
+    "id": "19acd368-0725-4f2b-a066-3041e469860b",
+    "data": [
+      {
+        "text": "What about whose ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520283741
+  },
+  {
+    "id": "af484735-1d42-4ab2-8255-5ca5f0fd4d77",
+    "data": [
+      {
+        "text": "What about the ",
+        "userDefined": false
+      },
+      {
+        "text": "lowest price",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1520283741
+  },
+  {
+    "id": "47c65c7b-fb31-4460-9fd1-878964927edd",
+    "data": [
+      {
+        "text": "What about the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520283741
+  },
+  {
+    "id": "4a9b36bd-8f11-47e7-8e41-4fe9070da262",
+    "data": [
+      {
+        "text": "What about the ",
+        "userDefined": false
+      },
+      {
+        "text": "highest price",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520283741
+  }
+]

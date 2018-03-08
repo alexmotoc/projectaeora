@@ -1,0 +1,64 @@
+{
+  "id": "15857f83-eb35-4a0e-92dc-2fd0b1cc51b5",
+  "parentId": "b2a19b9c-eac2-42a2-8b74-0d3ee351cbce",
+  "rootParentId": "b2a19b9c-eac2-42a2-8b74-0d3ee351cbce",
+  "name": "SectorQuery - Coming from Sub-Sectors",
+  "auto": true,
+  "contexts": [
+    "SubSectorQuery-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "SectorQuery.SectorQuery-custom",
+      "affectedContexts": [
+        {
+          "name": "SectorQuery-followup",
+          "parameters": {},
+          "lifespan": 3
+        }
+      ],
+      "parameters": [
+        {
+          "id": "b83c936e-e316-4da2-b11d-eed519466513",
+          "required": false,
+          "dataType": "@sector",
+          "name": "sector",
+          "value": "$sector",
+          "isList": false
+        },
+        {
+          "id": "98333437-dfa7-4e61-a337-10f9aedf2bb9",
+          "required": false,
+          "dataType": "@sector_attribute",
+          "name": "sector_attribute",
+          "value": "#SubSectorQuery-followup.sector_attribute",
+          "isList": false
+        },
+        {
+          "id": "f295f325-5904-4f0e-894b-8825a70119c0",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "#SubSectorQuery-followup.date-period",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520422390,
+  "fallbackIntent": false,
+  "events": []
+}

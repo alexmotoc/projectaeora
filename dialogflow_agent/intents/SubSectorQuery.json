@@ -1,0 +1,76 @@
+{
+  "id": "374f7e47-a154-4044-966e-90e23bbe2dd5",
+  "name": "SubSectorQuery",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "SubSectorQuery-followup",
+          "parameters": {},
+          "lifespan": 2
+        },
+        {
+          "name": "SubSectorQuery-followup-2",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "3bc3c2cd-7e93-4def-b18b-75c490936225",
+          "required": true,
+          "dataType": "@sector_attribute",
+          "name": "sector_attribute",
+          "value": "$sector_attribute",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What do you want to find out about $subsector?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "56c3f7fd-51a2-4647-b531-f4abe3c49450",
+          "required": true,
+          "dataType": "@subsector",
+          "name": "subsector",
+          "value": "$subsector",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which sub-sector do you wish to find out about?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "a51a2031-5165-44b6-9180-5650a5f28d17",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520422846,
+  "fallbackIntent": false,
+  "events": []
+}

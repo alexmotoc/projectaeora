@@ -1,0 +1,241 @@
+[
+  {
+    "id": "ba01824c-46b3-4bbf-88e2-7ff791aebc17",
+    "data": [
+      {
+        "text": "Beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " are what I\u0027d like to ask about ",
+        "userDefined": false
+      },
+      {
+        "text": "next",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  },
+  {
+    "id": "6bcbb7e1-e154-4372-9ec7-a898584f2967",
+    "data": [
+      {
+        "text": "what can you tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  },
+  {
+    "id": "47583803-2f0c-47e3-a1e1-7f6d8594b592",
+    "data": [
+      {
+        "text": "I\u0027d also like to know about ",
+        "userDefined": false
+      },
+      {
+        "text": "Beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  },
+  {
+    "id": "67cad3cd-7148-49f2-9878-168f2eaa96e7",
+    "data": [
+      {
+        "text": "And ",
+        "userDefined": false
+      },
+      {
+        "text": "Beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " please!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  },
+  {
+    "id": "66afa97f-80d3-48f4-b5d8-e1c03f054023",
+    "data": [
+      {
+        "text": "And what about ",
+        "userDefined": false
+      },
+      {
+        "text": "Beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  },
+  {
+    "id": "4bc4f067-bf07-4eb5-9a84-b22e4b599ef9",
+    "data": [
+      {
+        "text": "And ",
+        "userDefined": false
+      },
+      {
+        "text": "Beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  },
+  {
+    "id": "86dc175f-fa53-455a-8d54-61597c18e784",
+    "data": [
+      {
+        "text": "Could you inform me about ",
+        "userDefined": false
+      },
+      {
+        "text": "Beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  },
+  {
+    "id": "f751cbce-c8eb-4db9-83d8-729ed8850094",
+    "data": [
+      {
+        "text": "And could you tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "Beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  },
+  {
+    "id": "f9b2bc1f-6597-4d56-af83-af06a58d7bfb",
+    "data": [
+      {
+        "text": "And is there anything you can tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "Beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  },
+  {
+    "id": "f140b9cb-5ecf-4523-ae72-ad3df2b819fe",
+    "data": [
+      {
+        "text": "Beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  },
+  {
+    "id": "5c402f46-0945-4580-a0f3-a484397379a0",
+    "data": [
+      {
+        "text": "What about ",
+        "userDefined": false
+      },
+      {
+        "text": "Beverages",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422737
+  }
+]

@@ -1,0 +1,171 @@
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+.fixed-bottom {
+    z-index: 1;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.history {
+    padding-bottom: 50px;
+}
+
+.bubble {
+    display: inline-block;
+    height: auto;
+    max-width: 50%;
+    clear: both;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    word-wrap: break-word;
+}
+
+.bubble-interactive {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    clear: both;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    word-wrap: break-word;
+}
+
+.scrollable-container {
+    display: flex;
+    overflow-x: scroll;
+}
+
+.scrollable-container::-webkit-scrollbar {
+    display: none;
+}
+
+.news-article {
+    min-width: 305px;
+    max-width: 305px;
+    margin: 10px;
+}
+
+.company-comparison {
+    margin-right: 10px;
+}
+
+.code-time {
+    float: left;
+}
+
+.price-impact {
+    text-align: right;
+    white-space: nowrap;
+}
+
+@media only screen and (min-width: 470px) {
+    .price-impact {
+        padding-left: 150px;
+    }
+}
+
+.card {
+    min-width: 300px;
+}
+
+.suggestion-chip {
+    display: inline-block;
+    height: auto;
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    word-wrap: break-word;
+}
+
+.suggestion-chip-indigo:hover {
+    background-color: #5c6bc0;
+}
+
+.suggestion-chip-indigo:hover a {
+    color: white!important;
+}
+
+.suggestion-chip-dark:hover {
+    background-color: #424242;
+}
+
+.suggestion-chip-dark:hover a {
+    color: white!important;
+}
+
+.suggestion-chip-light:hover {
+    background-color: #eeeeee;
+}
+
+.suggestion-chip-light:hover a {
+    color: black!important;
+}
+
+.sent {
+    float: right;
+}
+
+.received {
+    float: left;
+}
+
+.timestamps {
+    font-weight: bold;
+}
+
+.text-bar {
+    border-radius: 20px 20px 20px 20px;
+    -webkit-border-radius: 20px 20px 20px 20px;
+    padding: 5px 10px;
+}
+
+.input-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+}
+
+.input-button {
+    margin-left: 5px;
+}
+
+.valign-icon {
+    vertical-align: middle;
+}
+
+.news-impact {
+    float: right;
+}
+
+/* label underline focus color */
+#id_question {
+    border-bottom: none!important;
+    margin: 0;
+}
+
+#id_question:focus {
+    border-bottom: none!important;
+    box-shadow: none!important;
+}
+
+/* Make sticky footer */
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}

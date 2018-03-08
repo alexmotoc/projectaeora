@@ -1,0 +1,16 @@
+.sidebar-divider {
+    margin: 0px!important;
+}
+
+.sidebar-section {
+    height: 30%;
+}
+
+.sidebar-status-section {
+    display: flex;
+}
+
+.sidebar-status {
+    align-self: flex-end;
+    width: 100%;
+}

@@ -1,0 +1,43 @@
+{
+  "id": "03726717-cb8d-4f1f-966f-5265febdec3c",
+  "name": "TopRisers",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "TopRisers-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "ff027ccf-535b-45b6-b6c9-7fc42cdefdca",
+          "required": true,
+          "dataType": "@rise_fall",
+          "name": "rise_fall",
+          "value": "$rise_fall",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520442656,
+  "fallbackIntent": false,
+  "events": []
+}

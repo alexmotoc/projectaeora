@@ -1,0 +1,126 @@
+[
+  {
+    "value": "last_close_date",
+    "synonyms": [
+      "last close date"
+    ]
+  },
+  {
+    "value": "diff",
+    "synonyms": [
+      "difference",
+      "variance",
+      "variation",
+      "change"
+    ]
+  },
+  {
+    "value": "per_diff",
+    "synonyms": [
+      "percentage change",
+      "percentage variance",
+      "percentage variation",
+      "rising",
+      "rise",
+      "falling",
+      "fall",
+      "fallen",
+      "risen"
+    ]
+  },
+  {
+    "value": "revenue",
+    "synonyms": [
+      "revenue"
+    ]
+  },
+  {
+    "value": "sector",
+    "synonyms": [
+      "sector",
+      "FTSE sector"
+    ]
+  },
+  {
+    "value": "news",
+    "synonyms": [
+      "news",
+      "reports",
+      "stories",
+      "articles",
+      "announcements"
+    ]
+  },
+  {
+    "value": "offer",
+    "synonyms": [
+      "offer"
+    ]
+  },
+  {
+    "value": "bid",
+    "synonyms": [
+      "bid"
+    ]
+  },
+  {
+    "value": "sub_sector",
+    "synonyms": [
+      "sub-sector",
+      "subsector",
+      "FTSE subsector"
+    ]
+  },
+  {
+    "value": "low",
+    "synonyms": [
+      "low",
+      "lowest price"
+    ]
+  },
+  {
+    "value": "volume",
+    "synonyms": [
+      "volume",
+      "trade volume",
+      "trading volume"
+    ]
+  },
+  {
+    "value": "market_cap",
+    "synonyms": [
+      "market cap",
+      "market capitalisation"
+    ]
+  },
+  {
+    "value": "price",
+    "synonyms": [
+      "price",
+      "stock price",
+      "value",
+      "current price",
+      "stock value",
+      "stock",
+      "spot price",
+      "current spot price",
+      "current stock price",
+      "performing",
+      "doing",
+      "getting on"
+    ]
+  },
+  {
+    "value": "last_close_value",
+    "synonyms": [
+      "last close value"
+    ]
+  },
+  {
+    "value": "high",
+    "synonyms": [
+      "high",
+      "highest price"
+    ]
+  }
+]

@@ -1,0 +1,294 @@
+[
+  {
+    "id": "89cedc9c-9395-4e16-97a1-66eb5447bdfb",
+    "data": [
+      {
+        "text": "Compare ",
+        "userDefined": false
+      },
+      {
+        "text": "HSBC",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "STAN",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520430232
+  },
+  {
+    "id": "5c0ab445-2769-42e9-80f5-d13c053e8330",
+    "data": [
+      {
+        "text": "Compare ",
+        "userDefined": false
+      },
+      {
+        "text": "HSBC",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": ", ",
+        "userDefined": false
+      },
+      {
+        "text": "Lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": ", ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "STAN",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520430232
+  },
+  {
+    "id": "33367854-8e66-4b34-9d28-2a90694eae01",
+    "data": [
+      {
+        "text": "Compare ",
+        "userDefined": false
+      },
+      {
+        "text": "HSBC",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "Lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "STAN",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520430232
+  },
+  {
+    "id": "c7e09584-dbff-48cc-92a8-f8bd304216a3",
+    "data": [
+      {
+        "text": "How are ",
+        "userDefined": false
+      },
+      {
+        "text": "HSBC",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "doing",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520430232
+  },
+  {
+    "id": "383e58ba-3001-428b-bc80-0e4c6c641ef5",
+    "data": [
+      {
+        "text": "Compare ",
+        "userDefined": false
+      },
+      {
+        "text": "HSBC",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "Lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520430232
+  },
+  {
+    "id": "8594c086-fba3-483c-a352-6cf4a745f8b2",
+    "data": [
+      {
+        "text": "How is ",
+        "userDefined": false
+      },
+      {
+        "text": "Tesco",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "doing",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " in comparison to ",
+        "userDefined": false
+      },
+      {
+        "text": "Morrisons",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520463511
+  },
+  {
+    "id": "a7be012c-7261-45a2-afa9-6a6699e26fa0",
+    "data": [
+      {
+        "text": "How is ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "performing",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " comparing to ",
+        "userDefined": false
+      },
+      {
+        "text": "Lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520463511
+  }
+]

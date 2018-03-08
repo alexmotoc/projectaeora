@@ -1,0 +1,83 @@
+{
+  "id": "a2bef24f-9993-45f5-bbe0-23f510a36674",
+  "name": "Footsie Intent",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "FootsieIntent-followup",
+          "parameters": {},
+          "lifespan": 3
+        },
+        {
+          "name": "FootsieIntent-followup-2",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "5ecd24ba-a6af-43d4-b197-ac8f03498c01",
+          "required": true,
+          "dataType": "@attribute",
+          "name": "attribute",
+          "value": "$attribute",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What do you want to find out about $company?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "967e7074-56d6-47d9-a2a1-bfe7704466dd",
+          "required": true,
+          "dataType": "@company",
+          "name": "company",
+          "value": "$company",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What company should I tell you about?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "0b40eeec-e1a8-461d-b802-507ea83e74d1",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
+          "isList": false
+        },
+        {
+          "id": "91bc6635-66f9-4bf2-bd59-1eb01a074573",
+          "dataType": "@positive_negative",
+          "name": "positive_negative",
+          "value": "$positive_negative",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520431737,
+  "fallbackIntent": false,
+  "events": []
+}

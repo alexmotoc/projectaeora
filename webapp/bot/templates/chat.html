@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="{% static "css/materialize.min.css" %}"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/chat.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/sidebar.css" %}"/>
+      <link type="text/css" rel="stylesheet" href="{% static "css/main-offset.css" %}"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta charset="utf-8">
+      <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo.png' %}" />
+      <title>Chat</title>
+    </head>
+
+    <body>
+      {% include "sidebar.html" %}
+
+      <main>
+        <!-- Question history -->
+        <div class="row history">
+          <div id="chat-history" class="col s10 offset-s1">
+
+            <!--Import jQuery before materialize.js-->
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+            <script type="text/javascript" src="{% static "js/jquery.cookie.js" %}"></script>
+            <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
+            <script type="text/javascript" src="{% static "js/chat.js" %}"></script>
+            <script type="text/javascript" src="{% static "js/sidebar.js" %}"></script>
+
+            {% for query_response in history %}
+            <div class="bubble sent {% include 'colour-scheme-primary.html' %} tooltipped"
+              data-position="right" data-delay="50" data-tooltip="{{ query_response.query.created_at }}" >
+              <span class="{% if colour_scheme == 'light' %} black-text
+              {% else %} white-text {% endif %}">{{ query_response.query.question }}</span>
+            </div>
+
+            <script>
+              var data = JSON.parse('{{ query_response.response | escapejs }}');
+              var colour = '{{ colour_scheme | escapejs }}';
+              appendReply(data, colour, true, false);
+            </script>
+            {% endfor %}
+
+          </div>
+        </div>
+
+        {% include "help-modal.html" %}
+        {% include "status-modal.html" %}
+
+      </main>
+
+      <footer class="fixed-bottom">
+        <!-- Text input -->
+        <div class="row">
+          <div class="col s10 offset-s1 text-bar z-depth-2 hoverable white">
+            <div class="col s12">
+            <form id="ask-question" action="/chat/" method="post">
+              {% csrf_token %}
+              <div class="col s6 md11 l9">
+                {{ form }}
+              </div>
+              <div class="col s6 md1 l3 input-buttons-container">
+                <a id="send-text" class="btn-floating waves-effect waves-light red input-button"><i class="material-icons md-24">send</i></a>
+                <a id="send-voice" class="btn-floating waves-effect waves-light red input-button"><i class="material-icons md-24">mic</i></a>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </body>
+  </html>

@@ -1,0 +1,334 @@
+[
+  {
+    "id": "c94cd688-2e42-4cfe-860f-c3cdba1b2209",
+    "data": [
+      {
+        "text": "And how ",
+        "userDefined": false
+      },
+      {
+        "text": "low",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is it?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "80a69463-d34f-4b68-beda-365e0701eefe",
+    "data": [
+      {
+        "text": "And could you tell me what it\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "low",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "66f1d819-64d1-45d9-8e88-1d4cbde69f6e",
+    "data": [
+      {
+        "text": "And could you tell me it\u0027s current ",
+        "userDefined": false
+      },
+      {
+        "text": "low",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "db5b0122-8cce-4fb1-ae9b-50f9a433d58b",
+    "data": [
+      {
+        "text": "And how ",
+        "userDefined": false
+      },
+      {
+        "text": "high",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is it?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "3f4c839d-85f8-473b-8b50-ba92249c96f5",
+    "data": [
+      {
+        "text": "And could you tell me what it\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "high",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "f5906110-c2e9-4ede-bf55-95de7a3ea97f",
+    "data": [
+      {
+        "text": "And could you tell me it\u0027s current ",
+        "userDefined": false
+      },
+      {
+        "text": "high",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "e17c8edf-9612-4228-ba62-ebeaf6d8a9d1",
+    "data": [
+      {
+        "text": "And could you tell me it\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "current price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "36717a74-86d7-42f2-a7c1-7fd675cd9182",
+    "data": [
+      {
+        "text": "And could you tell me about the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "6a7d083d-b1c4-4fa5-bc3d-748aa9b195b4",
+    "data": [
+      {
+        "text": "And the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is...?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "b54716e6-3f80-4d71-b10a-89820e4ac281",
+    "data": [
+      {
+        "text": "And the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "c898b9e4-f121-42d9-8c61-1d660e74f76c",
+    "data": [
+      {
+        "text": "What about which ",
+        "userDefined": false
+      },
+      {
+        "text": "sub-sector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is it in?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "974227c2-f989-411d-9a71-92ec2908130a",
+    "data": [
+      {
+        "text": "What about which ",
+        "userDefined": false
+      },
+      {
+        "text": "sector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " it is in?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "a86e48c2-8540-4da2-a2c1-c14095d23f5d",
+    "data": [
+      {
+        "text": "News",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "b6110342-37b7-406d-be27-23303d0c10b5",
+    "data": [
+      {
+        "text": "What about ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  },
+  {
+    "id": "6e3dd7ed-3bfa-4015-b1dc-42b807a67078",
+    "data": [
+      {
+        "text": "What about ",
+        "userDefined": false
+      },
+      {
+        "text": "revenue",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "in 2017",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421538
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "id": "93bcd2e4-6a5a-4fca-839a-883432a8ebaa",
+  "parentId": "a2bef24f-9993-45f5-bbe0-23f510a36674",
+  "rootParentId": "a2bef24f-9993-45f5-bbe0-23f510a36674",
+  "name": "Footsie Intent - Different Company",
+  "auto": true,
+  "contexts": [
+    "FootsieIntent-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "FootsieIntent.FootsieIntent-custom",
+      "affectedContexts": [
+        {
+          "name": "FootsieIntent-followup",
+          "parameters": {},
+          "lifespan": 3
+        }
+      ],
+      "parameters": [
+        {
+          "id": "be5301ff-4337-4e13-9f52-4ec79c22c14b",
+          "required": false,
+          "dataType": "@attribute",
+          "name": "attribute",
+          "value": "#FootsieIntent-followup.attribute",
+          "isList": false
+        },
+        {
+          "id": "78d637fc-7193-4d95-9171-e8c0f8958ea1",
+          "required": false,
+          "dataType": "@company",
+          "name": "company",
+          "value": "$company",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which company would you like to know about?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "e1128707-c793-43ee-b612-fd1ff8a6cbf7",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "#FootsieIntent-followup.date-period",
+          "isList": false
+        },
+        {
+          "id": "869de8b0-b4b3-432c-97cd-fb57df227237",
+          "dataType": "@positive_negative",
+          "name": "positive_negative",
+          "value": "#FootsieIntent-followup.positive_negative"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520431763,
+  "fallbackIntent": false,
+  "events": []
+}

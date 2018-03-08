@@ -321,7 +321,6 @@ function getImpact(value) {
 }
 
 function addQuery(question, colour, history, voice) {
-    console.log(colour);
     if ($('#suggestions').length) {
         $('#suggestions').remove();
     }

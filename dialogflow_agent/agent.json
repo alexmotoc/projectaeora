@@ -1,6 +1,10 @@
 {
   "description": "Virtual assistant to assist with financial queries.",
   "language": "en",
+  "activeAssistantAgents": [
+    "smalltalk-domain-on",
+    "smalltalk-fulfillment-on"
+  ],
   "disableInteractionLogs": false,
   "googleAssistant": {
     "googleAssistantCompatible": true,
@@ -8,7 +12,9 @@
     "welcomeIntentSignInRequired": false,
     "startIntents": [],
     "systemIntents": [],
-    "endIntentIds": [],
+    "endIntentIds": [
+      "374f7e47-a154-4044-966e-90e23bbe2dd5"
+    ],
     "oAuthLinking": {
       "required": false,
       "grantType": "AUTH_CODE_GRANT"

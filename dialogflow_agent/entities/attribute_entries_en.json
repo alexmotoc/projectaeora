@@ -1,36 +1,8 @@
 [
   {
-    "value": "price",
+    "value": "last_close_date",
     "synonyms": [
-      "price",
-      "stock price",
-      "value",
-      "current price",
-      "stock value",
-      "stock",
-      "spot price",
-      "current spot price",
-      "current stock price"
-    ]
-  },
-  {
-    "value": "high",
-    "synonyms": [
-      "high"
-    ]
-  },
-  {
-    "value": "low",
-    "synonyms": [
-      "low"
-    ]
-  },
-  {
-    "value": "volume",
-    "synonyms": [
-      "volume",
-      "trade volume",
-      "trading volume"
+      "last close date"
     ]
   },
   {
@@ -47,7 +19,13 @@
     "synonyms": [
       "percentage change",
       "percentage variance",
-      "percentage variation"
+      "percentage variation",
+      "rising",
+      "rise",
+      "falling",
+      "fall",
+      "fallen",
+      "risen"
     ]
   },
   {
@@ -64,11 +42,19 @@
     ]
   },
   {
-    "value": "sub-sector",
+    "value": "news",
     "synonyms": [
-      "sub-sector",
-      "subsector",
-      "FTSE subsector"
+      "news",
+      "reports",
+      "stories",
+      "articles",
+      "announcements"
+    ]
+  },
+  {
+    "value": "offer",
+    "synonyms": [
+      "offer"
     ]
   },
   {
@@ -78,9 +64,26 @@
     ]
   },
   {
-    "value": "offer",
+    "value": "sub_sector",
     "synonyms": [
-      "offer"
+      "sub-sector",
+      "subsector",
+      "FTSE subsector"
+    ]
+  },
+  {
+    "value": "low",
+    "synonyms": [
+      "low",
+      "lowest price"
+    ]
+  },
+  {
+    "value": "volume",
+    "synonyms": [
+      "volume",
+      "trade volume",
+      "trading volume"
     ]
   },
   {
@@ -91,25 +94,33 @@
     ]
   },
   {
+    "value": "price",
+    "synonyms": [
+      "price",
+      "stock price",
+      "value",
+      "current price",
+      "stock value",
+      "stock",
+      "spot price",
+      "current spot price",
+      "current stock price",
+      "performing",
+      "doing",
+      "getting on"
+    ]
+  },
+  {
     "value": "last_close_value",
     "synonyms": [
       "last close value"
     ]
   },
   {
-    "value": "last_close_date",
+    "value": "high",
     "synonyms": [
-      "last close date"
-    ]
-  },
-  {
-    "value": "news",
-    "synonyms": [
-      "news",
-      "reports",
-      "stories",
-      "articles",
-      "announcements"
+      "high",
+      "highest price"
     ]
   }
 ]

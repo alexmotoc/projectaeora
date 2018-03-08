@@ -1,0 +1,202 @@
+[
+  {
+    "id": "9e1bc4c0-f299-48cb-8bbd-acb5c1259328",
+    "data": [
+      {
+        "text": "And ",
+        "userDefined": false
+      },
+      {
+        "text": "General Retailers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1520422390
+  },
+  {
+    "id": "74adbb40-dde2-4ed7-bbf3-f05ac4339653",
+    "data": [
+      {
+        "text": "General Retailers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422390
+  },
+  {
+    "id": "96b3db5a-532d-42a4-b2bc-eecc74491995",
+    "data": [
+      {
+        "text": "General Retailers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": " please!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422390
+  },
+  {
+    "id": "485cf13f-ddcc-4372-bd45-45c06a6dd4a8",
+    "data": [
+      {
+        "text": "And could you tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "General Retailers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422390
+  },
+  {
+    "id": "d1bbafdb-c6bf-4b7d-9ea5-550ff21516e1",
+    "data": [
+      {
+        "text": "And please inform me about ",
+        "userDefined": false
+      },
+      {
+        "text": "General Retailers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422390
+  },
+  {
+    "id": "9be1f9a2-a225-453d-9370-425bc0b45121",
+    "data": [
+      {
+        "text": "And please inform me about ",
+        "userDefined": false
+      },
+      {
+        "text": "General Retailers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": true
+      },
+      {
+        "text": " :)",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422390
+  },
+  {
+    "id": "3be5d0f2-50f9-4bf8-85e4-0f0b4ec98285",
+    "data": [
+      {
+        "text": "And is there anything that you can tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "General Retailers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422390
+  },
+  {
+    "id": "c90e0d84-4f21-4fc3-9638-c25e61221cad",
+    "data": [
+      {
+        "text": "And what can you tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "General Retailers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520422390
+  },
+  {
+    "id": "9b7162b5-947b-43ac-a591-b394d04b6efa",
+    "data": [
+      {
+        "text": "What about ",
+        "userDefined": false
+      },
+      {
+        "text": "General Retailers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520284089
+  },
+  {
+    "id": "d1a97e60-c7f3-4acb-a1bc-9ef442d5559d",
+    "data": [
+      {
+        "text": "What about in ",
+        "userDefined": false
+      },
+      {
+        "text": "General Retailers",
+        "alias": "sector",
+        "meta": "@sector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520284089
+  }
+]

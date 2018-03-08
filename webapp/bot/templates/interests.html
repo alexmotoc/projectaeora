@@ -12,6 +12,7 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <meta charset="utf-8">
+      <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo.png' %}" />
       <title>My Interests</title>
     </head>
 
@@ -22,12 +23,10 @@
        <div class="row">
          <div class="col s10 offset-s1">
            <h1>My Interests</h1>
-           <div class='bubble-interactive received'><section class='scrollable-container'>
            {% if companies|length == 0 %}
-             <p>Go to settings to track companies and sectors</p>  
+             <p class="flow-text">Go to Settings to track companies and sectors.</p>
            {% else %}
-             <p>{{updated}}&nbsp&nbsp&nbsp&nbsp<a href="javascript:location.reload(true)">Refresh this page</a></p>
-             <div class='bubble-interactive received'>
+             <p>{{updated}}&nbsp&nbsp&nbsp&nbsp<a href="javascript:location.reload(true)"><i class="material-icons">refresh</i></a></p>
               <div class='card white'>
                <div class='card-content black-text'>
                  <span class='card-title'>Performance of Tracked Companies</span>
@@ -49,56 +48,56 @@
                  </table>
                </div>
              </div>
-           </div>
 
-           {% for news in all_news.text%}
-           <div class='news-article'>
-             <div class='card'>
-               <div class='card-content'>
-                 <div class='chip'>{{news.company}}</div>
-                   <span class='card-title grey-text text-darken-4'>{{news.headline}}</span>
+               {% for news in all_news.text%}
+                 <div class='card'>
+                   <div class='card-content'>
+                     <div class='chip'>{{news.company}}</div>
+                       <span class='card-title grey-text text-darken-4'>{{news.headline}}</span>
 
-                   <p>{{news.summary}}</p> 
+                       <p>{{news.summary}}</p>
 
-                   <blockquote>
-                   {% for keyword in news.keywords%}
-                   <div class='chip'>{{keyword}}</div>
-                   {% endfor %}
-                   </blockquote>
+                       <blockquote>
+                       {% for keyword in news.keywords%}
+                       <div class='chip'>{{keyword}}</div>
+                       {% endfor %}
+                       </blockquote>
 
-                 {% if news.impact != "-"%}
-                   {% if news.impact.0 == "+"%}
-                   <span class='green-text'>Impact: <i class='material-icons valign-icon'>trending_up</i>
-                   {% elif news.impact.0 == "-" %}
-                   <span class='red-text'><i class='material-icons valign-icon'>trending_down</i>
-                   {% endif %}
-    {{news.impact}}</span>
-                 {% endif %}
+                     {% if news.impact != "-"%}
+                       {% if news.impact.0 == "+"%}
+                       <span class='green-text'>Impact: <i class='material-icons valign-icon'>trending_up</i>
+                       {% elif news.impact.0 == "-" %}
+                       <span class='red-text'><i class='material-icons valign-icon'>trending_down</i>
+                       {% endif %}
+                       {{news.impact}}
+                       </span>
+                     {% endif %}
 
-                 {% if news.sentiment != "none" %}
-                   <p class='grey-text'>Sentiment: 
-                 {% if news.sentiment == "positive" %}
-                   <span class='green-text'>Positive</span>
-                 {% elif news.sentiment == "neutral" %}
-                   <span class='grey-text'>Neutral</span>
-                 {% elif news.sentiment == "negative" %}
-                   <span class='red-text'>Negative</span>
-                 {% endif %}
-                   </p>
-                 {% endif %}
+                     {% if news.sentiment != "none" %}
+                       <p class='grey-text'>Sentiment:
+                     {% if news.sentiment == "positive" %}
+                       <span class='green-text'>Positive</span>
+                     {% elif news.sentiment == "neutral" %}
+                       <span class='grey-text'>Neutral</span>
+                     {% elif news.sentiment == "negative" %}
+                       <span class='red-text'>Negative</span>
+                     {% endif %}
+                       </p>
+                     {% endif %}
 
-                   <p class = 'grey-text'>Date published: {{news.date}}</p>
-                   <p class = 'grey-text'>Source: {{news.source}}</p>
-                 <div class='card-action'><p><a href="{{news.url}}">Go to article</a></p></div>
-               </div>
-             </div>
-           </div>
-           {% endfor %}
-         </section>
-         </div>
+                       <p class = 'grey-text'>Date published: {{news.date}}</p>
+                       <p class = 'grey-text'>Source: {{news.source}}</p>
+                     <div class='card-action'><p><a href="{{news.url}}">Go to article</a></p></div>
+                   </div>
+                 </div>
+                {% endfor %}
        </div>
      </div>
    {% endif %}
+
+   {% include "help-modal.html" %}
+   {% include "status-modal.html" %}
+
    </main>
 
       <!--Import jQuery before materialize.js-->

@@ -1,0 +1,70 @@
+{
+  "id": "d7293c4f-10ed-43c6-9ba4-6d00db612ae9",
+  "parentId": "374f7e47-a154-4044-966e-90e23bbe2dd5",
+  "rootParentId": "374f7e47-a154-4044-966e-90e23bbe2dd5",
+  "name": "SubSectorQuery - Different Sub-Sector",
+  "auto": true,
+  "contexts": [
+    "SubSectorQuery-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "SubSectorQuery.SubSectorQuery-custom",
+      "affectedContexts": [
+        {
+          "name": "SubSectorQuery-followup",
+          "parameters": {},
+          "lifespan": 3
+        }
+      ],
+      "parameters": [
+        {
+          "id": "a2293ba5-0338-4d25-8e8a-cbf891be4ee0",
+          "required": false,
+          "dataType": "@subsector",
+          "name": "subsector",
+          "value": "$subsector",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which Sub-Sector would you like to know about?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "8c3ba37b-764d-4119-9703-ba851d702935",
+          "required": false,
+          "dataType": "@sector_attribute",
+          "name": "sector_attribute",
+          "value": "#SubSectorQuery-followup.sector_attribute",
+          "isList": false
+        },
+        {
+          "id": "6981b4ec-b7e4-4625-a139-84917b9225d3",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "#SubSectorQuery-followup.date-period",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520423056,
+  "fallbackIntent": false,
+  "events": []
+}

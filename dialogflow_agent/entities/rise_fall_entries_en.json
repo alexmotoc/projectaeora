@@ -1,0 +1,26 @@
+[
+  {
+    "value": "risers",
+    "synonyms": [
+      "risers",
+      "rising"
+    ]
+  },
+  {
+    "value": "fallers",
+    "synonyms": [
+      "fallers",
+      "falling"
+    ]
+  },
+  {
+    "value": "both",
+    "synonyms": [
+      "both",
+      "big movers",
+      "top performers",
+      "big performers",
+      "performers"
+    ]
+  }
+]

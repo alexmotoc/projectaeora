@@ -1,0 +1,442 @@
+[
+  {
+    "id": "161ee067-cfee-4244-b9c4-129d12c95c75",
+    "data": [
+      {
+        "text": "Give me the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " on ",
+        "userDefined": false
+      },
+      {
+        "text": "Banks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "this week",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520284802
+  },
+  {
+    "id": "22140d7c-fb5f-4f00-902c-e69332e2bbbc",
+    "data": [
+      {
+        "text": "Is ",
+        "userDefined": false
+      },
+      {
+        "text": "General Mining",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": " in the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "this week",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520284802
+  },
+  {
+    "id": "0a05f9e0-09d7-4872-bdd0-668f52246340",
+    "data": [
+      {
+        "text": "Is ",
+        "userDefined": false
+      },
+      {
+        "text": "General Mining",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "falling or rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "52daa59b-baed-46e4-bc33-e981b555fb9b",
+    "data": [
+      {
+        "text": "How are ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "performing",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "dfabcab6-5222-4bf2-a80b-d8afdf2f9473",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "highest price",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "Banks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "698afc74-ff80-4553-8daf-a8fa48eb54cf",
+    "data": [
+      {
+        "text": "Who are the top ",
+        "userDefined": false
+      },
+      {
+        "text": "risers",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "Banks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "72b13b45-8913-422a-b30d-1c55a573061b",
+    "data": [
+      {
+        "text": "News",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " on ",
+        "userDefined": false
+      },
+      {
+        "text": "Restaurants \u0026 Bars",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "f4043389-a40a-45a2-bda4-7b0c45ed0091",
+    "data": [
+      {
+        "text": "Risers",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "Pharmaceuticals",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "d44f2cbc-6edc-4655-9f5a-5478b258e4bc",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "highest price",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "Broadcasting \u0026 Entertainment",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "e8c5654d-b543-4bc2-b9a5-0ef85d489680",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "lowest price",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "General Mining",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "f9b77a9f-779b-4ee6-87c7-5821c9436b97",
+    "data": [
+      {
+        "text": "Are ",
+        "userDefined": false
+      },
+      {
+        "text": "Retail REITs",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "falling",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "82cfd7b0-1726-45e9-bc1c-0564fbc245e8",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "Industrial Suppliers",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": " are ",
+        "userDefined": false
+      },
+      {
+        "text": "falling",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "63157696-f061-4cb1-b710-506ad26e9c6b",
+    "data": [
+      {
+        "text": "Who is ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "Restaurants \u0026 Bars",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  },
+  {
+    "id": "63d6eef3-4329-44ba-b7c8-6b44a6591b52",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "sector_attribute",
+        "meta": "@sector_attribute",
+        "userDefined": false
+      },
+      {
+        "text": " on ",
+        "userDefined": false
+      },
+      {
+        "text": "Pharmaceuticals",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520179475
+  }
+]

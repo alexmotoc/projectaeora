@@ -1,0 +1,51 @@
+{
+  "id": "fc27ce31-c2c1-48e8-9ae8-8ae69a136542",
+  "name": "ComparisonIntent",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "42f77ea4-ea0d-4ba1-af4e-42f0bf9ab4fd",
+          "required": true,
+          "dataType": "@company",
+          "name": "company",
+          "value": "$company",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What companies do you want to compare?"
+            }
+          ],
+          "isList": true
+        },
+        {
+          "id": "51c85c88-9b52-4302-81ae-f0f81a5354b4",
+          "required": false,
+          "dataType": "@sector_attribute",
+          "name": "sector_attribute",
+          "value": "$sector_attribute",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520463511,
+  "fallbackIntent": false,
+  "events": []
+}

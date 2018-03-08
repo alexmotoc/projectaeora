@@ -1,6 +1,6 @@
 {
-  "id": "a2bef24f-9993-45f5-bbe0-23f510a36674",
-  "name": "Footsie Intent",
+  "id": "b2a19b9c-eac2-42a2-8b74-0d3ee351cbce",
+  "name": "SectorQuery",
   "auto": true,
   "contexts": [],
   "responses": [
@@ -8,47 +8,47 @@
       "resetContexts": false,
       "affectedContexts": [
         {
-          "name": "FootsieIntent-followup",
+          "name": "SectorQuery-followup",
           "parameters": {},
           "lifespan": 3
         },
         {
-          "name": "FootsieIntent-followup-2",
+          "name": "SectorQuery-followup-2",
           "parameters": {},
           "lifespan": 2
         }
       ],
       "parameters": [
         {
-          "id": "5ecd24ba-a6af-43d4-b197-ac8f03498c01",
+          "id": "5fa822c8-7a49-48e4-a262-eb86eb81e175",
           "required": true,
-          "dataType": "@attribute",
-          "name": "attribute",
-          "value": "$attribute",
+          "dataType": "@sector",
+          "name": "sector",
+          "value": "$sector",
           "prompts": [
             {
               "lang": "en",
-              "value": "What do you want to find out about $company?"
+              "value": "Which sector do you want to find out about?"
             }
           ],
           "isList": false
         },
         {
-          "id": "967e7074-56d6-47d9-a2a1-bfe7704466dd",
+          "id": "056d2108-fe7f-4e8e-9000-82363c90da53",
           "required": true,
-          "dataType": "@company",
-          "name": "company",
-          "value": "$company",
+          "dataType": "@sector_attribute",
+          "name": "sector_attribute",
+          "value": "$sector_attribute",
           "prompts": [
             {
               "lang": "en",
-              "value": "What company should I tell you about?"
+              "value": "What do you want to find out about $sector"
             }
           ],
           "isList": false
         },
         {
-          "id": "0b40eeec-e1a8-461d-b802-507ea83e74d1",
+          "id": "767c24cc-132a-4cba-991c-e4801bdc676e",
           "required": false,
           "dataType": "@sys.date-period",
           "name": "date-period",
@@ -56,10 +56,10 @@
           "isList": false
         },
         {
-          "id": "91bc6635-66f9-4bf2-bd59-1eb01a074573",
-          "dataType": "@positive_negative",
-          "name": "positive_negative",
-          "value": "$positive_negative",
+          "id": "0ed2e49d-f6a6-4b01-81f9-e5e2ee784b66",
+          "dataType": "@subsector",
+          "name": "subsector",
+          "value": "$subsector",
           "isList": false
         }
       ],
@@ -77,7 +77,7 @@
   "priority": 500000,
   "webhookUsed": false,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1520431737,
+  "lastUpdate": 1520422004,
   "fallbackIntent": false,
   "events": []
 }

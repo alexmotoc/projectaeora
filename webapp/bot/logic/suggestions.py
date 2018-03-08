@@ -107,7 +107,7 @@ def add_suggestions(response, dialogflow_response):
 
         suggestions = []
         # add suggestions for other companies that are in the sector
-        for i in range(2):
+        for i in range(3):
             if len(companies_in_sector) > 0:
                 suggestion = random.choice(companies_in_sector)
                 companies_in_sector.remove(suggestion)
@@ -118,7 +118,7 @@ def add_suggestions(response, dialogflow_response):
         del attributes[attribute]
 
         # add suggestions for other attributes.
-        for i in range(4 - len(suggestions)):
+        for i in range(6 - len(suggestions)):
             suggestion = random.choice(list(attributes.keys()))
             del attributes[suggestion]
             suggestions.append("What about {}?".format(company_attributes[suggestion]))
@@ -146,13 +146,13 @@ def add_suggestions(response, dialogflow_response):
         # if the user query was about a sector
         if 'sector' in dialogflow_response['result']['parameters']:
             # add suggestions for other sub-sectors that are in the sector
-            for i in range(min(2, len(sub_sectors))):
+            for i in range(min(3, len(sub_sectors))):
                 suggestion = random.choice(sub_sectors)
                 sub_sectors.remove(suggestion)
                 suggestions.append("What about {}?".format(suggestion))
 
             # add suggestions for other attributes
-            for i in range(4 - len(suggestions)):
+            for i in range(6 - len(suggestions)):
                 suggestion = random.choice(list(attributes.keys()))
                 del attributes[suggestion]
                 suggestions.append("What about {}?".format(sector_attributes[suggestion]))
@@ -165,13 +165,13 @@ def add_suggestions(response, dialogflow_response):
             sub_sectors.remove(sub_sector)
 
             # add suggestions for other sub-sectors
-            for i in range(min(2, len(sub_sectors))):
+            for i in range(min(3, len(sub_sectors))):
                 suggestion = random.choice(sub_sectors)
                 sub_sectors.remove(suggestion)
                 suggestions.append("What about {}?".format(suggestion))
 
             # add suggestions for other attributes
-            for i in range(4 - len(suggestions)):
+            for i in range(6 - len(suggestions)):
                 suggestion = random.choice(list(attributes.keys()))
                 del attributes[suggestion]
                 suggestions.append("What about {}?".format(sector_attributes[suggestion]))

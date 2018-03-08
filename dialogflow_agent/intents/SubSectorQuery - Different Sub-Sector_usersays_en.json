@@ -1,0 +1,126 @@
+[
+  {
+    "id": "26c6ad91-b8af-43f9-8532-a3ff605187bb",
+    "data": [
+      {
+        "text": "And is there anything that you can tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520423056
+  },
+  {
+    "id": "98805b4d-e107-4526-b523-e6da70612882",
+    "data": [
+      {
+        "text": "And what can you tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520423056
+  },
+  {
+    "id": "f5eaf31b-4e7e-464f-8afa-c1b60b9af7a9",
+    "data": [
+      {
+        "text": "And ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520423056
+  },
+  {
+    "id": "61ebafd6-480b-416f-ac22-abbea8b03508",
+    "data": [
+      {
+        "text": "And what about ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520423056
+  },
+  {
+    "id": "927c781e-bdc2-44b7-bbb2-d9aae5f344ab",
+    "data": [
+      {
+        "text": "What about ",
+        "userDefined": false
+      },
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1519843403
+  },
+  {
+    "id": "d001ddda-c076-40fd-86ba-765b75b07249",
+    "data": [
+      {
+        "text": "soft drinks",
+        "alias": "subsector",
+        "meta": "@subsector",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1519843403
+  }
+]

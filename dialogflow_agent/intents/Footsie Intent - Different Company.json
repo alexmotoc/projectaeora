@@ -1,66 +1,59 @@
 {
-  "id": "a2bef24f-9993-45f5-bbe0-23f510a36674",
-  "name": "Footsie Intent",
+  "id": "93bcd2e4-6a5a-4fca-839a-883432a8ebaa",
+  "parentId": "a2bef24f-9993-45f5-bbe0-23f510a36674",
+  "rootParentId": "a2bef24f-9993-45f5-bbe0-23f510a36674",
+  "name": "Footsie Intent - Different Company",
   "auto": true,
-  "contexts": [],
+  "contexts": [
+    "FootsieIntent-followup"
+  ],
   "responses": [
     {
       "resetContexts": false,
+      "action": "FootsieIntent.FootsieIntent-custom",
       "affectedContexts": [
         {
           "name": "FootsieIntent-followup",
           "parameters": {},
           "lifespan": 3
-        },
-        {
-          "name": "FootsieIntent-followup-2",
-          "parameters": {},
-          "lifespan": 2
         }
       ],
       "parameters": [
         {
-          "id": "5ecd24ba-a6af-43d4-b197-ac8f03498c01",
-          "required": true,
+          "id": "be5301ff-4337-4e13-9f52-4ec79c22c14b",
+          "required": false,
           "dataType": "@attribute",
           "name": "attribute",
-          "value": "$attribute",
-          "prompts": [
-            {
-              "lang": "en",
-              "value": "What do you want to find out about $company?"
-            }
-          ],
+          "value": "#FootsieIntent-followup.attribute",
           "isList": false
         },
         {
-          "id": "967e7074-56d6-47d9-a2a1-bfe7704466dd",
-          "required": true,
+          "id": "78d637fc-7193-4d95-9171-e8c0f8958ea1",
+          "required": false,
           "dataType": "@company",
           "name": "company",
           "value": "$company",
           "prompts": [
             {
               "lang": "en",
-              "value": "What company should I tell you about?"
+              "value": "Which company would you like to know about?"
             }
           ],
           "isList": false
         },
         {
-          "id": "0b40eeec-e1a8-461d-b802-507ea83e74d1",
+          "id": "e1128707-c793-43ee-b612-fd1ff8a6cbf7",
           "required": false,
           "dataType": "@sys.date-period",
           "name": "date-period",
-          "value": "$date-period",
+          "value": "#FootsieIntent-followup.date-period",
           "isList": false
         },
         {
-          "id": "91bc6635-66f9-4bf2-bd59-1eb01a074573",
+          "id": "869de8b0-b4b3-432c-97cd-fb57df227237",
           "dataType": "@positive_negative",
           "name": "positive_negative",
-          "value": "$positive_negative",
-          "isList": false
+          "value": "#FootsieIntent-followup.positive_negative"
         }
       ],
       "messages": [
@@ -77,7 +70,7 @@
   "priority": 500000,
   "webhookUsed": false,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1520431737,
+  "lastUpdate": 1520431763,
   "fallbackIntent": false,
   "events": []
 }

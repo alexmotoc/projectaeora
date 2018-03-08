@@ -1,67 +1,97 @@
 [
   {
-    "id": "a19f6769-4bde-428b-adbb-4821699a4304",
+    "id": "60fc28df-1f37-499f-8896-b83b74300225",
     "data": [
       {
-        "text": "Tesco",
-        "alias": "company",
-        "meta": "@company",
+        "text": "Is the ",
         "userDefined": false
       },
       {
-        "text": "\u0027s ",
-        "userDefined": false
-      },
-      {
-        "text": "subsector",
-        "alias": "attribute",
-        "meta": "@attribute",
-        "userDefined": false
-      }
-    ],
-    "isTemplate": false,
-    "count": 0
-  },
-  {
-    "id": "a2b6a656-a77c-4f7d-b310-c108c708c4da",
-    "data": [
-      {
-        "text": "What ",
-        "userDefined": false
-      },
-      {
-        "text": "sector",
+        "text": "news",
         "alias": "attribute",
         "meta": "@attribute",
         "userDefined": false
       },
       {
-        "text": " is Vodafone in?",
-        "userDefined": false
-      }
-    ],
-    "isTemplate": false,
-    "count": 0
-  },
-  {
-    "id": "da9210e0-bbfc-487b-a3cc-20b10d13efd8",
-    "data": [
-      {
-        "text": "Can you tell me about ",
+        "text": " about ",
         "userDefined": false
       },
       {
-        "text": "HSBC",
+        "text": "barclays",
         "alias": "company",
         "meta": "@company",
         "userDefined": false
       },
       {
-        "text": "\u0027s ",
+        "text": " ",
         "userDefined": false
       },
       {
-        "text": "offer",
+        "text": "positive",
+        "alias": "positive_negative",
+        "meta": "@positive_negative",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "d9fc1081-dbfc-47a4-8e7c-24d4b468316b",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1520431737
+  },
+  {
+    "id": "28d7c548-028c-4dbc-bd4b-2a7f094c9192",
+    "data": [
+      {
+        "text": "Is ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
         "alias": "attribute",
         "meta": "@attribute",
         "userDefined": false
@@ -72,13 +102,198 @@
       }
     ],
     "isTemplate": false,
-    "count": 0
+    "count": 1,
+    "updated": 1520431737
   },
   {
-    "id": "8b2b5b1e-c59c-4cb9-a0d8-635fd12b6f78",
+    "id": "9302a214-4192-497c-9a27-ae10ef474e8e",
     "data": [
       {
-        "text": "What was the ",
+        "text": "The ",
+        "userDefined": false
+      },
+      {
+        "text": "sector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " is?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "d6bd1533-78b8-48f6-95f5-1fe75e448192",
+    "data": [
+      {
+        "text": "The ",
+        "userDefined": false
+      },
+      {
+        "text": "sector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " is...?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "42175edb-53c6-4fb6-8346-322f4c3562a7",
+    "data": [
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "sector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "6fafe08c-28d6-4bff-904b-6d99dcac342b",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "lowest price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "336df98d-bc67-4599-b854-16220ff0db22",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "highest price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "0d12a275-b90e-4cc5-a675-5a29aa1b9c9a",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "last close value",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "f5a347ae-ac9e-493e-a286-5d0de1b22367",
+    "data": [
+      {
+        "text": "What is the ",
         "userDefined": false
       },
       {
@@ -92,7 +307,7 @@
         "userDefined": false
       },
       {
-        "text": "Sainsbury",
+        "text": "lloyds",
         "alias": "company",
         "meta": "@company",
         "userDefined": false
@@ -103,17 +318,114 @@
       }
     ],
     "isTemplate": false,
-    "count": 0
+    "count": 0,
+    "updated": 1520431737
   },
   {
-    "id": "ba563d27-b3e9-4009-901a-3fdb44e30a08",
+    "id": "603400b2-214f-4472-b022-3dd0b7de91ad",
     "data": [
       {
-        "text": "Tell me the ",
+        "text": "What ",
         "userDefined": false
       },
       {
-        "text": "market cap",
+        "text": "sub-sector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is ",
+        "userDefined": false
+      },
+      {
+        "text": "barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " in?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "3820b7e7-a89c-4419-85cd-9b37e5092419",
+    "data": [
+      {
+        "text": "What ",
+        "userDefined": false
+      },
+      {
+        "text": "sector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " in?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "1c6bf377-7ad0-4d83-bac8-9d9892ffec3e",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "last close date",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "7b1bba2f-c5ea-4ccc-a258-053fdb3d3a11",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "last close date",
         "alias": "attribute",
         "meta": "@attribute",
         "userDefined": false
@@ -123,40 +435,9 @@
         "userDefined": false
       },
       {
-        "text": "Rolls Royce",
+        "text": "Barclays",
         "alias": "company",
         "meta": "@company",
-        "userDefined": false
-      },
-      {
-        "text": ".",
-        "userDefined": false
-      }
-    ],
-    "isTemplate": false,
-    "count": 0
-  },
-  {
-    "id": "e448f8b0-6b6c-48ed-a6e4-7eabc9e0cef5",
-    "data": [
-      {
-        "text": "What is ",
-        "userDefined": false
-      },
-      {
-        "text": "Coca Cola",
-        "alias": "company",
-        "meta": "@company",
-        "userDefined": true
-      },
-      {
-        "text": "\u0027s ",
-        "userDefined": false
-      },
-      {
-        "text": "revenue",
-        "alias": "attribute",
-        "meta": "@attribute",
         "userDefined": false
       },
       {
@@ -165,11 +446,48 @@
       }
     ],
     "isTemplate": false,
-    "count": 0
+    "count": 0,
+    "updated": 1520431737
   },
   {
-    "id": "ec6d813b-54ac-452c-aff6-e8c63eae699a",
+    "id": "939eb25a-2f34-4795-953e-dbd395ef3179",
     "data": [
+      {
+        "text": "What is the current ",
+        "userDefined": false
+      },
+      {
+        "text": "volume",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "bad5c1ff-2708-4f47-9bdd-476dc173fc05",
+    "data": [
+      {
+        "text": "Is ",
+        "userDefined": false
+      },
       {
         "text": "BT",
         "alias": "company",
@@ -181,20 +499,25 @@
         "userDefined": false
       },
       {
-        "text": "stock price",
+        "text": "falling",
         "alias": "attribute",
         "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
         "userDefined": false
       }
     ],
     "isTemplate": false,
-    "count": 0
+    "count": 0,
+    "updated": 1520431737
   },
   {
-    "id": "f5dc5e2f-6a43-4415-adc7-f8b171081436",
+    "id": "71be73eb-a78f-4de6-a07a-e6399e9d94b8",
     "data": [
       {
-        "text": "Has ",
+        "text": "Is ",
         "userDefined": false
       },
       {
@@ -204,13 +527,13 @@
         "userDefined": false
       },
       {
-        "text": "  risen ",
+        "text": " ",
         "userDefined": false
       },
       {
-        "text": "this week",
-        "alias": "date-period",
-        "meta": "@sys.date-period",
+        "text": "falling",
+        "alias": "attribute",
+        "meta": "@attribute",
         "userDefined": false
       },
       {
@@ -219,10 +542,411 @@
       }
     ],
     "isTemplate": false,
-    "count": 0
+    "count": 0,
+    "updated": 1520431737
   },
   {
-    "id": "1d0bf174-e417-4876-98f6-032a20315e56",
+    "id": "1f824d19-6d5a-43e3-ba13-f93dae27d6e2",
+    "data": [
+      {
+        "text": "Is ",
+        "userDefined": false
+      },
+      {
+        "text": "Lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " in the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "fcd761ad-069a-4059-905f-638bbd40e5a8",
+    "data": [
+      {
+        "text": "Is ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " in the ",
+        "userDefined": false
+      },
+      {
+        "text": "news",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "06eed4d0-41c2-43b6-ad3f-869a4a458f3e",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "stock price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "74884454-e767-4b23-a021-d1a9ad62d961",
+    "data": [
+      {
+        "text": "Is ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "falling",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 1520431737
+  },
+  {
+    "id": "1ddda40c-43d3-48e0-af5c-13c0fecb929b",
+    "data": [
+      {
+        "text": "is ",
+        "userDefined": false
+      },
+      {
+        "text": "hsbc",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "falling",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "bb856a11-1da0-4eb5-82b8-80efc8605d58",
+    "data": [
+      {
+        "text": "is ",
+        "userDefined": false
+      },
+      {
+        "text": "rdsa",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "rising",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "705a2208-e2b7-4e40-ae89-f0af383196e1",
+    "data": [
+      {
+        "text": "how is ",
+        "userDefined": false
+      },
+      {
+        "text": "bt",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "performing",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "8c5920a7-9d71-4e50-bbbb-7c8784d73964",
+    "data": [
+      {
+        "text": "what is the ",
+        "userDefined": false
+      },
+      {
+        "text": "current price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "09d9c823-3115-4a29-b066-a35a5c16c31a",
+    "data": [
+      {
+        "text": "what is the ",
+        "userDefined": false
+      },
+      {
+        "text": "market cap",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "90899793-3979-48e2-b4d1-4a8c09eaa4ce",
+    "data": [
+      {
+        "text": "coca cola",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "89beb31c-ea67-43a9-9a23-bb1eb82e4849",
+    "data": [
+      {
+        "text": "What\u0027s the ",
+        "userDefined": false
+      },
+      {
+        "text": "price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "cc940682-1e09-4774-bf3b-5c20fc84d85f",
+    "data": [
+      {
+        "text": "What\u0027s the ",
+        "userDefined": false
+      },
+      {
+        "text": "market cap",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "ae14a55a-a182-4235-a727-61aedd1493d0",
+    "data": [
+      {
+        "text": "Coke",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "fb7ef99f-23b4-4123-9d08-846ebf5f056d",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "Vodafone",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "cc4d8acb-bc58-4976-b7f6-8e2cf1e577f0",
+    "data": [
+      {
+        "text": "news",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " on ",
+        "userDefined": false
+      },
+      {
+        "text": "vodafone",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "866126a1-267e-4593-9786-d227abd9b0c0",
     "data": [
       {
         "text": "What is the ",
@@ -250,10 +974,229 @@
       }
     ],
     "isTemplate": false,
-    "count": 0
+    "count": 0,
+    "updated": 1520431737
   },
   {
-    "id": "4fa76ab9-6bbd-419a-b1ce-99a6b88528c4",
+    "id": "63ecb6d9-520d-4634-a949-3899b8e8d44e",
+    "data": [
+      {
+        "text": "Can you tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "HSBC",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "offer",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "4c41d81c-f153-40ac-a20d-318d74e67d11",
+    "data": [
+      {
+        "text": "Tesco",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "subsector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "70ca0b74-18ee-4221-9d3a-2e74a06ba9eb",
+    "data": [
+      {
+        "text": "What ",
+        "userDefined": false
+      },
+      {
+        "text": "sector",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " is ",
+        "userDefined": false
+      },
+      {
+        "text": "Vodafone",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": true
+      },
+      {
+        "text": " in?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "3af26e36-f5a8-4a71-8bdd-2d392592257a",
+    "data": [
+      {
+        "text": "Has ",
+        "userDefined": false
+      },
+      {
+        "text": "Barclays",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "  ",
+        "userDefined": false
+      },
+      {
+        "text": "risen",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "this week",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "0637b27a-6772-44a5-8b48-fb7f9e2a66ea",
+    "data": [
+      {
+        "text": "Tell me the ",
+        "userDefined": false
+      },
+      {
+        "text": "market cap",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "Rolls Royce",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "72e92bed-8dd9-4d3e-9db2-c6fb71426ed9",
+    "data": [
+      {
+        "text": "BT",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "stock price",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "204f2f18-653d-494b-a217-5a0a2582c0af",
+    "data": [
+      {
+        "text": "What was the ",
+        "userDefined": false
+      },
+      {
+        "text": "last close value",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": " of ",
+        "userDefined": false
+      },
+      {
+        "text": "Sainsbury",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "c427ee2f-b421-4109-80e8-21d6921a5800",
     "data": [
       {
         "text": "What is the current ",
@@ -281,10 +1224,11 @@
       }
     ],
     "isTemplate": false,
-    "count": 0
+    "count": 0,
+    "updated": 1520431737
   },
   {
-    "id": "cc0bea15-ed82-48cf-aed2-9b65bace1cae",
+    "id": "cf05448a-489a-47cf-8ee8-e8ee80fcb716",
     "data": [
       {
         "text": "What is the ",
@@ -312,6 +1256,39 @@
       }
     ],
     "isTemplate": false,
-    "count": 0
+    "count": 0,
+    "updated": 1520431737
+  },
+  {
+    "id": "713180a9-9b4a-4807-9543-493d1a8893f4",
+    "data": [
+      {
+        "text": "What is ",
+        "userDefined": false
+      },
+      {
+        "text": "Coca Cola",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": true
+      },
+      {
+        "text": "\u0027s ",
+        "userDefined": false
+      },
+      {
+        "text": "revenue",
+        "alias": "attribute",
+        "meta": "@attribute",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520431737
   }
 ]

@@ -1,0 +1,290 @@
+[
+  {
+    "id": "b291c3c5-6abb-4682-b3d1-57c89fff4b6a",
+    "data": [
+      {
+        "text": "Please tell me information about ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "789b865e-d272-4ff9-9bbc-972354f1ec7a",
+    "data": [
+      {
+        "text": "Please tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "d9adb41d-132e-422e-b083-b4be105736d1",
+    "data": [
+      {
+        "text": "And is there anything that you can tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "67913285-8fdf-4654-9cd0-ee2a8fda5425",
+    "data": [
+      {
+        "text": "And could you please tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "2f2dcb0e-6cbe-4242-8fdb-908a0bde789c",
+    "data": [
+      {
+        "text": "I want to know about ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": " now",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "45eaf987-a96c-44c8-bf27-339d241c91e9",
+    "data": [
+      {
+        "text": "And please inform me about ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "f4a3e9df-176a-4aa8-9208-7fc73064027f",
+    "data": [
+      {
+        "text": "And is there stuff that you can tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "d1487707-433a-4f42-bb8c-4c973f6da3da",
+    "data": [
+      {
+        "text": "And what can you tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "0bbe2fc6-6a2e-4ac8-bf9e-d5250dee5141",
+    "data": [
+      {
+        "text": "And could you tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "ca939f93-ca83-46c7-9e90-336109c11e79",
+    "data": [
+      {
+        "text": "And ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "a3b35e3c-4a78-4991-82a0-f7c27735f98a",
+    "data": [
+      {
+        "text": "And for ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "55a9d798-0d0f-4f83-bb99-97e8c23d6f42",
+    "data": [
+      {
+        "text": "And what about ",
+        "userDefined": false
+      },
+      {
+        "text": "lloyds",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1520421868
+  },
+  {
+    "id": "e54c5885-4f62-4582-ace0-e859c470a24e",
+    "data": [
+      {
+        "text": "hsbc",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1519840181
+  },
+  {
+    "id": "27a32213-b179-433b-a7c9-764797169f9e",
+    "data": [
+      {
+        "text": "What about ",
+        "userDefined": false
+      },
+      {
+        "text": "hsbc",
+        "alias": "company",
+        "meta": "@company",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1519840181
+  }
+]

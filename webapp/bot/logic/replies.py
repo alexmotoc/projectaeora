@@ -330,7 +330,7 @@ def sector_reply(sector, sector_attribute):
         movers = defaultdict()
         movers['speech'] = "Here are the members of "+sector.name
         card = defaultdict()
-        card['title'] = "Members "+sector.name
+        card['title'] = "Members of"+sector.name
         card['companies'] = companies
         movers['text'] = card
         movers['type'] = 'members'

@@ -340,7 +340,7 @@ function getImpact(value) {
     }
 }
 
-function addQuery(question, colour, history, voice) {
+function addQuery(question, colour) {
     if ($('#suggestions').length) {
         $('#suggestions').remove();
     }
@@ -359,9 +359,6 @@ function addQuery(question, colour, history, voice) {
     $("#chat-history").append(query);
     $('.tooltipped').tooltip({delay: 50});
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-
-    processingQuery();
-    fetchReply(question, colour, false, false);
 }
 
 function getStyle(attribute, value){
@@ -514,7 +511,7 @@ $(document).ready(function() {
                 var finalTranscript = "";
 
                 recognition.onspeechstart = function(event) {
-                    addQuery('', colour, false, voice);
+                    addQuery('', colour);
                 };
 
                 recognition.onresult = function(event) {
@@ -553,7 +550,9 @@ $(document).ready(function() {
         e.preventDefault();
 
         if ($("#id_question").val().trim() != "") {
-            addQuery($('#id_question').val(), colour, false, false);
+            addQuery($('#id_question').val(), colour);
+            processingQuery();
+            fetchReply($('#id_question').val(), colour, false, false);
             $("#id_question").val("");
         }
     });

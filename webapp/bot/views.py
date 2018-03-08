@@ -18,6 +18,8 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '/../../scrape
 from footsie import Scraper
 from datetime import datetime, timedelta
 
+import traceback
+
 def index(request):
     """
     :param request: A HTTP request
@@ -91,6 +93,8 @@ def chat(request):
                     elif 'Daily Briefing' in intent:
                         response = intents.daily_briefings_intent(preferences.companies,
                                    preferences.sectors, attributes, preferences.days_old)
+                    elif 'SectorMembers' in intent:
+                        response = intents.sector_members(r)
                     else:
                         response['text'] = r['result']['fulfillment']['speech']
                         response['speech'] = r['result']['fulfillment']['speech']
@@ -99,13 +103,14 @@ def chat(request):
                 reply = Response(query=query, response=json.dumps(response))
                 reply.save()
 
-                if response['type'] not in ('comparison', 'briefing', 'input.unknown', 'incomplete', 'simple.response'):
+                if response['type'] not in ('members', 'comparison', 'briefing', 'input.unknown', 'incomplete', 'simple.response'):
                     response = suggestions.add_suggestions(response, r)
 
                 form = QueryForm()
         else:
             form = QueryForm()
     except:
+        traceback.print_exc()
         message = 'Ooops. Something went wrong.'
         response['text'] = message
         response['speech'] = message

@@ -468,7 +468,7 @@ $(document).ready(function() {
     });
 
     $("#send-text").click(function(e) {
-        if ($("#id_question").val() != "") {
+        if ($("#id_question").val().trim() != "") {
             $("#ask-question").submit();
         }
     });
@@ -516,8 +516,13 @@ $(document).ready(function() {
 
                 recognition.onspeechend = function(event) {
                     recognition.abort();
-                    processingQuery();
-                    fetchReply(finalTranscript, colour, false, voice);
+
+                    if (finalTranscript.trim() != "") {
+                        processingQuery();
+                        fetchReply(finalTranscript, colour, false, voice);
+                    } else {
+                        $(".sent").last().remove();
+                    }
                 }
 
                 recognition.onend = function(event) {
@@ -533,7 +538,10 @@ $(document).ready(function() {
 
     $("#ask-question").submit(function(e) {
         e.preventDefault();
-        addQuery($('#id_question').val(), colour, false, false);
-        $("#id_question").val("");
+
+        if ($("#id_question").val().trim() != "") {
+            addQuery($('#id_question').val(), colour, false, false);
+            $("#id_question").val("");
+        }
     });
 });

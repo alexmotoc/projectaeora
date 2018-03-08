@@ -26,6 +26,8 @@ function appendReply(data, colour, history, voice) {
     $(".suggestion-chip").on('click', function(e) {
         var suggestion = $($($(e.target)).contents()[0]).text();
         addQuery(suggestion, colour);
+        processingQuery();
+        fetchReply(suggestion, colour, false, voice);
     })
 
     if (!history) {

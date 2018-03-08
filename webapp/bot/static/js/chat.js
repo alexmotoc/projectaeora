@@ -514,9 +514,7 @@ $(document).ready(function() {
                 var finalTranscript = "";
 
                 recognition.onspeechstart = function(event) {
-                    var queryBubble = getQuery('', colour);
-                    $("#chat-history").append(queryBubble);
-                    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+                    addQuery('', colour, false, voice);
                 };
 
                 recognition.onresult = function(event) {
@@ -536,13 +534,8 @@ $(document).ready(function() {
 
                 recognition.onspeechend = function(event) {
                     recognition.abort();
-
-                    if (finalTranscript.trim() != "") {
-                        processingQuery();
-                        fetchReply(finalTranscript, colour, false, voice);
-                    } else {
-                        $(".sent").last().remove();
-                    }
+                    processingQuery();
+                    fetchReply(finalTranscript, colour, false, voice);
                 }
 
                 recognition.onend = function(event) {

@@ -239,20 +239,20 @@ function createReply(data, colour) {
 
             card['sectors'].forEach(function(obj) {
                 reply += simpleReply("The highest price in " + obj.name + " is:", colour);
-                reply += createReply(obj.highest_price);
+                reply += createReply(obj.highest_price, colour);
 
                 reply += simpleReply("The lowest price in " + obj.name + " is:", colour);
-                reply += createReply(obj.lowest_price);
+                reply += createReply(obj.lowest_price, colour);
 
                 reply += simpleReply("The rising companies in " + obj.name + " are:", colour);
-                reply += createReply(obj.rising);
+                reply += createReply(obj.rising, colour);
 
                 reply += simpleReply("The falling companies in " + obj.name + " are:", colour);
-                reply += createReply(obj.falling);
+                reply += createReply(obj.falling, colour);
 
                 if ("news" in obj) {
-                    reply += simpleReply("Here are some news about " + obj.name + ":", colour);
-                    reply += createReply(obj.news);
+                    reply += simpleReply("Here is some news about " + obj.name + ":", colour);
+                    reply += createReply(obj.news, colour);
                 }
             });
 
